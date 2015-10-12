@@ -1,0 +1,215 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "20. Core", "20. Core", "{77DA39B0-F018-4068-BE53-6461957A53DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gaia.Core.Services", "Gaia.Core.Services\Gaia.Core.Services.csproj", "{AC5E6F4B-D634-4FD6-B16E-487217B6978F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gaia.Core.Wcf.Services", "Gaia.Core.Wcf.Services\Gaia.Core.Wcf.Services.csproj", "{2ECECBA8-20A5-41DF-884B-11A621066A32}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "10. Tests", "10. Tests", "{4115B21A-DACD-4BC3-981B-3450337D6846}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Solution Items", "0. Solution Items", "{95EEC92A-F6E1-4AC9-9368-7C0C14D65A46}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gaia.Core.Workflows", "Gaia.Core.Workflows\Gaia.Core.Workflows.csproj", "{6A1170D3-1A3C-4109-B2CB-4654DD852DDD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configuration", "{2DE5E697-F8F8-4034-8958-5645F73774AC}"
+	ProjectSection(SolutionItems) = preProject
+		Solution Items\Configuration\connectionStrings.config = Solution Items\Configuration\connectionStrings.config
+		Solution Items\Configuration\entLib._forEditor.config = Solution Items\Configuration\entLib._forEditor.config
+		Solution Items\Configuration\entLib.exceptionHandling.config = Solution Items\Configuration\entLib.exceptionHandling.config
+		Solution Items\Configuration\entLib.loggingConfiguration.config = Solution Items\Configuration\entLib.loggingConfiguration.config
+		Solution Items\Configuration\quartz.config = Solution Items\Configuration\quartz.config
+		Solution Items\Configuration\quartzJobs.config = Solution Items\Configuration\quartzJobs.config
+		Solution Items\Configuration\unity.config = Solution Items\Configuration\unity.config
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{94CFE497-F49B-4098-8002-3E80779F0C45}"
+	ProjectSection(SolutionItems) = preProject
+		Solution Items\NuGet\BuildNuGets.cmd = Solution Items\NuGet\BuildNuGets.cmd
+		Solution Items\NuGet\nuspec.xsd = Solution Items\NuGet\nuspec.xsd
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{8886DA10-0020-4FDC-A693-290A0B062666}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{DF26845F-1F08-4860-B492-9C20C429B339}"
+	ProjectSection(SolutionItems) = preProject
+		Solution Items\Templates\GlobalAssemblyInfo.Core.tt = Solution Items\Templates\GlobalAssemblyInfo.Core.tt
+		Solution Items\Templates\GlobalData.ttinclude = Solution Items\Templates\GlobalData.ttinclude
+		Solution Items\Templates\TemplateFilemanager.CS.ttinclude = Solution Items\Templates\TemplateFilemanager.CS.ttinclude
+		Solution Items\Templates\Versions.xml = Solution Items\Templates\Versions.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Targets", "Targets", "{A60831E1-A640-4BE2-84FC-CAC422D27D01}"
+	ProjectSection(SolutionItems) = preProject
+		Solution Items\Targets\Gaia.targets = Solution Items\Targets\Gaia.targets
+		Solution Items\Targets\NuGet.targets = Solution Items\Targets\NuGet.targets
+		Solution Items\Targets\TextTransform.targets = Solution Items\Targets\TextTransform.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gaia.Core", "Gaia.Core\Gaia.Core.csproj", "{8318A17E-7BF1-4D45-A0CE-EE3FD9B83B2D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Template", "Template", "{DB410DE4-7AAB-478A-B347-11786266073C}"
+	ProjectSection(SolutionItems) = preProject
+		Solution Items\NuGet\Template\Template.nuspec = Solution Items\NuGet\Template\Template.nuspec
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{DE63C969-53F8-41A2-B34C-28505F01F7DA}"
+	ProjectSection(SolutionItems) = preProject
+		Solution Items\NuGet\Template\tools\init.ps1 = Solution Items\NuGet\Template\tools\init.ps1
+		Solution Items\NuGet\Template\tools\install.ps1 = Solution Items\NuGet\Template\tools\install.ps1
+		Solution Items\NuGet\Template\tools\uninstall.ps1 = Solution Items\NuGet\Template\tools\uninstall.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tasks", "Tasks", "{3B7049C4-FD26-41C5-B0AE-C8546025B0BA}"
+	ProjectSection(SolutionItems) = preProject
+		Solution Items\Targets\Tasks\Cloud17.MSBuild.NuGet.dll = Solution Items\Targets\Tasks\Cloud17.MSBuild.NuGet.dll
+		Solution Items\Targets\Tasks\Cloud17.MSBuild.NuGet.pdb = Solution Items\Targets\Tasks\Cloud17.MSBuild.NuGet.pdb
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gaia.Core.Tests", "Gaia.Core.Tests\Gaia.Core.Tests.csproj", "{C0FCA0DB-E48F-4255-8CE6-425298CEFDA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gaia.Core.IoC", "Gaia.Core.IoC\Gaia.Core.IoC.csproj", "{52980EBE-AEB1-4B3C-963A-BE0DA24B25B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gaia.Core.Wcf", "Gaia.Core.Wcf\Gaia.Core.Wcf.csproj", "{590B656F-57FD-4B29-875F-F55895EB1185}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gaia.Core.Scheduling", "Gaia.Core.Scheduling\Gaia.Core.Scheduling.csproj", "{25C70291-E074-4075-99A8-7AF0DF1BF6BC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "15. Plugins", "15. Plugins", "{D787A1D9-4250-49C1-9CE2-544BD0BE765E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{37C642A5-183F-4F5B-B065-3467581DB4D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gaia.Service.Plugins.Scheduler", "Gaia.Service.Plugins.Scheduler\Gaia.Service.Plugins.Scheduler.csproj", "{3A82E948-43E1-434C-9C6D-BCAA1C83F76F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "30. Portal", "30. Portal", "{66DD0CCD-592A-4EA1-9A93-97A20FC4718E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gaia.Portal.Framework", "Gaia.Portal.Framework\Gaia.Portal.Framework.csproj", "{05761CF0-B197-46B2-9180-7E10C10E56E4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		NuGet-Debug|Any CPU = NuGet-Debug|Any CPU
+		NuGet-Release|Any CPU = NuGet-Release|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AC5E6F4B-D634-4FD6-B16E-487217B6978F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC5E6F4B-D634-4FD6-B16E-487217B6978F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC5E6F4B-D634-4FD6-B16E-487217B6978F}.NuGet-Debug|Any CPU.ActiveCfg = NuGet-Debug|Any CPU
+		{AC5E6F4B-D634-4FD6-B16E-487217B6978F}.NuGet-Debug|Any CPU.Build.0 = NuGet-Debug|Any CPU
+		{AC5E6F4B-D634-4FD6-B16E-487217B6978F}.NuGet-Release|Any CPU.ActiveCfg = NuGet-Release|Any CPU
+		{AC5E6F4B-D634-4FD6-B16E-487217B6978F}.NuGet-Release|Any CPU.Build.0 = NuGet-Release|Any CPU
+		{AC5E6F4B-D634-4FD6-B16E-487217B6978F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC5E6F4B-D634-4FD6-B16E-487217B6978F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2ECECBA8-20A5-41DF-884B-11A621066A32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ECECBA8-20A5-41DF-884B-11A621066A32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2ECECBA8-20A5-41DF-884B-11A621066A32}.NuGet-Debug|Any CPU.ActiveCfg = NuGet-Debug|Any CPU
+		{2ECECBA8-20A5-41DF-884B-11A621066A32}.NuGet-Debug|Any CPU.Build.0 = NuGet-Debug|Any CPU
+		{2ECECBA8-20A5-41DF-884B-11A621066A32}.NuGet-Release|Any CPU.ActiveCfg = NuGet-Release|Any CPU
+		{2ECECBA8-20A5-41DF-884B-11A621066A32}.NuGet-Release|Any CPU.Build.0 = NuGet-Release|Any CPU
+		{2ECECBA8-20A5-41DF-884B-11A621066A32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2ECECBA8-20A5-41DF-884B-11A621066A32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A1170D3-1A3C-4109-B2CB-4654DD852DDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A1170D3-1A3C-4109-B2CB-4654DD852DDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A1170D3-1A3C-4109-B2CB-4654DD852DDD}.NuGet-Debug|Any CPU.ActiveCfg = NuGet-Debug|Any CPU
+		{6A1170D3-1A3C-4109-B2CB-4654DD852DDD}.NuGet-Debug|Any CPU.Build.0 = NuGet-Debug|Any CPU
+		{6A1170D3-1A3C-4109-B2CB-4654DD852DDD}.NuGet-Release|Any CPU.ActiveCfg = NuGet-Release|Any CPU
+		{6A1170D3-1A3C-4109-B2CB-4654DD852DDD}.NuGet-Release|Any CPU.Build.0 = NuGet-Release|Any CPU
+		{6A1170D3-1A3C-4109-B2CB-4654DD852DDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A1170D3-1A3C-4109-B2CB-4654DD852DDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8318A17E-7BF1-4D45-A0CE-EE3FD9B83B2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8318A17E-7BF1-4D45-A0CE-EE3FD9B83B2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8318A17E-7BF1-4D45-A0CE-EE3FD9B83B2D}.NuGet-Debug|Any CPU.ActiveCfg = NuGet-Debug|Any CPU
+		{8318A17E-7BF1-4D45-A0CE-EE3FD9B83B2D}.NuGet-Debug|Any CPU.Build.0 = NuGet-Debug|Any CPU
+		{8318A17E-7BF1-4D45-A0CE-EE3FD9B83B2D}.NuGet-Release|Any CPU.ActiveCfg = NuGet-Release|Any CPU
+		{8318A17E-7BF1-4D45-A0CE-EE3FD9B83B2D}.NuGet-Release|Any CPU.Build.0 = NuGet-Release|Any CPU
+		{8318A17E-7BF1-4D45-A0CE-EE3FD9B83B2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8318A17E-7BF1-4D45-A0CE-EE3FD9B83B2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0FCA0DB-E48F-4255-8CE6-425298CEFDA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0FCA0DB-E48F-4255-8CE6-425298CEFDA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0FCA0DB-E48F-4255-8CE6-425298CEFDA5}.NuGet-Debug|Any CPU.ActiveCfg = NuGet-Debug|Any CPU
+		{C0FCA0DB-E48F-4255-8CE6-425298CEFDA5}.NuGet-Debug|Any CPU.Build.0 = NuGet-Debug|Any CPU
+		{C0FCA0DB-E48F-4255-8CE6-425298CEFDA5}.NuGet-Release|Any CPU.ActiveCfg = NuGet-Release|Any CPU
+		{C0FCA0DB-E48F-4255-8CE6-425298CEFDA5}.NuGet-Release|Any CPU.Build.0 = NuGet-Release|Any CPU
+		{C0FCA0DB-E48F-4255-8CE6-425298CEFDA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0FCA0DB-E48F-4255-8CE6-425298CEFDA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52980EBE-AEB1-4B3C-963A-BE0DA24B25B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52980EBE-AEB1-4B3C-963A-BE0DA24B25B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52980EBE-AEB1-4B3C-963A-BE0DA24B25B1}.NuGet-Debug|Any CPU.ActiveCfg = NuGet-Debug|Any CPU
+		{52980EBE-AEB1-4B3C-963A-BE0DA24B25B1}.NuGet-Debug|Any CPU.Build.0 = NuGet-Debug|Any CPU
+		{52980EBE-AEB1-4B3C-963A-BE0DA24B25B1}.NuGet-Release|Any CPU.ActiveCfg = NuGet-Release|Any CPU
+		{52980EBE-AEB1-4B3C-963A-BE0DA24B25B1}.NuGet-Release|Any CPU.Build.0 = NuGet-Release|Any CPU
+		{52980EBE-AEB1-4B3C-963A-BE0DA24B25B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52980EBE-AEB1-4B3C-963A-BE0DA24B25B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{590B656F-57FD-4B29-875F-F55895EB1185}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{590B656F-57FD-4B29-875F-F55895EB1185}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{590B656F-57FD-4B29-875F-F55895EB1185}.NuGet-Debug|Any CPU.ActiveCfg = NuGet-Debug|Any CPU
+		{590B656F-57FD-4B29-875F-F55895EB1185}.NuGet-Debug|Any CPU.Build.0 = NuGet-Debug|Any CPU
+		{590B656F-57FD-4B29-875F-F55895EB1185}.NuGet-Release|Any CPU.ActiveCfg = NuGet-Release|Any CPU
+		{590B656F-57FD-4B29-875F-F55895EB1185}.NuGet-Release|Any CPU.Build.0 = NuGet-Release|Any CPU
+		{590B656F-57FD-4B29-875F-F55895EB1185}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{590B656F-57FD-4B29-875F-F55895EB1185}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25C70291-E074-4075-99A8-7AF0DF1BF6BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25C70291-E074-4075-99A8-7AF0DF1BF6BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25C70291-E074-4075-99A8-7AF0DF1BF6BC}.NuGet-Debug|Any CPU.ActiveCfg = NuGet-Debug|Any CPU
+		{25C70291-E074-4075-99A8-7AF0DF1BF6BC}.NuGet-Debug|Any CPU.Build.0 = NuGet-Debug|Any CPU
+		{25C70291-E074-4075-99A8-7AF0DF1BF6BC}.NuGet-Release|Any CPU.ActiveCfg = NuGet-Release|Any CPU
+		{25C70291-E074-4075-99A8-7AF0DF1BF6BC}.NuGet-Release|Any CPU.Build.0 = NuGet-Release|Any CPU
+		{25C70291-E074-4075-99A8-7AF0DF1BF6BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25C70291-E074-4075-99A8-7AF0DF1BF6BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A82E948-43E1-434C-9C6D-BCAA1C83F76F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A82E948-43E1-434C-9C6D-BCAA1C83F76F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A82E948-43E1-434C-9C6D-BCAA1C83F76F}.NuGet-Debug|Any CPU.ActiveCfg = NuGet-Release|Any CPU
+		{3A82E948-43E1-434C-9C6D-BCAA1C83F76F}.NuGet-Debug|Any CPU.Build.0 = NuGet-Release|Any CPU
+		{3A82E948-43E1-434C-9C6D-BCAA1C83F76F}.NuGet-Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A82E948-43E1-434C-9C6D-BCAA1C83F76F}.NuGet-Release|Any CPU.Build.0 = Release|Any CPU
+		{3A82E948-43E1-434C-9C6D-BCAA1C83F76F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A82E948-43E1-434C-9C6D-BCAA1C83F76F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05761CF0-B197-46B2-9180-7E10C10E56E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05761CF0-B197-46B2-9180-7E10C10E56E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05761CF0-B197-46B2-9180-7E10C10E56E4}.NuGet-Debug|Any CPU.ActiveCfg = NuGet-Debug|Any CPU
+		{05761CF0-B197-46B2-9180-7E10C10E56E4}.NuGet-Debug|Any CPU.Build.0 = NuGet-Debug|Any CPU
+		{05761CF0-B197-46B2-9180-7E10C10E56E4}.NuGet-Release|Any CPU.ActiveCfg = NuGet-Release|Any CPU
+		{05761CF0-B197-46B2-9180-7E10C10E56E4}.NuGet-Release|Any CPU.Build.0 = NuGet-Release|Any CPU
+		{05761CF0-B197-46B2-9180-7E10C10E56E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05761CF0-B197-46B2-9180-7E10C10E56E4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AC5E6F4B-D634-4FD6-B16E-487217B6978F} = {77DA39B0-F018-4068-BE53-6461957A53DB}
+		{2ECECBA8-20A5-41DF-884B-11A621066A32} = {77DA39B0-F018-4068-BE53-6461957A53DB}
+		{6A1170D3-1A3C-4109-B2CB-4654DD852DDD} = {77DA39B0-F018-4068-BE53-6461957A53DB}
+		{2DE5E697-F8F8-4034-8958-5645F73774AC} = {95EEC92A-F6E1-4AC9-9368-7C0C14D65A46}
+		{94CFE497-F49B-4098-8002-3E80779F0C45} = {95EEC92A-F6E1-4AC9-9368-7C0C14D65A46}
+		{DF26845F-1F08-4860-B492-9C20C429B339} = {95EEC92A-F6E1-4AC9-9368-7C0C14D65A46}
+		{A60831E1-A640-4BE2-84FC-CAC422D27D01} = {95EEC92A-F6E1-4AC9-9368-7C0C14D65A46}
+		{8318A17E-7BF1-4D45-A0CE-EE3FD9B83B2D} = {77DA39B0-F018-4068-BE53-6461957A53DB}
+		{DB410DE4-7AAB-478A-B347-11786266073C} = {94CFE497-F49B-4098-8002-3E80779F0C45}
+		{DE63C969-53F8-41A2-B34C-28505F01F7DA} = {DB410DE4-7AAB-478A-B347-11786266073C}
+		{3B7049C4-FD26-41C5-B0AE-C8546025B0BA} = {A60831E1-A640-4BE2-84FC-CAC422D27D01}
+		{C0FCA0DB-E48F-4255-8CE6-425298CEFDA5} = {4115B21A-DACD-4BC3-981B-3450337D6846}
+		{52980EBE-AEB1-4B3C-963A-BE0DA24B25B1} = {77DA39B0-F018-4068-BE53-6461957A53DB}
+		{590B656F-57FD-4B29-875F-F55895EB1185} = {77DA39B0-F018-4068-BE53-6461957A53DB}
+		{25C70291-E074-4075-99A8-7AF0DF1BF6BC} = {77DA39B0-F018-4068-BE53-6461957A53DB}
+		{37C642A5-183F-4F5B-B065-3467581DB4D1} = {D787A1D9-4250-49C1-9CE2-544BD0BE765E}
+		{3A82E948-43E1-434C-9C6D-BCAA1C83F76F} = {37C642A5-183F-4F5B-B065-3467581DB4D1}
+		{05761CF0-B197-46B2-9180-7E10C10E56E4} = {66DD0CCD-592A-4EA1-9A93-97A20FC4718E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Logging.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.ExceptionHandling.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.ExceptionHandling.WCF.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.ExceptionHandling.Logging.6.0.1304.0\lib\NET45
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35
+	EndGlobalSection
+EndGlobal

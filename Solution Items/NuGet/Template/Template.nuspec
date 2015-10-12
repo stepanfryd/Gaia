@@ -1,0 +1,13 @@
+﻿<?xml version="1.0"?>
+<package>
+	<metadata>
+		<id>$id$</id>
+		<version>$version$</version>
+		<authors>Stepan Fryd</authors>
+		<owners>Stepan Fryd (stepan.fryd@gmail.com)</owners>
+		<projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
+		<description>$id$</description>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<copyright>Copyright (c) Stepan Fryd 2012</copyright>
+	</metadata>
+</package>

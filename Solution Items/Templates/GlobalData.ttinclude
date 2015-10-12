@@ -1,0 +1,180 @@
+﻿<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Xml.Serialization" #>
+<#@ import namespace="System.Runtime.Serialization" #>
+<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
+<#+
+
+	[Serializable]
+	[XmlRoot("versionInfo")]
+	public class VersionInfo
+	{
+		public class ProjectInfo
+		{
+			[XmlIgnore]
+			public int Major { get; set; }
+			
+			[XmlIgnore]
+			public int Minor { get; set; } 
+
+			[XmlIgnore]
+			public int Build { get; set; } 
+
+			[XmlIgnore]
+			public int Revision { get; set; } 
+
+			[XmlAttribute("name")]
+			public string Name { get; set; }
+
+			[XmlAttribute("lastBuild")]
+			public DateTime LastBuild { get; set; }
+
+			[XmlAttribute("version")]
+			public string Version {
+				get
+				{
+					return String.Format("{0}.{1}.{2}.{3}", Major, Minor, Build, Revision);
+				}
+				set
+				{
+					try
+					{
+						var vp = value.Split('.');
+
+						if (vp.Length >= 1)
+						{
+							int major;
+							if (int.TryParse(vp[0], out major))
+							{
+								Major = major;
+							}
+						}
+
+						if (vp.Length >= 2)
+						{
+							int minor;
+							if (int.TryParse(vp[1], out minor))
+							{
+								Minor = minor;
+							}
+						}
+
+						if (vp.Length >= 3)
+						{
+							int build;
+							if (int.TryParse(vp[2], out build))
+							{
+								Build = build;
+							}
+						}
+
+						if (vp.Length >= 4)
+						{
+							int revision;
+							if (int.TryParse(vp[3], out revision))
+							{
+								Revision = revision;
+							}
+						}
+					}
+					catch
+					{
+						Major = Minor = Build = Revision = 0;
+					}
+				}
+			}		
+		}
+
+		[XmlElement("assemblyCompany")]
+		public string AssemblyCompany { get; set; }
+
+		[XmlElement("assemblyCopyright")]
+		public string AssemblyCopyright { get; set; }
+
+		[XmlElement("assemblyTrademark")]
+		public string AssemblyTrademark { get; set; }
+
+		[XmlElement("assemblyCulture")]
+		public string AssemblyCulture { get; set; }
+
+		[XmlElement("assemblyConfiguration")]
+		public string AssemblyConfiguration { get; set; }
+
+		[XmlElement("assemblyComVisible")]
+		public string AssemblyComVisible { get; set; }
+
+		[XmlArray("projects")]
+		[XmlArrayItem("project")]
+		public List<ProjectInfo> Projects { get; set; }
+
+	}
+
+	public class GlobalData
+	{
+		private string _versionfile = "Versions.xml";
+		private string _templateDirectory;
+		private ITextTemplatingEngineHost _host;
+
+		public VersionInfo AssemblyVersionInfo { get; set; }
+		public VersionInfo.ProjectInfo CurrentProject { get; private set; }
+
+
+		// templateDirectory - is directory where this template is in. Directory is specified relative to template where you included this template.
+		// 
+		// exampleTestTemplate.tt 
+		//
+		//	include file="..\GlobalData.ttinclude"
+		//	var data = new GlobalData("..\"); // path to directory where GlobalData.ttinclude is
+		//	
+		public GlobalData(string project, bool increaseBuildVersion, bool increaseRevisionVersion, ITextTemplatingEngineHost host, string templateDirectory = "")
+		{
+			this._host = host;
+			this._templateDirectory = templateDirectory;
+			var sb = new StringBuilder();
+			var xs = new XmlSerializer(typeof(VersionInfo));
+
+			using(var sr=new StreamReader(this._host.ResolvePath(Path.Combine(this._templateDirectory, _versionfile))))
+			{			
+				AssemblyVersionInfo = xs.Deserialize(new StringReader(sr.ReadToEnd().Trim())) as VersionInfo;
+
+				if (AssemblyVersionInfo != null)
+				{
+					CurrentProject = AssemblyVersionInfo.Projects.SingleOrDefault(p => p.Name == project);
+
+					if (CurrentProject == null)
+					{
+						CurrentProject = new VersionInfo.ProjectInfo
+						{
+							Name = project
+						};
+						AssemblyVersionInfo.Projects.Add(CurrentProject);
+					}
+				}
+			}
+
+			if (AssemblyVersionInfo!=null && ( increaseBuildVersion || increaseRevisionVersion))
+			{
+				if (increaseBuildVersion)
+				{
+					CurrentProject.Build ++;
+				}
+
+				if (increaseRevisionVersion)
+				{
+					CurrentProject.Revision++;
+				}
+
+				CurrentProject.LastBuild = DateTime.Now;
+
+				xs.Serialize(new StringWriter(sb), AssemblyVersionInfo);
+				File.WriteAllText(this._host.ResolvePath(Path.Combine(this._templateDirectory, _versionfile)), sb.ToString());
+			}
+		}
+	}
+#>

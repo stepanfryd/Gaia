@@ -1,0 +1,5 @@
+\obj\
+\bin\
+.cs\
+.csproj
+packages.config

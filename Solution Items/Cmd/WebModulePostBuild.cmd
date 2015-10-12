@@ -1,0 +1,13 @@
+@echo off
+
+SET SOLUTION_DIR=%1
+SET PROJECT_DIR=%2
+SET MODULE_NAME=%3
+
+SET SOLUTION_DIR=%SOLUTION_DIR:"=%
+SET PROJECT_DIR=%PROJECT_DIR:"=%
+SET MODULE_NAME=%MODULE_NAME:"=%
+
+xcopy "%PROJECT_DIR%*.*" "%SOLUTION_DIR%Gaia.Portal\Areas\%MODULE_NAME%\" /F /R /Y /I /S /EXCLUDE:%SOLUTION_DIR%SOLUTI~1\Cmd\excludelist.txt
+xcopy "%PROJECT_DIR%bin\*.*" "%SOLUTION_DIR%Gaia.Portal\Bin\" /F /R /Y /I /S 
+del "%SOLUTION_DIR%Gaia.Portal\Areas\%MODULE_NAME%\web.config" /F /Q

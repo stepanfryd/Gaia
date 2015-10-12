@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <!-- Default Microsoft.TextTemplating.targets -->
+  <Import Project="TextTemplating\Microsoft.TextTemplating.targets"/>
+
+  <PropertyGroup>
+    <!-- Indicates whether T4 templates should be transformed automatically as part of the build. -->
+    <TransformOnBuild>true</TransformOnBuild>
+    <!-- Indicates whether only out of date templates should be transformed, or whether all templates should be transformed. -->
+    <TransformOutOfDateOnly>false</TransformOutOfDateOnly>
+    <!-- Specifies how read-only output files will be handled. -->
+    <OverwriteReadOnlyOutputFiles>true</OverwriteReadOnlyOutputFiles>
+    <!-- Add SolutionDir folder to look for included T4 templates during build -->
+    <IncludeFolders>$(SolutionDir)</IncludeFolders>   
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Add SolutionDir folder to the list of places to look for assemblies used by templates during build -->
+    <!-- <T4ReferencePath Include="$(SolutionDir)\..\Library\" /> -->
+  </ItemGroup>
+
+  <Target Name="CreateT4ItemLists" >
+    <Message Importance="low" Text="Creating T4 items lists for project $(ProjectName) ($(ProjectPath))..." />
+
+    <!-- Specify the names of the T4 custom tools if they haven't already been set elsewhere. -->
+    <PropertyGroup>
+      <T4TransformCustomToolName Condition=" $(T4TransformCustomToolName)=='' ">TextTemplatingFileGenerator</T4TransformCustomToolName>
+      <T4PreprocessCustomToolName Condition=" $(T4PreprocessCustomToolName)=='' ">TextTemplatingFilePreprocessor</T4PreprocessCustomToolName>
+    </PropertyGroup>
+
+    <!-- Work out which of the files in the @(CreateT4ItemListsInputs) group are T4 files. -->
+    <ItemGroup>
+      <!-- Add any files that have the T4 transformation custom tool-->
+      <T4TransformInputs Include="@(CreateT4ItemListsInputs)" Condition=" %(CreateT4ItemListsInputs.Generator) == $(T4TransformCustomToolName) and %(CreateT4ItemListsInputs.TransformOnBuild) == true" />
+      <!-- Add any files that are in the gruop T4Transform -->
+      <T4TransformInputs Include="@(T4Transform)" />
+
+      <!-- Now repeat for the pre-processed files -->
+      <T4PreprocessInputs Include="@(CreateT4ItemListsInputs)" Condition=" %(CreateT4ItemListsInputs.Generator) == $(T4PreprocessCustomToolName) " />
+      <T4PreprocessInputs Include="@(T4Preprocess)" />
+    </ItemGroup>
+
+  </Target>
+</Project>

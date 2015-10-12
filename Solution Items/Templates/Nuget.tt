@@ -1,0 +1,12 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ include file="GlobalData.ttinclude" #>
+<#@ output extension=".nuspec" encoding="utf-8" #>
+<#@ assembly name="System.Core" #>
+<#@ parameter name="PackageId" type="System.String" #>
+<#@ parameter name="ProjectGroup" type="System.String" #>
+<#@ parameter name="TargetPath" type="System.String" #>
+<#@ parameter name="TargetFileName" type="System.String" #>
+<#
+	var data = new GlobalData(ProjectGroup, false, false, this.Host); 
+#>
+<#=TargetPath#>
