@@ -254,6 +254,7 @@
     <Compile Include="Validation\ValidationHelpers.cs" />
     <Compile Include="Web\BaseController.cs" />
     <Compile Include="Web\BaseWebApiController.cs" />
+    <Compile Include="Web\XmlActionResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
