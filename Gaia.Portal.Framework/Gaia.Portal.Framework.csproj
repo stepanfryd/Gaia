@@ -246,6 +246,7 @@
     <Compile Include="Security\Role.cs" />
     <Compile Include="Security\Route.cs" />
     <Compile Include="Security\SecureController.cs" />
+    <Compile Include="Web\Binders\EnumBinder.cs" />
     <Compile Include="Web\Binders\GuidModelBinder.cs" />
     <Compile Include="Web\Filters\ModelStateClearAttribute.cs" />
     <Compile Include="Web\Filters\ValidateModelAttribute.cs" />

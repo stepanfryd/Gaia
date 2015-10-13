@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Optimization;
+using Common.Logging;
 using Gaia.Portal.Framework.Configuration.EntLib;
 using Gaia.Portal.Framework.Configuration.Modules;
 using Newtonsoft.Json;
@@ -14,6 +15,14 @@ namespace Gaia.Portal.Framework.Configuration.Bundles
 	/// </summary>
 	public class BundlesRegistration : IBundlesRegistration
 	{
+		#region Fields and constants
+
+		private readonly ILog _log;
+
+		#endregion
+
+		#region Constructors
+
 		#region Constructor
 
 		/// <summary>
@@ -24,12 +33,17 @@ namespace Gaia.Portal.Framework.Configuration.Bundles
 		/// <param name="entLib">Instance of enterprise library wraper</param>
 		public BundlesRegistration(IConfiguration config, IWebModuleProvider modulesProvider, IEnterpriseLibrary entLib)
 		{
+			_log = LogManager.GetLogger(GetType());
 			_config = config;
 			_modulesProvider = modulesProvider;
 			_entLib = entLib;
 		}
 
 		#endregion
+
+		#endregion
+
+		#region Interface Implementations
 
 		#region Public methods
 
@@ -47,6 +61,8 @@ namespace Gaia.Portal.Framework.Configuration.Bundles
 				RegisterModulesBundles();
 			}, Constants.ExceptionPolicy.SwallowUp);
 		}
+
+		#endregion
 
 		#endregion
 
@@ -68,12 +84,17 @@ namespace Gaia.Portal.Framework.Configuration.Bundles
 			var path = _config.ApplicationSettings.BundlesConfig.StartsWith("~")
 				? HttpContext.Current.Server.MapPath(_config.ApplicationSettings.BundlesConfig)
 				: _config.ApplicationSettings.BundlesConfig;
-			_bundlesConfig = JsonConvert.DeserializeObject<BundlesConfig>(File.ReadAllText(path));
+
+			var bundleData = File.ReadAllText(path);
+			_log.InfoFormat("Loading bundles config form {0} => {1} => {2}", _config.ApplicationSettings.BundlesConfig, path,
+				bundleData);
+
+			_bundlesConfig = JsonConvert.DeserializeObject<BundlesConfig>(bundleData);
 		}
 
 		private void RegisterCommonBundles()
 		{
-			if (_bundlesConfig != null && _bundlesConfig.Bundles != null)
+			if (_bundlesConfig?.Bundles != null)
 			{
 				foreach (var bundle in _bundlesConfig.Bundles)
 				{
@@ -96,8 +117,14 @@ namespace Gaia.Portal.Framework.Configuration.Bundles
 						bn.Orderer = bundle.Orderer;
 					}
 
+					_log.InfoFormat("Registering bundle: {0}", bn.Path);
+
 					_bundles.Add(bn);
 				}
+			}
+			else
+			{
+				_log.Warn("Bundles config is null");
 			}
 		}
 
@@ -107,8 +134,12 @@ namespace Gaia.Portal.Framework.Configuration.Bundles
 			{
 				foreach (var bun in _modulesProvider.Modules.SelectMany(c => c.Bundles))
 				{
+					_log.InfoFormat("Registering module bundle: {0}", bun.Path);
 					_bundles.Add(bun);
 				}
+			} else
+			{
+				_log.Warn("Modules provider is not implemented");
 			}
 		}
 
