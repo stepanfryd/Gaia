@@ -75,6 +75,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Solution Items\Templates\GlobalAssemblyInfo.Core.cs">
+      <Link>Properties\GlobalAssemblyInfo.Core.cs</Link>
+    </Compile>
     <Compile Include="Configuration\SendGridSettings.cs" />
     <Compile Include="Configuration\Settings.cs" />
     <Compile Include="SendGridMailProvider.cs" />
