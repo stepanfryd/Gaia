@@ -1,4 +1,28 @@
-﻿using System;
+﻿/*
+The MIT License (MIT)
+
+Copyright (c) 2012 Stepan Fryd (stepan.fryd@gmail.com)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+*/
+using System;
 using System.IO;
 using System.Text;
 using System.Web.Mvc;
@@ -18,16 +42,17 @@ namespace Gaia.Portal.Framework.Pdf
 
 		#region Private and protected
 
-		public byte[] GeneratePdfOutput(ControllerContext context, object model = null, string viewName = null,
+		public byte[] GeneratePdfOutput(ControllerContext controllerContext, object model = null, string viewName = null,
 			Action<PdfWriter, Document> configureSettings = null)
 		{
+			controllerContext.Controller.ViewData.Model = model;
+
 			if (viewName == null)
 			{
-				viewName = context.RouteData.GetRequiredString("action");
+				viewName = controllerContext.RouteData.GetRequiredString("action");
 			}
-
-			context.Controller.ViewData.Model = model;
-			var html = RenderRazorView(context, viewName);
+		
+			var html = RenderView(controllerContext, viewName);
 
 			byte[] output;
 			using (var capturedActionStream = new MemoryStream(Encoding.UTF8.GetBytes(html)))
@@ -51,16 +76,16 @@ namespace Gaia.Portal.Framework.Pdf
 			return output;
 		}
 
-		public string RenderRazorView(ControllerContext context, string viewName)
+		public string RenderView(ControllerContext context, string viewName)
 		{
-			var viewEngineResult = ViewEngines.Engines.FindView(context, viewName, null).View;
+			var engineResult = ViewEngines.Engines.FindView(context, viewName, null).View;
 			var sb = new StringBuilder();
 
-			using (TextWriter tr = new StringWriter(sb))
+			using (var writer = new StringWriter(sb))
 			{
-				var viewContext = new ViewContext(context, viewEngineResult, context.Controller.ViewData,
-					context.Controller.TempData, tr);
-				viewEngineResult.Render(viewContext, tr);
+				var viewContext = new ViewContext(context, engineResult, context.Controller.ViewData,
+					context.Controller.TempData, writer);
+				engineResult.Render(viewContext, writer);
 			}
 			return sb.ToString();
 		}

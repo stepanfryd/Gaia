@@ -28,12 +28,27 @@ using System.Security;
 
 namespace Gaia.Core.Exceptions
 {
+	/// <summary>
+	/// Gaia ecosystem base exception and all exceptions thrown by core libraries should inherit from it
+	/// </summary>
 	public class GaiaBaseException : ApplicationException
 	{
+		/// <summary>
+		/// Create instatnce of Gaia base exception
+		/// </summary>
 		public GaiaBaseException() {}
 
+		/// <summary>
+		/// Create instatnce of Gaia base exception
+		/// </summary>
+		/// <param name="message"></param>
 		public GaiaBaseException(string message) : base(message) {}
 
+		/// <summary>
+		/// Create instatnce of Gaia base exception
+		/// </summary>
+		/// <param name="message"></param>
+		/// <param name="innerException"></param>
 		public GaiaBaseException(string message, Exception innerException) : base(message, innerException) {}
 
 		[SecuritySafeCritical]

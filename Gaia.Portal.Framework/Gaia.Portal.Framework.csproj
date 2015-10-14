@@ -221,6 +221,9 @@
     <Compile Include="Extensions\UrlHelperExtensions.cs" />
     <Compile Include="HttpErrorAwareControllerActionSelector.cs" />
     <Compile Include="IoC\ContainerActivator.cs" />
+    <Compile Include="Json\JsonExtensions.cs" />
+    <Compile Include="Mvc\JsonNetResult.cs" />
+    <Compile Include="Json\JsonNetValueProviderFactory.cs" />
     <Compile Include="NamespaceHttpControllerSelector.cs" />
     <Compile Include="GaiaModuleAreaRegistration.cs" />
     <Compile Include="Configuration\Settings.cs" />
@@ -245,16 +248,16 @@
     <Compile Include="Security\XmlPermissionsProvider.cs" />
     <Compile Include="Security\Role.cs" />
     <Compile Include="Security\Route.cs" />
-    <Compile Include="Security\SecureController.cs" />
-    <Compile Include="Web\Binders\EnumBinder.cs" />
-    <Compile Include="Web\Binders\GuidModelBinder.cs" />
-    <Compile Include="Web\Filters\ModelStateClearAttribute.cs" />
-    <Compile Include="Web\Filters\ValidateModelAttribute.cs" />
+    <Compile Include="Mvc\SecureController.cs" />
+    <Compile Include="Mvc\Binders\EnumBinder.cs" />
+    <Compile Include="Mvc\Binders\GuidModelBinder.cs" />
+    <Compile Include="Mvc\Filters\ModelStateClearAttribute.cs" />
+    <Compile Include="Mvc\Filters\ValidateModelAttribute.cs" />
     <Compile Include="Validation\IgnoreAttribute.cs" />
     <Compile Include="Validation\ValidationHelpers.cs" />
-    <Compile Include="Web\BaseController.cs" />
-    <Compile Include="Web\BaseWebApiController.cs" />
-    <Compile Include="Web\XmlActionResult.cs" />
+    <Compile Include="Mvc\BaseController.cs" />
+    <Compile Include="Mvc\BaseWebApiController.cs" />
+    <Compile Include="Mvc\XmlActionResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -280,6 +283,10 @@
     <ProjectReference Include="..\Gaia.Core.IoC\Gaia.Core.IoC.csproj">
       <Project>{52980ebe-aeb1-4b3c-963a-be0da24b25b1}</Project>
       <Name>Gaia.Core.IoC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gaia.Core.Mail\Gaia.Core.Mail.csproj">
+      <Project>{af928ce3-bbf1-40a7-b97b-41bc225009e7}</Project>
+      <Name>Gaia.Core.Mail</Name>
     </ProjectReference>
     <ProjectReference Include="..\Gaia.Core\Gaia.Core.csproj">
       <Project>{8318a17e-7bf1-4d45-a0ce-ee3fd9b83b2d}</Project>

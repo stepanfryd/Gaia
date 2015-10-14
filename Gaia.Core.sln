@@ -98,6 +98,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gaia.Portal.Framework", "Ga
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gaia.Portal.Framework.Pdf", "Gaia.Portal.Framework.Pdf\Gaia.Portal.Framework.Pdf.csproj", "{B530082C-AB18-4B6F-B442-AC46CF0CFB85}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gaia.Core.Mail", "Gaia.Core.Mail\Gaia.Core.Mail.csproj", "{AF928CE3-BBF1-40A7-B97B-41BC225009E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gaia.Core.Mail.SendGrid", "Gaia.Core.Mail.SendGrid\Gaia.Core.Mail.SendGrid.csproj", "{889992D1-CE62-4E54-9371-67657649AAB0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -194,6 +198,22 @@ Global
 		{B530082C-AB18-4B6F-B442-AC46CF0CFB85}.NuGet-Release|Any CPU.Build.0 = NuGet-Release|Any CPU
 		{B530082C-AB18-4B6F-B442-AC46CF0CFB85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B530082C-AB18-4B6F-B442-AC46CF0CFB85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF928CE3-BBF1-40A7-B97B-41BC225009E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF928CE3-BBF1-40A7-B97B-41BC225009E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF928CE3-BBF1-40A7-B97B-41BC225009E7}.NuGet-Debug|Any CPU.ActiveCfg = NuGet-Debug|Any CPU
+		{AF928CE3-BBF1-40A7-B97B-41BC225009E7}.NuGet-Debug|Any CPU.Build.0 = NuGet-Debug|Any CPU
+		{AF928CE3-BBF1-40A7-B97B-41BC225009E7}.NuGet-Release|Any CPU.ActiveCfg = NuGet-Release|Any CPU
+		{AF928CE3-BBF1-40A7-B97B-41BC225009E7}.NuGet-Release|Any CPU.Build.0 = NuGet-Release|Any CPU
+		{AF928CE3-BBF1-40A7-B97B-41BC225009E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF928CE3-BBF1-40A7-B97B-41BC225009E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{889992D1-CE62-4E54-9371-67657649AAB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{889992D1-CE62-4E54-9371-67657649AAB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{889992D1-CE62-4E54-9371-67657649AAB0}.NuGet-Debug|Any CPU.ActiveCfg = NuGet-Debug|Any CPU
+		{889992D1-CE62-4E54-9371-67657649AAB0}.NuGet-Debug|Any CPU.Build.0 = NuGet-Debug|Any CPU
+		{889992D1-CE62-4E54-9371-67657649AAB0}.NuGet-Release|Any CPU.ActiveCfg = NuGet-Release|Any CPU
+		{889992D1-CE62-4E54-9371-67657649AAB0}.NuGet-Release|Any CPU.Build.0 = NuGet-Release|Any CPU
+		{889992D1-CE62-4E54-9371-67657649AAB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{889992D1-CE62-4E54-9371-67657649AAB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -218,9 +238,11 @@ Global
 		{3A82E948-43E1-434C-9C6D-BCAA1C83F76F} = {37C642A5-183F-4F5B-B065-3467581DB4D1}
 		{05761CF0-B197-46B2-9180-7E10C10E56E4} = {66DD0CCD-592A-4EA1-9A93-97A20FC4718E}
 		{B530082C-AB18-4B6F-B442-AC46CF0CFB85} = {66DD0CCD-592A-4EA1-9A93-97A20FC4718E}
+		{AF928CE3-BBF1-40A7-B97B-41BC225009E7} = {77DA39B0-F018-4068-BE53-6461957A53DB}
+		{889992D1-CE62-4E54-9371-67657649AAB0} = {77DA39B0-F018-4068-BE53-6461957A53DB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Logging.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.ExceptionHandling.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.ExceptionHandling.WCF.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.ExceptionHandling.Logging.6.0.1304.0\lib\NET45
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35
 	EndGlobalSection
 EndGlobal
