@@ -206,7 +206,7 @@
     <Compile Include="Configuration\EntLib\EnterpriseLibraryBootstrap.cs" />
     <Compile Include="Configuration\EntLib\IEnterpriseLibrary.cs" />
     <Compile Include="Configuration\IConfiguration.cs" />
-    <Compile Include="Configuration\ISettings.cs" />
+    <Compile Include="Configuration\IGaiaSettings.cs" />
     <Compile Include="Configuration\Modules\IWebModuleProvider.cs" />
     <Compile Include="Configuration\Modules\IWebModule.cs" />
     <Compile Include="Configuration\Modules\DefaultWebModuleProvider.cs" />
@@ -222,11 +222,12 @@
     <Compile Include="HttpErrorAwareControllerActionSelector.cs" />
     <Compile Include="IoC\ContainerActivator.cs" />
     <Compile Include="Json\JsonExtensions.cs" />
+    <Compile Include="Mvc\SecureWebApiController.cs" />
     <Compile Include="Mvc\JsonNetResult.cs" />
     <Compile Include="Json\JsonNetValueProviderFactory.cs" />
     <Compile Include="NamespaceHttpControllerSelector.cs" />
     <Compile Include="GaiaModuleAreaRegistration.cs" />
-    <Compile Include="Configuration\Settings.cs" />
+    <Compile Include="Configuration\GaiaSettings.cs" />
     <Compile Include="GaiaWebViewPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

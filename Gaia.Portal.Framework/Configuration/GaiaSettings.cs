@@ -30,7 +30,7 @@ namespace Gaia.Portal.Framework.Configuration
 	/// Common application settings usually in web.config under gaia/settings
 	/// </summary>
 	[XmlRoot("settings")]
-	public class Settings : ISettings
+	public class GaiaSettings : IGaiaSettings
 	{
 		/// <summary>
 		/// Application name

@@ -22,16 +22,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
-
-using Gaia.Portal.Framework.Security;
-
-namespace Gaia.Portal.Framework.Mvc
+namespace Gaia.Portal.Framework.Configuration
 {
-	/// <summary>
-	///   Application controller requires authorized access
-	/// </summary>
-	[GaiaAuthorize]
-	public class SecureController : BaseController
+	public interface IGaiaSettings
 	{
+		string ApplicationName { get; set; }
+		string ModulesRoot { get; set; }
+		string ModuleIncludeMask { get; set; }
+		string ModuleConfigFile { get; set; }
+		string ModuleScriptBundleMask { get; set; }
+		string ModuleStylesBundleMask { get; set; }
+		string BundlesConfig { get; set; }
 	}
 }

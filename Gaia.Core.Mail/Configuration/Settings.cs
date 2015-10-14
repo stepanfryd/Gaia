@@ -24,6 +24,7 @@ THE SOFTWARE.
 */
 using NParametrizer;
 
+
 namespace Gaia.Core.Mail.Configuration
 {
 	/// <summary>
