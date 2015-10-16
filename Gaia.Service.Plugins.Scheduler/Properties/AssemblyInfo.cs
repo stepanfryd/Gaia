@@ -30,8 +30,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProduct("Gaia.Service.Plugins.Scheduler")]
 [assembly: Guid("e6beb28b-6823-402b-9dc8-25495530cc03")]
 
-[assembly: AssemblyVersion("0.3.0.0")]
-[assembly: AssemblyFileVersion("0.3.0.0")]
+[assembly: AssemblyVersion("0.3.0.2")]
+[assembly: AssemblyFileVersion("0.3.0.2")]
 [assembly: AssemblyCompany("Cloud17")]
 [assembly: AssemblyCopyright("Copyright © Stepan Fryd 2012")]
 [assembly: AssemblyTrademark("")]

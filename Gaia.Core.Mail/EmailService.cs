@@ -22,6 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -63,28 +64,22 @@ namespace Gaia.Core.Mail
 		/// <param name="mailProvider"></param>
 		/// <param name="templateProvider"></param>
 		/// <param name="emailTemplateConfiguration"></param>
-		/// <param name="emailSettings"></param>
 		/// <exception cref="ArgumentNullException"></exception>
 		/// <exception cref="EmailSettingsException"></exception>
 		public EmailService(IMailProvider mailProvider, IMessageTemplateProvider templateProvider,
-			IEmailTemplateConfiguration emailTemplateConfiguration, IEmailSettings emailSettings)
+			IEmailTemplateConfiguration emailTemplateConfiguration)
 		{
 			_log = LogManager.GetLogger(GetType());
 
 			if (mailProvider == null) throw new ArgumentNullException(nameof(mailProvider));
 			if (emailTemplateConfiguration == null) throw new ArgumentNullException(nameof(emailTemplateConfiguration));
-			if (emailSettings == null)
-			{
-				_emailSettings = new Settings().EmailSettings;
-			}
+			_emailSettings = new Settings().EmailSettings;
 
 			if (_emailSettings == null) throw new EmailSettingsException();
 
 			_mailProvider = mailProvider;
 			_templateProvider = templateProvider;
 			_emailTemplateConfiguration = emailTemplateConfiguration;
-			_emailSettings = emailSettings;
-
 			_engineService = RazorEngineService.Create((ITemplateServiceConfiguration) _emailTemplateConfiguration);
 		}
 

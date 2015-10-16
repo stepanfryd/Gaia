@@ -1,5 +1,5 @@
 setlocal disableextensions
-set NUGET_SERVER=http://cloud17nugetserver.azurewebsites.net/ 
+set NUGET_SERVER=https://www.nuget.org/api/v2/package/
 set NUGET_KEY=%NUGET_SERVER_API_KEY%
 
 IF [%NUGET_KEY%]==[] GOTO key_not_exists
