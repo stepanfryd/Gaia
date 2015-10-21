@@ -1,0 +1,28 @@
+{
+  "name": "Gaia.Samples.WebApp",
+  "authors": [
+    "stepanfryd <stepan.fryd@gmail.com>"
+  ],
+  "description": "Sample Web Application setup with Gaia.Core components",
+  "main": "",
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.5",
+    "respond": "~1.4.2",
+    "modernizr": "~3.1.0",
+    "jquery-validation": "jquery.validate#~1.13.0"
+  }
+}

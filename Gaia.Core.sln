@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gaia.Core.Wcf.Services", "G
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "10. Tests", "10. Tests", "{4115B21A-DACD-4BC3-981B-3450337D6846}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Solution Items", "0. Solution Items", "{95EEC92A-F6E1-4AC9-9368-7C0C14D65A46}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00. Solution Items", "00. Solution Items", "{95EEC92A-F6E1-4AC9-9368-7C0C14D65A46}"
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
@@ -78,8 +78,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tasks", "Tasks", "{3B7049C4
 		Solution Items\Targets\Tasks\Cloud17.MSBuild.NuGet.pdb = Solution Items\Targets\Tasks\Cloud17.MSBuild.NuGet.pdb
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gaia.Core.Tests", "Gaia.Core.Tests\Gaia.Core.Tests.csproj", "{C0FCA0DB-E48F-4255-8CE6-425298CEFDA5}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gaia.Core.IoC", "Gaia.Core.IoC\Gaia.Core.IoC.csproj", "{52980EBE-AEB1-4B3C-963A-BE0DA24B25B1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gaia.Core.Wcf", "Gaia.Core.Wcf\Gaia.Core.Wcf.csproj", "{590B656F-57FD-4B29-875F-F55895EB1185}"
@@ -101,6 +99,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gaia.Core.Mail", "Gaia.Core.Mail\Gaia.Core.Mail.csproj", "{AF928CE3-BBF1-40A7-B97B-41BC225009E7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gaia.Core.Mail.SendGrid", "Gaia.Core.Mail.SendGrid\Gaia.Core.Mail.SendGrid.csproj", "{889992D1-CE62-4E54-9371-67657649AAB0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05. Samples", "05. Samples", "{CF894717-3BAC-4D6E-BD25-E7A8855E2DE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gaia.Samples.WebApp", "Gaia.Samples.WebApp\Gaia.Samples.WebApp.csproj", "{29023FA4-164A-4101-A244-575DDFD2FCE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gaia.Portal.Tests", "..\Gaia.Portal\Fintrax.Panda.Tests\Gaia.Portal.Tests.csproj", "{C0FCA0DB-E48F-4255-8CE6-425298CEFDA5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -142,14 +146,6 @@ Global
 		{8318A17E-7BF1-4D45-A0CE-EE3FD9B83B2D}.NuGet-Release|Any CPU.Build.0 = NuGet-Release|Any CPU
 		{8318A17E-7BF1-4D45-A0CE-EE3FD9B83B2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8318A17E-7BF1-4D45-A0CE-EE3FD9B83B2D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C0FCA0DB-E48F-4255-8CE6-425298CEFDA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C0FCA0DB-E48F-4255-8CE6-425298CEFDA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C0FCA0DB-E48F-4255-8CE6-425298CEFDA5}.NuGet-Debug|Any CPU.ActiveCfg = NuGet-Debug|Any CPU
-		{C0FCA0DB-E48F-4255-8CE6-425298CEFDA5}.NuGet-Debug|Any CPU.Build.0 = NuGet-Debug|Any CPU
-		{C0FCA0DB-E48F-4255-8CE6-425298CEFDA5}.NuGet-Release|Any CPU.ActiveCfg = NuGet-Release|Any CPU
-		{C0FCA0DB-E48F-4255-8CE6-425298CEFDA5}.NuGet-Release|Any CPU.Build.0 = NuGet-Release|Any CPU
-		{C0FCA0DB-E48F-4255-8CE6-425298CEFDA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C0FCA0DB-E48F-4255-8CE6-425298CEFDA5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{52980EBE-AEB1-4B3C-963A-BE0DA24B25B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{52980EBE-AEB1-4B3C-963A-BE0DA24B25B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52980EBE-AEB1-4B3C-963A-BE0DA24B25B1}.NuGet-Debug|Any CPU.ActiveCfg = NuGet-Debug|Any CPU
@@ -214,6 +210,22 @@ Global
 		{889992D1-CE62-4E54-9371-67657649AAB0}.NuGet-Release|Any CPU.Build.0 = NuGet-Release|Any CPU
 		{889992D1-CE62-4E54-9371-67657649AAB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{889992D1-CE62-4E54-9371-67657649AAB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29023FA4-164A-4101-A244-575DDFD2FCE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29023FA4-164A-4101-A244-575DDFD2FCE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29023FA4-164A-4101-A244-575DDFD2FCE1}.NuGet-Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29023FA4-164A-4101-A244-575DDFD2FCE1}.NuGet-Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29023FA4-164A-4101-A244-575DDFD2FCE1}.NuGet-Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29023FA4-164A-4101-A244-575DDFD2FCE1}.NuGet-Release|Any CPU.Build.0 = Release|Any CPU
+		{29023FA4-164A-4101-A244-575DDFD2FCE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29023FA4-164A-4101-A244-575DDFD2FCE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0FCA0DB-E48F-4255-8CE6-425298CEFDA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0FCA0DB-E48F-4255-8CE6-425298CEFDA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0FCA0DB-E48F-4255-8CE6-425298CEFDA5}.NuGet-Debug|Any CPU.ActiveCfg = NuGet-Debug|Any CPU
+		{C0FCA0DB-E48F-4255-8CE6-425298CEFDA5}.NuGet-Debug|Any CPU.Build.0 = NuGet-Debug|Any CPU
+		{C0FCA0DB-E48F-4255-8CE6-425298CEFDA5}.NuGet-Release|Any CPU.ActiveCfg = NuGet-Release|Any CPU
+		{C0FCA0DB-E48F-4255-8CE6-425298CEFDA5}.NuGet-Release|Any CPU.Build.0 = NuGet-Release|Any CPU
+		{C0FCA0DB-E48F-4255-8CE6-425298CEFDA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0FCA0DB-E48F-4255-8CE6-425298CEFDA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -230,7 +242,6 @@ Global
 		{DB410DE4-7AAB-478A-B347-11786266073C} = {94CFE497-F49B-4098-8002-3E80779F0C45}
 		{DE63C969-53F8-41A2-B34C-28505F01F7DA} = {DB410DE4-7AAB-478A-B347-11786266073C}
 		{3B7049C4-FD26-41C5-B0AE-C8546025B0BA} = {A60831E1-A640-4BE2-84FC-CAC422D27D01}
-		{C0FCA0DB-E48F-4255-8CE6-425298CEFDA5} = {4115B21A-DACD-4BC3-981B-3450337D6846}
 		{52980EBE-AEB1-4B3C-963A-BE0DA24B25B1} = {77DA39B0-F018-4068-BE53-6461957A53DB}
 		{590B656F-57FD-4B29-875F-F55895EB1185} = {77DA39B0-F018-4068-BE53-6461957A53DB}
 		{25C70291-E074-4075-99A8-7AF0DF1BF6BC} = {77DA39B0-F018-4068-BE53-6461957A53DB}
@@ -240,6 +251,8 @@ Global
 		{B530082C-AB18-4B6F-B442-AC46CF0CFB85} = {66DD0CCD-592A-4EA1-9A93-97A20FC4718E}
 		{AF928CE3-BBF1-40A7-B97B-41BC225009E7} = {77DA39B0-F018-4068-BE53-6461957A53DB}
 		{889992D1-CE62-4E54-9371-67657649AAB0} = {77DA39B0-F018-4068-BE53-6461957A53DB}
+		{29023FA4-164A-4101-A244-575DDFD2FCE1} = {CF894717-3BAC-4D6E-BD25-E7A8855E2DE3}
+		{C0FCA0DB-E48F-4255-8CE6-425298CEFDA5} = {CF894717-3BAC-4D6E-BD25-E7A8855E2DE3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Logging.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.ExceptionHandling.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.ExceptionHandling.WCF.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.ExceptionHandling.Logging.6.0.1304.0\lib\NET45
