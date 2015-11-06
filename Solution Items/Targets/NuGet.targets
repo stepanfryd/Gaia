@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
-	<UsingTask AssemblyFile="$(SolutionDir)Solution Items\Targets\Tasks\Cloud17.MSBuild.NuGet.dll" TaskName="Cloud17.MSBuild.NuGet.NuGetTask" />
+	<UsingTask AssemblyFile="C:\_WORK\Cloud17.MSBuild.NuGet\Cloud17.MSBuild.NuGet\bin\Debug\Cloud17.MSBuild.NuGet.dll" TaskName="Cloud17.MSBuild.NuGet.NuGetTask" />
 	<Target Name="GenerateNuGet" AfterTargets="Build" Condition="$(NugetGeneration)=='true'">
 		<CreateItem Include="$(ProjectDir)*.nupkg">
 			<Output TaskParameter="Include" ItemName="FilesToCopy"/>

@@ -41,6 +41,9 @@
     <NugetGeneration>true</NugetGeneration>
     <IncreaseBuildVersion>true</IncreaseBuildVersion>
     <ProjectGroup>Core</ProjectGroup>
+    <DocumentationFile>
+    </DocumentationFile>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'NuGet-Release|AnyCPU'">
     <OutputPath>bin\NuGet-Release\</OutputPath>
