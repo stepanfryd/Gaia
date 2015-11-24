@@ -60,7 +60,7 @@ namespace Gaia.Core.Mail
 
 		public void Send(MailMessage message)
 		{
-			_smtpClient.SendAsync(message, message);
+			_smtpClient.Send(message);
 		}
 
 		#endregion
