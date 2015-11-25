@@ -30,7 +30,6 @@ using System.Linq;
 using System.Net.Mail;
 using System.Net.Mime;
 using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 using Common.Logging;
 using Gaia.Core.Mail.Configuration;
@@ -88,7 +87,7 @@ namespace Gaia.Core.Mail
 		#region Interface Implementations
 
 		/// <summary>
-		///   Send email asynchronously
+		///   Send email
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="recipients"></param>
@@ -98,17 +97,17 @@ namespace Gaia.Core.Mail
 		/// <param name="customHeaders"></param>
 		/// <typeparam name="T"></typeparam>
 		/// <returns></returns>
-		public Task SendEmailAsync<T>(MailAddress sender, MailAddress[] recipients, string templateKey, T model,
+		public void SendEmail<T>(MailAddress sender, MailAddress[] recipients, string templateKey, T model,
 			Attachment[] attachments = null, IDictionary<string, string> customHeaders = null)
 		{
 			var messageTemplate = _templateProvider.GetTemplate(templateKey);
-			return SendEmailAsync(sender, recipients, messageTemplate.Subject, messageTemplate.TemplatePlain,
+			SendEmail(sender, recipients, messageTemplate.Subject, messageTemplate.TemplatePlain,
 				messageTemplate.TemplateHtml, model, templateKey, attachments, customHeaders);
 		}
 
 
 		/// <summary>
-		///   Send email asynchronously
+		///   Send email
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="recipients"></param>
@@ -118,16 +117,16 @@ namespace Gaia.Core.Mail
 		/// <param name="customHeaders"></param>
 		/// <typeparam name="T"></typeparam>
 		/// <returns></returns>
-		public Task SendEmailAsync<T>(string sender, string[] recipients, string templateKey, T model,
+		public void SendEmail<T>(string sender, string[] recipients, string templateKey, T model,
 			Attachment[] attachments = null, IDictionary<string, string> customHeaders = null)
 		{
-			return SendEmailAsync(new MailAddress(sender), recipients.Select(r => new MailAddress(r)).ToArray(), templateKey,
+			SendEmail(new MailAddress(sender), recipients.Select(r => new MailAddress(r)).ToArray(), templateKey,
 				model,
 				attachments, customHeaders);
 		}
 
 		/// <summary>
-		///   Send email asynchronously
+		///   Send email
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="recipient"></param>
@@ -137,15 +136,15 @@ namespace Gaia.Core.Mail
 		/// <param name="customHeaders"></param>
 		/// <typeparam name="T"></typeparam>
 		/// <returns></returns>
-		public Task SendEmailAsync<T>(string sender, string recipient, string templateKey, T model,
+		public void SendEmail<T>(string sender, string recipient, string templateKey, T model,
 			Attachment[] attachments = null, IDictionary<string, string> customHeaders = null)
 		{
-			return SendEmailAsync(new MailAddress(sender), new[] {new MailAddress(recipient)}, templateKey, model, attachments,
+			SendEmail(new MailAddress(sender), new[] {new MailAddress(recipient)}, templateKey, model, attachments,
 				customHeaders);
 		}
 
 		/// <summary>
-		///   Send email asynchronously
+		///   Send email
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="recipient"></param>
@@ -158,36 +157,38 @@ namespace Gaia.Core.Mail
 		/// <param name="customHeaders"></param>
 		/// <typeparam name="T"></typeparam>
 		/// <returns></returns>
-		public Task SendEmailAsync<T>(MailAddress sender, MailAddress recipient, string subject, string templatePlain,
-			string templateHtml, T model, string templateKey, Attachment[] attachments = null,
-			IDictionary<string, string> customHeaders = null)
-			=> SendEmailAsync(sender, new[] {recipient}, subject, templatePlain, templateHtml, model, templateKey,
-				attachments, customHeaders);
-
-		/// <summary>
-		///   Send email asynchronously
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="recipient"></param>
-		/// <param name="subject"></param>
-		/// <param name="templatePlain"></param>
-		/// <param name="templateHtml"></param>
-		/// <param name="model"></param>
-		/// <param name="templateKey"></param>
-		/// <param name="attachments"></param>
-		/// <param name="customHeaders"></param>
-		/// <typeparam name="T"></typeparam>
-		/// <returns></returns>
-		public Task SendEmailAsync<T>(string sender, string recipient, string subject, string templatePlain,
+		public void SendEmail<T>(MailAddress sender, MailAddress recipient, string subject, string templatePlain,
 			string templateHtml, T model, string templateKey, Attachment[] attachments = null,
 			IDictionary<string, string> customHeaders = null)
 		{
-			return SendEmailAsync(new MailAddress(sender), new MailAddress(recipient), subject, templatePlain, templateHtml,
+			SendEmail(sender, new[] {recipient}, subject, templatePlain, templateHtml, model, templateKey,
+				attachments, customHeaders);
+		}
+
+		/// <summary>
+		///   Send email
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="recipient"></param>
+		/// <param name="subject"></param>
+		/// <param name="templatePlain"></param>
+		/// <param name="templateHtml"></param>
+		/// <param name="model"></param>
+		/// <param name="templateKey"></param>
+		/// <param name="attachments"></param>
+		/// <param name="customHeaders"></param>
+		/// <typeparam name="T"></typeparam>
+		/// <returns></returns>
+		public void SendEmail<T>(string sender, string recipient, string subject, string templatePlain,
+			string templateHtml, T model, string templateKey, Attachment[] attachments = null,
+			IDictionary<string, string> customHeaders = null)
+		{
+			SendEmail(new MailAddress(sender), new MailAddress(recipient), subject, templatePlain, templateHtml,
 				model, templateKey, attachments, customHeaders);
 		}
 
 		/// <summary>
-		///   Send email asynchronously
+		///   Send email
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="recipients"></param>
@@ -200,16 +201,16 @@ namespace Gaia.Core.Mail
 		/// <param name="customHeaders"></param>
 		/// <typeparam name="T"></typeparam>
 		/// <returns></returns>
-		public Task SendEmailAsync<T>(string sender, string[] recipients, string subject, string templatePlain,
+		public void SendEmail<T>(string sender, string[] recipients, string subject, string templatePlain,
 			string templateHtml, T model, string templateKey, Attachment[] attachments = null,
 			IDictionary<string, string> customHeaders = null)
 		{
-			return SendEmailAsync(new MailAddress(sender), recipients.Select(r => new MailAddress(r)).ToArray(), subject,
+			SendEmail(new MailAddress(sender), recipients.Select(r => new MailAddress(r)).ToArray(), subject,
 				templatePlain, templateHtml, model, templateKey, attachments, customHeaders);
 		}
 
 		/// <summary>
-		///   Send email asynchronously
+		///   Send email
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="recipients"></param>
@@ -222,7 +223,7 @@ namespace Gaia.Core.Mail
 		/// <param name="customHeaders"></param>
 		/// <typeparam name="T"></typeparam>
 		/// <returns></returns>
-		public async Task SendEmailAsync<T>(MailAddress sender, MailAddress[] recipients, string subject, string templatePlain,
+		public void SendEmail<T>(MailAddress sender, MailAddress[] recipients, string subject, string templatePlain,
 			string templateHtml, T model, string templateKey, Attachment[] attachments = null,
 			IDictionary<string, string> customHeaders = null)
 		{
@@ -303,25 +304,22 @@ namespace Gaia.Core.Mail
 				}
 			}
 
-			await Task.Run(() =>
+			if (_emailSettings.SaveCopy
+				  && !string.IsNullOrEmpty(_emailSettings.CopyLocation)
+				  && Directory.Exists(_emailSettings.CopyLocation))
 			{
-				if (_emailSettings.SaveCopy
-				    && !string.IsNullOrEmpty(_emailSettings.CopyLocation)
-				    && Directory.Exists(_emailSettings.CopyLocation))
+				var client = new SmtpClient
 				{
-					var client = new SmtpClient
-					{
-						DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory,
-						PickupDirectoryLocation = _emailSettings.CopyLocation
-					};
-					client.Send(message);
-				}
+					DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory,
+					PickupDirectoryLocation = _emailSettings.CopyLocation
+				};
+				client.Send(message);
+			}
 
-				if (_emailSettings.Enabled)
-				{
-					_mailProvider.Send(message);
-				}
-			});
+			if (_emailSettings.Enabled)
+			{
+				_mailProvider.Send(message);
+			}
 		}
 
 		#endregion

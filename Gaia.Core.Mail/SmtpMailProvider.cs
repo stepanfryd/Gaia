@@ -45,7 +45,6 @@ namespace Gaia.Core.Mail
 		{
 			_log = LogManager.GetLogger(GetType());
 			_smtpClient = new SmtpClient();
-			_smtpClient.SendCompleted += smtpClient_SendCompleted;
 		}
 
 		#endregion
@@ -66,35 +65,6 @@ namespace Gaia.Core.Mail
 		#endregion
 
 		#region Private and protected
-
-		private void smtpClient_SendCompleted(object sender, AsyncCompletedEventArgs e)
-		{
-			var mail = e.UserState as MailMessage;
-
-
-			if (mail != null)
-			{
-				var mailHeaders = mail.Headers.ToJson();
-				var recipients = string.Join(",", mail.To.Select(m => m.Address));
-				if (e.Cancelled)
-				{
-					_log.Warn($"Email delivery to {recipients} has been canceled. Headers: {mailHeaders}");
-				}
-
-				if (e.Error != null)
-				{
-					_log.ErrorFormat("Email to {0} delivery error. Headers: {1}", e.Error, recipients, mailHeaders);
-				}
-				else
-				{
-					_log.Warn($"Email has been sent to {recipients}. Headers: {mailHeaders}");
-				}
-			}
-			else
-			{
-				_log.Warn("Email token after mail complete doesn't exists");
-			}
-		}
 
 		~SmtpMailProvider()
 		{
