@@ -236,7 +236,7 @@ namespace Gaia.Core.Mail
 
 			var templateContentPlain = _engineService.IsTemplateCached(templateKey + "Plain", typeof(T))
 					? _engineService.Run(templateKey + "Plain", typeof(T), model)
-					: _engineService.RunCompile(templateHtml, templateKey + "Plain", typeof(T), model);
+					: _engineService.RunCompile(templatePlain, templateKey + "Plain", typeof(T), model);
 
 
 			var subjectProperty = modelType.GetProperties().SingleOrDefault(p => p.Name.ToLower() == "subject");
