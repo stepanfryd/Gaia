@@ -47,7 +47,7 @@ namespace Gaia.Core.Workflows
 		public WorkflowResult InvokeWorkflow(Activity workflowActivity, IDictionary<string, object> inputs = null,
 			IEnumerable<object> extensions = null)
 		{
-			if (workflowActivity == null) throw new ArgumentNullException("workflowActivity");
+			if (workflowActivity == null) throw new ArgumentNullException(nameof(workflowActivity));
 
 			var invoker = new WorkflowInvoker(workflowActivity);
 
@@ -98,11 +98,13 @@ namespace Gaia.Core.Workflows
 		public WorkflowResult InvokeWorkflow(string typeRegistrationName, IDictionary<string, object> inputs = null,
 			IEnumerable<object> extensions = null)
 		{
-			ContainerRegistration type = Container.Instance.Registrations.SingleOrDefault(c => c.Name == typeRegistrationName);
+			// TODO: Rewrite to universal container registration to kick off Unity hard link
+			var container = (IUnityContainer) Container.Instance.ContainerInstance;
+
+			ContainerRegistration type = container.Registrations.SingleOrDefault(c => c.Name == typeRegistrationName);
 
 			if (type == null)
-				throw new NullReferenceException(String.Format("In Unity configuration doesn't exist [{0}] registration",
-					typeRegistrationName));
+				throw new NullReferenceException($"In Unity configuration doesn't exist [{typeRegistrationName}] registration");
 
 			var activity = Container.Instance.Resolve(type.RegisteredType, typeRegistrationName) as Activity;
 			return InvokeWorkflow(activity, inputs, extensions);

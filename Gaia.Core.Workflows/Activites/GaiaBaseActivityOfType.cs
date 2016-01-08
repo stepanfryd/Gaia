@@ -93,7 +93,14 @@ namespace Gaia.Core.Workflows.Activites
 
 		protected ILog Log { get; set; }
 
-		protected IUnityContainer Container => IoC.Container.Instance;
+		protected IUnityContainer Container
+		{
+			get
+			{
+				// TODO: remove hard link to Unity
+				return  (IUnityContainer)IoC.Container.Instance.ContainerInstance;
+			}
+		} 
 
 		#endregion
 	}
