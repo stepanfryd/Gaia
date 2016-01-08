@@ -22,16 +22,40 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
 namespace Gaia.Core.Mail.Configuration
 {
+	/// <summary>
+	///   Email settings interface definion
+	/// </summary>
 	public interface IEmailSettings
 	{
 		#region Public members
 
+		/// <summary>
+		///   Email is enabled
+		/// </summary>
 		bool Enabled { get; set; }
+
+		/// <summary>
+		///   In case of Test mode the testing recipient email address
+		/// </summary>
 		string TestRecipient { get; set; }
+
+		/// <summary>
+		///   Defines if emails settings uses testing mode. If true, emails are send to TestRecipient address instead of original
+		///   recipient
+		/// </summary>
 		bool TestMode { get; set; }
+
+		/// <summary>
+		///   Specify if the email message is saved/archived to disc
+		/// </summary>
 		bool SaveCopy { get; set; }
+
+		/// <summary>
+		///   Location where to store local copy of messages can be physical or virtual
+		/// </summary>
 		string CopyLocation { get; set; }
 
 		#endregion

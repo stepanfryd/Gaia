@@ -22,25 +22,23 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
 using System;
-using System.ComponentModel;
-using System.Linq;
 using System.Net.Mail;
 using Common.Logging;
 
 namespace Gaia.Core.Mail
 {
+	/// <summary>
+	///   SmtpMail provider sends mail message using standard SMTP protocol with configured SMTP server
+	/// </summary>
 	public class SmtpMailProvider : IMailProvider, IDisposable
 	{
-		#region Fields and constants
-
-		private readonly ILog _log;
-		private SmtpClient _smtpClient;
-
-		#endregion
-
 		#region Constructors
 
+		/// <summary>
+		///   Creates default instance of object
+		/// </summary>
 		public SmtpMailProvider()
 		{
 			_log = LogManager.GetLogger(GetType());
@@ -49,28 +47,50 @@ namespace Gaia.Core.Mail
 
 		#endregion
 
+		#region Fields and constants
+
+		private readonly ILog _log;
+		private SmtpClient _smtpClient;
+
+		#endregion
+
 		#region Interface Implementations
 
+		/// <summary>
+		///   Default Dispose
+		/// </summary>
 		public void Dispose()
 		{
 			Dispose(true);
 			GC.SuppressFinalize(this);
 		}
 
+		/// <summary>
+		///   Send mail message
+		/// </summary>
+		/// <param name="message"></param>
 		public void Send(MailMessage message)
 		{
 			_smtpClient.Send(message);
+			_log.Info($"Message to {message.To} has been sent");
 		}
 
 		#endregion
 
 		#region Private and protected
 
+		/// <summary>
+		///   Default object destructor
+		/// </summary>
 		~SmtpMailProvider()
 		{
 			Dispose(false);
 		}
 
+		/// <summary>
+		///   Default dispose
+		/// </summary>
+		/// <param name="disposing"></param>
 		protected virtual void Dispose(bool disposing)
 		{
 			if (disposing)

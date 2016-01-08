@@ -22,14 +22,21 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
 using Gaia.Core.Exceptions;
 
 namespace Gaia.Core.Mail
 {
+	/// <summary>
+	///   Exception which is thrown in the case of wrong email configuration
+	/// </summary>
 	public class EmailSettingsException : GaiaBaseException
 	{
 		#region Constructors
 
+		/// <summary>
+		///   Default exception constructor
+		/// </summary>
 		public EmailSettingsException()
 			: base(
 				"Mail settings configuration section is not properly configured. Please set up gaia/emailSettings app.config or web.config section correctly."

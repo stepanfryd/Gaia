@@ -22,12 +22,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
 using System.IO;
 using System.Web;
 using System.Xml.Serialization;
 
 namespace Gaia.Core.Mail.Configuration
 {
+	/// <summary>
+	///   Email settings configuration section
+	/// </summary>
 	[XmlRoot("emailSettings")]
 	public class EmailSettings : IEmailSettings
 	{
@@ -39,18 +43,34 @@ namespace Gaia.Core.Mail.Configuration
 
 		#region Public members
 
+		/// <summary>
+		///   Email is enabled
+		/// </summary>
 		[XmlAttribute("enabled")]
 		public bool Enabled { get; set; }
 
+		/// <summary>
+		///   In case of Test mode the testing recipient email address
+		/// </summary>
 		[XmlAttribute("testRecipient")]
 		public string TestRecipient { get; set; }
 
+		/// <summary>
+		///   Defines if emails settings uses testing mode. If true, emails are send to TestRecipient address instead of original
+		///   recipient
+		/// </summary>
 		[XmlAttribute("testMode")]
 		public bool TestMode { get; set; }
 
+		/// <summary>
+		///   Specify if the email message is saved/archived to disc
+		/// </summary>
 		[XmlAttribute("saveCopy")]
 		public bool SaveCopy { get; set; }
 
+		/// <summary>
+		///   Location where to store local copy of messages can be physical or virtual
+		/// </summary>
 		[XmlAttribute("copyLocation")]
 		public string CopyLocation
 		{

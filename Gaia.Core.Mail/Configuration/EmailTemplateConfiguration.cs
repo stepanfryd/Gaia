@@ -30,39 +30,48 @@ using RazorEngine.Templating;
 
 namespace Gaia.Core.Mail.Configuration
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public class EmailTemplateConfiguration : TemplateServiceConfiguration, IEmailTemplateConfiguration
 	{
 		#region Public members
 
-		public string PhysicalEmailsTemplateFolder { get; }
+		/// <summary>
+		/// Location of email templates. Can by physical or virtual
+		/// </summary>
+		public string TemplateFolder { get; }
 
 		#endregion
 
 		#region Constructors
-
+		/// <summary>
+		/// Default configuration constructor
+		/// </summary>
+		/// <param name="emailsTemplatesFolder"></param>
 		public EmailTemplateConfiguration(string emailsTemplatesFolder)
 		{
 			if (string.IsNullOrEmpty(emailsTemplatesFolder))
 			{
 				var directoryInfo = new FileInfo(Assembly.GetEntryAssembly().Location).Directory;
 				if (directoryInfo != null)
-					PhysicalEmailsTemplateFolder = directoryInfo.FullName;
+					TemplateFolder = directoryInfo.FullName;
 			}
 			else
 			{
-				PhysicalEmailsTemplateFolder = emailsTemplatesFolder.StartsWith("~/")
+				TemplateFolder = emailsTemplatesFolder.StartsWith("~/")
 					? (HttpContext.Current != null
 						? HttpContext.Current.Server.MapPath(emailsTemplatesFolder)
 						: Path.Combine(Assembly.GetEntryAssembly().Location, emailsTemplatesFolder.TrimStart('~', '/')))
 					: emailsTemplatesFolder;
 			}
 
-			if (!Directory.Exists(PhysicalEmailsTemplateFolder))
-				throw new DirectoryNotFoundException($"Template directory {PhysicalEmailsTemplateFolder} doesn't exists.");
+			if (!Directory.Exists(TemplateFolder))
+				throw new DirectoryNotFoundException($"Template directory {TemplateFolder} doesn't exists.");
 
 			TemplateManager = new DelegateTemplateManager(name =>
 			{
-				var templatePath = Path.Combine(PhysicalEmailsTemplateFolder, name);
+				var templatePath = Path.Combine(TemplateFolder, name);
 				using (var reader = new StreamReader(templatePath))
 				{
 					return reader.ReadToEnd();

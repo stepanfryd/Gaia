@@ -24,11 +24,16 @@ THE SOFTWARE.
 */
 namespace Gaia.Core.Mail.Configuration
 {
+	/// <summary>
+	/// Interface specfication for emal templates configuration
+	/// </summary>
 	public interface IEmailTemplateConfiguration
 	{
 		#region Public members
-
-		string PhysicalEmailsTemplateFolder { get; }
+		/// <summary>
+		/// Location of email templates. Can by physical or virtual
+		/// </summary>
+		string TemplateFolder { get; }
 
 		#endregion
 	}
