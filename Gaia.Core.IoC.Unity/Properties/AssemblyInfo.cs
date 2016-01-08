@@ -23,27 +23,18 @@ THE SOFTWARE.
 
 */
 
-using Gaia.Core.Exceptions;
+using System.Reflection;
+using System.Runtime.InteropServices;
 
-namespace Gaia.Core.Mail.SendGrid
-{
-	/// <summary>
-	///   Sendgrid settings exception thrown in case wrong configuration
-	/// </summary>
-	public class SendGridSettingsException : GaiaBaseException
-	{
-		#region Constructors
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
 
-		/// <summary>
-		///   Exception default constructor
-		/// </summary>
-		public SendGridSettingsException()
-			: base(
-				"SendGrid settings configuration section is not properly configured. Please set up gaia/sendGrid app.config or web.config section correctly."
-				)
-		{
-		}
+[assembly: AssemblyTitle("Gaia.Core.IoC.Unity")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyProduct("Gaia.Core.IoC.Unity")]
 
-		#endregion
-	}
-}
+
+// The following GUID is for the ID of the typelib if this project is exposed to COM
+
+[assembly: Guid("51da7b52-994c-4f7b-a89c-94f2fc64de48")]

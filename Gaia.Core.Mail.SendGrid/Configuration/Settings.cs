@@ -22,15 +22,21 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
-using NParametrizer;
 
+using NParametrizer;
 
 namespace Gaia.Core.Mail.SendGrid.Configuration
 {
+	/// <summary>
+	///   Sendgrid settings
+	/// </summary>
 	public class Settings : ParametersBase
 	{
 		#region Public members
 
+		/// <summary>
+		///   Configuration section
+		/// </summary>
 		[Config("gaia/sendGrid")]
 		public SendGridSettings SendGrid { get; set; }
 
@@ -38,6 +44,9 @@ namespace Gaia.Core.Mail.SendGrid.Configuration
 
 		#region Private and protected
 
+		/// <summary>
+		///   Custom parameter validation
+		/// </summary>
 		protected override void ValidateArguments()
 		{
 		}

@@ -26,6 +26,7 @@ THE SOFTWARE.
 using System.ServiceModel;
 using Gaia.Core.IoC;
 using Gaia.Core.Wcf.Configuration;
+using Microsoft.Practices.Unity;
 using Unity.Wcf;
 
 namespace Gaia.Core.Wcf
@@ -44,7 +45,9 @@ namespace Gaia.Core.Wcf
 		/// <returns></returns>
 		public override ServiceHostBase CreateServiceHost(IServiceHostConfiguration hostconfig)
 		{
-			return new UnityServiceHost(Container.Instance, hostconfig.ServiceType);
+			// TODO: remove hard link to Unity
+			var container = (IUnityContainer) Container.Instance.ContainerInstance;
+			return new UnityServiceHost(container, hostconfig.ServiceType);
 		}
 
 		#endregion

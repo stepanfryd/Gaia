@@ -37,28 +37,29 @@ using Microsoft.Practices.Unity.Mvc;
 
 namespace Gaia.Portal.Framework.IoC
 {
+	// TODO: Rewrite to universal container registration
 	public static class ContainerActivator
 	{
 		/// <summary>Integrates Unity when the application starts.</summary>
 		public static void Start()
 		{
 			FilterProviders.Providers.Remove(FilterProviders.Providers.OfType<FilterAttributeFilterProvider>().First());
-			FilterProviders.Providers.Add(new UnityFilterAttributeFilterProvider(Container.Instance));
+			FilterProviders.Providers.Add(new UnityFilterAttributeFilterProvider((IUnityContainer)Container.Instance.ContainerInstance));
 
-			DependencyResolver.SetResolver(new UnityDependencyResolver(Container.Instance));
+			DependencyResolver.SetResolver(new UnityDependencyResolver((IUnityContainer)Container.Instance.ContainerInstance));
 
 			// TODO: Uncomment if you want to use PerRequestLifetimeManager
 			// Microsoft.Web.Infrastructure.DynamicModuleHelper.DynamicModuleUtility.RegisterModule(typeof(UnityPerRequestHttpModule));
 
 			// WebApi dependency configuration
-			var depRes = new Microsoft.Practices.Unity.WebApi.UnityDependencyResolver(Container.Instance);
+			var depRes = new Microsoft.Practices.Unity.WebApi.UnityDependencyResolver((IUnityContainer)Container.Instance.ContainerInstance);
 			GlobalConfiguration.Configuration.DependencyResolver = depRes;
 		}
 
 		/// <summary>Disposes the Unity container when the application is shut down.</summary>
 		public static void Shutdown()
 		{
-			Container.Instance.Dispose();
+			((IUnityContainer)Container.Instance.ContainerInstance).Dispose();
 		}
 
 		/// <summary>
@@ -74,9 +75,13 @@ namespace Gaia.Portal.Framework.IoC
 				var fileMap = new ExeConfigurationFileMap {ExeConfigFilename = module.IocContainerFullPath};
 				var configuration = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
 				var unitySection = (UnityConfigurationSection) configuration.GetSection("unity");
-				var subContainer = Container.Instance.CreateChildContainer();
+
+				// TODO: for current version is hacked to use UNITY here. Later rewrite to universal interface
+				var container = (IUnityContainer)Container.Instance.ContainerInstance;
+
+			 var subContainer = container.CreateChildContainer();
 				subContainer.LoadConfiguration(unitySection, module.Name);
-				Container.Instance.RegisterInstance(typeof(IUnityContainer), module.Name, subContainer);
+				container.RegisterInstance(typeof(IUnityContainer), module.Name, subContainer);
 			}
 			catch (Exception e)
 			{

@@ -24,8 +24,7 @@ THE SOFTWARE.
 */
 
 using System;
-using Microsoft.Practices.Unity;
-using Microsoft.Practices.Unity.Configuration;
+using System.Configuration;
 
 namespace Gaia.Core.IoC
 {
@@ -36,11 +35,19 @@ namespace Gaia.Core.IoC
 	{
 		#region Fields and constants
 
-		private static readonly Lazy<IUnityContainer> LazyContainer = new Lazy<IUnityContainer>(() =>
+		private static readonly Lazy<IContainerProvider> LazyContainer = new Lazy<IContainerProvider>(() =>
 		{
-			var container = new UnityContainer();
-			RegisterTypes(container);
-			return container;
+			var settings = new Settings();
+			
+			if (String.IsNullOrEmpty(settings.ContainerSection.ContainerProviderTypeName))
+				throw new ConfigurationErrorsException("IoC container configuration section gaia/ioc is not specified");
+
+			var providerType = Type.GetType(settings.ContainerSection.ContainerProviderTypeName);
+
+			if(providerType==null)
+				throw new ConfigurationErrorsException($"Unknown type '{settings.ContainerSection.ContainerProviderTypeName}'.");
+		
+			return (IContainerProvider)Activator.CreateInstance(providerType);
 		});
 
 		#endregion
@@ -52,24 +59,9 @@ namespace Gaia.Core.IoC
 		/// <summary>
 		///   Gets the configured Unity container.
 		/// </summary>
-		public static IUnityContainer Instance => LazyContainer.Value;
+		public static IContainerProvider Instance => LazyContainer.Value;
 
 		#endregion
-
-		#endregion
-
-		#region Private and protected
-
-		/// <summary>Registers the type mappings with the Unity container.</summary>
-		/// <param name="unityContainer">The unity container to configure.</param>
-		/// <remarks>
-		///   There is no need to register concrete types such as controllers or API controllers (unless you want to
-		///   change the defaults), as Unity allows resolving a concrete type even if it was not previously registered.
-		/// </remarks>
-		public static void RegisterTypes(IUnityContainer unityContainer)
-		{
-			unityContainer.LoadConfiguration();
-		}
 
 		#endregion
 	}

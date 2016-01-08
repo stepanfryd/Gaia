@@ -22,6 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -32,6 +33,9 @@ using SendGridWeb = SendGrid.Web;
 
 namespace Gaia.Core.Mail.SendGrid
 {
+	/// <summary>
+	///   Mail provider for SendGrid service
+	/// </summary>
 	public class SendGridMailProvider : IMailProvider
 	{
 		#region Fields and constants
@@ -42,6 +46,10 @@ namespace Gaia.Core.Mail.SendGrid
 
 		#region Constructors
 
+		/// <summary>
+		///   SendGrid default constructor
+		/// </summary>
+		/// <param name="sendGridSettings"></param>
 		public SendGridMailProvider(SendGridSettings sendGridSettings = null)
 		{
 			var settings = sendGridSettings ?? new Settings().SendGrid;
@@ -57,6 +65,10 @@ namespace Gaia.Core.Mail.SendGrid
 
 		#region Interface Implementations
 
+		/// <summary>
+		///   Send mail message
+		/// </summary>
+		/// <param name="message"></param>
 		public async void Send(MailMessage message)
 		{
 			var sendGridMessage = new SendGridMessage

@@ -22,24 +22,40 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
 using System.Xml.Serialization;
 
 namespace Gaia.Core.Mail.SendGrid.Configuration
 {
+	/// <summary>
+	///   Configuration section for SendGrid provider
+	/// </summary>
 	[XmlRoot("sendGrid")]
 	public class SendGridSettings
 	{
 		#region Public members
 
+		/// <summary>
+		///   SendGrid user name
+		/// </summary>
 		[XmlAttribute("userName")]
 		public string UserName { get; set; }
 
+		/// <summary>
+		///   SendGrid password
+		/// </summary>
 		[XmlAttribute("password")]
 		public string Password { get; set; }
 
+		/// <summary>
+		///   Sender default address
+		/// </summary>
 		[XmlAttribute("from")]
 		public string From { get; set; }
 
+		/// <summary>
+		///   Sender default name
+		/// </summary>
 		[XmlAttribute("fromName")]
 		public string FromName { get; set; }
 

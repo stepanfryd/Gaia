@@ -23,27 +23,30 @@ THE SOFTWARE.
 
 */
 
-using Gaia.Core.Exceptions;
+using System;
+using System.Collections.Generic;
+using System.Net.Mail;
 
-namespace Gaia.Core.Mail.SendGrid
+namespace Gaia.Core.Mail.EmailQueue
 {
 	/// <summary>
-	///   Sendgrid settings exception thrown in case wrong configuration
+	/// Interface defines mail storage provider
 	/// </summary>
-	public class SendGridSettingsException : GaiaBaseException
+	public interface IStorageProvider
 	{
-		#region Constructors
+		/// <summary>
+		/// Method stores message to storage
+		/// </summary>
+		/// <param name="messageId">Message unique identificator</param>
+		/// <param name="message">Mail message to store</param>
+		/// <param name="plannedtime">Planned time when to send. If plannedTime is null then message is ready to send in the next round</param>
+		void SaveMessage(object messageId, MailMessage message, DateTime? plannedtime = null);
 
 		/// <summary>
-		///   Exception default constructor
+		/// Method returns dictionary of messageId and messages which are ready to send.
 		/// </summary>
-		public SendGridSettingsException()
-			: base(
-				"SendGrid settings configuration section is not properly configured. Please set up gaia/sendGrid app.config or web.config section correctly."
-				)
-		{
-		}
-
-		#endregion
+		/// <param name="plannedtime">Time when to send messages</param>
+		/// <returns></returns>
+		IDictionary<object, MailMessage> GetMessages(DateTime? plannedtime = null);
 	}
 }
