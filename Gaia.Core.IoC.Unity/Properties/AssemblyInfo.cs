@@ -26,15 +26,8 @@ THE SOFTWARE.
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-
 [assembly: AssemblyTitle("Gaia.Core.IoC.Unity")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Gaia IoC Unity Container Support")]
 [assembly: AssemblyProduct("Gaia.Core.IoC.Unity")]
-
-
-// The following GUID is for the ID of the typelib if this project is exposed to COM
 
 [assembly: Guid("51da7b52-994c-4f7b-a89c-94f2fc64de48")]

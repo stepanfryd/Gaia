@@ -22,6 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
 using System.Reflection;
 using System.Runtime.InteropServices;
 
@@ -29,12 +30,10 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Assembly contains service scheduler functionality")]
 [assembly: AssemblyProduct("Gaia.Service.Plugins.Scheduler")]
 [assembly: Guid("e6beb28b-6823-402b-9dc8-25495530cc03")]
-
 [assembly: AssemblyVersion("1.3.22.*")]
 [assembly: AssemblyCompany("Cloud17")]
 [assembly: AssemblyCopyright("Copyright © Stepan Fryd 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: AssemblyConfiguration("")]
-
 [assembly: ComVisible(false)]
