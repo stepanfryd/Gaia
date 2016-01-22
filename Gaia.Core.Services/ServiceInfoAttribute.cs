@@ -22,24 +22,38 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Gaia.Core.Services
 {
 	/// <summary>
-	/// Attribute hold information about system service
+	///   Attribute hold information about system service
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Class)]
 	public class ServiceInfoAttribute : Attribute
 	{
+		/// <summary>
+		///   Service name
+		/// </summary>
 		public string ServiceName { get; set; }
+
+		/// <summary>
+		///   Service display name
+		/// </summary>
 		public string DisplayName { get; set; }
+
+		/// <summary>
+		///   Service description
+		/// </summary>
 		public string Description { get; set; }
 
+		/// <summary>
+		///   Service info attribute contstructor
+		/// </summary>
+		/// <param name="serviceName">Service name as is in the service list registrations</param>
+		/// <param name="displayName">Service display name</param>
+		/// <param name="description">Service description</param>
 		public ServiceInfoAttribute(string serviceName, string displayName, string description)
 		{
 			ServiceName = serviceName;

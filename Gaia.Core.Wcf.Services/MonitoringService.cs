@@ -22,27 +22,46 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
+using System;
 using System.Collections.Generic;
 using Common.Logging;
+using Gaia.Core.IoC;
 using Gaia.Core.Workflows;
-using Microsoft.Practices.Unity;
 
 namespace Gaia.Core.Wcf.Services
 {
+	/// <summary>
+	/// WCF service for different monitoring purposes. 
+	/// </summary>
 	public class MonitoringService : IMonitoringService
 	{
+		private readonly Lazy<IWorkflowManager> _lazyWorkflowManager =
+			new Lazy<IWorkflowManager>(() => Container.Instance.Resolve<IWorkflowManager>());
+
 		private ILog _log;
 
+		/// <summary>
+		/// WorkflowManager instance
+		/// </summary>
+		public IWorkflowManager WorkflowManager => _lazyWorkflowManager.Value;
+
+		/// <summary>
+		/// Service constructior
+		/// </summary>
 		public MonitoringService()
 		{
-			_log = LogManager.GetLogger("MonitoringService");
+			_log = LogManager.GetLogger<MonitoringService>() ;
 		}
 
-		[Dependency]
-		public IWorkflowManager WorkflowManager { get; set; }
-
+		/// <summary>
+		/// Returns service status
+		/// </summary>
+		/// <param name="input"></param>
+		/// <returns></returns>
 		public ServiceStatus GetStatus(int input)
 		{
+			_log.Info("Service status expected");
 			return new ServiceStatus
 			{
 				Result = "Some result",

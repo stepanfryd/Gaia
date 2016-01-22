@@ -31,10 +31,20 @@ using Topshelf;
 
 namespace Gaia.Core.Services
 {
+	/// <summary>
+	/// Services controller class. Controls service execution, and management
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
 	public class ServiceController<T> : IDisposable, ServiceControl, ServiceSuspend, ServiceShutdown where T : IGaiaService
 	{
 		#region Constructors
 
+		/// <summary>
+		/// ServiceController constructor creates new instatnce of service for registration
+		/// </summary>
+		/// <param name="service">Instance of service</param>
+		/// <param name="pluginsConfiguration">Instance of plugin configuration collections</param>
+		/// <param name="wcfServicesConfiguration">WCF services configuration</param>
 		public ServiceController(T service, PluginConfigurationCollection pluginsConfiguration,
 			ServiceHostConfigurationCollection wcfServicesConfiguration)
 		{
@@ -72,6 +82,11 @@ namespace Gaia.Core.Services
 
 		#region Public methods
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="hostControl"></param>
+		/// <returns></returns>
 		public bool Start(HostControl hostControl)
 		{
 			InitServices();
@@ -80,6 +95,11 @@ namespace Gaia.Core.Services
 			return true;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="hostControl"></param>
+		/// <returns></returns>
 		public bool Stop(HostControl hostControl)
 		{
 			KillPlugins();
@@ -89,18 +109,32 @@ namespace Gaia.Core.Services
 			return true;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="hostControl"></param>
+		/// <returns></returns>
 		public bool Continue(HostControl hostControl)
 		{
 			_service.Continue();
 			return true;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="hostControl"></param>
+		/// <returns></returns>
 		public bool Pause(HostControl hostControl)
 		{
 			_service.Pause();
 			return true;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="hostControl"></param>
 		public void Shutdown(HostControl hostControl)
 		{
 			_service.Shutdown();
@@ -147,13 +181,17 @@ namespace Gaia.Core.Services
 
 		#region IDisposable implementation
 
+		/// <summary>
+		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+		/// </summary>
+		/// <filterpriority>2</filterpriority>
 		public void Dispose()
 		{
 			Dispose(true);
 			GC.SuppressFinalize(this);
 		}
 
-		protected virtual void Dispose(bool disposing)
+		private void Dispose(bool disposing)
 		{
 			if (disposing)
 			{

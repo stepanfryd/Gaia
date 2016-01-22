@@ -25,27 +25,23 @@ THE SOFTWARE.
 
 using System;
 using System.Collections.Generic;
-using Gaia.Core.Services.Configuration;
 using Gaia.Core.Exceptions;
+using Gaia.Core.Services.Configuration;
 
 namespace Gaia.Core.Services
 {
+	/// <summary>
+	///   Plugins manager is responsible for loading configured plugins
+	/// </summary>
 	[Serializable]
-	public class PluginsManager
+	public class PluginsManager : IDisposable
 	{
-		#region Fields and constants
-
-		private readonly List<IServicePlugin> _plugins;
-		private readonly PluginConfigurationCollection _pluginsConfiguration;
-
-		#endregion
-
 		#region Constructors
 
-		public PluginsManager()
-		{
-		}
-
+		/// <summary>
+		///   Base constructor of plugin manager
+		/// </summary>
+		/// <param name="plugins">Plugins configuration collection</param>
 		public PluginsManager(PluginConfigurationCollection plugins)
 		{
 			_pluginsConfiguration = plugins;
@@ -55,7 +51,9 @@ namespace Gaia.Core.Services
 		#endregion
 
 		#region Private and protected
-
+		/// <summary>
+		/// Class destructor
+		/// </summary>
 		~PluginsManager()
 		{
 			Dispose(false);
@@ -63,15 +61,26 @@ namespace Gaia.Core.Services
 
 		#endregion
 
+		#region Fields and constants
+
+		private readonly List<IServicePlugin> _plugins;
+		private readonly PluginConfigurationCollection _pluginsConfiguration;
+
+		#endregion
+
 		#region IDisposable implementation
 
+		/// <summary>
+		///   Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+		/// </summary>
+		/// <filterpriority>2</filterpriority>
 		public void Dispose()
 		{
 			Dispose(true);
 			GC.SuppressFinalize(this);
 		}
 
-		protected virtual void Dispose(bool disposing)
+		private void Dispose(bool disposing)
 		{
 			if (disposing)
 			{

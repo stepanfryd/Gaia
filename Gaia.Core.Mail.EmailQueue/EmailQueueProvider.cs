@@ -24,8 +24,6 @@ THE SOFTWARE.
 */
 
 using System.Net.Mail;
-using Microsoft.Practices.Unity;
-
 namespace Gaia.Core.Mail.EmailQueue
 {
 	public class EmailQueueProvider : IMailProvider

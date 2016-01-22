@@ -22,6 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
 using System;
 using System.Xml.Serialization;
 
@@ -47,10 +48,10 @@ namespace Gaia.Core.Services.Configuration
 		[XmlAttribute("type")]
 		public string PluginTypeName { get; set; }
 
+		/// <summary>
+		///   Plugin type loaded from configuration
+		/// </summary>
 		[XmlIgnore]
-		public Type PluginType
-		{
-			get { return Type.GetType(PluginTypeName, true); }
-		}
+		public Type PluginType => Type.GetType(PluginTypeName, true);
 	}
 }

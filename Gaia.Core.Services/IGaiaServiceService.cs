@@ -24,13 +24,39 @@ THE SOFTWARE.
 */
 namespace Gaia.Core.Services
 {
+	/// <summary>
+	/// Interface for windows service
+	/// </summary>
 	public interface IGaiaService
 	{
+		/// <summary>
+		/// Starts srevice
+		/// </summary>
 		void Start();
+
+		/// <summary>
+		/// Stops service
+		/// </summary>
 		void Stop();
+
+		/// <summary>
+		/// Let's service continues
+		/// </summary>
 		void Continue();
+
+		/// <summary>
+		/// Service executes custom command after it is received
+		/// </summary>
 		void CustomCommandReceived();
+
+		/// <summary>
+		/// Pauses service
+		/// </summary>
 		void Pause();
+
+		/// <summary>
+		/// Shutdown the service
+		/// </summary>
 		void Shutdown();
 	}
 }

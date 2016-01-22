@@ -22,19 +22,20 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
+using System;
 using System.Net;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Microsoft.Practices.Unity;
 using AuthorizeAttribute = System.Web.Mvc.AuthorizeAttribute;
 
 namespace Gaia.Portal.Framework.Security
 {
 	public class GaiaAuthorizeAttribute : AuthorizeAttribute
 	{
-		[Dependency]
-		public IPermissionManager PermissionManager { get; set; }
+		public IPermissionManager PermissionManager
+			=> new Lazy<IPermissionManager>(() => Core.IoC.Container.Instance.Resolve<IPermissionManager>()).Value;
 
 		public override void OnAuthorization(AuthorizationContext filterContext)
 		{

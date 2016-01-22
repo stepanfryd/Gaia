@@ -22,6 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
 using System;
 using System.Configuration;
 using System.IO;
@@ -31,35 +32,40 @@ using System.Web.Mvc;
 using Gaia.Core.IoC;
 using Gaia.Portal.Framework.Configuration.Modules;
 using Gaia.Portal.Framework.Exceptions;
-using Microsoft.Practices.Unity;
-using Microsoft.Practices.Unity.Configuration;
-using Microsoft.Practices.Unity.Mvc;
+using Gaia.Portal.Framework.IoC.Mvc;
+using Gaia.Portal.Framework.IoC.WebApi;
 
 namespace Gaia.Portal.Framework.IoC
 {
-	// TODO: Rewrite to universal container registration
+	/// <summary>
+	///   IoC container activator
+	/// </summary>
 	public static class ContainerActivator
 	{
 		/// <summary>Integrates Unity when the application starts.</summary>
 		public static void Start()
 		{
 			FilterProviders.Providers.Remove(FilterProviders.Providers.OfType<FilterAttributeFilterProvider>().First());
-			FilterProviders.Providers.Add(new UnityFilterAttributeFilterProvider((IUnityContainer)Container.Instance.ContainerInstance));
 
-			DependencyResolver.SetResolver(new UnityDependencyResolver((IUnityContainer)Container.Instance.ContainerInstance));
+
+			//FilterProviders.Providers.Add(new UnityFilterAttributeFilterProvider((IUnityContainer)Container.Instance.ContainerInstance));
+			FilterProviders.Providers.Add(new GaiaFilterAttributeFilterProvider(Container.Instance));
+
+			//DependencyResolver.SetResolver(new UnityDependencyResolver((IUnityContainer)Container.Instance.ContainerInstance));
+			var dependencyResolver = new GaiaDependencyResolver(Container.Instance);
+			DependencyResolver.SetResolver(dependencyResolver);
 
 			// TODO: Uncomment if you want to use PerRequestLifetimeManager
 			// Microsoft.Web.Infrastructure.DynamicModuleHelper.DynamicModuleUtility.RegisterModule(typeof(UnityPerRequestHttpModule));
 
 			// WebApi dependency configuration
-			var depRes = new Microsoft.Practices.Unity.WebApi.UnityDependencyResolver((IUnityContainer)Container.Instance.ContainerInstance);
-			GlobalConfiguration.Configuration.DependencyResolver = depRes;
+			GlobalConfiguration.Configuration.DependencyResolver = new GaiaWebApiDependencyResolver(Container.Instance);
 		}
 
 		/// <summary>Disposes the Unity container when the application is shut down.</summary>
 		public static void Shutdown()
 		{
-			((IUnityContainer)Container.Instance.ContainerInstance).Dispose();
+			Container.Instance.Dispose();
 		}
 
 		/// <summary>
@@ -74,14 +80,7 @@ namespace Gaia.Portal.Framework.IoC
 			{
 				var fileMap = new ExeConfigurationFileMap {ExeConfigFilename = module.IocContainerFullPath};
 				var configuration = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
-				var unitySection = (UnityConfigurationSection) configuration.GetSection("unity");
-
-				// TODO: for current version is hacked to use UNITY here. Later rewrite to universal interface
-				var container = (IUnityContainer)Container.Instance.ContainerInstance;
-
-			 var subContainer = container.CreateChildContainer();
-				subContainer.LoadConfiguration(unitySection, module.Name);
-				container.RegisterInstance(typeof(IUnityContainer), module.Name, subContainer);
+				Container.Instance.RegisterChildContainer(configuration, module.Name);
 			}
 			catch (Exception e)
 			{

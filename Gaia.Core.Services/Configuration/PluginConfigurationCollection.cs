@@ -22,12 +22,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
 using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace Gaia.Core.Services.Configuration
 {
+	/// <summary>
+	///   Collection of configured plugins
+	/// </summary>
 	[Serializable]
 	[XmlInclude(typeof (List<PluginConfiguration>))]
 	[XmlRoot("plugins")]

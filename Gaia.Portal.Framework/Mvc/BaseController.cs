@@ -22,22 +22,30 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
+using System;
 using System.Web.Mvc;
+using Gaia.Core.IoC;
 using Gaia.Portal.Framework.Configuration;
 using Gaia.Portal.Framework.Security;
-using Microsoft.Practices.Unity;
 
 namespace Gaia.Portal.Framework.Mvc
 {
 	/// <summary>
-	/// Base application controller
+	///   Base application controller
 	/// </summary>
 	public class BaseController : Controller
 	{
-		[Dependency]
-		public IPermissionManager Permissions { get; set; }
+		/// <summary>
+		///   Instance of Permission manager
+		/// </summary>
+		public IPermissionManager Permissions
+			=> new Lazy<IPermissionManager>(() => Container.Instance.Resolve<IPermissionManager>()).Value;
 
-		[Dependency]
-		public IConfiguration Configuration { get; set; }
+		/// <summary>
+		///   Instance of application configuration
+		/// </summary>
+		public IConfiguration Configuration
+			=> new Lazy<IConfiguration>(() => Container.Instance.Resolve<IConfiguration>()).Value;
 	}
 }

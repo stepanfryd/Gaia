@@ -33,13 +33,33 @@ namespace Gaia.Core.Scheduling.Jobs
 	/// </summary>
 	public abstract class JobBaseAbstract : IJob
 	{
+		/// <summary>
+		/// Job base class which should be used for all scheduled tasks
+		/// </summary>
 		protected JobBaseAbstract()
 		{
 			Logger = LogManager.GetLogger(GetType());
 		}
 
+		/// <summary>
+		/// Common logger
+		/// </summary>
 		protected ILog Logger { get; }
 
+
+		/// <summary>
+		/// Called by the <see cref="T:Quartz.IScheduler"/> when a <see cref="T:Quartz.ITrigger"/>
+		///             fires that is associated with the <see cref="T:Quartz.IJob"/>.
+		/// </summary>
+		/// <remarks>
+		/// The implementation may wish to set a  result object on the 
+		///             JobExecutionContext before this method exits.  The result itself
+		///             is meaningless to Quartz, but may be informative to 
+		///             <see cref="T:Quartz.IJobListener"/>s or 
+		///             <see cref="T:Quartz.ITriggerListener"/>s that are watching the job's 
+		///             execution.
+		/// </remarks>
+		/// <param name="context">The execution context.</param>
 		public void Execute(IJobExecutionContext context)
 		{
 			try
@@ -53,6 +73,10 @@ namespace Gaia.Core.Scheduling.Jobs
 			}
 		}
 
+		/// <summary>
+		/// Abstract method executes particular job. Overriden method contains task execution
+		/// </summary>
+		/// <param name="context"></param>
 		protected abstract void ExecuteJob(IJobExecutionContext context);
 	}
 }

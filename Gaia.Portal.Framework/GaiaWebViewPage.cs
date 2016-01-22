@@ -27,7 +27,6 @@ using Gaia.Core.IoC;
 using Gaia.Portal.Framework.Configuration;
 using Gaia.Portal.Framework.Configuration.Modules;
 using Gaia.Portal.Framework.Security;
-using Microsoft.Practices.Unity;
 
 namespace Gaia.Portal.Framework
 {

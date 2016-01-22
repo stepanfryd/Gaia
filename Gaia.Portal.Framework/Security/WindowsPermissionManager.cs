@@ -22,13 +22,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
 using System.Threading;
+using Gaia.Core.IoC;
 using Gaia.Portal.Framework.Configuration.Modules;
-using Microsoft.Practices.Unity;
 
 namespace Gaia.Portal.Framework.Security
 {
@@ -36,14 +37,14 @@ namespace Gaia.Portal.Framework.Security
 	{
 		private readonly Permissions _definitions;
 
+		public IWebModuleProvider ModuleProvider
+			=> new Lazy<IWebModuleProvider>(() => Container.Instance.Resolve<IWebModuleProvider>()).Value;
+
 
 		public WindowsPermissionManager(IPermissionsProvider permissionProvider)
 		{
 			_definitions = permissionProvider.GetPermissions();
 		}
-
-		[Dependency]
-		public IWebModuleProvider ModuleProvider { get; set; }
 
 		public bool IsRouteSecure(IDictionary<string, object> routeValues, out Route securedRoute)
 		{

@@ -35,7 +35,7 @@ namespace Gaia.Core.IoC
 	{
 		#region Fields and constants
 
-		private static readonly Lazy<IContainerProvider> LazyContainer = new Lazy<IContainerProvider>(() =>
+		private static readonly Lazy<IContainer> LazyContainer = new Lazy<IContainer>(() =>
 		{
 			var settings = new Settings();
 			
@@ -47,7 +47,7 @@ namespace Gaia.Core.IoC
 			if(providerType==null)
 				throw new ConfigurationErrorsException($"Unknown type '{settings.ContainerSection.ContainerProviderTypeName}'.");
 		
-			return (IContainerProvider)Activator.CreateInstance(providerType);
+			return (IContainer)Activator.CreateInstance(providerType);
 		});
 
 		#endregion
@@ -59,7 +59,7 @@ namespace Gaia.Core.IoC
 		/// <summary>
 		///   Gets the configured Unity container.
 		/// </summary>
-		public static IContainerProvider Instance => LazyContainer.Value;
+		public static IContainer Instance => LazyContainer.Value;
 
 		#endregion
 

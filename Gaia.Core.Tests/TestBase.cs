@@ -34,6 +34,6 @@ namespace Gaia.Core.Tests
 
 	public class TestBase
 	{
-		protected IContainerProvider Container => Core.IoC.Container.Instance;
+		protected IContainer Container => Core.IoC.Container.Instance;
 	}
 }
