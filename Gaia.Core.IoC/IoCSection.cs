@@ -11,7 +11,7 @@ namespace Gaia.Core.IoC
 		/// <summary>
 		/// Container provider type name (eg. "Gaia.Core.IoC.Unity.Container, Gaia.Core.IoC.Unity")
 		/// </summary>
-		[XmlElement("containerProvider")]
+		[XmlAttribute("containerProvider")]
 		public string ContainerProviderTypeName { get; set; }
 	}
 }

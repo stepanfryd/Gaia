@@ -27,13 +27,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Practices.Unity;
+using Gaia.Core.IoC;
 
 namespace Gaia.Core.Tests
 {
 
 	public class TestBase
 	{
-		protected IUnityContainer Container => Core.IoC.Container.Instance;
+		protected IContainerProvider Container => Core.IoC.Container.Instance;
 	}
 }
