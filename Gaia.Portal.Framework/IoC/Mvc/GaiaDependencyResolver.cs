@@ -13,7 +13,6 @@ namespace Gaia.Portal.Framework.IoC.Mvc
 	public class GaiaDependencyResolver : IDependencyResolver
 	{
 		private readonly IContainer _container;
-		private readonly ILog _log;
 
 		/// <summary>
 		///   Initializes a new instance of the <see cref="T:Gaia.Portal.Framework.IoC.GaiaDependencyResolver" /> class for a
@@ -26,7 +25,6 @@ namespace Gaia.Portal.Framework.IoC.Mvc
 		/// </param>
 		public GaiaDependencyResolver(IContainer container)
 		{
-			_log = LogManager.GetLogger(GetType());
 			_container = container;
 		}
 
@@ -49,7 +47,6 @@ namespace Gaia.Portal.Framework.IoC.Mvc
 			}
 			catch (GaiaBaseException ex)
 			{
-				_log.Error(ex);
 				return null;
 			}
 		}

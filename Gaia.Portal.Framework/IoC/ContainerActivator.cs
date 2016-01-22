@@ -30,6 +30,7 @@ using System.Linq;
 using System.Web.Http;
 using System.Web.Mvc;
 using Gaia.Core.IoC;
+using Gaia.Portal.Framework.Configuration.EntLib;
 using Gaia.Portal.Framework.Configuration.Modules;
 using Gaia.Portal.Framework.Exceptions;
 using Gaia.Portal.Framework.IoC.Mvc;
@@ -42,11 +43,14 @@ namespace Gaia.Portal.Framework.IoC
 	/// </summary>
 	public static class ContainerActivator
 	{
+		private static IEnterpriseLibrary _entLib;
 		/// <summary>Integrates Unity when the application starts.</summary>
 		public static void Start()
 		{
+			// init entLib logger
+			_entLib = Container.Instance.Resolve<IEnterpriseLibrary>();
+			 
 			FilterProviders.Providers.Remove(FilterProviders.Providers.OfType<FilterAttributeFilterProvider>().First());
-
 
 			//FilterProviders.Providers.Add(new UnityFilterAttributeFilterProvider((IUnityContainer)Container.Instance.ContainerInstance));
 			FilterProviders.Providers.Add(new GaiaFilterAttributeFilterProvider(Container.Instance));

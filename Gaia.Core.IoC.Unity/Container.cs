@@ -248,6 +248,20 @@ namespace Gaia.Core.IoC.Unity
 		///   Register a <see cref="T:Microsoft.Practices.Unity.LifetimeManager" /> for the given type with the Instance.
 		///   No type mapping is performed for this type.
 		/// </summary>
+		/// <typeparam name="T">The type to apply the <paramref name="lifetimeManager" /> to.</typeparam>
+		/// <param name="lifetimeManager">
+		///   The <see cref="T:Microsoft.Practices.Unity.LifetimeManager" /> that controls the lifetime
+		///   of the returned instance.
+		/// </param>
+		public object RegisterType<T>(object lifetimeManager)
+		{
+			return Instance.RegisterType(null, typeof(T), null, (LifetimeManager)lifetimeManager);
+		}
+
+		/// <summary>
+		///   Register a <see cref="T:Microsoft.Practices.Unity.LifetimeManager" /> for the given type with the Instance.
+		///   No type mapping is performed for this type.
+		/// </summary>
 		/// <typeparam name="T">The type to configure injection on.</typeparam>
 		/// <param name="name">Name that will be used to request the type.</param>
 		/// <param name="injectionMembers">Injection configuration objects.</param>

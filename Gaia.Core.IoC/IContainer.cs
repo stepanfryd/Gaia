@@ -40,8 +40,8 @@ namespace Gaia.Core.IoC
 		object RegisterType<TFrom, TTo>(string name, object lifetimeManager,
 			params object[] injectionMembers) where TTo : TFrom;
 
-		object RegisterType<T>(object lifetimeManager,
-			params object[] injectionMembers);
+		object RegisterType<T>(object lifetimeManager, params object[] injectionMembers);
+		object RegisterType<T>(object lifetimeManager);
 
 		object RegisterType<T>(string name, params object[] injectionMembers);
 
