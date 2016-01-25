@@ -23,6 +23,7 @@ THE SOFTWARE.
 
 */
 
+using System;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -69,7 +70,9 @@ namespace Gaia.Core.Mail.SendGrid
 		///   Send mail message
 		/// </summary>
 		/// <param name="message"></param>
-		public async void Send(MailMessage message)
+		/// <param name="objectId"></param>
+		/// <param name="sendTime"></param>
+		public async void Send(MailMessage message, object objectId = null, DateTime? sendTime = null)
 		{
 			var sendGridMessage = new SendGridMessage
 			{

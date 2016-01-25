@@ -8,6 +8,8 @@ namespace Gaia.Core.IoC.Unity
 {
 	public class Container : IContainer
 	{
+		#region Fields and constants
+
 		private static readonly Lazy<IUnityContainer> LazyContainer = new Lazy<IUnityContainer>(() =>
 		{
 			var container = new UnityContainer();
@@ -15,8 +17,17 @@ namespace Gaia.Core.IoC.Unity
 			return container;
 		});
 
+		#endregion
+
+		#region  Public members
 
 		public IUnityContainer Instance => LazyContainer.Value;
+
+		public object ContainerInstance => Instance;
+
+		#endregion
+
+		#region Interface Implementations
 
 		public object Resolve(Type t, string name)
 		{
@@ -52,8 +63,6 @@ namespace Gaia.Core.IoC.Unity
 			return Instance.RegisterInstance(typeof (IUnityContainer), childName, subContainer);
 		}
 
-		public object ContainerInstance => Instance;
-
 		public object Resolve(Type t)
 		{
 			return Instance.Resolve(t);
@@ -68,6 +77,7 @@ namespace Gaia.Core.IoC.Unity
 		{
 			Instance.Dispose();
 		}
+
 
 		/// <summary>
 		///   Register an instance with the Instance.
@@ -153,244 +163,6 @@ namespace Gaia.Core.IoC.Unity
 		}
 
 		/// <summary>
-		///   Register a type mapping with the Instance.
-		/// </summary>
-		/// <remarks>
-		///   <para>
-		///     This method is used to tell the container that when asked for type <typeparamref name="TFrom" />,
-		///     actually return an instance of type <typeparamref name="TTo" />. This is very useful for
-		///     getting instances of interfaces.
-		///   </para>
-		///   <para>
-		///     This overload registers a default mapping and transient lifetime.
-		///   </para>
-		/// </remarks>
-		/// <typeparam name="TFrom"><see cref="T:System.Type" /> that will be requested.</typeparam>
-		/// <typeparam name="TTo"><see cref="T:System.Type" /> that will actually be returned.</typeparam>
-		/// <param name="injectionMembers">Injection configuration objects.</param>
-		public object RegisterType<TFrom, TTo>(params object[] injectionMembers) where TTo : TFrom
-		{
-			return RegisterType(typeof (TFrom), typeof (TTo), null, null, injectionMembers);
-		}
-
-		/// <summary>
-		///   Register a type mapping with the container, where the created instances will use
-		///   the given <see cref="T:Microsoft.Practices.Unity.LifetimeManager" />.
-		/// </summary>
-		/// <typeparam name="TFrom"><see cref="T:System.Type" /> that will be requested.</typeparam>
-		/// <typeparam name="TTo"><see cref="T:System.Type" /> that will actually be returned.</typeparam>
-		/// <param name="lifetimeManager">
-		///   The <see cref="T:Microsoft.Practices.Unity.LifetimeManager" /> that controls the lifetime
-		///   of the returned instance.
-		/// </param>
-		/// <param name="injectionMembers">Injection configuration objects.</param>
-		public object RegisterType<TFrom, TTo>(object lifetimeManager,
-			params object[] injectionMembers) where TTo : TFrom
-		{
-			return Instance.RegisterType(typeof (TFrom), typeof (TTo), null, (LifetimeManager) lifetimeManager,
-				(InjectionMember[]) injectionMembers);
-		}
-
-		/// <summary>
-		///   Register a type mapping with the Instance.
-		/// </summary>
-		/// <remarks>
-		///   This method is used to tell the container that when asked for type <typeparamref name="TFrom" />,
-		///   actually return an instance of type <typeparamref name="TTo" />. This is very useful for
-		///   getting instances of interfaces.
-		/// </remarks>
-		/// <typeparam name="TFrom"><see cref="T:System.Type" /> that will be requested.</typeparam>
-		/// <typeparam name="TTo"><see cref="T:System.Type" /> that will actually be returned.</typeparam>
-		/// <param name="name">Name of this mapping.</param>
-		/// <param name="injectionMembers">Injection configuration objects.</param>
-		public object RegisterType<TFrom, TTo>(string name, params object[] injectionMembers)
-			where TTo : TFrom
-		{
-			return Instance.RegisterType(typeof (TFrom), typeof (TTo), name, null, (InjectionMember[]) injectionMembers);
-		}
-
-		/// <summary>
-		///   Register a type mapping with the container, where the created instances will use
-		///   the given <see cref="T:Microsoft.Practices.Unity.LifetimeManager" />.
-		/// </summary>
-		/// <typeparam name="TFrom"><see cref="T:System.Type" /> that will be requested.</typeparam>
-		/// <typeparam name="TTo"><see cref="T:System.Type" /> that will actually be returned.</typeparam>
-		/// <param name="name">Name to use for registration, null if a default registration.</param>
-		/// <param name="lifetimeManager">
-		///   The <see cref="T:Microsoft.Practices.Unity.LifetimeManager" /> that controls the lifetime
-		///   of the returned instance.
-		/// </param>
-		/// <param name="injectionMembers">Injection configuration objects.</param>
-		public object RegisterType<TFrom, TTo>(string name, object lifetimeManager,
-			params object[] injectionMembers) where TTo : TFrom
-		{
-			return Instance.RegisterType(typeof (TFrom), typeof (TTo), name, (LifetimeManager) lifetimeManager,
-				(InjectionMember[]) injectionMembers);
-		}
-
-		/// <summary>
-		///   Register a <see cref="T:Microsoft.Practices.Unity.LifetimeManager" /> for the given type with the Instance.
-		///   No type mapping is performed for this type.
-		/// </summary>
-		/// <typeparam name="T">The type to apply the <paramref name="lifetimeManager" /> to.</typeparam>
-		/// <param name="lifetimeManager">
-		///   The <see cref="T:Microsoft.Practices.Unity.LifetimeManager" /> that controls the lifetime
-		///   of the returned instance.
-		/// </param>
-		/// <param name="injectionMembers">Injection configuration objects.</param>
-		public object RegisterType<T>(object lifetimeManager, params object[] injectionMembers)
-		{
-			return Instance.RegisterType(null, typeof (T), null, (LifetimeManager) lifetimeManager,
-				(InjectionMember[]) injectionMembers);
-		}
-
-		/// <summary>
-		///   Register a <see cref="T:Microsoft.Practices.Unity.LifetimeManager" /> for the given type with the Instance.
-		///   No type mapping is performed for this type.
-		/// </summary>
-		/// <typeparam name="T">The type to apply the <paramref name="lifetimeManager" /> to.</typeparam>
-		/// <param name="lifetimeManager">
-		///   The <see cref="T:Microsoft.Practices.Unity.LifetimeManager" /> that controls the lifetime
-		///   of the returned instance.
-		/// </param>
-		public object RegisterType<T>(object lifetimeManager)
-		{
-			return Instance.RegisterType(null, typeof(T), null, (LifetimeManager)lifetimeManager);
-		}
-
-		/// <summary>
-		///   Register a <see cref="T:Microsoft.Practices.Unity.LifetimeManager" /> for the given type with the Instance.
-		///   No type mapping is performed for this type.
-		/// </summary>
-		/// <typeparam name="T">The type to configure injection on.</typeparam>
-		/// <param name="name">Name that will be used to request the type.</param>
-		/// <param name="injectionMembers">Injection configuration objects.</param>
-		public object RegisterType<T>(string name, params object[] injectionMembers)
-		{
-			return Instance.RegisterType(null, typeof (T), name, null, (InjectionMember[]) injectionMembers);
-		}
-
-		/// <summary>
-		///   Register a <see cref="T:Microsoft.Practices.Unity.LifetimeManager" /> for the given type and name with the Instance.
-		///   No type mapping is performed for this type.
-		/// </summary>
-		/// <typeparam name="T">The type to apply the <paramref name="lifetimeManager" /> to.</typeparam>
-		/// <param name="name">Name that will be used to request the type.</param>
-		/// <param name="lifetimeManager">
-		///   The <see cref="T:Microsoft.Practices.Unity.LifetimeManager" /> that controls the lifetime
-		///   of the returned instance.
-		/// </param>
-		/// <param name="injectionMembers">Injection configuration objects.</param>
-		public object RegisterType<T>(string name, object lifetimeManager,
-			params object[] injectionMembers)
-		{
-			return Instance.RegisterType(null, typeof (T), name, (LifetimeManager) lifetimeManager,
-				(InjectionMember[]) injectionMembers);
-		}
-
-		/// <summary>
-		///   Register a type with specific members to be injected.
-		/// </summary>
-		/// <param name="t">Type this registration is for.</param>
-		/// <param name="injectionMembers">Injection configuration objects.</param>
-		public object RegisterType(Type t, params object[] injectionMembers)
-		{
-			return Instance.RegisterType(null, t, null, null, (InjectionMember[]) injectionMembers);
-		}
-
-		/// <summary>
-		///   Register a type with specific members to be injected.
-		/// </summary>
-		/// <param name="injectionMembers">Injection configuration objects.</param>
-		public object RegisterType<T>(params object[] injectionMembers)
-		{
-			return Instance.RegisterType(null, typeof (T), null, null, (InjectionMember[]) injectionMembers);
-		}
-
-		/// <summary>
-		///   Register a type mapping with the Instance.
-		/// </summary>
-		/// <remarks>
-		///   <para>
-		///     This method is used to tell the container that when asked for type <paramref name="from" />,
-		///     actually return an instance of type <paramref name="to" />. This is very useful for
-		///     getting instances of interfaces.
-		///   </para>
-		///   <para>
-		///     This overload registers a default mapping.
-		///   </para>
-		/// </remarks>
-		/// <param name="from"><see cref="T:System.Type" /> that will be requested.</param>
-		/// <param name="to"><see cref="T:System.Type" /> that will actually be returned.</param>
-		/// <param name="injectionMembers">Injection configuration objects.</param>
-		public object RegisterType(Type from, Type to, params object[] injectionMembers)
-		{
-			return Instance.RegisterType(from, to, null, null, (InjectionMember[]) injectionMembers);
-		}
-
-		/// <summary>
-		///   Register a type mapping with the Instance.
-		/// </summary>
-		/// <remarks>
-		///   This method is used to tell the container that when asked for type <paramref name="from" />,
-		///   actually return an instance of type <paramref name="to" />. This is very useful for
-		///   getting instances of interfaces.
-		/// </remarks>
-		/// <param name="from"><see cref="T:System.Type" /> that will be requested.</param>
-		/// <param name="to"><see cref="T:System.Type" /> that will actually be returned.</param>
-		/// <param name="name">Name to use for registration, null if a default registration.</param>
-		/// <param name="injectionMembers">Injection configuration objects.</param>
-		public object RegisterType(Type from, Type to, string name, params object[] injectionMembers)
-		{
-			return Instance.RegisterType(from, to, name, null, (InjectionMember[]) injectionMembers);
-		}
-
-		/// <summary>
-		///   Register a type mapping with the container, where the created instances will use
-		///   the given <see cref="T:Microsoft.Practices.Unity.LifetimeManager" />.
-		/// </summary>
-		/// <param name="from"><see cref="T:System.Type" /> that will be requested.</param>
-		/// <param name="to"><see cref="T:System.Type" /> that will actually be returned.</param>
-		/// <param name="lifetimeManager">
-		///   The <see cref="T:Microsoft.Practices.Unity.LifetimeManager" /> that controls the lifetime
-		///   of the returned instance.
-		/// </param>
-		/// <param name="injectionMembers">Injection configuration objects.</param>
-		public object RegisterType(Type from, Type to, object lifetimeManager,
-			params object[] injectionMembers)
-		{
-			return Instance.RegisterType(from, to, null, (LifetimeManager) lifetimeManager, (InjectionMember[]) injectionMembers);
-		}
-
-		/// <summary>
-		///   Register a <see cref="T:Microsoft.Practices.Unity.LifetimeManager" /> for the given type and name with the Instance.
-		///   No type mapping is performed for this type.
-		/// </summary>
-		public object RegisterType(Type t, object lifetimeManager, params object[] injectionMembers)
-		{
-			return Instance.RegisterType(null, t, null, (LifetimeManager) lifetimeManager, (InjectionMember[]) injectionMembers);
-		}
-
-		/// <summary>
-		///   Register a <see cref="T:Microsoft.Practices.Unity.LifetimeManager" /> for the given type and name with the Instance.
-		///   No type mapping is performed for this type.
-		/// </summary>
-		public object RegisterType(Type t, string name, params object[] injectionMembers)
-		{
-			return Instance.RegisterType(null, t, name, null, (InjectionMember[]) injectionMembers);
-		}
-
-		/// <summary>
-		///   Register a <see cref="T:Microsoft.Practices.Unity.LifetimeManager" /> for the given type and name with the Instance.
-		///   No type mapping is performed for this type.
-		/// </summary>
-		public object RegisterType(Type t, string name, object lifetimeManager,
-			params object[] injectionMembers)
-		{
-			return Instance.RegisterType(null, t, name, (LifetimeManager) lifetimeManager, (InjectionMember[]) injectionMembers);
-		}
-
-		/// <summary>
 		///   Register an instance with the Instance.
 		/// </summary>
 		/// <remarks>
@@ -459,6 +231,8 @@ namespace Gaia.Core.IoC.Unity
 		{
 			return Instance.RegisterInstance(t, null, instance, (LifetimeManager) lifetimeManager);
 		}
+
+		#endregion
 
 		/// <summary>
 		///   Register a type with specific members to be injected.

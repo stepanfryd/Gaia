@@ -22,6 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
+using System;
 using NParametrizer;
 
 
@@ -30,6 +32,7 @@ namespace Gaia.Core.Mail.Configuration
 	/// <summary>
 	/// Provides mail settings as properties
 	/// </summary>
+	[Serializable]
 	public class Settings : ParametersBase
 	{
 		#region Public members
@@ -37,7 +40,7 @@ namespace Gaia.Core.Mail.Configuration
 		/// Email configuration settings
 		/// </summary>
 		[Config("gaia/emailSettings")]
-		public IEmailSettings EmailSettings { get; set; }
+		public EmailSettings EmailSettings { get; set; }
 
 		#endregion
 

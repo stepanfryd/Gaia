@@ -22,12 +22,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using Gaia.Core.Services.Configuration;
 using Gaia.Core.Wcf.Configuration;
+using Gaia.Portal.Framework;
+using Gaia.Portal.Framework.Configuration;
 using NUnit.Framework;
 
 namespace Gaia.Core.Tests
@@ -38,7 +42,7 @@ namespace Gaia.Core.Tests
 		[Test]
 		public void PluginConfigurationSettingsSerializationTest()
 		{
-			string expectedXml =
+			var expectedXml =
 				"<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
 				"<plugins xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">" +
 				"<plugin name=\"Plugin\" type=\"Test.TestPluginType\" />" +
@@ -66,7 +70,7 @@ namespace Gaia.Core.Tests
 			{
 				using (var sr = new StreamWriter(ms))
 				{
-					using (XmlWriter xmlWriter = XmlWriter.Create(sr, new XmlWriterSettings {Indent = false}))
+					using (var xmlWriter = XmlWriter.Create(sr, new XmlWriterSettings {Indent = false}))
 					{
 						seri.Serialize(xmlWriter, config);
 					}
@@ -95,9 +99,63 @@ namespace Gaia.Core.Tests
 		}
 
 		[Test]
+		public void PortalConfigSettingsDeserializationTest()
+		{
+			var str =
+				"<?xml version=\"1.0\"?><web xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instanceq\" " +
+				"apiDependencyResolver=\"Gaia.Portal.Framework.Constants, Gaia.Portal.Framework\" " +
+				"mvcDependencyResolver=\"Gaia.Portal.Framework.Constants, Gaia.Portal.Framework\">" +
+				"<FilterProviders><filterProvider>Gaia.Portal.Framework.Constants, Gaia.Portal.Framework</filterProvider>" +
+				"<filterProvider>Gaia.Portal.Framework.Constants, Gaia.Portal.Framework</filterProvider></FilterProviders></web>";
+
+
+			var ser = new XmlSerializer(typeof (WebSettings));
+			using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(str)))
+			{
+				ms.Seek(0, SeekOrigin.Begin);
+				var obj = ser.Deserialize(ms);
+				ms.Close();
+			}
+		}
+
+		[Test]
+		public void PortalConfigurationSettingsSerializationTest()
+		{
+			var settings = new WebSettings
+			{
+				ApiDependencyResolver = "Gaia.Portal.Framework.Constants, Gaia.Portal.Framework",
+				MvcDependencyResolver = "Gaia.Portal.Framework.Constants, Gaia.Portal.Framework",
+				FilterProviders = new List<string>
+				{
+					"Gaia.Portal.Framework.Constants, Gaia.Portal.Framework",
+					"Gaia.Portal.Framework.Constants, Gaia.Portal.Framework"
+				}
+			};
+
+			var ser = new XmlSerializer(typeof (WebSettings));
+
+			byte[] data;
+			using (var ms = new MemoryStream())
+			{
+				ser.Serialize(ms, settings);
+				data = ms.GetBuffer();
+				ms.Close();
+			}
+
+			var str = Encoding.UTF8.GetString(data);
+		}
+
+		[Test]
+		public void PortalConfiguraitonTest()
+		{
+			var test = new Gaia.Portal.Framework.Configuration.Configuration();
+			
+
+		}
+		[Test]
 		public void ServiceConfigurationSettingsSerializationTest()
 		{
-			string expectedXml =
+			var expectedXml =
 				"<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
 				"<serviceHosts xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">" +
 				"<host type=\"Test.TestServiceType\" name=\"Host\" factory=\"Test.TestFactory\" />" +
@@ -128,7 +186,7 @@ namespace Gaia.Core.Tests
 			{
 				using (var sr = new StreamWriter(ms))
 				{
-					using (XmlWriter xmlWriter = XmlWriter.Create(sr, new XmlWriterSettings {Indent = false}))
+					using (var xmlWriter = XmlWriter.Create(sr, new XmlWriterSettings {Indent = false}))
 					{
 						seri.Serialize(xmlWriter, config);
 					}

@@ -58,6 +58,11 @@ namespace Gaia.Core.Mail.Configuration
 		/// </summary>
 		string CopyLocation { get; set; }
 
+		/// <summary>
+		///   Location where to store local copy of messages can be physical or virtual real path
+		/// </summary>
+		string CopyLocationPath { get; }
+
 		#endregion
 	}
 }

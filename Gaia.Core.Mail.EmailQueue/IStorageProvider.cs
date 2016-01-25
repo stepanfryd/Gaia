@@ -26,27 +26,31 @@ THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Net.Mail;
+using System.Threading.Tasks;
 
 namespace Gaia.Core.Mail.EmailQueue
 {
 	/// <summary>
-	/// Interface defines mail storage provider
+	///   Interface defines mail storage provider
 	/// </summary>
 	public interface IStorageProvider
 	{
 		/// <summary>
-		/// Method stores message to storage
+		///   Method stores message to storage
 		/// </summary>
 		/// <param name="messageId">Message unique identificator</param>
 		/// <param name="message">Mail message to store</param>
-		/// <param name="plannedtime">Planned time when to send. If plannedTime is null then message is ready to send in the next round</param>
-		void SaveMessage(object messageId, MailMessage message, DateTime? plannedtime = null);
+		/// <param name="plannedtime">
+		///   Planned time when to send. If plannedTime is null then message is ready to send in the next
+		///   round
+		/// </param>
+		Task SaveMessage(object messageId, MailMessage message, DateTime? plannedtime = null);
 
 		/// <summary>
-		/// Method returns dictionary of messageId and messages which are ready to send.
+		///   Method returns dictionary of messageId and messages which are ready to send.
 		/// </summary>
 		/// <param name="plannedtime">Time when to send messages</param>
 		/// <returns></returns>
-		IDictionary<object, MailMessage> GetMessages(DateTime? plannedtime = null);
+		Task<IDictionary<object, byte[]>> GetMessages(DateTime? plannedtime = null);
 	}
 }

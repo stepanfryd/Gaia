@@ -32,10 +32,13 @@ namespace Gaia.Portal.Framework.Configuration
 		#region Public members
 
 		[Config("gaia/settings")]
-		public IGaiaSettings ApplicationSettings { get; set; }
+		public GaiaSettings ApplicationSettings { get; set; }
 
 		[Config("gaia/emailSettings")]
-		public IEmailSettings EmailSettings { get; set; }
+		public EmailSettings EmailSettings { get; set; }
+
+		[Config("gaia/web")]
+		public WebSettings WebSettings { get; set; }
 
 		#endregion
 

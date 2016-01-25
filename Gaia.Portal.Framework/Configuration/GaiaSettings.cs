@@ -22,6 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
+using System;
 using System.Xml.Serialization;
 
 namespace Gaia.Portal.Framework.Configuration
@@ -29,6 +31,7 @@ namespace Gaia.Portal.Framework.Configuration
 	/// <summary>
 	/// Common application settings usually in web.config under gaia/settings
 	/// </summary>
+	[Serializable]
 	[XmlRoot("settings")]
 	public class GaiaSettings : IGaiaSettings
 	{

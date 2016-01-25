@@ -22,21 +22,26 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
+using System;
 using System.Net.Mail;
 
 namespace Gaia.Core.Mail
 {
 	/// <summary>
-	/// Mail provider interface contains methods and properties for mail operations
+	///   Mail provider interface contains methods and properties for mail operations
 	/// </summary>
 	public interface IMailProvider
 	{
 		#region Private and protected
+
 		/// <summary>
-		/// Send mail message
+		///   Send mail message
 		/// </summary>
 		/// <param name="message"></param>
-		void Send(MailMessage message);
+		/// <param name="objectId"></param>
+		/// <param name="sendTime"></param>
+		void Send(MailMessage message, object objectId = null, DateTime? sendTime = null);
 
 		#endregion
 	}

@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\Build\Output\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -184,11 +184,13 @@
     <Compile Include="Configuration\EntLib\IEnterpriseLibrary.cs" />
     <Compile Include="Configuration\IConfiguration.cs" />
     <Compile Include="Configuration\IGaiaSettings.cs" />
+    <Compile Include="Configuration\IWebSettings.cs" />
     <Compile Include="Configuration\Modules\IWebModuleProvider.cs" />
     <Compile Include="Configuration\Modules\IWebModule.cs" />
     <Compile Include="Configuration\Modules\DefaultWebModuleProvider.cs" />
     <Compile Include="Configuration\Modules\DefaultWebModule.cs" />
     <Compile Include="Configuration\Modules\WebModuleConfigurationAttribute.cs" />
+    <Compile Include="Configuration\WebSettings.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\Api\ApiErrorController.cs" />
     <Compile Include="Exceptions\DependencyContainerLoadingException.cs" />
@@ -198,9 +200,6 @@
     <Compile Include="Extensions\UrlHelperExtensions.cs" />
     <Compile Include="HttpErrorAwareControllerActionSelector.cs" />
     <Compile Include="IoC\ContainerActivator.cs" />
-    <Compile Include="IoC\Mvc\GaiaDependencyResolver.cs" />
-    <Compile Include="IoC\Mvc\GaiaFilterAttributeFilterProvider.cs" />
-    <Compile Include="IoC\WebApi\GaiaWebApiDependencyResolver.cs" />
     <Compile Include="Json\JsonExtensions.cs" />
     <Compile Include="Mvc\SecureWebApiController.cs" />
     <Compile Include="Mvc\JsonNetResult.cs" />

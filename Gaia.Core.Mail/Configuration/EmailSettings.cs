@@ -23,6 +23,7 @@ THE SOFTWARE.
 
 */
 
+using System;
 using System.IO;
 using System.Web;
 using System.Xml.Serialization;
@@ -32,15 +33,10 @@ namespace Gaia.Core.Mail.Configuration
 	/// <summary>
 	///   Email settings configuration section
 	/// </summary>
+	[Serializable]
 	[XmlRoot("emailSettings")]
 	public class EmailSettings : IEmailSettings
 	{
-		#region Fields and constants
-
-		private string _copyLocation;
-
-		#endregion
-
 		#region Public members
 
 		/// <summary>
@@ -72,15 +68,16 @@ namespace Gaia.Core.Mail.Configuration
 		///   Location where to store local copy of messages can be physical or virtual
 		/// </summary>
 		[XmlAttribute("copyLocation")]
-		public string CopyLocation
+		public string CopyLocation { get; set; }
+
+		public string CopyLocationPath
 		{
-			get { return _copyLocation; }
-			set
+			get
 			{
-				var path = value;
-				if (value.StartsWith("~/") && HttpContext.Current != null)
+				var path = CopyLocation;
+				if (path.StartsWith("~/") && HttpContext.Current != null)
 				{
-					path = HttpContext.Current.Server.MapPath(value);
+					path = HttpContext.Current.Server.MapPath(path);
 				}
 
 				if (!Directory.Exists(path))
@@ -88,7 +85,7 @@ namespace Gaia.Core.Mail.Configuration
 					Directory.CreateDirectory(path);
 				}
 
-				_copyLocation = path;
+				return path;
 			}
 		}
 

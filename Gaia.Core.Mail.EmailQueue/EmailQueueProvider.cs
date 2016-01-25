@@ -23,21 +23,24 @@ THE SOFTWARE.
 
 */
 
+using System;
 using System.Net.Mail;
+using System.Threading.Tasks;
+
 namespace Gaia.Core.Mail.EmailQueue
 {
 	public class EmailQueueProvider : IMailProvider
 	{
-		private IStorageProvider _provider;
+		private readonly IStorageProvider _provider;
 
-		public EmailQueueProvider(string storageProviderName)
+		public EmailQueueProvider(IStorageProvider storageProvider)
 		{
-			_provider = IoC.Container.Instance.Resolve<IStorageProvider>(storageProviderName);
+			_provider = storageProvider;
 		}
 
-		public void Send(MailMessage message)
+		public void Send(MailMessage message, object objectId = null, DateTime? sendTime = null)
 		{
-			
+			Task.WaitAll(_provider.SaveMessage(objectId, message, sendTime));
 		}
 	}
 }

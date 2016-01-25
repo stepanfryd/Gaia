@@ -69,7 +69,9 @@ namespace Gaia.Core.Mail
 		///   Send mail message
 		/// </summary>
 		/// <param name="message"></param>
-		public void Send(MailMessage message)
+		/// <param name="objectId"></param>
+		/// <param name="sendTime"></param>
+		public void Send(MailMessage message, object objectId = null, DateTime? sendTime = null)
 		{
 			_smtpClient.Send(message);
 			_log.Info($"Message to {message.To} has been sent");

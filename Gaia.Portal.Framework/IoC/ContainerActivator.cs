@@ -33,8 +33,6 @@ using Gaia.Core.IoC;
 using Gaia.Portal.Framework.Configuration.EntLib;
 using Gaia.Portal.Framework.Configuration.Modules;
 using Gaia.Portal.Framework.Exceptions;
-using Gaia.Portal.Framework.IoC.Mvc;
-using Gaia.Portal.Framework.IoC.WebApi;
 
 namespace Gaia.Portal.Framework.IoC
 {
@@ -43,27 +41,51 @@ namespace Gaia.Portal.Framework.IoC
 	/// </summary>
 	public static class ContainerActivator
 	{
+		#region Fields and constants
+
 		private static IEnterpriseLibrary _entLib;
+
+		#endregion
+
 		/// <summary>Integrates Unity when the application starts.</summary>
 		public static void Start()
 		{
 			// init entLib logger
 			_entLib = Container.Instance.Resolve<IEnterpriseLibrary>();
-			 
+			var config = new Configuration.Configuration();
+			if(config.WebSettings==null) throw new NullReferenceException("Configuration section gaia/web is not correctly configured.");
+
 			FilterProviders.Providers.Remove(FilterProviders.Providers.OfType<FilterAttributeFilterProvider>().First());
 
 			//FilterProviders.Providers.Add(new UnityFilterAttributeFilterProvider((IUnityContainer)Container.Instance.ContainerInstance));
-			FilterProviders.Providers.Add(new GaiaFilterAttributeFilterProvider(Container.Instance));
+
+			if (config.WebSettings.FilterProviders != null)
+			{
+				foreach (var type in config.WebSettings.FilterProviders.Select(Type.GetType).Where(type => type != null))
+				{
+					FilterProviders.Providers.Add((IFilterProvider) Activator.CreateInstance(type, Container.Instance.ContainerInstance));
+				}
+			}
 
 			//DependencyResolver.SetResolver(new UnityDependencyResolver((IUnityContainer)Container.Instance.ContainerInstance));
-			var dependencyResolver = new GaiaDependencyResolver(Container.Instance);
-			DependencyResolver.SetResolver(dependencyResolver);
+			var mvcResolver = Type.GetType(config.WebSettings.MvcDependencyResolver);
+			if (mvcResolver == null)
+				throw new NullReferenceException(
+					$"Could not resolve type ${config.WebSettings.MvcDependencyResolver} for Mvc Dependency resolver.");
+			DependencyResolver.SetResolver(
+				(IDependencyResolver) Activator.CreateInstance(mvcResolver, Container.Instance.ContainerInstance));
 
 			// TODO: Uncomment if you want to use PerRequestLifetimeManager
 			// Microsoft.Web.Infrastructure.DynamicModuleHelper.DynamicModuleUtility.RegisterModule(typeof(UnityPerRequestHttpModule));
 
+			var webApiResolver = Type.GetType(config.WebSettings.ApiDependencyResolver);
+			if (webApiResolver == null)
+				throw new NullReferenceException(
+					$"Cound not resolve ${config.WebSettings.ApiDependencyResolver} for WebApi Dependency resolver.");
 			// WebApi dependency configuration
-			GlobalConfiguration.Configuration.DependencyResolver = new GaiaWebApiDependencyResolver(Container.Instance);
+			GlobalConfiguration.Configuration.DependencyResolver =
+				(System.Web.Http.Dependencies.IDependencyResolver)
+					Activator.CreateInstance(webApiResolver, Container.Instance.ContainerInstance);
 		}
 
 		/// <summary>Disposes the Unity container when the application is shut down.</summary>
