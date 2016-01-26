@@ -40,7 +40,7 @@ namespace Gaia.Core.Mail.EmailQueue
 
 		public void Send(MailMessage message, object objectId = null, DateTime? sendTime = null)
 		{
-			Task.WaitAll(_provider.SaveMessage(objectId, message, sendTime));
+			_provider.SaveMessage(objectId, message, sendTime);
 		}
 	}
 }

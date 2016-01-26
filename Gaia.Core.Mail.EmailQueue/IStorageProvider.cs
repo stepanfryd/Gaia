@@ -26,7 +26,6 @@ THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Net.Mail;
-using System.Threading.Tasks;
 
 namespace Gaia.Core.Mail.EmailQueue
 {
@@ -44,13 +43,15 @@ namespace Gaia.Core.Mail.EmailQueue
 		///   Planned time when to send. If plannedTime is null then message is ready to send in the next
 		///   round
 		/// </param>
-		Task SaveMessage(object messageId, MailMessage message, DateTime? plannedtime = null);
+		void SaveMessage(object messageId, MailMessage message, DateTime? plannedtime = null);
 
 		/// <summary>
 		///   Method returns dictionary of messageId and messages which are ready to send.
 		/// </summary>
 		/// <param name="plannedtime">Time when to send messages</param>
 		/// <returns></returns>
-		Task<IDictionary<object, byte[]>> GetMessages(DateTime? plannedtime = null);
+		IDictionary<object, byte[]> GetMessages(DateTime? plannedtime = null);
+
+		void UpdateSentRecipients(object messageId, string recipient);
 	}
 }

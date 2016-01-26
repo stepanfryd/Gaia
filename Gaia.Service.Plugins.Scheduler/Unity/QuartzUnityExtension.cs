@@ -44,10 +44,8 @@ namespace Gaia.Service.Plugins.Scheduler.Unity
 		/// </remarks>
 		protected override void Initialize()
 		{
-			Container.RegisterType<ISchedulerFactory,
-				UnitySchedulerFactory>(new ContainerControlledLifetimeManager());
-			Container.RegisterType<IScheduler>(
-				new InjectionFactory(factory => factory.Resolve<ISchedulerFactory>().GetScheduler()));
+			Container.RegisterType<ISchedulerFactory, UnitySchedulerFactory>(new ContainerControlledLifetimeManager());
+			Container.RegisterType<IScheduler>(new InjectionFactory(factory => factory.Resolve<ISchedulerFactory>().GetScheduler()));
 		}
 
 		#endregion
