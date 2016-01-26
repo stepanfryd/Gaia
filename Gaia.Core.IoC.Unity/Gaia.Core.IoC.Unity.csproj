@@ -88,6 +88,8 @@
       <Link>Properties\GlobalAssemblyInfo.Core.cs</Link>
     </Compile>
     <Compile Include="Container.cs" />
+    <Compile Include="InjectionMember.cs" />
+    <Compile Include="LifetimeManagers\ContainerControlledLifetimeManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

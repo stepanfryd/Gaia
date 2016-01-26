@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using Gaia.Core.IoC.LifetimeManagers;
 
 namespace Gaia.Core.IoC
 {
@@ -41,5 +42,9 @@ namespace Gaia.Core.IoC
 		object RegisterInstance(Type t, object instance, object lifetimeManager);
 
 		object RegisterInstance(Type t, string name, object instance);
+		IContainer RegisterType<TFrom, TTo>(ILifetimeManager lifetimeManager);
+		IContainer RegisterType<T>(params IInjectionMember[] lifetimeManager);
+
+		ILifetimeManager GetContainerControlledLifetimeManager();
 	}
 }

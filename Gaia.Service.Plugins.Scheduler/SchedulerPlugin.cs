@@ -27,8 +27,7 @@ using System;
 using Common.Logging;
 using Gaia.Core.IoC;
 using Gaia.Core.Services;
-using Gaia.Service.Plugins.Scheduler.Unity;
-using Microsoft.Practices.Unity;
+using Gaia.Service.Plugins.Scheduler.IoC;
 using Quartz;
 
 namespace Gaia.Service.Plugins.Scheduler
@@ -69,12 +68,8 @@ namespace Gaia.Service.Plugins.Scheduler
 		public SchedulerPlugin()
 		{
 			_logger = LogManager.GetLogger(GetType());
-
-			// TODO: remove hard link to Unity
-			var container = (IUnityContainer)Container.Instance.ContainerInstance;
-
-			var jobFactory = new UnityJobFactory(container);
-			var schedulerFactory = new UnitySchedulerFactory(jobFactory);
+			var jobFactory = new IoCJobFactory(Container.Instance);
+			var schedulerFactory = new IoCSchedulerFactory(jobFactory);
 			_scheduler = schedulerFactory.GetScheduler();
 		}
 

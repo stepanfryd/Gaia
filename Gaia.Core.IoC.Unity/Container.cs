@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using Gaia.Core.IoC.LifetimeManagers;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 
@@ -18,6 +19,26 @@ namespace Gaia.Core.IoC.Unity
 		});
 
 		#endregion
+
+		/// <summary>
+		///   Register a type with specific members to be injected.
+		/// </summary>
+		/// <typeparam name="T">Type this registration is for.</typeparam>
+		/// <param name="injectionMembers">Injection configuration objects.</param>
+		public object RegisterType<T>(params InjectionMember[] injectionMembers)
+		{
+			return Instance.RegisterType(null, typeof (T), null, null, injectionMembers);
+		}
+
+		public static void RegisterTypes(IUnityContainer unityContainer)
+		{
+			unityContainer.LoadConfiguration();
+		}
+
+		private LifetimeManager CreateDefaultInstanceLifetimeManager()
+		{
+			return new ContainerControlledLifetimeManager();
+		}
 
 		#region  Public members
 
@@ -162,6 +183,40 @@ namespace Gaia.Core.IoC.Unity
 			return Instance.RegisterInstance(t, name, instance, new ContainerControlledLifetimeManager());
 		}
 
+		public IContainer RegisterType<TFrom, TTo>(ILifetimeManager lifetimeManager)
+		{
+			Instance.RegisterType(typeof (TFrom), typeof (TTo), (LifetimeManager) lifetimeManager);
+			return this;
+		}
+
+		public IContainer RegisterType<T>(params IInjectionMember[] injectionMembers)
+		{
+			var members = new List<Microsoft.Practices.Unity.InjectionMember>();
+
+			if (injectionMembers != null)
+			{
+				foreach (var member in injectionMembers)
+				{
+					if (member.Type != null && member.Name != null)
+					{
+						members.Add(new InjectionFactory(container => container.Resolve(member.Type, member.Name)));
+					}
+					else if (member.Type != null)
+					{
+						members.Add(new InjectionFactory(container => container.Resolve(member.Type)));
+					}
+				}
+			}
+
+			Instance.RegisterType(typeof (T), members.ToArray());
+			return this;
+		}
+
+		public ILifetimeManager GetContainerControlledLifetimeManager()
+		{
+			return new LifetimeManagers.ContainerControlledLifetimeManager();
+		}
+
 		/// <summary>
 		///   Register an instance with the Instance.
 		/// </summary>
@@ -233,25 +288,5 @@ namespace Gaia.Core.IoC.Unity
 		}
 
 		#endregion
-
-		/// <summary>
-		///   Register a type with specific members to be injected.
-		/// </summary>
-		/// <typeparam name="T">Type this registration is for.</typeparam>
-		/// <param name="injectionMembers">Injection configuration objects.</param>
-		public object RegisterType<T>(params InjectionMember[] injectionMembers)
-		{
-			return Instance.RegisterType(null, typeof (T), null, null, injectionMembers);
-		}
-
-		public static void RegisterTypes(IUnityContainer unityContainer)
-		{
-			unityContainer.LoadConfiguration();
-		}
-
-		private LifetimeManager CreateDefaultInstanceLifetimeManager()
-		{
-			return new ContainerControlledLifetimeManager();
-		}
 	}
 }

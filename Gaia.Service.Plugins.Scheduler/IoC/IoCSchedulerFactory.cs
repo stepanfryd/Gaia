@@ -26,16 +26,16 @@ using Quartz;
 using Quartz.Core;
 using Quartz.Impl;
 
-namespace Gaia.Service.Plugins.Scheduler.Unity
+namespace Gaia.Service.Plugins.Scheduler.IoC
 {
 	/// <summary>
 	///   Factory pro podporu Unity v Scheduleru
 	/// </summary>
-	public class UnitySchedulerFactory : StdSchedulerFactory
+	public class IoCSchedulerFactory : StdSchedulerFactory
 	{
 		#region Fields
 
-		private readonly UnityJobFactory _unityJobFactory;
+		private readonly IoCJobFactory _unityJobFactory;
 
 		#endregion
 
@@ -45,7 +45,7 @@ namespace Gaia.Service.Plugins.Scheduler.Unity
 		///   Konstruktor
 		/// </summary>
 		/// <param name="unityJobFactory"></param>
-		public UnitySchedulerFactory(UnityJobFactory unityJobFactory)
+		public IoCSchedulerFactory(IoCJobFactory unityJobFactory)
 		{
 			_unityJobFactory = unityJobFactory;
 		}

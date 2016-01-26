@@ -81,7 +81,10 @@
     </Compile>
     <Compile Include="Container.cs" />
     <Compile Include="IContainer.cs" />
+    <Compile Include="IInjectionMember.cs" />
+    <Compile Include="InjectionMember.cs" />
     <Compile Include="IoCSection.cs" />
+    <Compile Include="LifetimeManagers\ILifetimeManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
   </ItemGroup>

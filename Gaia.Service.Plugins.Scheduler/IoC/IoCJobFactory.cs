@@ -22,39 +22,40 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
 using System;
 using System.Globalization;
 using Common.Logging;
-using Microsoft.Practices.Unity;
+using Gaia.Core.IoC;
 using Quartz;
 using Quartz.Spi;
 
-namespace Gaia.Service.Plugins.Scheduler.Unity
+namespace Gaia.Service.Plugins.Scheduler.IoC
 {
 	/// <summary>
 	///   Unity factory pro vytváření nových jobů scheduleru
 	/// </summary>
-	public class UnityJobFactory : IJobFactory
+	public class IoCJobFactory : IJobFactory
 	{
-		#region Fields
-
-		private readonly IUnityContainer _container;
-
-		private readonly ILog _log;
-
-		#endregion
-
 		#region Constructors
 
 		/// <summary>
 		///   Konstruktor vytvoření instance Job factory
 		/// </summary>
 		/// <param name="container">Instance Unity kontaineru</param>
-		public UnityJobFactory(IUnityContainer container)
+		public IoCJobFactory(IContainer container)
 		{
 			_container = container;
 			_log = LogManager.GetLogger(GetType());
 		}
+
+		#endregion
+
+		#region Fields
+
+		private readonly IContainer _container;
+
+		private readonly ILog _log;
 
 		#endregion
 
@@ -84,15 +85,15 @@ namespace Gaia.Service.Plugins.Scheduler.Unity
 		/// </returns>
 		public IJob NewJob(TriggerFiredBundle bundle, IScheduler scheduler)
 		{
-			IJobDetail jobDetail = bundle.JobDetail;
+			var jobDetail = bundle.JobDetail;
 			try
 			{
 				return _container.Resolve(jobDetail.JobType) as IJob;
 			}
 			catch (Exception ex)
 			{
-				string message = String.Format(CultureInfo.InvariantCulture, "There is an issue to create job [{0}]. {1}",
-					new object[] { jobDetail.JobType.FullName, ex.Message });
+				var message = string.Format(CultureInfo.InvariantCulture, "There is an issue to create job [{0}]. {1}",
+					jobDetail.JobType.FullName, ex.Message);
 				_log.Error(message, ex);
 
 				throw new SchedulerException(message, ex);

@@ -50,8 +50,11 @@ namespace Gaia.Core.Mail.EmailQueue
 		/// </summary>
 		/// <param name="plannedtime">Time when to send messages</param>
 		/// <returns></returns>
-		IDictionary<object, byte[]> GetMessages(DateTime? plannedtime = null);
+		IDictionary<object, Tuple<byte[], List<string>>> GetMessages(DateTime? plannedtime = null);
 
 		void UpdateSentRecipients(object messageId, string recipient);
+
+		void FinishMail(object messageId);
+		void UpdateMail(object messageId, object status);
 	}
 }
