@@ -44,6 +44,17 @@ namespace Gaia.Core.Mail
 	/// </summary>
 	public class EmailService : IEmailService
 	{
+		#region Fields and constants
+
+		private readonly IEmailSettings _emailSettings;
+		private readonly IEmailTemplateConfiguration _emailTemplateConfiguration;
+		private readonly IRazorEngineService _engineService;
+		private readonly ILog _log;
+		private readonly IMailProvider _mailProvider;
+		private readonly IMessageTemplateProvider _templateProvider;
+
+		#endregion
+
 		#region Constructors
 
 		/// <summary>
@@ -70,74 +81,6 @@ namespace Gaia.Core.Mail
 			_emailTemplateConfiguration = emailTemplateConfiguration;
 			_engineService = RazorEngineService.Create((ITemplateServiceConfiguration) _emailTemplateConfiguration);
 		}
-
-		#endregion
-
-		#region Private and protected
-
-		private string EmbedImages(string source, out List<LinkedResource> embeddedImages)
-		{
-			embeddedImages = new List<LinkedResource>();
-			var doc = new HtmlDocument();
-			doc.LoadHtml(source);
-
-			var images = doc.DocumentNode.SelectNodes("//img");
-
-			if (images != null)
-			{
-				foreach (var img in images)
-				{
-					try
-					{
-						var srcAttr = img.Attributes.FirstOrDefault(a => a.Name.ToLower() == "src");
-						if (srcAttr != null)
-						{
-							if (srcAttr.Value.ToLower().StartsWith("data:"))
-							{
-								// data:image/png;base64,
-								var p1 = srcAttr.Value.Split(',');
-
-								var lr = new LinkedResource(
-									new MemoryStream(
-										Convert.FromBase64String(p1[1])),
-									p1[0].Split(';')[0].Split(':')[1]
-									);
-								embeddedImages.Add(lr);
-								img.SetAttributeValue("src", $"cid:{lr.ContentId}");
-							}
-							else
-							{
-								var imgFullPath = Path.Combine(_emailTemplateConfiguration.TemplateFolder, srcAttr.Value);
-								if (File.Exists(imgFullPath))
-								{
-									var mime = MimeMapping.GetMimeMapping(imgFullPath);
-									var lr = new LinkedResource(imgFullPath, mime);
-									embeddedImages.Add(lr);
-									img.SetAttributeValue("src", $"cid:{lr.ContentId}");
-								}
-							}
-						}
-					}
-					catch (Exception ex)
-					{
-						_log.Error(ex);
-					}
-				}
-			}
-
-			return doc.DocumentNode.OuterHtml;
-		}
-
-		#endregion
-
-		#region Fields and constants
-
-		private readonly IEmailSettings _emailSettings;
-		private readonly IEmailTemplateConfiguration _emailTemplateConfiguration;
-		private readonly IRazorEngineService _engineService;
-		private readonly ILog _log;
-		private readonly IMailProvider _mailProvider;
-		private readonly IMessageTemplateProvider _templateProvider;
 
 		#endregion
 
@@ -330,12 +273,14 @@ namespace Gaia.Core.Mail
 					? _engineService.Run(templateKey + "Html", typeof (T), model)
 					: _engineService.RunCompile(templateHtml, templateKey + "Html", typeof (T), model);
 
-
 				List<LinkedResource> embeddedImages;
 				templateContentHtml = EmbedImages(templateContentHtml, out embeddedImages);
 
 				var htmlView = AlternateView.CreateAlternateViewFromString(templateContentHtml);
-				htmlView.ContentType = new ContentType("text/html");
+				htmlView.ContentType = new ContentType("text/html")
+				{
+					CharSet = "utf8"
+				};
 
 				foreach (var lr in embeddedImages)
 				{
@@ -380,6 +325,63 @@ namespace Gaia.Core.Mail
 			{
 				_mailProvider.Send(message);
 			}
+		}
+
+		#endregion
+
+		#region Private and protected
+
+		private string EmbedImages(string source, out List<LinkedResource> embeddedImages)
+		{
+			embeddedImages = new List<LinkedResource>();
+			var doc = new HtmlDocument();
+			doc.LoadHtml(source);
+
+			var images = doc.DocumentNode.SelectNodes("//img");
+
+			if (images != null)
+			{
+				foreach (var img in images)
+				{
+					try
+					{
+						var srcAttr = img.Attributes.FirstOrDefault(a => a.Name.ToLower() == "src");
+						if (srcAttr != null)
+						{
+							if (srcAttr.Value.ToLower().StartsWith("data:"))
+							{
+								// data:image/png;base64,
+								var p1 = srcAttr.Value.Split(',');
+
+								var lr = new LinkedResource(
+									new MemoryStream(
+										Convert.FromBase64String(p1[1])),
+									p1[0].Split(';')[0].Split(':')[1]
+									);
+								embeddedImages.Add(lr);
+								img.SetAttributeValue("src", $"cid:{lr.ContentId}");
+							}
+							else
+							{
+								var imgFullPath = Path.Combine(_emailTemplateConfiguration.TemplateFolder, srcAttr.Value);
+								if (File.Exists(imgFullPath))
+								{
+									var mime = MimeMapping.GetMimeMapping(imgFullPath);
+									var lr = new LinkedResource(imgFullPath, mime);
+									embeddedImages.Add(lr);
+									img.SetAttributeValue("src", $"cid:{lr.ContentId}");
+								}
+							}
+						}
+					}
+					catch (Exception ex)
+					{
+						_log.Error(ex);
+					}
+				}
+			}
+
+			return doc.DocumentNode.OuterHtml;
 		}
 
 		#endregion
