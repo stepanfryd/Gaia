@@ -29,9 +29,7 @@ using System.Net.Mail;
 
 namespace Gaia.Core.Mail.EmailQueue
 {
-	/// <summary>
-	///   Interface defines mail storage provider
-	/// </summary>
+
 	public interface IStorageProvider
 	{
 		/// <summary>
@@ -45,14 +43,26 @@ namespace Gaia.Core.Mail.EmailQueue
 		/// </param>
 		void SaveMessage(object messageId, MailMessage message, DateTime? plannedtime = null);
 
+
+	}
+
+
+	/// <summary>
+	///   Interface defines mail storage provider
+	/// </summary>
+	public interface IStorageProvider<TMessage, TDeliveryInfo> : IStorageProvider
+	{
 		/// <summary>
 		///   Method returns dictionary of messageId and messages which are ready to send.
 		/// </summary>
+		/// <param name="total"></param>
 		/// <param name="plannedtime">Time when to send messages</param>
+		/// <param name="skip"></param>
+		/// <param name="pageSize"></param>
 		/// <returns></returns>
-		IDictionary<object, Tuple<byte[], List<string>>> GetMessages(DateTime? plannedtime = null);
+		IDictionary<object, Tuple<TMessage, List<TDeliveryInfo>>> GetMessages(DateTime? plannedtime = null);
 
-		void UpdateSentRecipients(object messageId, string recipient);
+		void UpdateSentRecipients(object messageId, TDeliveryInfo deliveryInfo);
 
 		void FinishMail(object messageId);
 		void UpdateMail(object messageId, object status);

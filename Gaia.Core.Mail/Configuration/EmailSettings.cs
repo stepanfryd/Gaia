@@ -70,6 +70,9 @@ namespace Gaia.Core.Mail.Configuration
 		[XmlAttribute("copyLocation")]
 		public string CopyLocation { get; set; }
 
+		/// <summary>
+		/// Physical path to copy location
+		/// </summary>
 		public string CopyLocationPath
 		{
 			get

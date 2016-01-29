@@ -4,8 +4,13 @@ using System.Reflection;
 
 namespace Gaia.Core.Mail
 {
+	/// <summary>
+	///   Mail helpers and utilities
+	/// </summary>
 	public class Utils
 	{
+		#region Fields
+
 		private static volatile Utils _instance;
 		private static readonly object SyncRoot = new object();
 
@@ -13,8 +18,27 @@ namespace Gaia.Core.Mail
 		private readonly ConstructorInfo _mailWriterContructor;
 		private readonly MethodInfo _sendMethod;
 
-		#region Public properties
+		#endregion
 
+		#region Constructors
+
+		private Utils()
+		{
+			var smtpClientAssembly = typeof (SmtpClient).Assembly;
+			var mailWriterType = smtpClientAssembly.GetType("System.Net.Mail.MailWriter");
+			_mailWriterContructor = mailWriterType.GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic, null,
+				new[] {typeof (Stream)}, null);
+			_sendMethod = typeof (MailMessage).GetMethod("Send", BindingFlags.Instance | BindingFlags.NonPublic);
+			_closeMethod = mailWriterType.GetMethod("Close", BindingFlags.Instance | BindingFlags.NonPublic);
+		}
+
+		#endregion
+
+		#region Public
+
+		/// <summary>
+		///   Singleton instance of Utils class
+		/// </summary>
 		public static Utils Instance
 		{
 			get
@@ -34,44 +58,31 @@ namespace Gaia.Core.Mail
 
 		#endregion
 
-		#region Constructor
-
-		private Utils()
-		{
-			var smtpClientAssembly = typeof (SmtpClient).Assembly;
-			var mailWriterType = smtpClientAssembly.GetType("System.Net.Mail.MailWriter");
-			_mailWriterContructor = mailWriterType.GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic, null,
-				new[] {typeof (Stream)}, null);
-			_sendMethod = typeof (MailMessage).GetMethod("Send", BindingFlags.Instance | BindingFlags.NonPublic);
-			_closeMethod = mailWriterType.GetMethod("Close", BindingFlags.Instance | BindingFlags.NonPublic);
-		}
-
-		#endregion
-
-		#region Public methods
-
+		/// <summary>
+		///   Method returns email content as a byte array
+		/// </summary>
+		/// <param name="message"></param>
+		/// <returns></returns>
 		public byte[] GetMailBytes(MailMessage message)
 		{
 			byte[] retVal;
 
 			using (var ms = new MemoryStream())
 			{
-				// Construct
+				// Construct mail writer object
 				var mailWriter = _mailWriterContructor.Invoke(new object[] {ms});
 
-				// Send
+				// Call Send method
 				_sendMethod?.Invoke(message, BindingFlags.Instance | BindingFlags.NonPublic, null, new[] {mailWriter, true, true},
 					null);
 
 				retVal = ms.GetBuffer();
 
-				// Close
+				// Close mail writer object
 				_closeMethod.Invoke(mailWriter, BindingFlags.Instance | BindingFlags.NonPublic, null, new object[] {}, null);
 				ms.Close();
 			}
 			return retVal;
 		}
-
-		#endregion
 	}
 }
