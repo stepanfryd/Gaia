@@ -29,12 +29,16 @@ namespace Gaia.Portal.Framework.Mvc
 {
 	public class XmlActionResult<T> : ActionResult
 	{
+		private XmlSerializerNamespaces _namespaces;
+
 		#region Public members
 
 		/// <summary>
 		///   Gets the object to be serialized to XML.
 		/// </summary>
 		public T ObjectToSerialize { get; }
+
+
 
 		#endregion
 
@@ -44,9 +48,11 @@ namespace Gaia.Portal.Framework.Mvc
 		///   Initializes a new instance of the <see cref="XmlResult" /> class.
 		/// </summary>
 		/// <param name="objectToSerialize">The object to serialize to XML.</param>
-		public XmlActionResult(T objectToSerialize)
+		/// <param name="namespaces"></param>
+		public XmlActionResult(T objectToSerialize, XmlSerializerNamespaces namespaces = null)
 		{
 			ObjectToSerialize = objectToSerialize;
+			_namespaces = namespaces;	
 		}
 
 		#endregion
@@ -65,7 +71,7 @@ namespace Gaia.Portal.Framework.Mvc
 				context.HttpContext.Response.Clear();
 				var xs = new XmlSerializer(typeof (T));
 				context.HttpContext.Response.ContentType = "text/xml";
-				xs.Serialize(context.HttpContext.Response.Output, ObjectToSerialize);
+				xs.Serialize(context.HttpContext.Response.Output, ObjectToSerialize, _namespaces);
 			}
 		}
 
