@@ -22,24 +22,26 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
+using System.IO;
+using System.Web.Http.Description;
 using System.Web.Mvc;
 using System.Xml.Serialization;
+using Antlr.Runtime.Misc;
 
 namespace Gaia.Portal.Framework.Mvc
 {
 	public class XmlActionResult<T> : ActionResult
 	{
 		private XmlSerializerNamespaces _namespaces;
-
+		private Func<Stream, byte[]> _postProcesFunc;
 		#region Public members
 
 		/// <summary>
 		///   Gets the object to be serialized to XML.
 		/// </summary>
 		public T ObjectToSerialize { get; }
-
-
-
+		
 		#endregion
 
 		#region Constructors
@@ -49,10 +51,11 @@ namespace Gaia.Portal.Framework.Mvc
 		/// </summary>
 		/// <param name="objectToSerialize">The object to serialize to XML.</param>
 		/// <param name="namespaces"></param>
-		public XmlActionResult(T objectToSerialize, XmlSerializerNamespaces namespaces = null)
+		public XmlActionResult(T objectToSerialize, Func<Stream, byte[]> postProcesFunc = null, XmlSerializerNamespaces namespaces = null)
 		{
 			ObjectToSerialize = objectToSerialize;
-			_namespaces = namespaces;	
+			_namespaces = namespaces;
+			_postProcesFunc = postProcesFunc;
 		}
 
 		#endregion
@@ -69,11 +72,18 @@ namespace Gaia.Portal.Framework.Mvc
 			if (ObjectToSerialize != null)
 			{
 				context.HttpContext.Response.Clear();
-				var xs = new XmlSerializer(typeof (T));
 				context.HttpContext.Response.ContentType = "text/xml";
-				xs.Serialize(context.HttpContext.Response.Output, ObjectToSerialize, _namespaces);
+
+				var xs = new XmlSerializer(typeof (T));
+				using (var ms = new MemoryStream())
+				{
+					xs.Serialize(ms, ObjectToSerialize, _namespaces);
+					context.HttpContext.Response.BinaryWrite(_postProcesFunc != null ? _postProcesFunc.Invoke(ms) : ms.GetBuffer());
+					ms.Close();
+				}
 			}
 		}
+
 
 		#endregion
 	}
