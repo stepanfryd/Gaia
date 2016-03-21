@@ -28,6 +28,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.ServiceModel;
+using Common.Logging;
 using Gaia.Core.Wcf.Configuration;
 
 namespace Gaia.Core.Wcf
@@ -46,6 +47,7 @@ namespace Gaia.Core.Wcf
 		/// <param name="configurationCollection">List of services to be managed by this manager</param>
 		public WcfServicesManager(ServiceHostConfigurationCollection configurationCollection)
 		{
+			_log = LogManager.GetLogger(GetType());
 			_serviceHosts = new List<ServiceHostBase>();
 			_servicesConfiguration = configurationCollection;
 		}
@@ -69,6 +71,7 @@ namespace Gaia.Core.Wcf
 
 		private readonly IList<ServiceHostBase> _serviceHosts;
 		private readonly ServiceHostConfigurationCollection _servicesConfiguration;
+		private ILog _log;
 
 		#endregion
 
@@ -118,7 +121,9 @@ namespace Gaia.Core.Wcf
 
 				var firstOrDefault = host.BaseAddresses.FirstOrDefault();
 				if (firstOrDefault != null)
-					Debug.WriteLine("Service {0} on {1}", hostConfig.ServiceTypeName, firstOrDefault.AbsoluteUri);
+				{
+					_log.Info($"Service {hostConfig.ServiceTypeName} on {firstOrDefault.AbsoluteUri}");
+				}
 
 				_serviceHosts.Add(host);
 			}
