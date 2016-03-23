@@ -36,10 +36,11 @@ namespace Gaia.Portal.Framework
 	public abstract class GaiaModuleAreaRegistration : AreaRegistration
 	{
 		private readonly string[] _nameSpaces;
+		private readonly bool _enableDefaultApiRouting;
 		private WebModuleConfigurationAttribute _moduleConfiguration;
 
 		protected GaiaModuleAreaRegistration(string areaName, string defaultController, string defaultAction,
-			string[] namespaces = null)
+			string[] namespaces = null, bool enableDefaultApiRouting = false)
 		{
 			if (string.IsNullOrEmpty(areaName)) throw new ArgumentNullException(areaName);
 			if (string.IsNullOrEmpty(defaultController)) throw new ArgumentNullException(defaultController);
@@ -49,6 +50,7 @@ namespace Gaia.Portal.Framework
 
 			AreaName = areaName;
 			_nameSpaces = namespaces;
+			_enableDefaultApiRouting = enableDefaultApiRouting;
 			DefaultController = defaultController;
 			DefaultAction = defaultAction;
 		}
@@ -65,11 +67,14 @@ namespace Gaia.Portal.Framework
 			constraintResolver.ConstraintMap.Add("rangeWithStatus", typeof (RangeWithStatusRouteConstraint));
 			context.Routes.MapMvcAttributeRoutes(constraintResolver);
 
-			context.Routes.MapHttpRoute(
-				$"{AreaName}_DefaultApi",
-				$"{AreaName}_Api/{{controller}}/{{id}}",
-				new {id = RouteParameter.Optional},
-				new {id = new RangeWithStatusRouteConstraint(2, 10, HttpStatusCode.PreconditionFailed)});
+			if (_enableDefaultApiRouting)
+			{
+				context.Routes.MapHttpRoute(
+					$"{AreaName}_DefaultApi",
+					$"{AreaName}_Api/{{controller}}/{{id}}",
+					new {id = RouteParameter.Optional},
+					new {id = new RangeWithStatusRouteConstraint(2, 10, HttpStatusCode.PreconditionFailed)});
+			}
 
 			context.MapRoute(
 				$"{AreaName}_Area",
