@@ -52,6 +52,8 @@ namespace Gaia.Core.Exceptions
 		public GaiaBaseException(string message, Exception innerException) : base(message, innerException) {}
 
 		[SecuritySafeCritical]
+#pragma warning disable 1591
 		protected GaiaBaseException(SerializationInfo info, StreamingContext context) : base(info, context) {}
+#pragma warning restore 1591
 	}
 }

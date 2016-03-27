@@ -4,6 +4,9 @@ using System.Text.RegularExpressions;
 
 namespace Gaia.Core
 {
+	/// <summary>
+	///   Base regex utilities
+	/// </summary>
 	public class RegexUtilities
 	{
 		#region Fields and constants
@@ -15,6 +18,13 @@ namespace Gaia.Core
 
 		#endregion
 
+		#region Private and protected
+
+		/// <summary>
+		///   Check if string is valid email address
+		/// </summary>
+		/// <param name="strIn"></param>
+		/// <returns></returns>
 		public bool IsValidEmail(string strIn)
 		{
 			_invalidEmail = false;
@@ -62,5 +72,7 @@ namespace Gaia.Core
 			}
 			return match.Groups[1].Value + domainName;
 		}
+
+		#endregion
 	}
 }
