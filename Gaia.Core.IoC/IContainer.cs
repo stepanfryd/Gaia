@@ -10,7 +10,13 @@ namespace Gaia.Core.IoC
 	/// </summary>
 	public interface IContainer : IDisposable
 	{
+		#region Public members
+
 		object ContainerInstance { get; }
+
+		#endregion
+
+		#region Private and protected
 
 		object Resolve(Type t, string name);
 
@@ -28,7 +34,6 @@ namespace Gaia.Core.IoC
 
 		object RegisterChildContainer(Configuration configuration, string childName);
 
-
 		object RegisterInstance<TInterface>(TInterface instance);
 
 		object RegisterInstance<TInterface>(TInterface instance, object lifetimeManager);
@@ -42,9 +47,13 @@ namespace Gaia.Core.IoC
 		object RegisterInstance(Type t, object instance, object lifetimeManager);
 
 		object RegisterInstance(Type t, string name, object instance);
+
 		IContainer RegisterType<TFrom, TTo>(ILifetimeManager lifetimeManager);
+
 		IContainer RegisterType<T>(params IInjectionMember[] lifetimeManager);
 
 		ILifetimeManager GetContainerControlledLifetimeManager();
+
+		#endregion
 	}
 }

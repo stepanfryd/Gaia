@@ -2,6 +2,9 @@
 
 namespace Gaia.Core.IoC
 {
+	/// <summary>
+	/// Container configuration settings
+	/// </summary>
 	public class Settings : ParametersBase
 	{
 		#region Public members
