@@ -34,6 +34,8 @@ namespace Gaia.Core.IoC
 
 		object RegisterChildContainer(Configuration configuration, string childName);
 
+		IContainer CreateChildContainer();
+
 		object RegisterInstance<TInterface>(TInterface instance);
 
 		object RegisterInstance<TInterface>(TInterface instance, object lifetimeManager);

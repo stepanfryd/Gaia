@@ -28,10 +28,18 @@ using Gaia.Core.Wcf.Configuration;
 
 namespace Gaia.Core.Wcf
 {
+	/// <summary>
+	/// Base factory for WCF Gaia hosts
+	/// </summary>
 	public abstract class ServiceHostFactoryBase
 	{
 		#region Private and protected
 
+		/// <summary>
+		/// Creates Gaia service host
+		/// </summary>
+		/// <param name="hostconfig"></param>
+		/// <returns></returns>
 		public abstract ServiceHostBase CreateServiceHost(IServiceHostConfiguration hostconfig);
 
 		#endregion

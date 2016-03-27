@@ -23,19 +23,32 @@ THE SOFTWARE.
 
 */
 
-using Gaia.Core.Services;
-using Gaia.Core.Tests.TestObjects;
-using NUnit.Framework;
+using System.ServiceModel;
+using Gaia.Core.IoC;
+using Gaia.Core.Wcf.Configuration;
+using Gaia.Core.Wcf.IoC;
 
-namespace Gaia.Core.Tests
+namespace Gaia.Core.Wcf
 {
-	[TestFixture]
-	public class ServiceTests
+	/// <summary>
+	///   Implementation of Unit IoC container service host factory
+	/// </summary>
+	public class IoCServiceFactory : ServiceHostFactoryBase
 	{
-		[Test]
-		public void TestServiceRun()
+		#region Private and protected
+
+		/// <summary>
+		///   This method creates instance of new WCF service host using Unity as IoC container
+		/// </summary>
+		/// <param name="hostconfig"></param>
+		/// <returns></returns>
+		public override ServiceHostBase CreateServiceHost(IServiceHostConfiguration hostconfig)
 		{
-			var s = ServiceFactory.Create<TestService>();
+			// TODO: remove hard link to Unity
+			var container = (IContainer) Container.Instance.ContainerInstance;
+			return new IoCServiceHost(container, hostconfig.ServiceType);
 		}
+
+		#endregion
 	}
 }

@@ -102,13 +102,13 @@
     <Compile Include="Configuration\ServiceHostConfigurationCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceHostFactoryBase.cs" />
-    <Compile Include="UnityServiceFactory.cs" />
-    <Compile Include="Unity\UnityContractBehavior.cs" />
-    <Compile Include="Unity\UnityInstanceContextExtension.cs" />
-    <Compile Include="Unity\UnityInstanceContextInitializer.cs" />
-    <Compile Include="Unity\UnityInstanceProvider.cs" />
-    <Compile Include="Unity\UnityServiceHost.cs" />
-    <Compile Include="Unity\UnityServiceHostFactory.cs" />
+    <Compile Include="IoCServiceFactory.cs" />
+    <Compile Include="IoC\IoCContractBehavior.cs" />
+    <Compile Include="IoC\IoCInstanceContextExtension.cs" />
+    <Compile Include="IoC\IoCInstanceContextInitializer.cs" />
+    <Compile Include="IoC\IoCInstanceProvider.cs" />
+    <Compile Include="IoC\IoCServiceHost.cs" />
+    <Compile Include="IoC\IoCServiceHostFactory.cs" />
     <Compile Include="WcfServicesManager.cs" />
   </ItemGroup>
   <ItemGroup>
