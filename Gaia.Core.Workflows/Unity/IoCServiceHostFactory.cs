@@ -30,7 +30,7 @@ using Microsoft.Practices.Unity;
 
 namespace Gaia.Core.Workflows.Unity
 {
-	public abstract class UnityServiceHostFactory : WorkflowServiceHostFactory
+	public abstract class IoCServiceHostFactory : WorkflowServiceHostFactory
 	{
 		#region Private and protected
 
