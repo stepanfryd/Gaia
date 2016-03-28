@@ -30,6 +30,9 @@ namespace Gaia.Core.Workflows
 	/// <typeparam name="T"></typeparam>
 	public class SimpleResult<T>
 	{
+		/// <summary>
+		/// Smple activity result out argument
+		/// </summary>
 		[OutArgument]
 		public T Result { get; set; }
 	}
