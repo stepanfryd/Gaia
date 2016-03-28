@@ -38,6 +38,10 @@ namespace Gaia.Core.Workflows
 	{
 		#region Constructors and Destructors
 
+		/// <summary>
+		/// Workflow result constructor
+		/// </summary>
+		/// <param name="workflowArguments"></param>
 		public WorkflowResult(IEnumerable<KeyValuePair<string, object>> workflowArguments)
 		{
 			foreach (var arg in workflowArguments)

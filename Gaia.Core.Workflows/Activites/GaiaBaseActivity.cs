@@ -22,9 +22,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
 using System;
 using System.Activities;
 using Common.Logging;
+using Gaia.Core.IoC;
 
 namespace Gaia.Core.Workflows.Activites
 {
@@ -33,20 +35,7 @@ namespace Gaia.Core.Workflows.Activites
 	/// </summary>
 	public abstract class GaiaBaseActivity : CodeActivity
 	{
-		#region Private members
-
-		#endregion
-
-		#region Protected members
-
-		protected ILog Log { get; set; }
-
-		#endregion
-
-		protected GaiaBaseActivity()
-		{
-			Log = LogManager.GetLogger(GetType());
-		}
+		#region Public members
 
 		/// <summary>
 		///   Workflow kontext aktivity
@@ -56,10 +45,23 @@ namespace Gaia.Core.Workflows.Activites
 		/// <summary>
 		///   Systémový newLine
 		/// </summary>
-		protected string NewLine
+		protected string NewLine => Environment.NewLine;
+
+		#endregion
+
+		#region Constructors
+
+		/// <summary>
+		///   Base activit abstract constructor
+		/// </summary>
+		protected GaiaBaseActivity()
 		{
-			get { return Environment.NewLine; }
+			Log = LogManager.GetLogger(GetType());
 		}
+
+		#endregion
+
+		#region Private and protected
 
 		/// <summary>
 		///   When implemented in a derived class, performs the execution of the activity.
@@ -86,12 +88,32 @@ namespace Gaia.Core.Workflows.Activites
 
 		private void PreExecute()
 		{
-			Log.Info(String.Format("ACTIVITY {0} - START", this));
+			Log.Info($"ACTIVITY {this} - START");
 		}
 
 		private void PostExecute()
 		{
-			Log.Info(String.Format("ACTIVITY {0} - FINISH", this));
+			Log.Info($"ACTIVITY {this} - FINISH");
 		}
+
+		#endregion
+
+		#region Private members
+
+		#endregion
+
+		#region Protected members
+
+		/// <summary>
+		///   Logging providers
+		/// </summary>
+		protected ILog Log { get; set; }
+
+		/// <summary>
+		///   IoC container reference
+		/// </summary>
+		protected IContainer Container => IoC.Container.Instance;
+
+		#endregion
 	}
 }

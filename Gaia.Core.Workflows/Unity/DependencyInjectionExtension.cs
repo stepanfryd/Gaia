@@ -20,7 +20,7 @@ namespace Gaia.Core.Workflows.Unity
 		public DependencyInjectionExtension(IUnityContainer container)
 		{
 			if (container == null)
-				throw new ArgumentNullException("container");
+				throw new ArgumentNullException(nameof(container));
 
 			_container = container;
 		}

@@ -22,9 +22,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
 using System.Activities;
 using Common.Logging;
-using Microsoft.Practices.Unity;
+using Gaia.Core.IoC;
 
 namespace Gaia.Core.Workflows.Activites
 {
@@ -34,15 +35,28 @@ namespace Gaia.Core.Workflows.Activites
 	/// <typeparam name="T"></typeparam>
 	public abstract class GaiaBaseActivity<T> : CodeActivity<T>
 	{
-		protected GaiaBaseActivity()
-		{
-			Log = LogManager.GetLogger(GetType());
-		}
+		#region Public members
 
 		/// <summary>
 		///   Workflow aktivity context
 		/// </summary>
 		protected CodeActivityContext Context { get; private set; }
+
+		#endregion
+
+		#region Constructors
+
+		/// <summary>
+		///   Base activity of type constructor
+		/// </summary>
+		protected GaiaBaseActivity()
+		{
+			Log = LogManager.GetLogger(GetType());
+		}
+
+		#endregion
+
+		#region Private and protected
 
 		/// <summary>
 		///   When implemented in a derived class, performs the execution of the activity.
@@ -85,22 +99,23 @@ namespace Gaia.Core.Workflows.Activites
 			Log.Info($"ACTIVITY {this} - FINISH");
 		}
 
+		#endregion
+
 		#region Private members
 
 		#endregion
 
 		#region Protected members
 
+		/// <summary>
+		///   Logging providers
+		/// </summary>
 		protected ILog Log { get; set; }
 
-		protected IUnityContainer Container
-		{
-			get
-			{
-				// TODO: remove hard link to Unity
-				return  (IUnityContainer)IoC.Container.Instance.ContainerInstance;
-			}
-		} 
+		/// <summary>
+		///   IoC container reference
+		/// </summary>
+		protected IContainer Container => IoC.Container.Instance;
 
 		#endregion
 	}

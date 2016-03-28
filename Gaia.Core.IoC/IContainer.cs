@@ -30,6 +30,8 @@ namespace Gaia.Core.IoC
 
 		IEnumerable<T> ResolveAll<T>();
 
+		IContainer AddNewExtension<T>();
+
 		object BuildUp(Type t, object existing, params object[] resolverOverrides);
 
 		object RegisterChildContainer(Configuration configuration, string childName);

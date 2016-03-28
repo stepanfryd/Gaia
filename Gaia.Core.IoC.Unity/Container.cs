@@ -50,6 +50,13 @@ namespace Gaia.Core.IoC.Unity
 			return Instance.ResolveAll<T>();
 		}
 
+		public IContainer AddNewExtension<T>()
+		{
+			var extension = Instance.Resolve<T>() as UnityContainerExtension;
+			Instance.AddExtension(extension);
+			return this;
+		}
+
 		public object BuildUp(Type t, object existing, params object[] resolverOverrides)
 		{
 			return Instance.BuildUp(t, existing);
