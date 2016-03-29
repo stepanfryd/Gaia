@@ -115,7 +115,7 @@
     <Compile Include="Unity\ActivityContextExtension.cs" />
     <Compile Include="Unity\DependencyInjectionExtension.cs" />
     <Compile Include="Unity\InjectionTypes.cs" />
-    <Compile Include="Unity\UnityServiceHostFactory.cs" />
+    <Compile Include="Unity\IoCServiceHostFactory.cs" />
     <Compile Include="Unity\WorkflowExtension.cs" />
     <Compile Include="WorkflowInfo.cs" />
     <Compile Include="WorkflowManager.cs" />

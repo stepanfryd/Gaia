@@ -20,27 +20,7 @@ namespace Gaia.Core.IoC.Unity
 
 		#endregion
 
-		/// <summary>
-		///   Register a type with specific members to be injected.
-		/// </summary>
-		/// <typeparam name="T">Type this registration is for.</typeparam>
-		/// <param name="injectionMembers">Injection configuration objects.</param>
-		public object RegisterType<T>(params InjectionMember[] injectionMembers)
-		{
-			return Instance.RegisterType(null, typeof (T), null, null, injectionMembers);
-		}
-
-		public static void RegisterTypes(IUnityContainer unityContainer)
-		{
-			unityContainer.LoadConfiguration();
-		}
-
-		private LifetimeManager CreateDefaultInstanceLifetimeManager()
-		{
-			return new ContainerControlledLifetimeManager();
-		}
-
-		#region  Public members
+		#region Public members
 
 		public IUnityContainer Instance => LazyContainer.Value;
 
@@ -70,6 +50,13 @@ namespace Gaia.Core.IoC.Unity
 			return Instance.ResolveAll<T>();
 		}
 
+		public IContainer AddNewExtension<T>()
+		{
+			var extension = Instance.Resolve<T>() as UnityContainerExtension;
+			Instance.AddExtension(extension);
+			return this;
+		}
+
 		public object BuildUp(Type t, object existing, params object[] resolverOverrides)
 		{
 			return Instance.BuildUp(t, existing);
@@ -82,6 +69,11 @@ namespace Gaia.Core.IoC.Unity
 			var subContainer = Instance.CreateChildContainer();
 			subContainer.LoadConfiguration(unitySection, childName);
 			return Instance.RegisterInstance(typeof (IUnityContainer), childName, subContainer);
+		}
+
+		public IContainer CreateChildContainer()
+		{
+			return new Container();
 		}
 
 		public object Resolve(Type t)
@@ -285,6 +277,30 @@ namespace Gaia.Core.IoC.Unity
 		public object RegisterInstance(Type t, object instance, object lifetimeManager)
 		{
 			return Instance.RegisterInstance(t, null, instance, (LifetimeManager) lifetimeManager);
+		}
+
+		#endregion
+
+		#region Private and protected
+
+		/// <summary>
+		///   Register a type with specific members to be injected.
+		/// </summary>
+		/// <typeparam name="T">Type this registration is for.</typeparam>
+		/// <param name="injectionMembers">Injection configuration objects.</param>
+		public object RegisterType<T>(params InjectionMember[] injectionMembers)
+		{
+			return Instance.RegisterType(null, typeof (T), null, null, injectionMembers);
+		}
+
+		public static void RegisterTypes(IUnityContainer unityContainer)
+		{
+			unityContainer.LoadConfiguration();
+		}
+
+		private LifetimeManager CreateDefaultInstanceLifetimeManager()
+		{
+			return new ContainerControlledLifetimeManager();
 		}
 
 		#endregion

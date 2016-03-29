@@ -23,49 +23,30 @@ THE SOFTWARE.
 
 */
 
-using System;
-using System.ServiceModel.Activities;
-using System.ServiceModel.Activities.Activation;
-using Microsoft.Practices.Unity;
+using System.ServiceModel;
+using Gaia.Core.IoC;
+using Gaia.Core.Wcf.Configuration;
+using Gaia.Core.Wcf.IoC;
 
-namespace Gaia.Core.Workflows.Unity
+namespace Gaia.Core.Wcf
 {
-	public abstract class UnityServiceHostFactory : WorkflowServiceHostFactory
+	/// <summary>
+	///   Implementation of Unit IoC container service host factory
+	/// </summary>
+	public class IoCServiceFactory : ServiceHostFactoryBase
 	{
 		#region Private and protected
 
-		protected abstract void ConfigureContainer(IUnityContainer container);
-
-		protected abstract InjectionTypes ConfigureInjectionType();
-
-		protected virtual void ConfigureServiceHost(WorkflowServiceHost serviceHost)
+		/// <summary>
+		///   This method creates instance of new WCF service host using Unity as IoC container
+		/// </summary>
+		/// <param name="hostconfig"></param>
+		/// <returns></returns>
+		public override ServiceHostBase CreateServiceHost(IServiceHostConfiguration hostconfig)
 		{
-		}
-
-		protected override WorkflowServiceHost CreateWorkflowServiceHost(WorkflowService service, Uri[] baseAddresses)
-		{
-			var container = new UnityContainer();
-			ConfigureContainer(container);
-
-			var host = base.CreateWorkflowServiceHost(service, baseAddresses);
-
-			var injectionType = ConfigureInjectionType();
-
-			if (injectionType == InjectionTypes.Push)
-			{
-				container.AddNewExtension<WorkflowExtension>();
-
-				var rootActivity = host.Activity;
-				container.BuildUp(rootActivity.GetType(), rootActivity);
-			}
-			else
-			{
-				var diExtension = new DependencyInjectionExtension(container);
-				host.WorkflowExtensions.Add(diExtension);
-			}
-
-			ConfigureServiceHost(host);
-			return host;
+			// TODO: remove hard link to Unity
+			var container = (IContainer) Container.Instance.ContainerInstance;
+			return new IoCServiceHost(container, hostconfig.ServiceType);
 		}
 
 		#endregion

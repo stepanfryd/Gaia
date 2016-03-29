@@ -22,11 +22,25 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
 namespace Gaia.Core.Exceptions
 {
+	/// <summary>
+	///   Plugin doesn't implements correct interface
+	/// </summary>
 	public class NotImplementedPluginInterfaceException : GaiaBaseException
 	{
+		#region Constructors
+
+		/// <summary>
+		///   Class constructor
+		/// </summary>
+		/// <param name="typeName"></param>
 		public NotImplementedPluginInterfaceException(string typeName)
-			: base($"Type {typeName} doesn't implement Gaia.Core.Interfaces.Plugins.IGaiaPlugin interface") {}
+			: base($"Type {typeName} doesn't implement Gaia.Core.Interfaces.Plugins.IGaiaPlugin interface")
+		{
+		}
+
+		#endregion
 	}
 }

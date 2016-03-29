@@ -28,27 +28,50 @@ using System.ServiceModel;
 
 namespace Gaia.Core.Wcf.Services
 {
+	/// <summary>
+	/// Monitoring service interface definition
+	/// </summary>
 	[ServiceContract(Name = "IMonitoringService", Namespace = Constants.WCF_NAMESPACE)]
 	public interface IMonitoringService
 	{
+		/// <summary>
+		/// Gets services status
+		/// </summary>
+		/// <param name="input"></param>
+		/// <returns></returns>
 		[OperationContract]
 		ServiceStatus GetStatus(int input);
 
 		// TODO: Add your service operations here
 	}
 
+	/// <summary>
+	/// Service status data contract
+	/// </summary>
 	[DataContract]
 	public class ServiceStatus
 	{
+		/// <summary>
+		/// Status result
+		/// </summary>
 		[DataMember]
 		public string Result { get; set; }
 
+		/// <summary>
+		/// Service is running
+		/// </summary>
 		[DataMember]
 		public bool IsRunning { get; set; }
 
+		/// <summary>
+		/// List of running pluggins
+		/// </summary>
 		[DataMember]
 		public List<string> Plugins { get; set; }
 
+		/// <summary>
+		/// List of Wcf services
+		/// </summary>
 		[DataMember]
 		public List<string> WcfServices { get; set; }
 	}

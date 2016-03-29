@@ -22,15 +22,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using Gaia.Core.Services;
 using Gaia.Core.Tests.TestObjects;
 using NUnit.Framework;
-using NUnit.Util;
 
 namespace Gaia.Core.Tests
 {
@@ -40,7 +35,6 @@ namespace Gaia.Core.Tests
 		[Test]
 		public void TestServiceRun()
 		{
-
 			var s = ServiceFactory.Create<TestService>();
 		}
 	}

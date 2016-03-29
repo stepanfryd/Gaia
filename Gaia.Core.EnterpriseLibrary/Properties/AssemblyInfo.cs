@@ -23,33 +23,11 @@ THE SOFTWARE.
 
 */
 
-using System.ServiceModel;
-using Gaia.Core.IoC;
-using Gaia.Core.Wcf.Configuration;
-using Microsoft.Practices.Unity;
-using Unity.Wcf;
+using System.Reflection;
+using System.Runtime.InteropServices;
 
-namespace Gaia.Core.Wcf
-{
-	/// <summary>
-	///   Implementation of Unit IoC container service host factory
-	/// </summary>
-	public class UnityServiceFactory : ServiceHostFactoryBase
-	{
-		#region Private and protected
+[assembly: AssemblyTitle("Gaia.Core.EnterpriseLibrary")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyProduct("Gaia.Core.EnterpriseLibrary")]
 
-		/// <summary>
-		///   This method creates instance of new WCF service host using Unity as IoC container
-		/// </summary>
-		/// <param name="hostconfig"></param>
-		/// <returns></returns>
-		public override ServiceHostBase CreateServiceHost(IServiceHostConfiguration hostconfig)
-		{
-			// TODO: remove hard link to Unity
-			var container = (IUnityContainer) Container.Instance.ContainerInstance;
-			return new UnityServiceHost(container, hostconfig.ServiceType);
-		}
-
-		#endregion
-	}
-}
+[assembly: Guid("7a9a8e04-2d78-45a7-9b08-5dc7a1f82c23")]

@@ -32,6 +32,9 @@ using Quartz;
 
 namespace Gaia.Service.Plugins.Scheduler
 {
+	/// <summary>
+	///   Gaia schedulerl service plugin
+	/// </summary>
 	[Serializable]
 	public class SchedulerPlugin : IServicePlugin
 	{
@@ -39,6 +42,9 @@ namespace Gaia.Service.Plugins.Scheduler
 
 		#region Public properties
 
+		/// <summary>
+		/// Scheduler name
+		/// </summary>
 		public string Name { get; set; }
 
 		#endregion
@@ -49,9 +55,24 @@ namespace Gaia.Service.Plugins.Scheduler
 
 		#region Events
 
+		/// <summary>
+		///   Scheduler plugin has been initialized
+		/// </summary>
 		public event EventHandler Initialized;
 
 		#endregion
+
+		#endregion
+
+		#region Private and protected
+
+		/// <summary>
+		///   Initialized event
+		/// </summary>
+		protected virtual void OnInitialized()
+		{
+			Initialized?.Invoke(this, EventArgs.Empty);
+		}
 
 		#endregion
 
@@ -65,6 +86,9 @@ namespace Gaia.Service.Plugins.Scheduler
 
 		#region Constructor and destructor
 
+		/// <summary>
+		///   Gaia schedulerl service plugin constructor
+		/// </summary>
 		public SchedulerPlugin()
 		{
 			_logger = LogManager.GetLogger(GetType());
@@ -73,6 +97,9 @@ namespace Gaia.Service.Plugins.Scheduler
 			_scheduler = schedulerFactory.GetScheduler();
 		}
 
+		/// <summary>
+		///   Gaia schedulerl service plugin destructor
+		/// </summary>
 		~SchedulerPlugin()
 		{
 			Dispose(false);
@@ -82,6 +109,9 @@ namespace Gaia.Service.Plugins.Scheduler
 
 		#region Public methods
 
+		/// <summary>
+		///   Plugin has been initialized
+		/// </summary>
 		public void Initialize()
 		{
 			// TODO: add declarative configuration hardcoded for devleopment purppose
@@ -91,9 +121,13 @@ namespace Gaia.Service.Plugins.Scheduler
 				_scheduler.Start();
 				// TODO: implelent EVENT => Initialized(this, new EventArgs()); 
 				_logger.Info("Scheduler has been initialized");
+				OnInitialized();
 			}
 		}
 
+		/// <summary>
+		///   Scheduler plugin has been uninitialized
+		/// </summary>
 		public void Uninitialize()
 		{
 			_logger.Info("Scheduler is going to shutdown");
