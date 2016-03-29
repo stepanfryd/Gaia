@@ -26,14 +26,7 @@ THE SOFTWARE.
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-
 [assembly: AssemblyTitle("Gaia.Core.Mail.EmailQueue")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Assembly contains email queue functions")]
 [assembly: AssemblyProduct("Gaia.Core.Mail.EmailQueue")]
-
-// The following GUID is for the ID of the typelib if this project is exposed to COM
-
 [assembly: Guid("112f6856-c285-4d54-a438-2ea47326b9a7")]
