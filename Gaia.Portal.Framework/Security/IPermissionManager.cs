@@ -47,7 +47,7 @@ namespace Gaia.Portal.Framework.Security
 		/// <param name="identity"></param>
 		/// <param name="routeValues"></param>
 		/// <returns></returns>
-		bool HasAccess(WindowsIdentity identity, IDictionary<string, object> routeValues);
+		bool HasAccess(IIdentity identity, IDictionary<string, object> routeValues);
 
 		/// <summary>
 		///   Method validates if provided route is declared as secured
@@ -78,7 +78,7 @@ namespace Gaia.Portal.Framework.Security
 		/// <param name="identity"></param>
 		/// <param name="route"></param>
 		/// <returns></returns>
-		bool HasAccess(WindowsIdentity identity, Route route);
+		bool HasAccess(IIdentity identity, Route route);
 
 		/// <summary>
 		///   Method validates if provided route is declared as secured
@@ -104,7 +104,7 @@ namespace Gaia.Portal.Framework.Security
 		///   List modules which are accessible to current user
 		/// </summary>
 		/// <returns></returns>
-		IList<IWebModule> GetAccessibleModules(WindowsIdentity identity);
+		IList<IWebModule> GetAccessibleModules(IIdentity identity);
 
 		/// <summary>
 		///   List modules which are accessible to current user

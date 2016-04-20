@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Gaia.Core.Mail.SendGrid</id>
+    <version>1.16.34.533</version>
+    <authors>Cloud17</authors>
+    <owners>Cloud17</owners>
+    <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
+    <description>SendGrid mail provider for Gaia</description>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <copyright>Copyright (c) Stepan Fryd 2015</copyright>
+    <dependencies>
+      <dependency id="Cloud17.NParametrizer" version="1.0.8.0" />
+      <dependency id="Microsoft.AspNet.WebApi.Client" version="5.2.3" />
+      <dependency id="Newtonsoft.Json" version="8.0.3" />
+      <dependency id="Sendgrid" version="6.3.4" />
+      <dependency id="SendGrid.SmtpApi" version="1.3.1" />
+      <dependency id="Gaia.Core.Mail" version="1.16.34.520" />
+      <dependency id="Gaia.Core" version="1.16.34.487" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\_WORK\_CLOUD17\Gaia\Gaia.Core\Solution Items\NuGet\Template\tools\*" target="tools" />
+    <file src="C:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Core.Mail.SendGrid\bin\NuGet-Debug\Gaia.Core.Mail.SendGrid.dll" target="lib\net452\Gaia.Core.Mail.SendGrid.dll" />
+    <file src="C:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Core.Mail.SendGrid\bin\NuGet-Debug\Gaia.Core.Mail.SendGrid.pdb" target="lib\net452\Gaia.Core.Mail.SendGrid.pdb" />
+  </files>
+</package>

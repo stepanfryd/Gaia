@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Gaia.Core.IoC</id>
+    <version>1.16.34.491</version>
+    <authors>Cloud17</authors>
+    <owners>Cloud17</owners>
+    <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
+    <description>Assembly contains common IoC container and DI functionality</description>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <copyright>Copyright (c) Stepan Fryd 2015</copyright>
+    <dependencies>
+      <dependency id="Cloud17.NParametrizer" version="1.0.8.0" />
+      <dependency id="Gaia.Core" version="1.16.34.487" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\_WORK\_CLOUD17\Gaia\Gaia.Core\Solution Items\NuGet\Template\tools\*" target="tools" />
+    <file src="C:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Core.IoC\bin\NuGet-Debug\Gaia.Core.IoC.dll" target="lib\net452\Gaia.Core.IoC.dll" />
+    <file src="C:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Core.IoC\bin\NuGet-Debug\Gaia.Core.IoC.pdb" target="lib\net452\Gaia.Core.IoC.pdb" />
+  </files>
+</package>

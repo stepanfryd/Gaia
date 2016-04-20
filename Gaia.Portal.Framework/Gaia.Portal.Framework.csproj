@@ -223,6 +223,7 @@
     <Compile Include="Security\IPermissionManager.cs" />
     <Compile Include="Security\IPermissionsProvider.cs" />
     <Compile Include="Security\GaiaAuthorizeAttribute.cs" />
+    <Compile Include="Security\PermissionManagerBase.cs" />
     <Compile Include="Security\WindowsPermissionManager.cs" />
     <Compile Include="Security\Permissions.cs" />
     <Compile Include="Security\XmlPermissionsProvider.cs" />
