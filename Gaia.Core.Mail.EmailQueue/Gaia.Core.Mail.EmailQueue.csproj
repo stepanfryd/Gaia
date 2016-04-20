@@ -31,6 +31,33 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'NuGet-Debug|AnyCPU'">
+		<DebugSymbols>true</DebugSymbols>
+		<OutputPath>bin\NuGet-Debug\</OutputPath>
+		<DefineConstants>DEBUG;TRACE</DefineConstants>
+		<DebugType>full</DebugType>
+		<PlatformTarget>AnyCPU</PlatformTarget>
+		<ErrorReport>prompt</ErrorReport>
+		<CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+		<NugetGeneration>true</NugetGeneration>
+		<IncreaseBuildVersion>true</IncreaseBuildVersion>
+		<ProjectGroup>Portal</ProjectGroup>
+		<DocumentationFile>
+		</DocumentationFile>
+		<UseVSHostingProcess>false</UseVSHostingProcess>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'NuGet-Release|AnyCPU'">
+		<OutputPath>bin\NuGet-Release\</OutputPath>
+		<DefineConstants>TRACE</DefineConstants>
+		<Optimize>true</Optimize>
+		<DebugType>pdbonly</DebugType>
+		<PlatformTarget>AnyCPU</PlatformTarget>
+		<ErrorReport>prompt</ErrorReport>
+		<CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+		<NugetGeneration>true</NugetGeneration>
+		<IncreaseBuildVersion>true</IncreaseBuildVersion>
+		<ProjectGroup>Portal</ProjectGroup>
+	</PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />

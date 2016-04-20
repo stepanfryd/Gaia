@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Gaia.Core.Services</id>
-    <version>1.16.34.499</version>
+    <version>1.16.89.28722</version>
     <authors>Cloud17</authors>
     <owners>Cloud17</owners>
     <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
@@ -14,9 +14,9 @@
       <dependency id="Common.Logging.Core" version="3.3.1" />
       <dependency id="Topshelf" version="3.3.1" />
       <dependency id="Topshelf.Linux" version="1.0.12.11" />
-      <dependency id="Gaia.Core.IoC" version="1.16.34.491" />
-      <dependency id="Gaia.Core.Wcf" version="1.16.34.495" />
-      <dependency id="Gaia.Core" version="1.16.34.487" />
+      <dependency id="Gaia.Core.IoC" version="1.16.89.28713" />
+      <dependency id="Gaia.Core.Wcf" version="1.16.89.28718" />
+      <dependency id="Gaia.Core" version="1.16.89.28710" />
     </dependencies>
   </metadata>
   <files>

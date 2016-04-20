@@ -29,5 +29,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Gaia.Core.Mail")]
 [assembly: AssemblyDescription("Assembly contains email and email templating functions")]
 [assembly: AssemblyProduct("Gaia.Core.Mail")]
-
 [assembly: Guid("af928ce3-bbf1-40a7-b97b-41bc225009e7")]

@@ -94,6 +94,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Solution Items\Templates\GlobalAssemblyInfo.Core.cs">
@@ -106,6 +107,7 @@
     <Compile Include="Exceptions\GaiaBaseException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegexUtilities.cs" />
+    <Compile Include="SerializationUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
