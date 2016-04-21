@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Gaia.Core.Mail.EmailQueue</id>
-    <version>1.16.89.28764</version>
+    <version>1.16.112.1438</version>
     <authors>Cloud17</authors>
     <owners>Cloud17</owners>
     <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
@@ -10,9 +10,9 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <copyright>Copyright (c) Stepan Fryd 2015</copyright>
     <dependencies>
-      <dependency id="Gaia.Core.IoC" version="1.16.89.28713" />
-      <dependency id="Gaia.Core.Mail" version="1.16.89.28743" />
-      <dependency id="Gaia.Core" version="1.16.89.28710" />
+      <dependency id="Gaia.Core.IoC" version="1.16.112.1392" />
+      <dependency id="Gaia.Core.Mail" version="1.16.112.1420" />
+      <dependency id="Gaia.Core" version="1.16.112.1388" />
     </dependencies>
   </metadata>
   <files>

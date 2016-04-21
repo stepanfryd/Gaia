@@ -35,16 +35,29 @@ namespace Gaia.Portal.Framework.Security
 {
 	public abstract class PermissionManagerBase : IPermissionManager
 	{
+		#region Fields and constants
+
 		private readonly Permissions _definitions;
+
+		#endregion
+
+		#region Public members
 
 		public IWebModuleProvider ModuleProvider
 			=> new Lazy<IWebModuleProvider>(() => Container.Instance.Resolve<IWebModuleProvider>()).Value;
 
+		#endregion
+
+		#region Constructors
 
 		public PermissionManagerBase(IPermissionsProvider permissionProvider)
 		{
 			_definitions = permissionProvider.GetPermissions();
 		}
+
+		#endregion
+
+		#region Interface Implementations
 
 		public bool IsRouteSecure(IDictionary<string, object> routeValues, out Route securedRoute)
 		{
@@ -69,19 +82,7 @@ namespace Gaia.Portal.Framework.Security
 			return false;
 		}
 
-		public bool HasAccess(string userName, IDictionary<string, object> routeValues)
-		{
-			Route route;
-			if (IsRouteSecure(routeValues, out route))
-			{
-				using (var identity = new WindowsIdentity(userName))
-				{
-					return HasAccess(identity, route);
-				}
-			}
-
-			return true;
-		}
+		public abstract bool HasAccess(string userName, IDictionary<string, object> routeValues);
 
 		public bool HasAccess(IIdentity identity, IDictionary<string, object> routeValues)
 		{
@@ -101,33 +102,26 @@ namespace Gaia.Portal.Framework.Security
 			return !IsRouteSecure(routeValues, out route) || HasAccess(Thread.CurrentPrincipal, route);
 		}
 
-		public bool HasAccess(IIdentity identity, Route route)
-		{
-			return HasAccess(new WindowsPrincipal((WindowsIdentity)identity), route);
-		}
+		public abstract bool HasAccess(IIdentity identity, Route route);
 
-	    public abstract bool HasAccess(IPrincipal principal, Route route);
-		
+		public abstract bool HasAccess(IPrincipal principal, Route route);
 
-		public IList<IWebModule> GetAccessibleModules()
-		{
-			return GetAccessibleModules(Thread.CurrentPrincipal);
-		}
 
-		public IList<IWebModule> GetAccessibleModules(string userName)
-		{
-			return GetAccessibleModules(new WindowsIdentity(userName));
-		}
+		public abstract IList<IWebModule> GetAccessibleModules();
 
-	    public abstract IList<IWebModule> GetAccessibleModules(IIdentity identity);
+		public abstract IList<IWebModule> GetAccessibleModules(string userName);
+
+		public abstract IList<IWebModule> GetAccessibleModules(IIdentity identity);
 
 		public IList<IWebModule> GetAccessibleModules(IPrincipal principal)
 		{
 			return ModuleProvider?.Modules.Where(module => !string.IsNullOrEmpty(module?.AreaName))
 				.Select(
 					module => new {module, rArea = new Dictionary<string, object> {{Constants.RouteValues.Area, module.AreaName}}})
-				.Where(@t => HasAccess(principal.Identity, @t.rArea))
-				.Select(@t => @t.module).ToList();
+				.Where(t => HasAccess(principal.Identity, t.rArea))
+				.Select(t => t.module).ToList();
 		}
+
+		#endregion
 	}
 }

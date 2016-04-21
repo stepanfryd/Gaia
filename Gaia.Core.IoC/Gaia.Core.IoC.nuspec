@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Gaia.Core.IoC</id>
-    <version>1.16.89.28713</version>
+    <version>1.16.112.1392</version>
     <authors>Cloud17</authors>
     <owners>Cloud17</owners>
     <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
@@ -11,7 +11,7 @@
     <copyright>Copyright (c) Stepan Fryd 2015</copyright>
     <dependencies>
       <dependency id="Cloud17.NParametrizer" version="1.0.8.0" />
-      <dependency id="Gaia.Core" version="1.16.89.28710" />
+      <dependency id="Gaia.Core" version="1.16.112.1388" />
     </dependencies>
   </metadata>
   <files>
