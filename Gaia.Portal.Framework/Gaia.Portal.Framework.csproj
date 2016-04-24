@@ -195,9 +195,7 @@
     <Compile Include="Controllers\Api\ApiErrorController.cs" />
     <Compile Include="Exceptions\DependencyContainerLoadingException.cs" />
     <Compile Include="Exceptions\PortalBaseException.cs" />
-    <Compile Include="Extensions\HtmlHelperExtensions.cs" />
-    <Compile Include="Extensions\Tools.cs" />
-    <Compile Include="Extensions\UrlHelperExtensions.cs" />
+    <Compile Include="Extensions\HelperExtensions.cs" />
     <Compile Include="HttpErrorAwareControllerActionSelector.cs" />
     <Compile Include="IoC\ContainerActivator.cs" />
     <Compile Include="Json\JsonExtensions.cs" />

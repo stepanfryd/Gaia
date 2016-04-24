@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Gaia.Portal.Framework</id>
-    <version>1.16.112.1424</version>
+    <version>1.16.115.41354</version>
     <authors>Cloud17</authors>
     <owners>Cloud17</owners>
     <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
@@ -32,9 +32,9 @@
       <dependency id="Newtonsoft.Json" version="8.0.3" />
       <dependency id="WebActivatorEx" version="2.1.0" />
       <dependency id="WebGrease" version="1.6.0" />
-      <dependency id="Gaia.Core.IoC" version="1.16.112.1392" />
-      <dependency id="Gaia.Core.Mail" version="1.16.112.1420" />
-      <dependency id="Gaia.Core" version="1.16.112.1388" />
+      <dependency id="Gaia.Core.IoC" version="1.16.115.41322" />
+      <dependency id="Gaia.Core.Mail" version="1.16.115.41350" />
+      <dependency id="Gaia.Core" version="1.16.115.41318" />
     </dependencies>
   </metadata>
   <files>

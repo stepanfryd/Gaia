@@ -42,13 +42,14 @@ namespace Gaia.Portal.Framework.Security
 			var hasAccess = PermissionManager.HasAccess(filterContext.RouteData.Values);
 			if (!hasAccess)
 			{
-				filterContext.Result = new RedirectToRouteResult(
-					new RouteValueDictionary
-					{
-						{"Controller", "Home"},
-						{"Action", "Error"},
-						{"statusCode", 401}
-					});
+				throw new HttpResponseException(HttpStatusCode.Unauthorized);
+				//filterContext.Result = new RedirectToRouteResult(
+				//	new RouteValueDictionary
+				//	{
+				//		{"Controller", "Home"},
+				//		{"Action", "Error"},
+				//		{"statusCode", 401}
+				//	});
 			}
 		}
 

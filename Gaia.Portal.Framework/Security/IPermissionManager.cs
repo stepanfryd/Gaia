@@ -22,6 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
 using System.Collections.Generic;
 using System.Security.Principal;
 using Gaia.Portal.Framework.Configuration.Modules;
@@ -33,21 +34,7 @@ namespace Gaia.Portal.Framework.Security
 	/// </summary>
 	public interface IPermissionManager
 	{
-		/// <summary>
-		///   Method validates if user has an access to provided route
-		/// </summary>
-		/// <param name="userName"></param>
-		/// <param name="routeValues"></param>
-		/// <returns></returns>
-		bool HasAccess(string userName, IDictionary<string, object> routeValues);
-
-		/// <summary>
-		///   Method validates if user has an access to provided route
-		/// </summary>
-		/// <param name="identity"></param>
-		/// <param name="routeValues"></param>
-		/// <returns></returns>
-		bool HasAccess(IIdentity identity, IDictionary<string, object> routeValues);
+		#region Private and protected
 
 		/// <summary>
 		///   Method validates if provided route is declared as secured
@@ -75,14 +62,6 @@ namespace Gaia.Portal.Framework.Security
 		/// <summary>
 		///   Method validates if provided route is declared as secured
 		/// </summary>
-		/// <param name="identity"></param>
-		/// <param name="route"></param>
-		/// <returns></returns>
-		bool HasAccess(IIdentity identity, Route route);
-
-		/// <summary>
-		///   Method validates if provided route is declared as secured
-		/// </summary>
 		/// <param name="principal"></param>
 		/// <param name="route"></param>
 		/// <returns></returns>
@@ -98,18 +77,8 @@ namespace Gaia.Portal.Framework.Security
 		///   List modules which are accessible to current user
 		/// </summary>
 		/// <returns></returns>
-		IList<IWebModule> GetAccessibleModules(string userName);
-
-		/// <summary>
-		///   List modules which are accessible to current user
-		/// </summary>
-		/// <returns></returns>
-		IList<IWebModule> GetAccessibleModules(IIdentity identity);
-
-		/// <summary>
-		///   List modules which are accessible to current user
-		/// </summary>
-		/// <returns></returns>
 		IList<IWebModule> GetAccessibleModules(IPrincipal principal);
+
+		#endregion
 	}
 }

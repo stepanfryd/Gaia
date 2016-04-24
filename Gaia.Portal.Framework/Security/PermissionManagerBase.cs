@@ -33,6 +33,9 @@ using Gaia.Portal.Framework.Configuration.Modules;
 
 namespace Gaia.Portal.Framework.Security
 {
+	/// <summary>
+	/// Base class for permission manager
+	/// </summary>
 	public abstract class PermissionManagerBase : IPermissionManager
 	{
 		#region Fields and constants
@@ -42,7 +45,9 @@ namespace Gaia.Portal.Framework.Security
 		#endregion
 
 		#region Public members
-
+		/// <summary>
+		/// Web moduler provider
+		/// </summary>
 		public IWebModuleProvider ModuleProvider
 			=> new Lazy<IWebModuleProvider>(() => Container.Instance.Resolve<IWebModuleProvider>()).Value;
 
@@ -50,7 +55,7 @@ namespace Gaia.Portal.Framework.Security
 
 		#region Constructors
 
-		public PermissionManagerBase(IPermissionsProvider permissionProvider)
+		protected PermissionManagerBase(IPermissionsProvider permissionProvider)
 		{
 			_definitions = permissionProvider.GetPermissions();
 		}
@@ -58,7 +63,12 @@ namespace Gaia.Portal.Framework.Security
 		#endregion
 
 		#region Interface Implementations
-
+		/// <summary>
+		/// Determines if provided route is secure
+		/// </summary>
+		/// <param name="routeValues">Dictionary contains route values provided by environment</param>
+		/// <param name="securedRoute">Returns Gaia route if secured</param>
+		/// <returns></returns>
 		public bool IsRouteSecure(IDictionary<string, object> routeValues, out Route securedRoute)
 		{
 			if (routeValues == null)
@@ -82,43 +92,54 @@ namespace Gaia.Portal.Framework.Security
 			return false;
 		}
 
-		public abstract bool HasAccess(string userName, IDictionary<string, object> routeValues);
-
-		public bool HasAccess(IIdentity identity, IDictionary<string, object> routeValues)
-		{
-			Route route;
-			return !IsRouteSecure(routeValues, out route) || HasAccess(identity, route);
-		}
-
+		/// <summary>
+		/// Check whether identity has access to route by route values
+		/// </summary>
+		/// <param name="identity"></param>
+		/// <param name="routeValues"></param>
+		/// <returns></returns>
 		public bool HasAccess(IPrincipal identity, IDictionary<string, object> routeValues)
 		{
 			Route route;
 			return !IsRouteSecure(routeValues, out route) || HasAccess(identity, route);
 		}
 
+		/// <summary>
+		/// Check whether default thread principal has access to route by route values
+		/// </summary>
+		/// <param name="routeValues"></param>
+		/// <returns></returns>
 		public bool HasAccess(IDictionary<string, object> routeValues)
 		{
 			Route route;
 			return !IsRouteSecure(routeValues, out route) || HasAccess(Thread.CurrentPrincipal, route);
 		}
 
-		public abstract bool HasAccess(IIdentity identity, Route route);
-
+		/// <summary>
+		/// Check whether default thread principal has access to route by route values
+		/// </summary>
+		/// <param name="principal"></param>
+		/// <param name="route"></param>
+		/// <returns></returns>
 		public abstract bool HasAccess(IPrincipal principal, Route route);
 
-
+		/// <summary>
+		/// Get list of accessible modules
+		/// </summary>
+		/// <returns></returns>
 		public abstract IList<IWebModule> GetAccessibleModules();
 
-		public abstract IList<IWebModule> GetAccessibleModules(string userName);
-
-		public abstract IList<IWebModule> GetAccessibleModules(IIdentity identity);
-
+		/// <summary>
+		/// Het accessible modules for provided principal
+		/// </summary>
+		/// <param name="principal"></param>
+		/// <returns></returns>
 		public IList<IWebModule> GetAccessibleModules(IPrincipal principal)
 		{
 			return ModuleProvider?.Modules.Where(module => !string.IsNullOrEmpty(module?.AreaName))
 				.Select(
 					module => new {module, rArea = new Dictionary<string, object> {{Constants.RouteValues.Area, module.AreaName}}})
-				.Where(t => HasAccess(principal.Identity, t.rArea))
+				.Where(t => HasAccess(principal, t.rArea))
 				.Select(t => t.module).ToList();
 		}
 
