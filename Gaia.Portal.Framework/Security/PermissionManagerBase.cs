@@ -136,11 +136,12 @@ namespace Gaia.Portal.Framework.Security
 		/// <returns></returns>
 		public IList<IWebModule> GetAccessibleModules(IPrincipal principal)
 		{
-			return ModuleProvider?.Modules.Where(module => !string.IsNullOrEmpty(module?.AreaName))
+			var modules = ModuleProvider?.Modules.Where(module => !string.IsNullOrEmpty(module?.AreaName))
 				.Select(
-					module => new {module, rArea = new Dictionary<string, object> {{Constants.RouteValues.Area, module.AreaName}}})
-				.Where(t => HasAccess(principal, t.rArea))
-				.Select(t => t.module).ToList();
+					m => new { Module = m, rArea = new Dictionary<string, object> {{Constants.RouteValues.Area, m.AreaName}}});
+
+			return modules.Where(t => HasAccess(principal, t.rArea))
+				.Select(t => t.Module).ToList();
 		}
 
 		#endregion
