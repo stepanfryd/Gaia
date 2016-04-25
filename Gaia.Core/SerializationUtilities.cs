@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
@@ -7,12 +6,14 @@ using System.Xml.Serialization;
 namespace Gaia.Core
 {
 	/// <summary>
-	/// Serialization and deserialization utilities for different formats
+	///   Serialization and deserialization utilities for different formats
 	/// </summary>
 	public static class SerializationUtilities
 	{
+		#region Public
+
 		/// <summary>
-		/// Serialize object to XML string
+		///   Serialize object to XML string
 		/// </summary>
 		/// <param name="data"></param>
 		/// <typeparam name="T"></typeparam>
@@ -26,7 +27,7 @@ namespace Gaia.Core
 			{
 				using (var sr = new StreamWriter(ms))
 				{
-					using (var xmlWriter = XmlWriter.Create(sr, new XmlWriterSettings { Indent = false }))
+					using (var xmlWriter = XmlWriter.Create(sr, new XmlWriterSettings {Indent = false}))
 					{
 						seri.Serialize(xmlWriter, data);
 					}
@@ -40,7 +41,7 @@ namespace Gaia.Core
 		}
 
 		/// <summary>
-		/// Deserialize from XML
+		///   Deserialize from XML
 		/// </summary>
 		/// <param name="data"></param>
 		/// <typeparam name="T"></typeparam>
@@ -53,12 +54,12 @@ namespace Gaia.Core
 			using (var ms = new MemoryStream(Encoding.Default.GetBytes(data)))
 			{
 				ms.Seek(0, SeekOrigin.Begin);
-				retVal = (T)seri.Deserialize(ms);
+				retVal = (T) seri.Deserialize(ms);
 				ms.Close();
 			}
 			return retVal;
 		}
 
-
+		#endregion
 	}
 }
