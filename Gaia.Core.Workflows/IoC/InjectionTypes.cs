@@ -2,7 +2,7 @@
  Code copy from https://github.com/dimaKudr/Unity.WF
  */
 
-namespace Gaia.Core.Workflows.Unity
+namespace Gaia.Core.Workflows.IoC
 {
 	public enum InjectionTypes
 	{

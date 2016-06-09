@@ -44,11 +44,9 @@ namespace Gaia.Core.Wcf
 		/// <returns></returns>
 		public override ServiceHostBase CreateServiceHost(IServiceHostConfiguration hostconfig)
 		{
-			// TODO: remove hard link to Unity
-			var container = (IContainer) Container.Instance.ContainerInstance;
-			return new IoCServiceHost(container, hostconfig.ServiceType);
+			return new IoCServiceHost(Container.Instance, hostconfig.ServiceType);
 		}
-
+        
 		#endregion
 	}
 }

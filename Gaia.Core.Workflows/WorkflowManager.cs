@@ -101,7 +101,7 @@ namespace Gaia.Core.Workflows
 			// TODO: Rewrite to universal container registration to kick off Unity hard link
 			var container = (IUnityContainer) Container.Instance.ContainerInstance;
 
-			ContainerRegistration type = container.Registrations.SingleOrDefault(c => c.Name == typeRegistrationName);
+			var type = container.Registrations.SingleOrDefault(c => c.Name == typeRegistrationName);
 
 			if (type == null)
 				throw new NullReferenceException($"In Unity configuration doesn't exist [{typeRegistrationName}] registration");

@@ -112,11 +112,11 @@
     <Compile Include="OutArgumentAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleResult.cs" />
-    <Compile Include="Unity\ActivityContextExtension.cs" />
-    <Compile Include="Unity\DependencyInjectionExtension.cs" />
-    <Compile Include="Unity\InjectionTypes.cs" />
-    <Compile Include="Unity\IoCServiceHostFactory.cs" />
-    <Compile Include="Unity\WorkflowExtension.cs" />
+    <Compile Include="IoC\ActivityContextExtension.cs" />
+    <Compile Include="IoC\DependencyInjectionExtension.cs" />
+    <Compile Include="IoC\InjectionTypes.cs" />
+    <Compile Include="IoC\IoCServiceHostFactory.cs" />
+    <Compile Include="IoC\WorkflowExtension.cs" />
     <Compile Include="WorkflowInfo.cs" />
     <Compile Include="WorkflowManager.cs" />
     <Compile Include="WorkflowResult.cs" />

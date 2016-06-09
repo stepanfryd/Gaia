@@ -57,7 +57,6 @@ namespace Gaia.Portal.Framework.IoC
 
 			FilterProviders.Providers.Remove(FilterProviders.Providers.OfType<FilterAttributeFilterProvider>().First());
 
-			//FilterProviders.Providers.Add(new UnityFilterAttributeFilterProvider((IUnityContainer)Container.Instance.ContainerInstance));
 
 			if (config.WebSettings.FilterProviders != null)
 			{
@@ -67,7 +66,6 @@ namespace Gaia.Portal.Framework.IoC
 				}
 			}
 
-			//DependencyResolver.SetResolver(new UnityDependencyResolver((IUnityContainer)Container.Instance.ContainerInstance));
 			var mvcResolver = Type.GetType(config.WebSettings.MvcDependencyResolver);
 			if (mvcResolver == null)
 				throw new NullReferenceException(

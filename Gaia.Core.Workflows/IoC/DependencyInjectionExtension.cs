@@ -5,7 +5,7 @@
 using System;
 using Microsoft.Practices.Unity;
 
-namespace Gaia.Core.Workflows.Unity
+namespace Gaia.Core.Workflows.IoC
 {
 	public sealed class DependencyInjectionExtension
 	{

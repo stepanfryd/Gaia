@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Gaia.Portal.Framework.Pdf</id>
-    <version>1.16.115.41358</version>
+    <version>1.16.116.25058</version>
     <authors>Cloud17</authors>
     <owners>Cloud17</owners>
     <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
@@ -20,8 +20,8 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="C:\_WORK\_CLOUD17\Gaia\Gaia.Core\Solution Items\NuGet\Template\tools\*" target="tools" />
-    <file src="C:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Portal.Framework.Pdf\bin\NuGet-Debug\Gaia.Portal.Framework.Pdf.dll" target="lib\net452\Gaia.Portal.Framework.Pdf.dll" />
-    <file src="C:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Portal.Framework.Pdf\bin\NuGet-Debug\Gaia.Portal.Framework.Pdf.pdb" target="lib\net452\Gaia.Portal.Framework.Pdf.pdb" />
+    <file src="O:\_CLOUD17\Gaia\Gaia.Core\Solution Items\NuGet\Template\tools\*" target="tools" />
+    <file src="O:\_CLOUD17\Gaia\Gaia.Core\Gaia.Portal.Framework.Pdf\bin\NuGet-Debug\Gaia.Portal.Framework.Pdf.dll" target="lib\net452\Gaia.Portal.Framework.Pdf.dll" />
+    <file src="O:\_CLOUD17\Gaia\Gaia.Core\Gaia.Portal.Framework.Pdf\bin\NuGet-Debug\Gaia.Portal.Framework.Pdf.pdb" target="lib\net452\Gaia.Portal.Framework.Pdf.pdb" />
   </files>
 </package>

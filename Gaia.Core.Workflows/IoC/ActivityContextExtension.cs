@@ -22,50 +22,23 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+/*
+ Code copy from https://github.com/dimaKudr/Unity.WF
+ */
 
-using System;
-using System.ServiceModel.Activities;
-using System.ServiceModel.Activities.Activation;
-using Microsoft.Practices.Unity;
+using System.Activities;
 
-namespace Gaia.Core.Workflows.Unity
+namespace Gaia.Core.Workflows.IoC
 {
-	public abstract class IoCServiceHostFactory : WorkflowServiceHostFactory
+	public static class ActivityContextExtension
 	{
 		#region Private and protected
 
-		protected abstract void ConfigureContainer(IUnityContainer container);
-
-		protected abstract InjectionTypes ConfigureInjectionType();
-
-		protected virtual void ConfigureServiceHost(WorkflowServiceHost serviceHost)
+		public static T GetDependency<T>(this ActivityContext context)
 		{
-		}
+			var diExtension = context.GetExtension<DependencyInjectionExtension>();
 
-		protected override WorkflowServiceHost CreateWorkflowServiceHost(WorkflowService service, Uri[] baseAddresses)
-		{
-			var container = new UnityContainer();
-			ConfigureContainer(container);
-
-			var host = base.CreateWorkflowServiceHost(service, baseAddresses);
-
-			var injectionType = ConfigureInjectionType();
-
-			if (injectionType == InjectionTypes.Push)
-			{
-				container.AddNewExtension<WorkflowExtension>();
-
-				var rootActivity = host.Activity;
-				container.BuildUp(rootActivity.GetType(), rootActivity);
-			}
-			else
-			{
-				var diExtension = new DependencyInjectionExtension(container);
-				host.WorkflowExtensions.Add(diExtension);
-			}
-
-			ConfigureServiceHost(host);
-			return host;
+			return diExtension.GetDependency<T>();
 		}
 
 		#endregion

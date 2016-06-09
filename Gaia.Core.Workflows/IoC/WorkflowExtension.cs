@@ -7,7 +7,7 @@ using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.ObjectBuilder;
 
-namespace Gaia.Core.Workflows.Unity
+namespace Gaia.Core.Workflows.IoC
 {
 	public interface IWorkflowConfiguration : IUnityContainerExtensionConfigurator
 	{
