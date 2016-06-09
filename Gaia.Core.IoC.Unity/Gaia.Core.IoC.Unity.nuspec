@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Gaia.Core.IoC.Unity</id>
-    <version>1.16.116.25078</version>
+    <version>1.16.161.22550</version>
     <authors>Cloud17</authors>
     <owners>Cloud17</owners>
     <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
@@ -12,7 +12,7 @@
     <dependencies>
       <dependency id="CommonServiceLocator" version="1.3" />
       <dependency id="Unity" version="4.0.1" />
-      <dependency id="Gaia.Core.IoC" version="1.16.116.25005" />
+      <dependency id="Gaia.Core.IoC" version="1.16.161.22361" />
     </dependencies>
   </metadata>
   <files>

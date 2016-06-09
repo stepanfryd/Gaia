@@ -112,7 +112,7 @@ namespace Gaia.Core.Workflows.Activites
 		/// <summary>
 		///   IoC container reference
 		/// </summary>
-		protected IContainer Container => IoC.Container.Instance;
+		protected IContainer Container => Core.IoC.Container.Instance;
 
 		#endregion
 	}
