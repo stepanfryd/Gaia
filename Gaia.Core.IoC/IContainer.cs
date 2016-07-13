@@ -1,42 +1,74 @@
-﻿using System;
+﻿using Gaia.Core.IoC.LifetimeManagers;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
-using Gaia.Core.IoC.LifetimeManagers;
 
 namespace Gaia.Core.IoC
 {
 	/// <summary>
-	///   Interface specified container functions specification
+	/// Interface specified container functions specification
 	/// </summary>
 	public interface IContainer : IDisposable
 	{
-		#region Public members
+		#region Public Properties
 
 		object ContainerInstance { get; }
 
-		#endregion
+		#endregion Public Properties
 
-		#region Private and protected
-
-		object Resolve(Type t, string name);
-
-		IEnumerable<object> ResolveAll(Type t);
-
-		T Resolve<T>();
-
-		T Resolve<T>(string name);
-
-		object Resolve(Type t);
-
-		IEnumerable<T> ResolveAll<T>();
+		#region Public Methods
 
 		IContainer AddNewExtension<T>();
 
 		object BuildUp(Type t, object existing, params object[] resolverOverrides);
 
-		object RegisterChildContainer(Configuration configuration, string childName);
-
 		IContainer CreateChildContainer();
+
+		ILifetimeManager GetContainerControlledLifetimeManager();
+
+		// Summary: Check if a particular type has been registered with the container with the
+		// default name.
+		//
+		// Parameters: container: Container to inspect.
+		//
+		// typeToCheck: Type to check registration for.
+		//
+		// Returns: True if this type has been registered, false if not.
+		bool IsRegistered(Type typeToCheck);
+
+		// Summary: Check if a particular type/name pair has been registered with the container.
+		//
+		// Parameters: container: Container to inspect.
+		//
+		// typeToCheck: Type to check registration for.
+		//
+		// nameToCheck: Name to check registration for.
+		//
+		// Returns: True if this type/name pair has been registered, false if not.
+		bool IsRegistered(Type typeToCheck, string nameToCheck);
+
+		// Summary: Check if a particular type has been registered with the container with the
+		// default name.
+		//
+		// Parameters: container: Container to inspect.
+		//
+		// Type parameters: T: Type to check registration for.
+		//
+		// Returns: True if this type has been registered, false if not.
+		bool IsRegistered<T>();
+
+		// Summary: Check if a particular type/name pair has been registered with the container.
+		//
+		// Parameters: container: Container to inspect.
+		//
+		// nameToCheck: Name to check registration for.
+		//
+		// Type parameters: T: Type to check registration for.
+		//
+		// Returns: True if this type/name pair has been registered, false if not.
+		bool IsRegistered<T>(string nameToCheck);
+
+		object RegisterChildContainer(Configuration configuration, string childName);
 
 		object RegisterInstance<TInterface>(TInterface instance);
 
@@ -56,8 +88,18 @@ namespace Gaia.Core.IoC
 
 		IContainer RegisterType<T>(params IInjectionMember[] lifetimeManager);
 
-		ILifetimeManager GetContainerControlledLifetimeManager();
+		object Resolve(Type t, string name);
 
-		#endregion
+		T Resolve<T>();
+
+		T Resolve<T>(string name);
+
+		object Resolve(Type t);
+
+		IEnumerable<object> ResolveAll(Type t);
+
+		IEnumerable<T> ResolveAll<T>();
+
+		#endregion Public Methods
 	}
 }

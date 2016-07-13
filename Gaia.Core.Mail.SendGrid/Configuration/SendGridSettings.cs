@@ -28,37 +28,43 @@ using System.Xml.Serialization;
 namespace Gaia.Core.Mail.SendGrid.Configuration
 {
 	/// <summary>
-	///   Configuration section for SendGrid provider
+	/// Configuration section for SendGrid provider
 	/// </summary>
 	[XmlRoot("sendGrid")]
 	public class SendGridSettings
 	{
-		#region Public members
+		#region Public Properties
 
 		/// <summary>
-		///   SendGrid user name
+		/// Sender default name
 		/// </summary>
-		[XmlAttribute("userName")]
-		public string UserName { get; set; }
+		[XmlAttribute("apiKey")]
+		public string ApiKey { get; set; }
 
 		/// <summary>
-		///   SendGrid password
-		/// </summary>
-		[XmlAttribute("password")]
-		public string Password { get; set; }
-
-		/// <summary>
-		///   Sender default address
+		/// Sender default address
 		/// </summary>
 		[XmlAttribute("from")]
 		public string From { get; set; }
 
 		/// <summary>
-		///   Sender default name
+		/// Sender default name
 		/// </summary>
 		[XmlAttribute("fromName")]
 		public string FromName { get; set; }
 
-		#endregion
+		/// <summary>
+		/// SendGrid password
+		/// </summary>
+		[XmlAttribute("password")]
+		public string Password { get; set; }
+
+		/// <summary>
+		/// SendGrid user name
+		/// </summary>
+		[XmlAttribute("userName")]
+		public string UserName { get; set; }
+
+		#endregion Public Properties
 	}
 }

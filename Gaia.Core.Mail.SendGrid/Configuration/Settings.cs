@@ -28,29 +28,29 @@ using NParametrizer;
 namespace Gaia.Core.Mail.SendGrid.Configuration
 {
 	/// <summary>
-	///   Sendgrid settings
+	/// Sendgrid settings
 	/// </summary>
 	public class Settings : ParametersBase
 	{
-		#region Public members
+		#region Public Properties
 
 		/// <summary>
-		///   Configuration section
+		/// Configuration section
 		/// </summary>
 		[Config("gaia/sendGrid")]
 		public SendGridSettings SendGrid { get; set; }
 
-		#endregion
+		#endregion Public Properties
 
-		#region Private and protected
+		#region Protected Methods
 
 		/// <summary>
-		///   Custom parameter validation
+		/// Custom parameter validation
 		/// </summary>
 		protected override void ValidateArguments()
 		{
 		}
 
-		#endregion
+		#endregion Protected Methods
 	}
 }

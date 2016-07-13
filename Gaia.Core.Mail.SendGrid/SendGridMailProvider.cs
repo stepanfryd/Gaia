@@ -23,79 +23,78 @@ THE SOFTWARE.
 
 */
 
+using Gaia.Core.Mail.SendGrid.Configuration;
+using SendGrid;
 using System;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using Gaia.Core.Mail.SendGrid.Configuration;
-using SendGrid;
-using SendGridWeb = SendGrid.Web;
+
+// using SendGridWeb = SendGrid.Web;
 
 namespace Gaia.Core.Mail.SendGrid
 {
 	/// <summary>
-	///   Mail provider for SendGrid service
+	/// Mail provider for SendGrid service
 	/// </summary>
 	public class SendGridMailProvider : IMailProvider
 	{
-		#region Fields and constants
+		//private readonly SendGridWeb _sendGridClient;
 
-		private readonly SendGridWeb _sendGridClient;
-
-		#endregion
-
-		#region Constructors
+		#region Public Constructors
 
 		/// <summary>
-		///   SendGrid default constructor
+		/// SendGrid default constructor
 		/// </summary>
-		/// <param name="sendGridSettings"></param>
+		/// <param name="sendGridSettings">
+		/// </param>
 		public SendGridMailProvider(SendGridSettings sendGridSettings = null)
 		{
-			var settings = sendGridSettings ?? new Settings().SendGrid;
+			//var settings = sendGridSettings ?? new Settings().SendGrid;
 
-			if (settings == null) throw new SendGridSettingsException();
+			//if (settings == null) throw new SendGridSettingsException();
 
-			_sendGridClient =
-				new SendGridWeb(
-					new NetworkCredential(settings.UserName, settings.Password));
+			//_sendGridClient = new SendGridWeb(new NetworkCredential(settings.UserName, settings.Password));
 		}
 
-		#endregion
+		#endregion Public Constructors
 
-		#region Interface Implementations
+		#region Public Methods
 
 		/// <summary>
-		///   Send mail message
+		/// Send mail message
 		/// </summary>
-		/// <param name="message"></param>
-		/// <param name="objectId"></param>
-		/// <param name="sendTime"></param>
+		/// <param name="message">
+		/// </param>
+		/// <param name="objectId">
+		/// </param>
+		/// <param name="sendTime">
+		/// </param>
 		public async void Send(MailMessage message, object objectId = null, DateTime? sendTime = null)
 		{
-			var sendGridMessage = new SendGridMessage
-			{
-				From = message.From,
-				To = message.To.Select(a => a).ToArray(),
-				Subject = message.Subject,
-				Text = message.Body
-			};
+			//var sendGridMessage = new SendGridMessage
+			//{
+			//	From = message.From,
+			//	To = message.To.Select(a => a).ToArray(),
+			//	Subject = message.Subject,
+			//	Text = message.Body
+			//};
 
-			var stream = message.AlternateViews[0].ContentStream;
-			using (var reader = new StreamReader(stream))
-			{
-				sendGridMessage.Html = reader.ReadToEnd();
-			}
+			//var stream = message.AlternateViews[0].ContentStream;
+			//using (var reader = new StreamReader(stream))
+			//{
+			//	sendGridMessage.Html = reader.ReadToEnd();
+			//}
 
-			foreach (var att in message.Attachments)
-			{
-				sendGridMessage.AddAttachment(att.ContentStream, att.Name);
-			}
+			//foreach (var att in message.Attachments)
+			//{
+			//	sendGridMessage.AddAttachment(att.ContentStream, att.Name);
+			//}
 
-			await _sendGridClient.DeliverAsync(sendGridMessage);
+			//await _sendGridClient.DeliverAsync(sendGridMessage);
 		}
 
-		#endregion
+		#endregion Public Methods
 	}
 }
