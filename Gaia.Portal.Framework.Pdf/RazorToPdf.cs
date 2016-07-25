@@ -43,7 +43,7 @@ namespace Gaia.Portal.Framework.Pdf
 		#region Private and protected
 
 		public byte[] GeneratePdfOutput(ControllerContext controllerContext, object model = null, string viewName = null,
-			Action<PdfWriter, Document> configureSettings = null)
+			Rectangle pageSize = null, Action<PdfWriter, Document> configureSettings = null)
 		{
 			controllerContext.Controller.ViewData.Model = model;
 
@@ -58,7 +58,7 @@ namespace Gaia.Portal.Framework.Pdf
 			using (var capturedActionStream = new MemoryStream(Encoding.UTF8.GetBytes(html)))
 			{
 				var memoryStream = new MemoryStream();
-				var document = new Document(PageSize.A4, 30, 30, 10, 10);
+				var document = new Document(pageSize ?? PageSize.A4, 30, 30, 10, 10);
 				//to create landscape, use PageSize.A4.Rotate() for pageSize
 				var writer = PdfWriter.GetInstance(document, memoryStream);
 				var worker = XMLWorkerHelper.GetInstance();

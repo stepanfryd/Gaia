@@ -91,7 +91,7 @@ namespace Gaia.Portal.Framework.Pdf
 						"attachment; filename=" + FileDownloadName);
 				}
 
-				new FileContentResult(context.GeneratePdf(Model, ViewName, ConfigureSettings), "application/pdf")
+				new FileContentResult(context.GeneratePdf(Model, ViewName, PageSize.A4, ConfigureSettings), "application/pdf")
 					.ExecuteResult(context);
 			}
 		}

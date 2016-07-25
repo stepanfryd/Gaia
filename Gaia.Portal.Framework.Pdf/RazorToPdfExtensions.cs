@@ -22,6 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
 using System;
 using System.Web.Mvc;
 using iTextSharp.text;
@@ -34,9 +35,9 @@ namespace Gaia.Portal.Framework.Pdf
 		#region Private and protected
 
 		public static byte[] GeneratePdf(this ControllerContext context, object model = null, string viewName = null,
-			Action<PdfWriter, Document> configureSettings = null)
+			Rectangle pageSize = null, Action<PdfWriter, Document> configureSettings = null)
 		{
-			return new RazorToPdf().GeneratePdfOutput(context, model, viewName, configureSettings);
+			return new RazorToPdf().GeneratePdfOutput(context, model, viewName, pageSize, configureSettings);
 		}
 
 		public static PdfActionResult Pdf(this Controller controller, string viewName, object model,
