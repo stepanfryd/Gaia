@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Gaia.Portal.Framework.Pdf</id>
-    <version>1.16.161.22529</version>
+    <version>1.16.207.3842</version>
     <authors>Cloud17</authors>
     <owners>Cloud17</owners>
     <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <copyright>Copyright (c) Stepan Fryd 2015</copyright>
     <dependencies>
-      <dependency id="HtmlAgilityPack" version="1.4.9" />
+      <dependency id="HtmlAgilityPack" version="1.4.9.4" />
       <dependency id="iTextSharp" version="5.5.9" />
       <dependency id="itextsharp.xmlworker" version="5.5.9" />
       <dependency id="Microsoft.AspNet.Mvc" version="5.2.3" />
@@ -20,8 +20,8 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="O:\_CLOUD17\Gaia\Gaia.Core\Solution Items\NuGet\Template\tools\*" target="tools" />
-    <file src="O:\_CLOUD17\Gaia\Gaia.Core\Gaia.Portal.Framework.Pdf\bin\NuGet-Debug\Gaia.Portal.Framework.Pdf.dll" target="lib\net452\Gaia.Portal.Framework.Pdf.dll" />
-    <file src="O:\_CLOUD17\Gaia\Gaia.Core\Gaia.Portal.Framework.Pdf\bin\NuGet-Debug\Gaia.Portal.Framework.Pdf.pdb" target="lib\net452\Gaia.Portal.Framework.Pdf.pdb" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Solution Items\NuGet\Template\tools\*" target="tools" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Portal.Framework.Pdf\bin\NuGet-Debug\Gaia.Portal.Framework.Pdf.dll" target="lib\net452\Gaia.Portal.Framework.Pdf.dll" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Portal.Framework.Pdf\bin\NuGet-Debug\Gaia.Portal.Framework.Pdf.pdb" target="lib\net452\Gaia.Portal.Framework.Pdf.pdb" />
   </files>
 </package>

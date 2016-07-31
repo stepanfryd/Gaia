@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Gaia.Core.Wcf</id>
-    <version>1.16.161.22367</version>
+    <version>1.16.207.3806</version>
     <authors>Cloud17</authors>
     <owners>Cloud17</owners>
     <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
@@ -13,13 +13,13 @@
       <dependency id="Common.Logging" version="3.3.1" />
       <dependency id="Common.Logging.Core" version="3.3.1" />
       <dependency id="CommonServiceLocator" version="1.3" />
-      <dependency id="Gaia.Core.IoC" version="1.16.161.22361" />
-      <dependency id="Gaia.Core" version="1.16.161.22355" />
+      <dependency id="Gaia.Core.IoC" version="1.16.207.3801" />
+      <dependency id="Gaia.Core" version="1.16.207.3797" />
     </dependencies>
   </metadata>
   <files>
-    <file src="O:\_CLOUD17\Gaia\Gaia.Core\Solution Items\NuGet\Template\tools\*" target="tools" />
-    <file src="O:\_CLOUD17\Gaia\Gaia.Core\Gaia.Core.Wcf\bin\NuGet-Debug\Gaia.Core.Wcf.dll" target="lib\net452\Gaia.Core.Wcf.dll" />
-    <file src="O:\_CLOUD17\Gaia\Gaia.Core\Gaia.Core.Wcf\bin\NuGet-Debug\Gaia.Core.Wcf.pdb" target="lib\net452\Gaia.Core.Wcf.pdb" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Solution Items\NuGet\Template\tools\*" target="tools" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Core.Wcf\bin\NuGet-Debug\Gaia.Core.Wcf.dll" target="lib\net452\Gaia.Core.Wcf.dll" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Core.Wcf\bin\NuGet-Debug\Gaia.Core.Wcf.pdb" target="lib\net452\Gaia.Core.Wcf.pdb" />
   </files>
 </package>

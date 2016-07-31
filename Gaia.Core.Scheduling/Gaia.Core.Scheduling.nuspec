@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Gaia.Core.Scheduling</id>
-    <version>1.16.161.22449</version>
+    <version>1.16.207.3824</version>
     <authors>Cloud17</authors>
     <owners>Cloud17</owners>
     <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
@@ -16,8 +16,8 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="O:\_CLOUD17\Gaia\Gaia.Core\Solution Items\NuGet\Template\tools\*" target="tools" />
-    <file src="O:\_CLOUD17\Gaia\Gaia.Core\Gaia.Core.Scheduling\bin\NuGet-Debug\Gaia.Core.Scheduling.dll" target="lib\net452\Gaia.Core.Scheduling.dll" />
-    <file src="O:\_CLOUD17\Gaia\Gaia.Core\Gaia.Core.Scheduling\bin\NuGet-Debug\Gaia.Core.Scheduling.pdb" target="lib\net452\Gaia.Core.Scheduling.pdb" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Solution Items\NuGet\Template\tools\*" target="tools" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Core.Scheduling\bin\NuGet-Debug\Gaia.Core.Scheduling.dll" target="lib\net452\Gaia.Core.Scheduling.dll" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Core.Scheduling\bin\NuGet-Debug\Gaia.Core.Scheduling.pdb" target="lib\net452\Gaia.Core.Scheduling.pdb" />
   </files>
 </package>
