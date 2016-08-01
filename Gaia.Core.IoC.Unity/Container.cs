@@ -306,6 +306,18 @@ namespace Gaia.Core.IoC.Unity
 			return this;
 		}
 
+		public IContainer RegisterType(Type t, ILifetimeManager lifetimeManager)
+		{
+			Instance.RegisterType(t, (LifetimeManager)lifetimeManager);
+			return this;
+		}
+
+		public IContainer RegisterType(Type t, ILifetimeManager lifetimeManager, params IInjectionMember[] injectionMembers)
+		{
+			Instance.RegisterType(t, (LifetimeManager)lifetimeManager, GetInjectionMembers(injectionMembers));
+			return this;
+		}
+
 		public IContainer RegisterType(Type t)
 		{
 			Instance.RegisterType(t);

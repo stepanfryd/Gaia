@@ -90,6 +90,9 @@ namespace Gaia.Core.IoC
 
 		IContainer RegisterType<TFrom, TTo>(ILifetimeManager lifetimeManager);
 
+		IContainer RegisterType(Type t, ILifetimeManager lifetimeManager);
+		IContainer RegisterType(Type t, ILifetimeManager lifetimeManager, params IInjectionMember[] injectionMembers);
+
 		IContainer RegisterType<T>(params IInjectionMember[] lifetimeManager);
 
 		IContainer RegisterType(Type t, params IInjectionMember[] injectionMembers);

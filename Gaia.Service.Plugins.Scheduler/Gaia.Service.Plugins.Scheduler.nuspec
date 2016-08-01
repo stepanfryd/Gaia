@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Gaia.Service.Plugins.Scheduler</id>
-    <version>1.3.26.2601</version>
+    <version>1.3.26.4624</version>
     <authors>Cloud17</authors>
     <owners>Cloud17</owners>
     <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
@@ -14,8 +14,8 @@
       <dependency id="Common.Logging.Core" version="3.3.1" />
       <dependency id="Newtonsoft.Json" version="9.0.1" />
       <dependency id="Quartz" version="2.3.3" />
-      <dependency id="Gaia.Core.IoC" version="1.16.213.2567" />
-      <dependency id="Gaia.Core.Services" version="1.16.213.2582" />
+      <dependency id="Gaia.Core.IoC" version="1.16.214.4596" />
+      <dependency id="Gaia.Core.Services" version="1.16.214.4605" />
     </dependencies>
   </metadata>
   <files>
