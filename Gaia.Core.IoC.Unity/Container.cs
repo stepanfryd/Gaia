@@ -1,9 +1,12 @@
-﻿using Gaia.Core.IoC.LifetimeManagers;
-using Microsoft.Practices.Unity;
-using Microsoft.Practices.Unity.Configuration;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using Gaia.Core.IoC.LifetimeManagers;
+using Microsoft.Practices.Unity;
+using Microsoft.Practices.Unity.Configuration;
+using ContainerControlledLifetimeManager = Gaia.Core.IoC.Unity.LifetimeManagers.ContainerControlledLifetimeManager;
+using HierarchicalLifetimeManager = Gaia.Core.IoC.Unity.LifetimeManagers.HierarchicalLifetimeManager;
+using TransientLifetimeManager = Gaia.Core.IoC.Unity.LifetimeManagers.TransientLifetimeManager;
 
 namespace Gaia.Core.IoC.Unity
 {
@@ -59,7 +62,17 @@ namespace Gaia.Core.IoC.Unity
 
 		public ILifetimeManager GetContainerControlledLifetimeManager()
 		{
-			return new LifetimeManagers.ContainerControlledLifetimeManager();
+			return new ContainerControlledLifetimeManager();
+		}
+
+		public ILifetimeManager GetTransientLifetimeManager()
+		{
+			return new TransientLifetimeManager();
+		}
+
+		public ILifetimeManager GetHierarchicalLifetimeManager()
+		{
+			return new HierarchicalLifetimeManager();
 		}
 
 		public bool IsRegistered<T>()
@@ -84,7 +97,7 @@ namespace Gaia.Core.IoC.Unity
 
 		public object RegisterChildContainer(Configuration configuration, string childName)
 		{
-			var unitySection = (UnityConfigurationSection)configuration.GetSection("unity");
+			var unitySection = (UnityConfigurationSection) configuration.GetSection("unity");
 
 			var subContainer = Instance.CreateChildContainer();
 			subContainer.LoadConfiguration(unitySection, childName);
@@ -92,24 +105,24 @@ namespace Gaia.Core.IoC.Unity
 		}
 
 		/// <summary>
-		/// Register an instance with the Instance.
+		///   Register an instance with the Instance.
 		/// </summary>
 		/// <remarks>
-		/// <para>
-		/// Instance registration is much like setting a type as a singleton, except that instead of
-		/// the container creating the instance the first time it is requested, the user creates the
-		/// instance ahead of type and adds that instance to the Instance.
-		/// </para>
-		/// <para>
-		/// This overload does a default registration and has the container take over the lifetime of
-		/// the instance.
-		/// </para>
+		///   <para>
+		///     Instance registration is much like setting a type as a singleton, except that instead of
+		///     the container creating the instance the first time it is requested, the user creates the
+		///     instance ahead of type and adds that instance to the Instance.
+		///   </para>
+		///   <para>
+		///     This overload does a default registration and has the container take over the lifetime of
+		///     the instance.
+		///   </para>
 		/// </remarks>
 		/// <typeparam name="TInterface">
-		/// Type of instance to register (may be an implemented interface instead of the full type).
+		///   Type of instance to register (may be an implemented interface instead of the full type).
 		/// </typeparam>
 		/// <param name="instance">
-		/// Object to returned.
+		///   Object to returned.
 		/// </param>
 		public object RegisterInstance<TInterface>(TInterface instance)
 		{
@@ -117,30 +130,30 @@ namespace Gaia.Core.IoC.Unity
 		}
 
 		/// <summary>
-		/// Register an instance with the Instance.
+		///   Register an instance with the Instance.
 		/// </summary>
 		/// <remarks>
-		/// <para>
-		/// Instance registration is much like setting a type as a singleton, except that instead of
-		/// the container creating the instance the first time it is requested, the user creates the
-		/// instance ahead of type and adds that instance to the Instance.
-		/// </para>
-		/// <para>
-		/// This overload automatically has the container take ownership of the <paramref name="instance"/>.
-		/// </para>
+		///   <para>
+		///     Instance registration is much like setting a type as a singleton, except that instead of
+		///     the container creating the instance the first time it is requested, the user creates the
+		///     instance ahead of type and adds that instance to the Instance.
+		///   </para>
+		///   <para>
+		///     This overload automatically has the container take ownership of the <paramref name="instance" />.
+		///   </para>
 		/// </remarks>
 		/// <typeparam name="TInterface">
-		/// Type of instance to register (may be an implemented interface instead of the full type).
+		///   Type of instance to register (may be an implemented interface instead of the full type).
 		/// </typeparam>
 		/// <param name="instance">
-		/// Object to returned.
+		///   Object to returned.
 		/// </param>
 		/// <param name="name">
-		/// Name for registration.
+		///   Name for registration.
 		/// </param>
 		/// <returns>
-		/// The <see cref="T:Microsoft.Practices.Unity.UnityContainer"/> object that this method was
-		/// called on (this in C#, Me in Visual Basic).
+		///   The <see cref="T:Microsoft.Practices.Unity.UnityContainer" /> object that this method was
+		///   called on (this in C#, Me in Visual Basic).
 		/// </returns>
 		public object RegisterInstance<TInterface>(string name, TInterface instance)
 		{
@@ -148,24 +161,24 @@ namespace Gaia.Core.IoC.Unity
 		}
 
 		/// <summary>
-		/// Register an instance with the Instance.
+		///   Register an instance with the Instance.
 		/// </summary>
 		/// <remarks>
-		/// <para>
-		/// Instance registration is much like setting a type as a singleton, except that instead of
-		/// the container creating the instance the first time it is requested, the user creates the
-		/// instance ahead of type and adds that instance to the Instance.
-		/// </para>
-		/// <para>
-		/// This overload does a default registration and has the container take over the lifetime of
-		/// the instance.
-		/// </para>
+		///   <para>
+		///     Instance registration is much like setting a type as a singleton, except that instead of
+		///     the container creating the instance the first time it is requested, the user creates the
+		///     instance ahead of type and adds that instance to the Instance.
+		///   </para>
+		///   <para>
+		///     This overload does a default registration and has the container take over the lifetime of
+		///     the instance.
+		///   </para>
 		/// </remarks>
 		/// <param name="t">
-		/// Type of instance to register (may be an implemented interface instead of the full type).
+		///   Type of instance to register (may be an implemented interface instead of the full type).
 		/// </param>
 		/// <param name="instance">
-		/// Object to returned.
+		///   Object to returned.
 		/// </param>
 		public object RegisterInstance(Type t, object instance)
 		{
@@ -173,148 +186,130 @@ namespace Gaia.Core.IoC.Unity
 		}
 
 		/// <summary>
-		/// Register an instance with the Instance.
+		///   Register an instance with the Instance.
 		/// </summary>
 		/// <remarks>
-		/// <para>
-		/// Instance registration is much like setting a type as a singleton, except that instead of
-		/// the container creating the instance the first time it is requested, the user creates the
-		/// instance ahead of type and adds that instance to the Instance.
-		/// </para>
-		/// <para>
-		/// This overload automatically has the container take ownership of the <paramref name="instance"/>.
-		/// </para>
+		///   <para>
+		///     Instance registration is much like setting a type as a singleton, except that instead of
+		///     the container creating the instance the first time it is requested, the user creates the
+		///     instance ahead of type and adds that instance to the Instance.
+		///   </para>
+		///   <para>
+		///     This overload automatically has the container take ownership of the <paramref name="instance" />.
+		///   </para>
 		/// </remarks>
 		public object RegisterInstance(Type t, string name, object instance)
 		{
-			return Instance.RegisterInstance(t, name, instance, new ContainerControlledLifetimeManager());
+			return Instance.RegisterInstance(t, name, instance,
+				new Microsoft.Practices.Unity.ContainerControlledLifetimeManager());
 		}
 
 		/// <summary>
-		/// Register an instance with the Instance.
+		///   Register an instance with the Instance.
 		/// </summary>
 		/// <remarks>
-		/// <para>
-		/// Instance registration is much like setting a type as a singleton, except that instead of
-		/// the container creating the instance the first time it is requested, the user creates the
-		/// instance ahead of type and adds that instance to the Instance.
-		/// </para>
-		/// <para>
-		/// This overload does a default registration (name = null).
-		/// </para>
+		///   <para>
+		///     Instance registration is much like setting a type as a singleton, except that instead of
+		///     the container creating the instance the first time it is requested, the user creates the
+		///     instance ahead of type and adds that instance to the Instance.
+		///   </para>
+		///   <para>
+		///     This overload does a default registration (name = null).
+		///   </para>
 		/// </remarks>
 		/// <typeparam name="TInterface">
-		/// Type of instance to register (may be an implemented interface instead of the full type).
+		///   Type of instance to register (may be an implemented interface instead of the full type).
 		/// </typeparam>
 		/// <param name="instance">
-		/// Object to returned.
+		///   Object to returned.
 		/// </param>
 		/// <param name="lifetimeManager">
-		/// <see cref="T:Microsoft.Practices.Unity.LifetimeManager"/> object that controls how this
-		/// instance will be managed by the Instance.
+		///   <see cref="T:Microsoft.Practices.Unity.LifetimeManager" /> object that controls how this
+		///   instance will be managed by the Instance.
 		/// </param>
 		public object RegisterInstance<TInterface>(TInterface instance, object lifetimeManager)
 		{
-			return Instance.RegisterInstance(typeof(TInterface), null, instance, (LifetimeManager)lifetimeManager);
+			return Instance.RegisterInstance(typeof(TInterface), null, instance, (LifetimeManager) lifetimeManager);
 		}
 
 		/// <summary>
-		/// Register an instance with the Instance.
+		///   Register an instance with the Instance.
 		/// </summary>
 		/// <remarks>
-		/// <para>
-		/// Instance registration is much like setting a type as a singleton, except that instead of
-		/// the container creating the instance the first time it is requested, the user creates the
-		/// instance ahead of type and adds that instance to the Instance.
-		/// </para>
+		///   <para>
+		///     Instance registration is much like setting a type as a singleton, except that instead of
+		///     the container creating the instance the first time it is requested, the user creates the
+		///     instance ahead of type and adds that instance to the Instance.
+		///   </para>
 		/// </remarks>
 		/// <typeparam name="TInterface">
-		/// Type of instance to register (may be an implemented interface instead of the full type).
+		///   Type of instance to register (may be an implemented interface instead of the full type).
 		/// </typeparam>
 		/// <param name="instance">
-		/// Object to returned.
+		///   Object to returned.
 		/// </param>
 		/// <param name="name">
-		/// Name for registration.
+		///   Name for registration.
 		/// </param>
 		/// <param name="lifetimeManager">
-		/// <see cref="T:Microsoft.Practices.Unity.LifetimeManager"/> object that controls how this
-		/// instance will be managed by the Instance.
+		///   <see cref="T:Microsoft.Practices.Unity.LifetimeManager" /> object that controls how this
+		///   instance will be managed by the Instance.
 		/// </param>
 		public object RegisterInstance<TInterface>(string name, TInterface instance, object lifetimeManager)
 		{
-			return Instance.RegisterInstance(typeof(TInterface), name, instance, (LifetimeManager)lifetimeManager);
+			return Instance.RegisterInstance(typeof(TInterface), name, instance, (LifetimeManager) lifetimeManager);
 		}
 
 		/// <summary>
-		/// Register an instance with the Instance.
+		///   Register an instance with the Instance.
 		/// </summary>
 		/// <remarks>
-		/// <para>
-		/// Instance registration is much like setting a type as a singleton, except that instead of
-		/// the container creating the instance the first time it is requested, the user creates the
-		/// instance ahead of type and adds that instance to the Instance.
-		/// </para>
-		/// <para>
-		/// This overload does a default registration (name = null).
-		/// </para>
+		///   <para>
+		///     Instance registration is much like setting a type as a singleton, except that instead of
+		///     the container creating the instance the first time it is requested, the user creates the
+		///     instance ahead of type and adds that instance to the Instance.
+		///   </para>
+		///   <para>
+		///     This overload does a default registration (name = null).
+		///   </para>
 		/// </remarks>
 		/// <param name="t">
-		/// Type of instance to register (may be an implemented interface instead of the full type).
+		///   Type of instance to register (may be an implemented interface instead of the full type).
 		/// </param>
 		/// <param name="instance">
-		/// Object to returned.
+		///   Object to returned.
 		/// </param>
 		/// <param name="lifetimeManager">
-		/// <see cref="T:Microsoft.Practices.Unity.LifetimeManager"/> object that controls how this
-		/// instance will be managed by the Instance.
+		///   <see cref="T:Microsoft.Practices.Unity.LifetimeManager" /> object that controls how this
+		///   instance will be managed by the Instance.
 		/// </param>
 		public object RegisterInstance(Type t, object instance, object lifetimeManager)
 		{
-			return Instance.RegisterInstance(t, null, instance, (LifetimeManager)lifetimeManager);
+			return Instance.RegisterInstance(t, null, instance, (LifetimeManager) lifetimeManager);
 		}
 
 		public IContainer RegisterType<TFrom, TTo>(ILifetimeManager lifetimeManager)
 		{
-			Instance.RegisterType(typeof(TFrom), typeof(TTo), (LifetimeManager)lifetimeManager);
+			Instance.RegisterType(typeof(TFrom), typeof(TTo), (LifetimeManager) lifetimeManager);
 			return this;
 		}
 
 		public IContainer RegisterType<T>(params IInjectionMember[] injectionMembers)
 		{
-			var members = new List<Microsoft.Practices.Unity.InjectionMember>();
-
-			if (injectionMembers != null)
-			{
-				foreach (var member in injectionMembers)
-				{
-					if (member.Type != null && member.Name != null)
-					{
-						members.Add(new InjectionFactory(container => container.Resolve(member.Type, member.Name)));
-					}
-					else if (member.Type != null)
-					{
-						members.Add(new InjectionFactory(container => container.Resolve(member.Type)));
-					}
-				}
-			}
-
-			Instance.RegisterType(typeof(T), members.ToArray());
+			Instance.RegisterType(typeof(T), GetInjectionMembers(injectionMembers));
 			return this;
 		}
 
-		/// <summary>
-		/// Register a type with specific members to be injected.
-		/// </summary>
-		/// <typeparam name="T">
-		/// Type this registration is for.
-		/// </typeparam>
-		/// <param name="injectionMembers">
-		/// Injection configuration objects.
-		/// </param>
-		public object RegisterType<T>(params InjectionMember[] injectionMembers)
+		public IContainer RegisterType(Type t, params IInjectionMember[] injectionMembers)
 		{
-			return Instance.RegisterType(null, typeof(T), null, null, injectionMembers);
+			Instance.RegisterType(t, GetInjectionMembers(injectionMembers));
+			return this;
+		}
+
+		public IContainer RegisterType(Type t)
+		{
+			Instance.RegisterType(t);
+			return this;
 		}
 
 		public object Resolve(Type t, string name)
@@ -351,9 +346,31 @@ namespace Gaia.Core.IoC.Unity
 
 		#region Private Methods
 
+		private Microsoft.Practices.Unity.InjectionMember[] GetInjectionMembers(IInjectionMember[] injectionMembers)
+		{
+			var members = new List<Microsoft.Practices.Unity.InjectionMember>();
+
+			if (injectionMembers != null)
+			{
+				foreach (var member in injectionMembers)
+				{
+					if (member.Type != null && member.Name != null)
+					{
+						members.Add(new InjectionFactory(container => container.Resolve(member.Type, member.Name)));
+					}
+					else if (member.Type != null)
+					{
+						members.Add(new InjectionFactory(container => container.Resolve(member.Type)));
+					}
+				}
+			}
+
+			return members.ToArray();
+		}
+
 		private LifetimeManager CreateDefaultInstanceLifetimeManager()
 		{
-			return new ContainerControlledLifetimeManager();
+			return new Microsoft.Practices.Unity.ContainerControlledLifetimeManager();
 		}
 
 		#endregion Private Methods

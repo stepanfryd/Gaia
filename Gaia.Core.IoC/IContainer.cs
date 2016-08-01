@@ -26,6 +26,10 @@ namespace Gaia.Core.IoC
 
 		ILifetimeManager GetContainerControlledLifetimeManager();
 
+		ILifetimeManager GetTransientLifetimeManager();
+
+		ILifetimeManager GetHierarchicalLifetimeManager();
+
 		// Summary: Check if a particular type has been registered with the container with the
 		// default name.
 		//
@@ -87,6 +91,10 @@ namespace Gaia.Core.IoC
 		IContainer RegisterType<TFrom, TTo>(ILifetimeManager lifetimeManager);
 
 		IContainer RegisterType<T>(params IInjectionMember[] lifetimeManager);
+
+		IContainer RegisterType(Type t, params IInjectionMember[] injectionMembers);
+
+		IContainer RegisterType(Type t);
 
 		object Resolve(Type t, string name);
 

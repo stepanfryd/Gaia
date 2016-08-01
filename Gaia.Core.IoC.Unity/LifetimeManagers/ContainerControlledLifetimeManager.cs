@@ -2,8 +2,8 @@
 
 namespace Gaia.Core.IoC.Unity.LifetimeManagers
 {
-	public class ContainerControlledLifetimeManager : Microsoft.Practices.Unity.ContainerControlledLifetimeManager, ILifetimeManager
+	public class ContainerControlledLifetimeManager : Microsoft.Practices.Unity.ContainerControlledLifetimeManager,
+		ILifetimeManager
 	{
-		 
 	}
 }
