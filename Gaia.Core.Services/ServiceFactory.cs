@@ -69,7 +69,7 @@ namespace Gaia.Core.Services
 		{
 			HostFactory.Run(x =>
 			{
-				x.UseLinuxIfAvailable();
+				//x.UseLinuxIfAvailable();
 				x.ApplyCommandLine();
 
 				x.StartAutomatically();
