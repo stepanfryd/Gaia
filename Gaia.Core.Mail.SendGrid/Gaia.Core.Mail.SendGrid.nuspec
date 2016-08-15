@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Gaia.Core.Mail.SendGrid</id>
-    <version>1.16.214.30728</version>
+    <version>1.16.227.40741</version>
     <authors>Cloud17</authors>
     <owners>Cloud17</owners>
     <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
@@ -13,11 +13,11 @@
       <dependency id="Cloud17.NParametrizer" version="1.0.8.0" />
       <dependency id="Microsoft.AspNet.WebApi.Client" version="5.2.3" />
       <dependency id="Newtonsoft.Json" version="9.0.1" />
-      <dependency id="Sendgrid" version="8.0.1" />
+      <dependency id="Sendgrid" version="8.0.2" />
       <dependency id="SendGrid.CSharp.HTTP.Client" version="3.0.0" />
       <dependency id="SendGrid.SmtpApi" version="1.3.1" />
-      <dependency id="Gaia.Core.Mail" version="1.16.214.30713" />
-      <dependency id="Gaia.Core" version="1.16.214.30677" />
+      <dependency id="Gaia.Core.Mail" version="1.16.227.40729" />
+      <dependency id="Gaia.Core" version="1.16.227.40684" />
     </dependencies>
   </metadata>
   <files>
