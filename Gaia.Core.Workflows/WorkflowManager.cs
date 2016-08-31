@@ -22,13 +22,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
 using System;
 using System.Activities;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Gaia.Core.IoC;
-using Microsoft.Practices.Unity;
 
 namespace Gaia.Core.Workflows
 {
@@ -37,6 +36,8 @@ namespace Gaia.Core.Workflows
 	/// </summary>
 	public class WorkflowManager : IWorkflowManager
 	{
+		#region Interface Implementations
+
 		/// <summary>
 		///   Method invokes activity with arguments and extensions
 		/// </summary>
@@ -61,11 +62,9 @@ namespace Gaia.Core.Workflows
 			};
 
 			if (extensions != null)
-			{
 				exts.AddRange(extensions);
-			}
 
-			foreach (object ext in exts)
+			foreach (var ext in exts)
 				invoker.Extensions.Add(ext);
 
 			if (inputs == null) inputs = new Dictionary<string, object>();
@@ -98,15 +97,19 @@ namespace Gaia.Core.Workflows
 		public WorkflowResult InvokeWorkflow(string typeRegistrationName, IDictionary<string, object> inputs = null,
 			IEnumerable<object> extensions = null)
 		{
-			// TODO: Rewrite to universal container registration to kick off Unity hard link
-			var container = (IUnityContainer) Container.Instance.ContainerInstance;
+			var registeredType = Type.GetType(typeRegistrationName);
 
-			var type = container.Registrations.SingleOrDefault(c => c.Name == typeRegistrationName);
+			if (registeredType == null)
+				throw new NullReferenceException($"Type '{typeRegistrationName}' doesn't exists.");
 
-			if (type == null)
-				throw new NullReferenceException($"In Unity configuration doesn't exist [{typeRegistrationName}] registration");
+			if (!Container.Instance.IsRegistered(registeredType))
+				throw new NullReferenceException($"Type '{typeRegistrationName}' is not registred in IoC container");
 
-			var activity = Container.Instance.Resolve(type.RegisteredType, typeRegistrationName) as Activity;
+			var activity = Container.Instance.Resolve(registeredType, typeRegistrationName) as Activity;
+
+			if (activity == null)
+				throw new NullReferenceException($"Type '{typeRegistrationName}' is not derived from System.Activities.Activity");
+
 			return InvokeWorkflow(activity, inputs, extensions);
 		}
 
@@ -151,6 +154,10 @@ namespace Gaia.Core.Workflows
 			return InvokeWorkflow<TWorkflowActivity>(GetObjectDictionary(inputs), extensions);
 		}
 
+		#endregion
+
+		#region Private and protected
+
 		/// <summary>
 		///   Flat parameter copy from object to dictionary for processing in the workflow
 		/// </summary>
@@ -160,23 +167,23 @@ namespace Gaia.Core.Workflows
 		{
 			if (inputs == null) return null;
 
-			Type inputsType = inputs.GetType();
-			CustomAttributeData[] cattr = inputsType.CustomAttributes.ToArray();
+			var inputsType = inputs.GetType();
+			var cattr = inputsType.CustomAttributes.ToArray();
 
-			if (inputsType.Namespace == null && inputsType.BaseType == typeof (Object)
-			    && inputsType.IsSealed && !inputsType.IsPublic && cattr.Length > 0
-			    && cattr[0].AttributeType.Name == "DebuggerDisplayAttribute")
-			{
+			if ((inputsType.Namespace == null) && (inputsType.BaseType == typeof(object))
+			    && inputsType.IsSealed && !inputsType.IsPublic && (cattr.Length > 0)
+			    && (cattr[0].AttributeType.Name == "DebuggerDisplayAttribute"))
 				return inputsType.GetProperties().ToDictionary(pi => pi.Name, pi => pi.GetValue(inputs));
-			}
 
 
-			return (inputsType.GetProperties()
+			return inputsType.GetProperties()
 				.SelectMany(
 					prop =>
 						prop.GetCustomAttributes(true)
-							.Where(a => a.GetType() == typeof (InArgumentAttribute) || a.GetType() == typeof (InOutArgumentAttribute)),
-					(prop, a) => prop)).ToDictionary(prop => prop.Name, prop => prop.GetValue(inputs));
+							.Where(a => (a.GetType() == typeof(InArgumentAttribute)) || (a.GetType() == typeof(InOutArgumentAttribute))),
+					(prop, a) => prop).ToDictionary(prop => prop.Name, prop => prop.GetValue(inputs));
 		}
+
+		#endregion
 	}
 }

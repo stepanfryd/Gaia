@@ -22,50 +22,20 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
-
-using System;
-using System.ServiceModel.Activities;
-using System.ServiceModel.Activities.Activation;
+/*
+ Code copy from https://github.com/dimaKudr/Unity.WF
+ */
 using Microsoft.Practices.Unity;
+using Microsoft.Practices.Unity.ObjectBuilder;
 
-namespace Gaia.Core.Workflows.IoC
+namespace Gaia.Core.IoC.Unity.Workflow
 {
-	public abstract class IoCServiceHostFactory : WorkflowServiceHostFactory
-	{
+	public sealed class WorkflowExtension : UnityContainerExtension, IWorkflowConfiguration {
 		#region Private and protected
 
-		protected abstract void ConfigureContainer(IUnityContainer container);
-
-		protected abstract InjectionTypes ConfigureInjectionType();
-
-		protected virtual void ConfigureServiceHost(WorkflowServiceHost serviceHost)
-		{
-		}
-
-		protected override WorkflowServiceHost CreateWorkflowServiceHost(WorkflowService service, Uri[] baseAddresses)
-		{
-			var container = new UnityContainer();
-			ConfigureContainer(container);
-
-			var host = base.CreateWorkflowServiceHost(service, baseAddresses);
-
-			var injectionType = ConfigureInjectionType();
-
-			if (injectionType == InjectionTypes.Push)
-			{
-				container.AddNewExtension<WorkflowExtension>();
-
-				var rootActivity = host.Activity;
-				container.BuildUp(rootActivity.GetType(), rootActivity);
-			}
-			else
-			{
-				var diExtension = new DependencyInjectionExtension(container);
-				host.WorkflowExtensions.Add(diExtension);
-			}
-
-			ConfigureServiceHost(host);
-			return host;
+		protected override void Initialize() {
+			Context.Strategies.Add(
+				new WorkflowBuildStrategy(Context), UnityBuildStage.PostInitialization);
 		}
 
 		#endregion
