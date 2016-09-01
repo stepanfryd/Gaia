@@ -2,13 +2,13 @@
 <package>
   <metadata>
     <id>Gaia.Core.Mail</id>
-    <version>1.16.227.40729</version>
+    <version>1.16.244.27047</version>
     <authors>Cloud17</authors>
     <owners>Cloud17</owners>
     <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
     <description>Assembly contains email and email templating functions</description>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <copyright>Copyright (c) Stepan Fryd 2015</copyright>
+    <copyright>Copyright (c) Stepan Fryd 2016</copyright>
     <dependencies>
       <dependency id="Cloud17.NParametrizer" version="1.0.8.0" />
       <dependency id="Common.Logging" version="3.3.1" />
@@ -17,7 +17,7 @@
       <dependency id="Microsoft.AspNet.Razor" version="3.2.3" />
       <dependency id="Newtonsoft.Json" version="9.0.1" />
       <dependency id="RazorEngine" version="3.9.0" />
-      <dependency id="Gaia.Core" version="1.16.227.40684" />
+      <dependency id="Gaia.Core" version="1.16.244.26997" />
     </dependencies>
   </metadata>
   <files>

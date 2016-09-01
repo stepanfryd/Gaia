@@ -2,13 +2,13 @@
 <package>
   <metadata>
     <id>Gaia.Core.Scheduling</id>
-    <version>1.16.227.40718</version>
+    <version>1.16.244.27037</version>
     <authors>Cloud17</authors>
     <owners>Cloud17</owners>
     <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
     <description>Core functions for scheduling using Quartz</description>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <copyright>Copyright (c) Stepan Fryd 2015</copyright>
+    <copyright>Copyright (c) Stepan Fryd 2016</copyright>
     <dependencies>
       <dependency id="Common.Logging" version="3.3.1" />
       <dependency id="Common.Logging.Core" version="3.3.1" />

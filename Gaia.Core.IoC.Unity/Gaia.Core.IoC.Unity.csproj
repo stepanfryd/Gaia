@@ -97,6 +97,7 @@
     <Compile Include="LifetimeManagers\HierarchicalLifetimeManager.cs" />
     <Compile Include="LifetimeManagers\TransientLifetimeManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Wcf\UnityServiceHostFactory.cs" />
     <Compile Include="Workflow\ActivityContextExtension.cs" />
     <Compile Include="Workflow\DependencyInjectionExtension.cs" />
     <Compile Include="Workflow\InjectionTypes.cs" />
@@ -109,6 +110,10 @@
     <ProjectReference Include="..\Gaia.Core.IoC\Gaia.Core.IoC.csproj">
       <Project>{52980ebe-aeb1-4b3c-963a-be0da24b25b1}</Project>
       <Name>Gaia.Core.IoC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gaia.Core.Wcf\Gaia.Core.Wcf.csproj">
+      <Project>{590b656f-57fd-4b29-875f-f55895eb1185}</Project>
+      <Name>Gaia.Core.Wcf</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

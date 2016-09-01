@@ -2,16 +2,16 @@
 <package>
   <metadata>
     <id>Gaia.Core.IoC</id>
-    <version>1.16.227.40692</version>
+    <version>1.16.244.27015</version>
     <authors>Cloud17</authors>
     <owners>Cloud17</owners>
     <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
     <description>Assembly contains common IoC container and DI functionality</description>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <copyright>Copyright (c) Stepan Fryd 2015</copyright>
+    <copyright>Copyright (c) Stepan Fryd 2016</copyright>
     <dependencies>
       <dependency id="Cloud17.NParametrizer" version="1.0.8.0" />
-      <dependency id="Gaia.Core" version="1.16.227.40684" />
+      <dependency id="Gaia.Core" version="1.16.244.26997" />
     </dependencies>
   </metadata>
   <files>

@@ -2,20 +2,19 @@
 <package>
   <metadata>
     <id>Gaia.Core.Workflows</id>
-    <version>1.16.227.40710</version>
+    <version>1.16.244.27029</version>
     <authors>Cloud17</authors>
     <owners>Cloud17</owners>
     <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
     <description>Assembly contains classes for workflow management </description>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <copyright>Copyright (c) Stepan Fryd 2015</copyright>
+    <copyright>Copyright (c) Stepan Fryd 2016</copyright>
     <dependencies>
       <dependency id="Common.Logging" version="3.3.1" />
       <dependency id="Common.Logging.Core" version="3.3.1" />
       <dependency id="CommonServiceLocator" version="1.3" />
       <dependency id="Newtonsoft.Json" version="9.0.1" />
-      <dependency id="Unity" version="4.0.1" />
-      <dependency id="Gaia.Core.IoC" version="1.16.227.40692" />
+      <dependency id="Gaia.Core.IoC" version="1.16.244.27015" />
     </dependencies>
   </metadata>
   <files>
