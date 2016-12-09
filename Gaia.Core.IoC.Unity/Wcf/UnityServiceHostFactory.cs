@@ -1,10 +1,15 @@
-﻿using Gaia.Core.IoC.Unity.Workflow;
+﻿using Gaia.Core.Wcf.IoC;
 
 namespace Gaia.Core.IoC.Unity.Wcf
 {
-	public class UnityServiceHostFactory : Core.Wcf.IoC.IoCServiceHostFactory {
+	public class UnityServiceHostFactory : IoCServiceHostFactory
+	{
+		#region Private and protected
+
 		protected override void ConfigureContainer(IContainer container)
 		{
 		}
+
+		#endregion
 	}
 }

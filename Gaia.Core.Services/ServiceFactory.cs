@@ -108,7 +108,7 @@ namespace Gaia.Core.Services
 				Description = description
 			};
 
-			var serviceController = new ServiceController<IGaiaService>(
+		    var serviceController = new ServiceController<IGaiaService>(
 				(IGaiaService) Activator.CreateInstance(typeof (T)),
 				pluginsConfiguration, wcfServicesConfiguration);
 

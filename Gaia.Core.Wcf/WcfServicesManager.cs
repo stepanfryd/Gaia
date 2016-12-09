@@ -115,8 +115,9 @@ namespace Gaia.Core.Wcf
 
 			foreach (IServiceHostConfiguration hostConfig in _servicesConfiguration)
 			{
-				var host =
-					((ServiceHostFactoryBase) Activator.CreateInstance(hostConfig.FactoryType)).CreateServiceHost(hostConfig);
+				var factory = Activator.CreateInstance(hostConfig.FactoryType);
+
+				var host = ((ServiceHostFactoryBase)factory).CreateServiceHost(hostConfig);
 				host.Open();
 
 				var firstOrDefault = host.BaseAddresses.FirstOrDefault();
