@@ -57,9 +57,7 @@ namespace Gaia.Core.Services
 
 		#region Constructors
 
-		private ServiceFactory()
-		{
-		}
+		private ServiceFactory() {}
 
 		#endregion
 
@@ -76,13 +74,11 @@ namespace Gaia.Core.Services
 				x.RunAsNetworkService();
 				x.EnableShutdown();
 				x.EnableServiceRecovery(r => r.RestartService(2));
+				x.EnablePauseAndContinue();
 
 				x.SetDescription(Description);
 				x.SetDisplayName(DisplayName);
 				x.SetServiceName(ServiceName);
-
-				x.EnablePauseAndContinue();
-				x.EnableServiceRecovery(r => { r.RestartService(1); });
 
 				x.Service(s => serviceController);
 			});
@@ -108,8 +104,8 @@ namespace Gaia.Core.Services
 				Description = description
 			};
 
-		    var serviceController = new ServiceController<IGaiaService>(
-				(IGaiaService) Activator.CreateInstance(typeof (T)),
+			var serviceController = new ServiceController<IGaiaService>(
+				(IGaiaService) Activator.CreateInstance(typeof(T)),
 				pluginsConfiguration, wcfServicesConfiguration);
 
 			serVact.RunService(serviceController);
@@ -125,7 +121,7 @@ namespace Gaia.Core.Services
 		public static ServiceFactory Create<T>(PluginConfigurationCollection pluginsConfiguration = null,
 			ServiceHostConfigurationCollection wcfServicesConfiguration = null)
 		{
-			var serviceType = typeof (T);
+			var serviceType = typeof(T);
 
 			var serviceName = serviceType.Name;
 			var displayName = serviceType.FullName;

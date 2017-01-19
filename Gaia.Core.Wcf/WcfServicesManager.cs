@@ -109,7 +109,7 @@ namespace Gaia.Core.Wcf
 		{
 			if (_servicesConfiguration == null || _servicesConfiguration.Count == 0)
 			{
-				// TODO: Log if there are not services to host
+				_log.Info("No services are configured.");
 				return;
 			}
 
