@@ -25,11 +25,10 @@ THE SOFTWARE.
 
 using Gaia.Core.Mail.SendGrid.Configuration;
 using SendGrid;
+using SendGrid.Helpers.Mail;
 using System;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Mail;
 
 // using SendGridWeb = SendGrid.Web;
 
@@ -40,7 +39,11 @@ namespace Gaia.Core.Mail.SendGrid
 	/// </summary>
 	public class SendGridMailProvider : IMailProvider
 	{
-		//private readonly SendGridWeb _sendGridClient;
+		#region Private Fields
+
+		private readonly SendGridClient _sendGridClient;
+
+		#endregion
 
 		#region Public Constructors
 
@@ -51,11 +54,10 @@ namespace Gaia.Core.Mail.SendGrid
 		/// </param>
 		public SendGridMailProvider(SendGridSettings sendGridSettings = null)
 		{
-			//var settings = sendGridSettings ?? new Settings().SendGrid;
+			var settings = sendGridSettings ?? new Settings().SendGrid;
+			if (settings == null) throw new SendGridSettingsException();
 
-			//if (settings == null) throw new SendGridSettingsException();
-
-			//_sendGridClient = new SendGridWeb(new NetworkCredential(settings.UserName, settings.Password));
+			_sendGridClient = new SendGridClient(settings.ApiKey);
 		}
 
 		#endregion Public Constructors
@@ -71,30 +73,39 @@ namespace Gaia.Core.Mail.SendGrid
 		/// </param>
 		/// <param name="sendTime">
 		/// </param>
-		public async void Send(MailMessage message, object objectId = null, DateTime? sendTime = null)
+		public async void Send(System.Net.Mail.MailMessage message, object objectId = null, DateTime? sendTime = null)
 		{
-			//var sendGridMessage = new SendGridMessage
-			//{
-			//	From = message.From,
-			//	To = message.To.Select(a => a).ToArray(),
-			//	Subject = message.Subject,
-			//	Text = message.Body
-			//};
+			var sendGridMessage = new SendGridMessage
+			{
+				From = new EmailAddress(message.From.Address, message.From.DisplayName),
+				Subject = message.Subject,
+				PlainTextContent = message.Body
+			};
 
-			//var stream = message.AlternateViews[0].ContentStream;
-			//using (var reader = new StreamReader(stream))
-			//{
-			//	sendGridMessage.Html = reader.ReadToEnd();
-			//}
+			sendGridMessage.AddTos(message.To.Select(a => new EmailAddress(a.Address, a.DisplayName)).ToList());
 
-			//foreach (var att in message.Attachments)
-			//{
-			//	sendGridMessage.AddAttachment(att.ContentStream, att.Name);
-			//}
+			var stream = message.AlternateViews[0].ContentStream;
+			using (var reader = new StreamReader(stream))
+			{
+				sendGridMessage.HtmlContent = reader.ReadToEnd();
+			}
 
-			//await _sendGridClient.DeliverAsync(sendGridMessage);
+			foreach (var att in message.Attachments)
+			{
+				if (att.ContentStream != null && att.ContentStream.CanRead)
+				{
+					using (var ms = new MemoryStream())
+					{
+						await att.ContentStream.CopyToAsync(ms);
+						sendGridMessage.AddAttachment(att.Name, Convert.ToBase64String(ms.ToArray()), att.ContentType.MediaType, att.ContentDisposition.DispositionType, att.ContentId);
+						ms.Close();
+					}
+				}
+
+				await _sendGridClient.SendEmailAsync(sendGridMessage);
+			}
+
+			#endregion Public Methods
 		}
-
-		#endregion Public Methods
 	}
 }
