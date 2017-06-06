@@ -27,15 +27,27 @@ using Newtonsoft.Json;
 
 namespace Gaia.Portal.Framework.Json
 {
+	/// <summary>
+	/// MVC Json extensions
+	/// </summary>
 	public static class JsonExtensions
 	{
 		#region Private and protected
-
+		/// <summary>
+		/// Returns object as JSON MvcHtmlString
+		/// </summary>
+		/// <param name="obj"></param>
+		/// <returns></returns>
 		public static MvcHtmlString ToJsonHtmlString(this object obj)
 		{
 			return new MvcHtmlString(ToJson(obj));
 		}
 
+		/// <summary>
+		/// Returns object serialized as simple string
+		/// </summary>
+		/// <param name="obj"></param>
+		/// <returns></returns>
 		public static string ToJson(this object obj)
 		{
 			return JsonConvert.SerializeObject(obj);

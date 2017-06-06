@@ -30,7 +30,6 @@ using System.Web;
 using System.Web.Optimization;
 using Common.Logging;
 using Gaia.Portal.Framework.Bundling;
-using Gaia.Portal.Framework.Configuration.EntLib;
 using Newtonsoft.Json;
 
 namespace Gaia.Portal.Framework.Configuration.Modules
@@ -40,9 +39,8 @@ namespace Gaia.Portal.Framework.Configuration.Modules
 		#region
 		private const string MODULE_MASK = @"{Module}";
 		private const string INCLUDE_FILE_MASK = @"{ModuleConfig}";
-		private readonly IConfiguration _config;
 
-		private readonly IEnterpriseLibrary _entLib;
+		private readonly IConfiguration _config;
 		private readonly ILog _log;
 
 		#endregion
@@ -54,10 +52,9 @@ namespace Gaia.Portal.Framework.Configuration.Modules
 
 		#region Constructors 
 
-		public DefaultWebModuleProvider(IConfiguration configuration, IEnterpriseLibrary entLib)
+		public DefaultWebModuleProvider(IConfiguration configuration)
 		{
 			_config = configuration;
-			_entLib = entLib;
 			_log = LogManager.GetLogger(GetType());
 
 			if (Modules == null)
@@ -86,7 +83,7 @@ namespace Gaia.Portal.Framework.Configuration.Modules
 
 					if (moduleConfigFile.Exists)
 					{
-						_entLib.ExceptionManager.Process(delegate
+						try
 						{
 							var webModule =
 								JsonConvert.DeserializeObject<DefaultWebModule>(File.ReadAllText(moduleConfigFile.FullName));
@@ -107,8 +104,7 @@ namespace Gaia.Portal.Framework.Configuration.Modules
 								Orderer = new NonOrderingBundleOrderer()
 							};
 
-							foreach (var p in webModule.Scripts
-									.Select(p => $"{moduleScriptVirtualPath}{p}".Replace(MODULE_MASK, dir.Name)))
+							foreach (var p in webModule.Scripts.Select(p => $"{moduleScriptVirtualPath}{p}".Replace(MODULE_MASK, dir.Name)))
 							{
 								try
 								{
@@ -129,8 +125,11 @@ namespace Gaia.Portal.Framework.Configuration.Modules
 
 							webModule.Bundles.Add(modulesScriptBundle);
 							Modules.Add(webModule);
-						}, Constants.ExceptionPolicy.SwallowUp);
-
+						} catch (Exception e)
+						{
+							_log.Error(e);
+							throw new Core.Exceptions.GaiaBaseException("Error during web modules loading", e);
+						}
 					}
 					else
 					{

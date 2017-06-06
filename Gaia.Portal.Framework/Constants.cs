@@ -33,12 +33,5 @@ namespace Gaia.Portal.Framework
 			public const string Action = "action";
 			public const string Id = "id";
 		}
-
-		public class ExceptionPolicy
-		{
-			public const string GeneralPolicy = "GeneralPolicy";
-			public const string UIPolicy = "UIPolicy";
-			public const string SwallowUp = "SwallowUp";
-		}
 	}
 }

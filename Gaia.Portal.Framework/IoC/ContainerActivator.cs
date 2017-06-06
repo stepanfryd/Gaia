@@ -30,7 +30,6 @@ using System.Linq;
 using System.Web.Http;
 using System.Web.Mvc;
 using Gaia.Core.IoC;
-using Gaia.Portal.Framework.Configuration.EntLib;
 using Gaia.Portal.Framework.Configuration.Modules;
 using Gaia.Portal.Framework.Exceptions;
 
@@ -41,23 +40,15 @@ namespace Gaia.Portal.Framework.IoC
 	/// </summary>
 	public static class ContainerActivator
 	{
-		#region Fields and constants
-
-		private static IEnterpriseLibrary _entLib;
-
-		#endregion
-
 		/// <summary>Integrates Unity when the application starts.</summary>
 		public static void Start()
 		{
 			// init entLib logger
-			_entLib = Container.Instance.Resolve<IEnterpriseLibrary>();
 			var config = new Configuration.Configuration();
 			if(config.WebSettings==null) throw new NullReferenceException("Configuration section gaia/web is not correctly configured.");
 
 			FilterProviders.Providers.Remove(FilterProviders.Providers.OfType<FilterAttributeFilterProvider>().First());
-
-
+			
 			if (config.WebSettings.FilterProviders != null)
 			{
 				foreach (var type in config.WebSettings.FilterProviders.Select(Type.GetType).Where(type => type != null))
@@ -68,8 +59,10 @@ namespace Gaia.Portal.Framework.IoC
 
 			var mvcResolver = Type.GetType(config.WebSettings.MvcDependencyResolver);
 			if (mvcResolver == null)
-				throw new NullReferenceException(
-					$"Could not resolve type ${config.WebSettings.MvcDependencyResolver} for Mvc Dependency resolver.");
+			{
+				throw new NullReferenceException($"Could not resolve type ${config.WebSettings.MvcDependencyResolver} for Mvc Dependency resolver.");
+			}
+
 			DependencyResolver.SetResolver(
 				(IDependencyResolver) Activator.CreateInstance(mvcResolver, Container.Instance.ContainerInstance));
 

@@ -28,7 +28,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Optimization;
 using Common.Logging;
-using Gaia.Portal.Framework.Configuration.EntLib;
 using Gaia.Portal.Framework.Configuration.Modules;
 using Newtonsoft.Json;
 
@@ -45,8 +44,6 @@ namespace Gaia.Portal.Framework.Configuration.Bundles
 
 		#endregion
 
-		#region Constructors
-
 		#region Constructor
 
 		/// <summary>
@@ -55,15 +52,12 @@ namespace Gaia.Portal.Framework.Configuration.Bundles
 		/// <param name="config">Instance of common configuration object</param>
 		/// <param name="modulesProvider">Web module configuration provider</param>
 		/// <param name="entLib">Instance of enterprise library wraper</param>
-		public BundlesRegistration(IConfiguration config, IWebModuleProvider modulesProvider, IEnterpriseLibrary entLib)
+		public BundlesRegistration(IConfiguration config, IWebModuleProvider modulesProvider)
 		{
 			_log = LogManager.GetLogger(GetType());
 			_config = config;
 			_modulesProvider = modulesProvider;
-			_entLib = entLib;
 		}
-
-		#endregion
 
 		#endregion
 
@@ -78,12 +72,16 @@ namespace Gaia.Portal.Framework.Configuration.Bundles
 		public void RegisterBundles(BundleCollection bundles)
 		{
 			_bundles = bundles;
-			_entLib.ExceptionManager.Process(() =>
+
+			try
 			{
 				LoadConfiguration();
 				RegisterCommonBundles();
 				RegisterModulesBundles();
-			}, Constants.ExceptionPolicy.SwallowUp);
+			} catch (Exception e)	{
+				_log.Error(e);
+				throw new Core.Exceptions.GaiaBaseException("Bundles registration error", e);
+			}
 		}
 
 		#endregion
@@ -94,7 +92,6 @@ namespace Gaia.Portal.Framework.Configuration.Bundles
 
 		private readonly IConfiguration _config;
 		private readonly IWebModuleProvider _modulesProvider;
-		private readonly IEnterpriseLibrary _entLib;
 
 		private BundleCollection _bundles;
 		private BundlesConfig _bundlesConfig;

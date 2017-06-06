@@ -32,10 +32,10 @@ using System.Runtime.InteropServices;
 // IncreaseRevisionVersion: False
 
 // General Information about an assembly is controlled through the following set of attributes.
-[assembly: AssemblyVersion("1.16.344.*")]
+[assembly: AssemblyVersion("1.17.157.*")]
 // [assembly: AssemblyInformationalVersion("1.16.22-alpha")]
 [assembly: AssemblyCompany("Cloud17")]
-[assembly: AssemblyCopyright("Copyright (c) Stepan Fryd 2016")]
+[assembly: AssemblyCopyright("Copyright (c) Stepan Fryd 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: AssemblyConfiguration("")]
