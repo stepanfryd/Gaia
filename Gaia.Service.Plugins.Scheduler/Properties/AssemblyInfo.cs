@@ -29,11 +29,5 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Gaia.Service.Plugins.Scheduler")]
 [assembly: AssemblyDescription("Assembly contains service scheduler functionality")]
 [assembly: AssemblyProduct("Gaia.Service.Plugins.Scheduler")]
-[assembly: Guid("e6beb28b-6823-402b-9dc8-25495530cc03")]
-[assembly: AssemblyVersion("1.3.26.*")]
-[assembly: AssemblyCompany("Cloud17")]
-[assembly: AssemblyCopyright("Copyright © Stepan Fryd 2012")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: ComVisible(false)]
+
+[assembly: Guid("8a82e21f-fad0-4f07-862c-b2822d53124a")]

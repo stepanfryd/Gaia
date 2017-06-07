@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Gaia.Core.Mail</id>
-    <version>1.17.158.23409</version>
+    <version>1.17.159.4</version>
     <authors>Cloud17</authors>
     <owners>Cloud17</owners>
     <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
@@ -17,7 +17,7 @@
       <dependency id="Microsoft.AspNet.Razor" version="3.2.3" />
       <dependency id="Newtonsoft.Json" version="10.0.2" />
       <dependency id="RazorEngine" version="3.9.3" />
-      <dependency id="Gaia.Core" version="1.17.158.23367" />
+      <dependency id="Gaia.Core" version="1.17.159.4" />
     </dependencies>
   </metadata>
   <files>
