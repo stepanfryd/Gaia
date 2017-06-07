@@ -2,24 +2,24 @@
 <package>
   <metadata>
     <id>Gaia.Core.Wcf.Services</id>
-    <version>1.16.245.42391</version>
+    <version>1.17.158.23393</version>
     <authors>Cloud17</authors>
     <owners>Cloud17</owners>
     <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
     <description>Assembly contains functionality for WCF activation and services</description>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <copyright>Copyright (c) Stepan Fryd 2016</copyright>
+    <copyright>Copyright (c) Stepan Fryd 2017</copyright>
     <dependencies>
       <dependency id="Common.Logging" version="3.3.1" />
       <dependency id="Common.Logging.Core" version="3.3.1" />
-      <dependency id="Gaia.Core.IoC" version="1.16.245.42370" />
-      <dependency id="Gaia.Core.Workflows" version="1.16.245.42384" />
-      <dependency id="Gaia.Core" version="1.16.245.42365" />
+      <dependency id="Gaia.Core.IoC" version="1.17.158.23372" />
+      <dependency id="Gaia.Core.Workflows" version="1.17.158.23387" />
+      <dependency id="Gaia.Core" version="1.17.158.23367" />
     </dependencies>
   </metadata>
   <files>
-    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Solution Items\NuGet\Template\tools\*" target="tools" />
-    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Core.Wcf.Services\bin\NuGet-Debug\Gaia.Core.Wcf.Services.dll" target="lib\net452\Gaia.Core.Wcf.Services.dll" />
-    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Core.Wcf.Services\bin\NuGet-Debug\Gaia.Core.Wcf.Services.pdb" target="lib\net452\Gaia.Core.Wcf.Services.pdb" />
+    <file src="C:\_WORK\Gaia\Solution Items\NuGet\Template\tools\*" target="tools" />
+    <file src="C:\_WORK\Gaia\Gaia.Core.Wcf.Services\bin\NuGet-Debug\Gaia.Core.Wcf.Services.dll" target="lib\net462\Gaia.Core.Wcf.Services.dll" />
+    <file src="C:\_WORK\Gaia\Gaia.Core.Wcf.Services\bin\NuGet-Debug\Gaia.Core.Wcf.Services.pdb" target="lib\net462\Gaia.Core.Wcf.Services.pdb" />
   </files>
 </package>

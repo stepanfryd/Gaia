@@ -4,8 +4,8 @@
 
 @IF [%NUGET_KEY%]==[] GOTO key_not_exists
 	
-"%ProgramFiles(x86)%\MSBuild\14.0\bin\msbuild.exe" /v:n /p:Configuration=NuGet-Debug "..\..\Gaia.sln" /t:Clean
-"%ProgramFiles(x86)%\MSBuild\14.0\bin\msbuild.exe" /v:n /p:Configuration=NuGet-Debug "..\..\Gaia.sln" 
+msbuild.exe /v:n /p:Configuration=NuGet-Debug "..\..\Gaia.sln" /t:Clean
+msbuild.exe /v:n /p:Configuration=NuGet-Debug "..\..\Gaia.sln" 
 @GOTO exit
 
 :key_not_exists
