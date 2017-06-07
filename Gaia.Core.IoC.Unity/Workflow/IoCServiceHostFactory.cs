@@ -28,6 +28,7 @@ THE SOFTWARE.
 using System;
 using System.ServiceModel.Activities;
 using System.ServiceModel.Activities.Activation;
+using Microsoft.Practices.Unity;
 
 namespace Gaia.Core.IoC.Unity.Workflow
 {
@@ -42,7 +43,9 @@ namespace Gaia.Core.IoC.Unity.Workflow
 		}
 
 		protected override WorkflowServiceHost CreateWorkflowServiceHost(WorkflowService service, Uri[] baseAddresses) {
-			var container = IoC.Container.Instance;//  new UnityContainer();
+			var container = IoC.Container.Instance;
+			var unityContainer = (IUnityContainer)container.ContainerInstance;
+
 			ConfigureContainer(container);
 
 			var host = base.CreateWorkflowServiceHost(service, baseAddresses);
@@ -50,10 +53,10 @@ namespace Gaia.Core.IoC.Unity.Workflow
 			var injectionType = ConfigureInjectionType();
 
 			if (injectionType == InjectionTypes.Push) {
-				container.AddNewExtension<WorkflowExtension>();
+				unityContainer.AddNewExtension<WorkflowExtension>();
 
 				var rootActivity = host.Activity;
-				container.BuildUp(rootActivity.GetType(), rootActivity);
+				unityContainer.BuildUp(rootActivity.GetType(), rootActivity);
 			}
 			else {
 				var diExtension = new DependencyInjectionExtension(container);

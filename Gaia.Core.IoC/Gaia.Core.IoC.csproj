@@ -81,12 +81,10 @@
     <Compile Include="..\Solution Items\Templates\GlobalAssemblyInfo.Core.cs">
       <Link>Properties\GlobalAssemblyInfo.Core.cs</Link>
     </Compile>
+    <Compile Include="ConfigSourceType.cs" />
     <Compile Include="Container.cs" />
     <Compile Include="IContainer.cs" />
-    <Compile Include="IInjectionMember.cs" />
-    <Compile Include="InjectionMember.cs" />
     <Compile Include="IoCSection.cs" />
-    <Compile Include="LifetimeManagers\ILifetimeManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceProvider.cs" />
     <Compile Include="Settings.cs" />

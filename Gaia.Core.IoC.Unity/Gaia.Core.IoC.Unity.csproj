@@ -94,9 +94,6 @@
     </Compile>
     <Compile Include="Container.cs" />
     <Compile Include="InjectionMember.cs" />
-    <Compile Include="LifetimeManagers\ContainerControlledLifetimeManager.cs" />
-    <Compile Include="LifetimeManagers\HierarchicalLifetimeManager.cs" />
-    <Compile Include="LifetimeManagers\TransientLifetimeManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Wcf\UnityServiceHostFactory.cs" />
     <Compile Include="Workflow\ActivityContextExtension.cs" />

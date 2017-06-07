@@ -47,7 +47,11 @@ namespace Gaia.Core.IoC
 			if(providerType==null)
 				throw new ConfigurationErrorsException($"Unknown type '{settings.ContainerSection.ContainerProviderTypeName}'.");
 		
-			return (IContainer)Activator.CreateInstance(providerType);
+			var retVal = (IContainer)Activator.CreateInstance(providerType);
+			retVal.ConfigSource = settings.ContainerSection.ConfigSource;
+			retVal.ConfigSourceType = settings.ContainerSection.ConfigSourceType ?? ConfigSourceType.Json;
+
+			return retVal;
 		});
 
 		#endregion

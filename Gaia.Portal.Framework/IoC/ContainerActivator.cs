@@ -84,26 +84,5 @@ namespace Gaia.Portal.Framework.IoC
 		{
 			Container.Instance.Dispose();
 		}
-
-		/// <summary>
-		///   Load Unity IoC container configuration from module configuratoin file
-		/// </summary>
-		public static void RegisterModuleContainer(string moduleName)
-		{
-			var module = Container.Instance.Resolve<IWebModuleProvider>()?.Modules?.SingleOrDefault(m => m.Name == moduleName);
-			if (string.IsNullOrEmpty(module?.IocContainerFullPath) || !File.Exists(module.IocContainerFullPath)) return;
-
-			try
-			{
-				var fileMap = new ExeConfigurationFileMap {ExeConfigFilename = module.IocContainerFullPath};
-				var configuration = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
-				Container.Instance.RegisterChildContainer(configuration, module.Name);
-			}
-			catch (Exception e)
-			{
-				throw new DependencyContainerLoadingException(
-					$"Unable to load module IoC container configuration from file {module.IocContainerFullPath}.", e);
-			}
-		}
 	}
 }

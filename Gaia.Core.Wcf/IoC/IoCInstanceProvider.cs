@@ -88,10 +88,7 @@ namespace Gaia.Core.Wcf.IoC
 
 			Contract.EndContractBlock();
 
-			var childContainer =
-				instanceContext.Extensions.Find<IoCInstanceContextExtension>().GetChildContainer(_container);
-
-			return childContainer.Resolve(_contractType);
+			return _container.Resolve(_contractType);
 		}
 
 		/// <summary>
@@ -139,7 +136,7 @@ namespace Gaia.Core.Wcf.IoC
 
 			Contract.EndContractBlock();
 
-			instanceContext.Extensions.Find<IoCInstanceContextExtension>().DisposeOfChildContainer();
+			instance = null;
 		}
 
 		#endregion

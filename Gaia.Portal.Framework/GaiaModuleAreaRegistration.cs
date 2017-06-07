@@ -61,8 +61,6 @@ namespace Gaia.Portal.Framework
 
 		public override void RegisterArea(AreaRegistrationContext context)
 		{
-			RegisterContainer();
-
 			var constraintResolver = new DefaultInlineConstraintResolver();
 			constraintResolver.ConstraintMap.Add("rangeWithStatus", typeof (RangeWithStatusRouteConstraint));
 			context.Routes.MapMvcAttributeRoutes(constraintResolver);
@@ -86,13 +84,5 @@ namespace Gaia.Portal.Framework
 		}
 
 		public abstract void RegisterRoutes(AreaRegistrationContext context);
-
-		private void RegisterContainer()
-		{
-			if (_moduleConfiguration != null)
-			{
-				ContainerActivator.RegisterModuleContainer(_moduleConfiguration.ModuleName);
-			}
-		}
 	}
 }
