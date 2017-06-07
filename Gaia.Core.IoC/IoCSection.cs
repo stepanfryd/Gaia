@@ -14,10 +14,10 @@ namespace Gaia.Core.IoC
 		[XmlAttribute("containerProvider")]
 		public string ContainerProviderTypeName { get; set; }
 
-		[XmlAttribute("configSource")]
-		public string ConfigSource { get; set; }
+		[XmlAttribute("configSourceFile")]
+		public string ConfigSourceFile { get; set; }
 
 		[XmlAttribute("configSourceType")]
-		public ConfigSourceType? ConfigSourceType { get; set; }
+		public string ConfigSourceType { get; set; }
 	}
 }

@@ -26,7 +26,7 @@ THE SOFTWARE.
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyVersion("1.17.159.4")]
+[assembly: AssemblyVersion("1.17.159.5")]
 [assembly: AssemblyCompany("Cloud17")]
 [assembly: AssemblyCopyright("Copyright (c) Stepan Fryd 2017")]
 
