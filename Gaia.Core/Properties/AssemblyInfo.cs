@@ -26,8 +26,8 @@ THE SOFTWARE.
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyVersion("1.17.159.3")]
-[assembly: AssemblyCompany("Cloud17")]
-[assembly: AssemblyCopyright("Copyright (c) Stepan Fryd 2017")]
+[assembly: AssemblyTitle("Gaia.Core")]
+[assembly: AssemblyDescription("Assembly contains common IoC container and DI functionality")]
+[assembly: AssemblyProduct("Gaia.Core")]
 
-[assembly: ComVisible(false)]
+[assembly: Guid("94126fdf-2841-45e5-b3da-e532e2039264")]
