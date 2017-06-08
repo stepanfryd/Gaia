@@ -53,7 +53,7 @@ namespace Gaia.Portal.Framework
 			_controllers = new Lazy<Dictionary<string, HttpControllerDescriptor>>(InitializeControllerDictionary);
 		}
 
-		public override HttpControllerDescriptor SelectController(HttpRequestMessage request)
+		public new HttpControllerDescriptor SelectController(HttpRequestMessage request)
 		{
 			HttpControllerDescriptor decriptor = null;
 			try
@@ -106,7 +106,7 @@ namespace Gaia.Portal.Framework
 			throw new HttpResponseException(HttpStatusCode.NotFound);
 		}
 
-		public override IDictionary<string, HttpControllerDescriptor> GetControllerMapping()
+		public new IDictionary<string, HttpControllerDescriptor> GetControllerMapping()
 		{
 			return _controllers.Value;
 		}
