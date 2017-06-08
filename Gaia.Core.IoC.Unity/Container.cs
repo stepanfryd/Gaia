@@ -26,7 +26,7 @@ namespace Gaia.Core.IoC.Unity
 
 		public IUnityContainer Instance => LazyContainer.Value;
 
-		public ConfigSourceType ConfigSourceType { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+		public ConfigSourceType ConfigSourceType { get ; set ; }
 
 		#endregion Public Properties
 
