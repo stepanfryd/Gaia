@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Gaia.Core.Workflows</id>
-    <version>1.17.159.8</version>
+    <version>1.17.159.9</version>
     <authors>Cloud17</authors>
     <owners>Cloud17</owners>
     <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
@@ -14,7 +14,7 @@
       <dependency id="Common.Logging.Core" version="3.3.1" />
       <dependency id="CommonServiceLocator" version="1.3" />
       <dependency id="Newtonsoft.Json" version="10.0.2" />
-      <dependency id="Gaia.Core.IoC" version="1.17.159.8" />
+      <dependency id="Gaia.Core.IoC" version="1.17.159.9" />
     </dependencies>
   </metadata>
   <files>
