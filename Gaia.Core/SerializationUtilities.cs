@@ -23,20 +23,37 @@ namespace Gaia.Core
 			string retVal;
 			var seri = new XmlSerializer(typeof(T));
 
-			using (var ms = new MemoryStream())
+			MemoryStream ms = null;
+			StreamWriter sr = null;
+			XmlWriter xmlWriter = null;
+			try
 			{
-				using (var sr = new StreamWriter(ms))
-				{
-					using (var xmlWriter = XmlWriter.Create(sr, new XmlWriterSettings {Indent = false}))
-					{
-						seri.Serialize(xmlWriter, data);
-					}
-					ms.Seek(0, SeekOrigin.Begin);
-					retVal = Encoding.Default.GetString(ms.ToArray());
-					sr.Close();
-				}
+				ms = new MemoryStream();
+				sr = new StreamWriter(ms);
+				xmlWriter = XmlWriter.Create(sr, new XmlWriterSettings { Indent = false });
+				
+				seri.Serialize(xmlWriter, data);
+				ms.Seek(0, SeekOrigin.Begin);
+				retVal = Encoding.Default.GetString(ms.ToArray());
+
+				xmlWriter.Close();
+				sr.Close();
 				ms.Close();
+			} finally {
+				if(xmlWriter!=null) {
+					xmlWriter.Dispose();
+				}
+
+				if (sr != null)
+				{
+					sr.Dispose();
+				}
+
+				if (ms!=null) {
+					ms.Dispose();
+				}
 			}
+
 			return retVal;
 		}
 

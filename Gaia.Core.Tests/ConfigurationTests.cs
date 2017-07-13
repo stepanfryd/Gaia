@@ -73,10 +73,10 @@ namespace Gaia.Core.Tests
 					using (var xmlWriter = XmlWriter.Create(sr, new XmlWriterSettings {Indent = false}))
 					{
 						seri.Serialize(xmlWriter, config);
+						ms.Seek(0, SeekOrigin.Begin);
+						serData = Encoding.Default.GetString(ms.GetBuffer());
+						sr.Close();
 					}
-					ms.Seek(0, SeekOrigin.Begin);
-					serData = Encoding.Default.GetString(ms.GetBuffer());
-					sr.Close();
 				}
 				ms.Close();
 			}
@@ -182,32 +182,47 @@ namespace Gaia.Core.Tests
 			string serData;
 			var seri = new XmlSerializer(typeof (ServiceHostConfigurationCollection));
 
-			using (var ms = new MemoryStream())
-			{
-				using (var sr = new StreamWriter(ms))
-				{
-					using (var xmlWriter = XmlWriter.Create(sr, new XmlWriterSettings {Indent = false}))
-					{
-						seri.Serialize(xmlWriter, config);
-					}
-					ms.Seek(0, SeekOrigin.Begin);
-					serData = Encoding.Default.GetString(ms.GetBuffer());
-					sr.Close();
-				}
-				ms.Close();
-			}
+			MemoryStream ms = null;
+			StreamWriter sr = null;
 
+			try
+			{
+				ms = new MemoryStream();
+				sr = new StreamWriter(ms);
+					
+				using (var xmlWriter = XmlWriter.Create(sr, new XmlWriterSettings { Indent = false }))
+				{
+					seri.Serialize(xmlWriter, config);
+				}
+				ms.Seek(0, SeekOrigin.Begin);
+				serData = Encoding.Default.GetString(ms.GetBuffer());
+				sr.Close();	
+				ms.Close();
+			} finally {
+				if(ms!=null) {
+					ms.Dispose();
+				}
+
+				if(sr!=null) {
+					sr.Dispose();
+				}
+			}
 
 			Assert.AreEqual(expectedXml, serData);
 			ServiceHostConfigurationCollection expectedCollection;
 
-			using (var ms = new MemoryStream(Encoding.Default.GetBytes(expectedXml)))
+			try
 			{
+				ms = new MemoryStream(Encoding.Default.GetBytes(expectedXml));
 				ms.Seek(0, SeekOrigin.Begin);
-				expectedCollection = (ServiceHostConfigurationCollection) seri.Deserialize(ms);
+				expectedCollection = (ServiceHostConfigurationCollection)seri.Deserialize(ms);
 				ms.Close();
+			} finally {
+				if(ms!=null) {
+					ms.Dispose();
+				}
 			}
-
+			
 			Assert.IsNotNull(expectedCollection);
 			Assert.AreEqual(expectedCollection[0].Name, "Host");
 			Assert.AreEqual(expectedCollection[0].FactoryTypeName, "Test.TestFactory");

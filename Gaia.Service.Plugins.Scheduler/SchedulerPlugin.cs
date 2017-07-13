@@ -29,6 +29,8 @@ using Gaia.Core.IoC;
 using Gaia.Core.Services;
 using Gaia.Service.Plugins.Scheduler.IoC;
 using Quartz;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Gaia.Service.Plugins.Scheduler
 {
@@ -38,7 +40,23 @@ namespace Gaia.Service.Plugins.Scheduler
 	[Serializable]
 	public class SchedulerPlugin : IServicePlugin
 	{
-		#region Public members
+		private static readonly object syncRoot = new object();
+
+		private static IList<IScheduler> _schedulers;
+
+		public static IList<IScheduler> Schedulers {
+			get {
+				if(_schedulers==null) {
+					lock(syncRoot) {
+						if(_schedulers==null) {
+							_schedulers = new List<IScheduler>();
+						}
+					}
+				}
+				
+				return _schedulers;
+			}
+		}
 
 		#region Public properties
 
@@ -46,8 +64,6 @@ namespace Gaia.Service.Plugins.Scheduler
 		/// Scheduler name
 		/// </summary>
 		public string Name { get; set; }
-
-		#endregion
 
 		#endregion
 
@@ -95,6 +111,7 @@ namespace Gaia.Service.Plugins.Scheduler
 			var jobFactory = new IoCJobFactory(Container.Instance);
 			var schedulerFactory = new IoCSchedulerFactory(jobFactory);
 			_scheduler = schedulerFactory.GetScheduler();
+			Schedulers.Add(_scheduler);
 		}
 
 		/// <summary>
@@ -162,6 +179,11 @@ namespace Gaia.Service.Plugins.Scheduler
 					{
 						Uninitialize();
 					}
+
+					if(Schedulers.Contains(_scheduler)) {
+						Schedulers.Remove(_scheduler);
+					}
+					
 					_scheduler = null;
 				}
 				_disposed = true;

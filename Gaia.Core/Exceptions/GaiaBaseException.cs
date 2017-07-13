@@ -31,6 +31,7 @@ namespace Gaia.Core.Exceptions
 	/// <summary>
 	/// Gaia ecosystem base exception and all exceptions thrown by core libraries should inherit from it
 	/// </summary>
+	[Serializable]
 	public class GaiaBaseException : ApplicationException
 	{
 		/// <summary>

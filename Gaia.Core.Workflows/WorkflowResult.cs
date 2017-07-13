@@ -34,6 +34,7 @@ namespace Gaia.Core.Workflows
 	///     <cref>WorkflowInvoker.Invoke</cref>
 	///   </see>
 	/// </summary>
+	[Serializable]
 	public class WorkflowResult : Dictionary<string, object>
 	{
 		#region Constructors and Destructors

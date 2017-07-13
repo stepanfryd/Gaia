@@ -24,12 +24,14 @@ THE SOFTWARE.
 */
 
 using Gaia.Core.Exceptions;
+using System;
 
 namespace Gaia.Core.Mail.SendGrid
 {
 	/// <summary>
 	///   Sendgrid settings exception thrown in case wrong configuration
 	/// </summary>
+	[Serializable]
 	public class SendGridSettingsException : GaiaBaseException
 	{
 		#region Constructors

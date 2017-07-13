@@ -24,12 +24,14 @@ THE SOFTWARE.
 */
 
 using Gaia.Core.Exceptions;
+using System;
 
 namespace Gaia.Core.Mail
 {
 	/// <summary>
 	///   Exception which is thrown in the case of wrong email configuration
 	/// </summary>
+	[Serializable]
 	public class EmailSettingsException : GaiaBaseException
 	{
 		#region Constructors

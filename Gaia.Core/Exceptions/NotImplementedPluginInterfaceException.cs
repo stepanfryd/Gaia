@@ -23,11 +23,14 @@ THE SOFTWARE.
 
 */
 
+using System;
+
 namespace Gaia.Core.Exceptions
 {
 	/// <summary>
 	///   Plugin doesn't implements correct interface
 	/// </summary>
+	[Serializable]
 	public class NotImplementedPluginInterfaceException : GaiaBaseException
 	{
 		#region Constructors

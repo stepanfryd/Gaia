@@ -26,6 +26,7 @@ using System;
 
 namespace Gaia.Portal.Framework.Exceptions
 {
+	[Serializable]
 	public class DependencyContainerLoadingException : PortalBaseException
 	{
 		public DependencyContainerLoadingException(string message) : base(message) {}

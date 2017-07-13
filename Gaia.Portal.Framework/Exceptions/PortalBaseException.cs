@@ -28,6 +28,7 @@ using Gaia.Core.Exceptions;
 
 namespace Gaia.Portal.Framework.Exceptions
 {
+	[Serializable]
 	public class PortalBaseException : GaiaBaseException
 	{
 		public PortalBaseException(string message) : base(message) {}
