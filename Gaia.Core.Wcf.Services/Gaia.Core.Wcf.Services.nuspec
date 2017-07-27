@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Gaia.Core.Wcf.Services</id>
-    <version>1.17.159.9</version>
+    <version>1.17.194.1</version>
     <authors>Cloud17</authors>
     <owners>Cloud17</owners>
     <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
@@ -12,9 +12,9 @@
     <dependencies>
       <dependency id="Common.Logging" version="3.3.1" />
       <dependency id="Common.Logging.Core" version="3.3.1" />
-      <dependency id="Gaia.Core.IoC" version="1.17.159.9" />
-      <dependency id="Gaia.Core.Workflows" version="1.17.159.9" />
-      <dependency id="Gaia.Core" version="1.17.159.9" />
+      <dependency id="Gaia.Core.IoC" version="1.17.194.1" />
+      <dependency id="Gaia.Core.Workflows" version="1.17.194.1" />
+      <dependency id="Gaia.Core" version="1.17.194.1" />
     </dependencies>
   </metadata>
   <files>

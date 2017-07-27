@@ -83,6 +83,8 @@
       <Link>Properties\GlobalAssemblyInfo.Core.cs</Link>
     </Compile>
     <Compile Include="Jobs\JobBaseAbstract.cs" />
+    <Compile Include="Jobs\JobDataKeyAttribute.cs" />
+    <Compile Include="Jobs\TriggerDataKeyAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
