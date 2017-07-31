@@ -24,6 +24,7 @@ THE SOFTWARE.
 */
 using System;
 using Common.Logging;
+using Newtonsoft.Json;
 using Quartz;
 
 namespace Gaia.Core.Scheduling.Jobs
@@ -69,7 +70,13 @@ namespace Gaia.Core.Scheduling.Jobs
 			}
 			catch (Exception e)
 			{
-				Logger.ErrorFormat("Error while executing scheduled Job [{0}]", e, context.JobDetail.Key.Name);
+				Logger.Error($"Error while executing scheduled Job [{context.JobDetail.Key.Name}]", e);
+
+				// create trigger logger for further logging
+				var triggerLogger = $"{context.Trigger.JobKey}|{context.Trigger.Key}";
+
+				var jobRunLogger = LogManager.GetLogger(triggerLogger);
+				jobRunLogger.Error($"Trigger Data: {JsonConvert.SerializeObject(context.Trigger.JobDataMap)}", e);
 			}
 		}
 

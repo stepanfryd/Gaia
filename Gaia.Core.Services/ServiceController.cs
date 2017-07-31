@@ -146,7 +146,7 @@ namespace Gaia.Core.Services
 
 		private void InitServices()
 		{
-			_servicesManager.InitalizeServices();
+			_servicesManager?.InitalizeServices();
 		}
 
 		private void ShutDownServices()
@@ -169,12 +169,17 @@ namespace Gaia.Core.Services
 
 		private void InitPlugins()
 		{
-			_pluginsManager.InitalizePlugins();
+			_pluginsManager?.InitalizePlugins();
 		}
 
 		private void KillPlugins()
 		{
-			_pluginsManager.Dispose();
+			if (_pluginsManager != null)
+			{
+				_pluginsManager.ShutdownPlugins();
+				_pluginsManager.Dispose();
+				GC.SuppressFinalize(_pluginsManager);
+			}
 		}
 
 		#endregion
@@ -196,6 +201,7 @@ namespace Gaia.Core.Services
 			if (disposing)
 			{
 				ShutDownServices();
+				KillPlugins();
 				KillDomains();
 			}
 		}

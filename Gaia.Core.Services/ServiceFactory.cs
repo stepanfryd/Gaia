@@ -53,6 +53,11 @@ namespace Gaia.Core.Services
 		/// </summary>
 		public string ServiceName { get; set; }
 
+		/// <summary>
+		/// Service instance
+		/// </summary>
+		public IGaiaService Service { get; private set; }
+
 		#endregion
 
 		#region Constructors
@@ -101,12 +106,13 @@ namespace Gaia.Core.Services
 			{
 				ServiceName = serviceName,
 				DisplayName = displayName,
-				Description = description
+				Description = description,
+				Service = (IGaiaService)Activator.CreateInstance(typeof(T))
 			};
 
+
 			var serviceController = new ServiceController<IGaiaService>(
-				(IGaiaService) Activator.CreateInstance(typeof(T)),
-				pluginsConfiguration, wcfServicesConfiguration);
+				serVact.Service, pluginsConfiguration, wcfServicesConfiguration);
 
 			serVact.RunService(serviceController);
 			return serVact;

@@ -23,20 +23,32 @@ THE SOFTWARE.
 
 */
 
-using Gaia.Core.Services;
-using Gaia.Core.Tests.TestObjects;
+
+using Gaia.Service.Plugins.Scheduler;
 using NUnit.Framework;
 
 namespace Gaia.Core.Tests
 {
 	[TestFixture]
-	public class ServiceTests
+	public class PluginsTest
 	{
 		[Test]
-		public void TestServiceRunTest()
+		public void SchedulerPluginTest()
 		{
-			var s = ServiceFactory.Create<TestService>();
+			var sp = new SchedulerPlugin();
+			sp.Initialize();
+			sp.Start();
+			sp.Pause();
+			sp.Continue();
+			sp.Stop();
+			sp.Start();
+			sp.Uninitialize();
+		}
 
+		[Test]
+		public void PluginsManagerTest()
+		{
+			
 		}
 	}
 }

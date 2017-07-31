@@ -25,6 +25,7 @@ THE SOFTWARE.
 
 using System;
 using System.Collections.Generic;
+using Common.Logging;
 using Gaia.Core.Exceptions;
 using Gaia.Core.Services.Configuration;
 
@@ -36,6 +37,8 @@ namespace Gaia.Core.Services
 	[Serializable]
 	public class PluginsManager : IDisposable
 	{
+		private ILog _log;
+
 		#region Constructors
 
 		/// <summary>
@@ -44,6 +47,7 @@ namespace Gaia.Core.Services
 		/// <param name="plugins">Plugins configuration collection</param>
 		public PluginsManager(PluginConfigurationCollection plugins)
 		{
+			_log = LogManager.GetLogger(GetType());
 			_pluginsConfiguration = plugins;
 			_plugins = new List<IServicePlugin>();
 		}
@@ -112,11 +116,14 @@ namespace Gaia.Core.Services
 					{
 						plutinInstance.Initialize();
 						_plugins.Add(plutinInstance);
+						_log.Info($"Plugin [{plugin.Name}] has been initialized succesfully.");
 					}
 				}
 				else
 				{
-					throw new NotImplementedPluginInterfaceException(plugin.PluginTypeName);
+					var ex = new NotImplementedPluginInterfaceException(plugin.PluginTypeName);
+					_log.Error(ex);
+					throw ex;
 				}
 			}
 		}
@@ -130,20 +137,110 @@ namespace Gaia.Core.Services
 		/// </summary>
 		public void ShutdownPlugins()
 		{
-			//if (_pluginDomains != null)
-			//{
-			//	foreach (AppDomain pluginDomain in _pluginDomains)
-			//	{
-			//		AppDomain.Unload(pluginDomain);
-			//	}
-			//}
-
 			if (_plugins != null)
 			{
 				foreach (var plugin in _plugins)
 				{
-					plugin.Uninitialize();
-					plugin.Dispose();
+					try
+					{
+
+						plugin.Uninitialize();
+						plugin.Dispose();
+
+						_log.Info($"Plugin [{plugin.Name}] has been shut down succesfully.");
+					}
+					catch (Exception e)
+					{
+						_log.Error($"Plugin SHUTDOWN error [{plugin.Name}]", e);
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// Start all registered plugins
+		/// </summary>
+		public void StartPlugins()
+		{
+			if (_plugins != null)
+			{
+				foreach (var plugin in _plugins)
+				{
+					try
+					{
+						plugin.Start();
+						_log.Info($"Plugin [{plugin.Name}] has been started succesfully.");
+					}
+					catch (Exception e)
+					{
+						_log.Error($"Plugin START error [{plugin.Name}]", e);
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// Stop all registered plugins
+		/// </summary>
+		public void StopPlugins()
+		{
+			if (_plugins != null)
+			{
+				foreach (var plugin in _plugins)
+				{
+					try
+					{
+						plugin.Start();
+						_log.Info($"Plugin [{plugin.Name}] has been stopped succesfully.");
+					}
+					catch (Exception e)
+					{
+						_log.Error($"Plugin STOP error [{plugin.Name}]", e);
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// Pause all registered plugins
+		/// </summary>
+		public void PausePlugins()
+		{
+			if (_plugins != null)
+			{
+				foreach (var plugin in _plugins)
+				{
+					try
+					{
+						plugin.Pause();
+						_log.Info($"Plugin [{plugin.Name}] has been paused succesfully.");
+					}
+					catch (Exception e)
+					{
+						_log.Error($"Plugin PAUSE error [{plugin.Name}]", e);
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// Continue in execution of all registered plugins
+		/// </summary>
+		public void ContinuePlugins()
+		{
+			if (_plugins != null)
+			{
+				foreach (var plugin in _plugins)
+				{
+					try
+					{
+						plugin.Start();
+						_log.Info($"Plugin [{plugin.Name}] has been resumed succesfully.");
+					}
+					catch (Exception e)
+					{
+						_log.Error($"Plugin CONTINUE error [{plugin.Name}]", e);
+					}
 				}
 			}
 		}

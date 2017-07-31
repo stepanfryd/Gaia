@@ -29,7 +29,6 @@ using Gaia.Core.IoC;
 using Gaia.Core.Services;
 using Gaia.Service.Plugins.Scheduler.IoC;
 using Quartz;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace Gaia.Service.Plugins.Scheduler
@@ -40,14 +39,13 @@ namespace Gaia.Service.Plugins.Scheduler
 	[Serializable]
 	public class SchedulerPlugin : IServicePlugin
 	{
-		private static readonly object syncRoot = new object();
-
+		private static readonly object SyncRoot = new object();
 		private static IList<IScheduler> _schedulers;
 
 		public static IList<IScheduler> Schedulers {
 			get {
 				if(_schedulers==null) {
-					lock(syncRoot) {
+					lock(SyncRoot) {
 						if(_schedulers==null) {
 							_schedulers = new List<IScheduler>();
 						}
@@ -58,12 +56,18 @@ namespace Gaia.Service.Plugins.Scheduler
 			}
 		}
 
+		
 		#region Public properties
 
 		/// <summary>
 		/// Scheduler name
 		/// </summary>
 		public string Name { get; set; }
+
+		/// <summary>
+		/// Scheduler registered name
+		/// </summary>
+		public string SchedulerName { get; set; }
 
 		#endregion
 
@@ -97,6 +101,7 @@ namespace Gaia.Service.Plugins.Scheduler
 		private readonly ILog _logger;
 		private bool _disposed;
 		private IScheduler _scheduler;
+		private readonly IoCSchedulerFactory _schedulerFactory;
 
 		#endregion
 
@@ -109,9 +114,7 @@ namespace Gaia.Service.Plugins.Scheduler
 		{
 			_logger = LogManager.GetLogger(GetType());
 			var jobFactory = new IoCJobFactory(Container.Instance);
-			var schedulerFactory = new IoCSchedulerFactory(jobFactory);
-			_scheduler = schedulerFactory.GetScheduler();
-			Schedulers.Add(_scheduler);
+			_schedulerFactory = new IoCSchedulerFactory(jobFactory);
 		}
 
 		/// <summary>
@@ -131,27 +134,106 @@ namespace Gaia.Service.Plugins.Scheduler
 		/// </summary>
 		public void Initialize()
 		{
-			// TODO: add declarative configuration hardcoded for devleopment purppose
-
-			if (!_scheduler.IsStarted || _scheduler.InStandbyMode)
-			{
-				_scheduler.Start();
-				// TODO: implelent EVENT => Initialized(this, new EventArgs()); 
-				_logger.Info("Scheduler has been initialized");
-				OnInitialized();
-			}
+			_logger.Info("Scheduler has been initialized");
+			OnInitialized();
 		}
 
 		/// <summary>
 		///   Scheduler plugin has been uninitialized
 		/// </summary>
 		public void Uninitialize()
-		{
-			_logger.Info("Scheduler is going to shutdown");
-			_scheduler.Shutdown(true);
-			_logger.Info("Scheduler has shutdown");
+		{		
+			Stop();
+			_logger.Info("Scheduler has been uninitialized");
 		}
 
+		/// <summary>
+		/// Start service plugin
+		/// </summary>
+		public void Start()
+		{
+			try
+			{
+				_scheduler = _schedulerFactory.GetScheduler();
+				SchedulerName = _scheduler.SchedulerName;
+				Schedulers.Add(_scheduler);
+				_scheduler.Start();
+				_logger.Info($"Scheduler [{SchedulerName}] has been succesfully started");
+			}
+			catch (Exception e)
+			{
+				_logger.Error($"Scheduler [{SchedulerName}] start error", e);
+			}
+		}
+
+		/// <summary>
+		/// Pause service plugin. Scheduler goes to Stand By mode. Continue action executes Start action on scheduler
+		/// </summary>
+		public void Pause()
+		{
+			try
+			{
+				if (_scheduler != null && _scheduler.IsStarted)
+				{
+					_scheduler.Standby();
+				}
+				_logger.Info($"Scheduler [{SchedulerName}] has been succesfully paused (stand by mode)");
+			}
+			catch (Exception e)
+			{
+				_logger.Error($"Scheduler [{SchedulerName}] pause error", e);
+			}
+		}
+
+		/// <summary>
+		/// Stop service plugin
+		/// </summary>
+		public void Stop()
+		{
+			try
+			{
+				if (_scheduler != null)
+				{
+					_scheduler.Shutdown();
+
+					if (Schedulers.Contains(_scheduler))
+					{
+						Schedulers.Remove(_scheduler);
+					}
+
+					_scheduler = null;
+				}
+				_logger.Info($"Scheduler [{SchedulerName}] has been succesfully terminated (stop action)");
+			}
+			catch (Exception e)
+			{
+				_logger.Error($"Scheduler [{SchedulerName}] stop error", e);
+			}
+		}
+
+		/// <summary>
+		/// Continue with service plugin. Scheduler 
+		/// </summary>
+		public void Continue()
+		{
+			try
+			{
+				if (_scheduler != null && _scheduler.InStandbyMode)
+				{
+					_scheduler.Start();
+					_logger.Info($"Scheduler [{SchedulerName}] has been started from stand by mode");
+				}
+				else
+				{
+					_logger.Warn($"Scheduler [{SchedulerName}] has not been in stand by mode. Can't start. Service must be stop and start again.");
+				}
+				
+			}
+			catch (Exception e)
+			{
+				_logger.Error($"Scheduler [{SchedulerName}] continue error", e);
+			}
+		}
 		#endregion
 
 		#region IDisposable Implementation
@@ -175,16 +257,7 @@ namespace Gaia.Service.Plugins.Scheduler
 			{
 				if (disposing)
 				{
-					if (!_scheduler.IsShutdown)
-					{
-						Uninitialize();
-					}
-
-					if(Schedulers.Contains(_scheduler)) {
-						Schedulers.Remove(_scheduler);
-					}
-					
-					_scheduler = null;
+					Uninitialize();
 				}
 				_disposed = true;
 			}

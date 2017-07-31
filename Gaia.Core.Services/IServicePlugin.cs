@@ -54,6 +54,26 @@ namespace Gaia.Core.Services
 		void Uninitialize();
 
 		/// <summary>
+		/// Start service plugin
+		/// </summary>
+		void Start();
+
+		/// <summary>
+		/// Pause service plugin
+		/// </summary>
+		void Pause();
+
+		/// <summary>
+		/// Stop service plugin
+		/// </summary>
+		void Stop();
+
+		/// <summary>
+		/// Continue with service plugion
+		/// </summary>
+		void Continue();
+
+		/// <summary>
 		///   Event is fired when plugin is fully initialized
 		/// </summary>
 		event EventHandler Initialized;
