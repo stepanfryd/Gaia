@@ -29,6 +29,12 @@ namespace Gaia.Core.Services
 	/// </summary>
 	public interface IGaiaService
 	{
+
+		/// <summary>
+		/// Service controller managing service
+		/// </summary>
+		IServiceController ServiceController { get; set; }
+
 		/// <summary>
 		/// Starts srevice
 		/// </summary>

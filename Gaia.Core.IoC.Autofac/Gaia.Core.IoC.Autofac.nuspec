@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Gaia.Core.IoC.Autofac</id>
-    <version>1.17.212.2</version>
+    <version>1.17.212.6</version>
     <authors>Cloud17</authors>
     <owners>Cloud17</owners>
     <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <copyright>Copyright (c) Stepan Fryd 2017</copyright>
     <dependencies>
-      <dependency id="Autofac" version="4.6.0" />
+      <dependency id="Autofac" version="4.6.1" />
       <dependency id="Autofac.Configuration" version="4.0.1" />
       <dependency id="Microsoft.Extensions.Configuration" version="1.1.2" />
       <dependency id="Microsoft.Extensions.Configuration.Abstractions" version="1.1.2" />
@@ -24,13 +24,13 @@
       <dependency id="Microsoft.NETCore.Platforms" version="1.1.0" />
       <dependency id="Microsoft.Win32.Primitives" version="4.3.0" />
       <dependency id="NETStandard.Library" version="1.6.1" />
-      <dependency id="Newtonsoft.Json" version="10.0.2" />
+      <dependency id="Newtonsoft.Json" version="10.0.3" />
       <dependency id="System.AppContext" version="4.3.0" />
       <dependency id="System.Collections" version="4.3.0" />
       <dependency id="System.Collections.Concurrent" version="4.3.0" />
       <dependency id="System.Console" version="4.3.0" />
       <dependency id="System.Diagnostics.Debug" version="4.3.0" />
-      <dependency id="System.Diagnostics.DiagnosticSource" version="4.3.1" />
+      <dependency id="System.Diagnostics.DiagnosticSource" version="4.4.0" />
       <dependency id="System.Diagnostics.Tools" version="4.3.0" />
       <dependency id="System.Diagnostics.Tracing" version="4.3.0" />
       <dependency id="System.Globalization" version="4.3.0" />
@@ -69,7 +69,7 @@
       <dependency id="System.Threading.Timer" version="4.3.0" />
       <dependency id="System.Xml.ReaderWriter" version="4.3.0" />
       <dependency id="System.Xml.XDocument" version="4.3.0" />
-      <dependency id="Gaia.Core.IoC" version="1.17.212.2" />
+      <dependency id="Gaia.Core.IoC" version="1.17.212.6" />
     </dependencies>
   </metadata>
   <files>

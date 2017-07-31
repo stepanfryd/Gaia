@@ -32,25 +32,61 @@ using Topshelf;
 namespace Gaia.Core.Services
 {
 	/// <summary>
-	/// Services controller class. Controls service execution, and management
+	/// Base abstract class for service controllers
+	/// </summary>
+	public abstract class ServiceControllerBase : IServiceController
+	{
+		/// <summary>
+		///   ServiceController constructor creates new instatnce of service for registration
+		/// </summary>
+		/// <param name="service">Instance of service</param>
+		/// <param name="pluginsConfiguration">Instance of plugin configuration collections</param>
+		/// <param name="wcfServicesConfiguration">WCF services configuration</param>
+		protected ServiceControllerBase(IGaiaService service, PluginConfigurationCollection pluginsConfiguration,
+			ServiceHostConfigurationCollection wcfServicesConfiguration)
+		{
+			Service = service;
+			PluginsManager = new PluginsManager(pluginsConfiguration);
+			ServicesManager = new WcfServicesManager(wcfServicesConfiguration);
+
+			service.ServiceController = this;
+		}
+
+		/// <summary>
+		///   Controlled service
+		/// </summary>
+		public IGaiaService Service { get; protected set; }
+
+		/// <summary>
+		///   Instance of service plugin manager if exists
+		/// </summary>
+		public PluginsManager PluginsManager { get; protected set; }
+
+		/// <summary>
+		///   Instance of WCF service manager
+		/// </summary>
+		public WcfServicesManager ServicesManager { get; protected set; }
+	}
+
+	/// <summary>
+	///   Services controller class. Controls service execution, and management
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
-	public class ServiceController<T> : IDisposable, ServiceControl, ServiceSuspend, ServiceShutdown where T : IGaiaService
+	public class ServiceController<T> : ServiceControllerBase, IDisposable, ServiceControl, ServiceSuspend, ServiceShutdown
+		where T : IGaiaService
 	{
 		#region Constructors
 
 		/// <summary>
-		/// ServiceController constructor creates new instatnce of service for registration
+		///   ServiceController constructor creates new instatnce of service for registration
 		/// </summary>
 		/// <param name="service">Instance of service</param>
 		/// <param name="pluginsConfiguration">Instance of plugin configuration collections</param>
 		/// <param name="wcfServicesConfiguration">WCF services configuration</param>
 		public ServiceController(T service, PluginConfigurationCollection pluginsConfiguration,
-			ServiceHostConfigurationCollection wcfServicesConfiguration)
+			ServiceHostConfigurationCollection wcfServicesConfiguration) : base(service, pluginsConfiguration,
+			wcfServicesConfiguration)
 		{
-			_service = service;
-			_pluginsManager = new PluginsManager(pluginsConfiguration);
-			_servicesManager = new WcfServicesManager(wcfServicesConfiguration);
 		}
 
 		#endregion
@@ -68,22 +104,10 @@ namespace Gaia.Core.Services
 
 		#endregion
 
-		#region Private members
-
-		private readonly IGaiaService _service;
-		private readonly PluginsManager _pluginsManager;
-		private readonly WcfServicesManager _servicesManager;
-
-		#endregion
-
-		#region Public properties
-
-		#endregion
 
 		#region Public methods
 
 		/// <summary>
-		/// 
 		/// </summary>
 		/// <param name="hostControl"></param>
 		/// <returns></returns>
@@ -91,12 +115,11 @@ namespace Gaia.Core.Services
 		{
 			InitServices();
 			InitPlugins();
-			_service.Start();
+			Service.Start();
 			return true;
 		}
 
 		/// <summary>
-		/// 
 		/// </summary>
 		/// <param name="hostControl"></param>
 		/// <returns></returns>
@@ -105,39 +128,36 @@ namespace Gaia.Core.Services
 			KillPlugins();
 			ShutDownServices();
 			KillDomains();
-			_service.Stop();
+			Service.Stop();
 			return true;
 		}
 
 		/// <summary>
-		/// 
 		/// </summary>
 		/// <param name="hostControl"></param>
 		/// <returns></returns>
 		public bool Continue(HostControl hostControl)
 		{
-			_service.Continue();
+			Service.Continue();
 			return true;
 		}
 
 		/// <summary>
-		/// 
 		/// </summary>
 		/// <param name="hostControl"></param>
 		/// <returns></returns>
 		public bool Pause(HostControl hostControl)
 		{
-			_service.Pause();
+			Service.Pause();
 			return true;
 		}
 
 		/// <summary>
-		/// 
 		/// </summary>
 		/// <param name="hostControl"></param>
 		public void Shutdown(HostControl hostControl)
 		{
-			_service.Shutdown();
+			Service.Shutdown();
 		}
 
 		#endregion
@@ -146,16 +166,16 @@ namespace Gaia.Core.Services
 
 		private void InitServices()
 		{
-			_servicesManager?.InitalizeServices();
+			ServicesManager?.InitalizeServices();
 		}
 
 		private void ShutDownServices()
 		{
-			if (_servicesManager != null)
+			if (ServicesManager != null)
 			{
-				_servicesManager.ShutdownServices();
-				_servicesManager.Dispose();
-				GC.SuppressFinalize(_servicesManager);
+				ServicesManager.ShutdownServices();
+				ServicesManager.Dispose();
+				GC.SuppressFinalize(ServicesManager);
 			}
 		}
 
@@ -169,16 +189,16 @@ namespace Gaia.Core.Services
 
 		private void InitPlugins()
 		{
-			_pluginsManager?.InitalizePlugins();
+			PluginsManager?.InitalizePlugins();
 		}
 
 		private void KillPlugins()
 		{
-			if (_pluginsManager != null)
+			if (PluginsManager != null)
 			{
-				_pluginsManager.ShutdownPlugins();
-				_pluginsManager.Dispose();
-				GC.SuppressFinalize(_pluginsManager);
+				PluginsManager.ShutdownPlugins();
+				PluginsManager.Dispose();
+				GC.SuppressFinalize(PluginsManager);
 			}
 		}
 
@@ -187,7 +207,7 @@ namespace Gaia.Core.Services
 		#region IDisposable implementation
 
 		/// <summary>
-		/// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+		///   Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
 		/// </summary>
 		/// <filterpriority>2</filterpriority>
 		public void Dispose()

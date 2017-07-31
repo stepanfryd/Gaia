@@ -96,6 +96,7 @@
     <Compile Include="Configuration\PluginConfiguration.cs" />
     <Compile Include="Configuration\PluginConfigurationCollection.cs" />
     <Compile Include="IGaiaServiceService.cs" />
+    <Compile Include="IServiceController.cs" />
     <Compile Include="IServicePlugin.cs" />
     <Compile Include="PluginsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

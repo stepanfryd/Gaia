@@ -29,6 +29,8 @@ namespace Gaia.Core.Tests.TestObjects
 	[ServiceInfo("Service Name", "Service Display Name", "Service Description attribute")]
 	public class TestService : IGaiaService
 	{
+		public IServiceController ServiceController { get; set; }
+
 		public void Start() {}
 
 		public void Stop() {}
