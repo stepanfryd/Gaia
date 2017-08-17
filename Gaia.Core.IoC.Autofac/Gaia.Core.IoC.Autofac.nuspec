@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Gaia.Core.IoC.Autofac</id>
-    <version>1.17.212.6</version>
+    <version>1.17.212.7</version>
     <authors>Cloud17</authors>
     <owners>Cloud17</owners>
     <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
@@ -69,7 +69,7 @@
       <dependency id="System.Threading.Timer" version="4.3.0" />
       <dependency id="System.Xml.ReaderWriter" version="4.3.0" />
       <dependency id="System.Xml.XDocument" version="4.3.0" />
-      <dependency id="Gaia.Core.IoC" version="1.17.212.6" />
+      <dependency id="Gaia.Core.IoC" version="1.17.212.7" />
     </dependencies>
   </metadata>
   <files>
