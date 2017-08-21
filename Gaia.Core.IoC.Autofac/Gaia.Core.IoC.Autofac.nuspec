@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Gaia.Core.IoC.Autofac</id>
-    <version>1.17.212.7</version>
+    <version>1.17.229.1</version>
     <authors>Cloud17</authors>
     <owners>Cloud17</owners>
     <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
@@ -12,25 +12,25 @@
     <dependencies>
       <dependency id="Autofac" version="4.6.1" />
       <dependency id="Autofac.Configuration" version="4.0.1" />
-      <dependency id="Microsoft.Extensions.Configuration" version="1.1.2" />
-      <dependency id="Microsoft.Extensions.Configuration.Abstractions" version="1.1.2" />
-      <dependency id="Microsoft.Extensions.Configuration.FileExtensions" version="1.1.2" />
-      <dependency id="Microsoft.Extensions.Configuration.Json" version="1.1.2" />
-      <dependency id="Microsoft.Extensions.Configuration.Xml" version="1.1.2" />
-      <dependency id="Microsoft.Extensions.FileProviders.Abstractions" version="1.1.1" />
-      <dependency id="Microsoft.Extensions.FileProviders.Physical" version="1.1.1" />
-      <dependency id="Microsoft.Extensions.FileSystemGlobbing" version="1.1.1" />
-      <dependency id="Microsoft.Extensions.Primitives" version="1.1.1" />
-      <dependency id="Microsoft.NETCore.Platforms" version="1.1.0" />
+      <dependency id="Microsoft.Extensions.Configuration" version="2.0.0" />
+      <dependency id="Microsoft.Extensions.Configuration.Abstractions" version="2.0.0" />
+      <dependency id="Microsoft.Extensions.Configuration.FileExtensions" version="2.0.0" />
+      <dependency id="Microsoft.Extensions.Configuration.Json" version="2.0.0" />
+      <dependency id="Microsoft.Extensions.Configuration.Xml" version="2.0.0" />
+      <dependency id="Microsoft.Extensions.FileProviders.Abstractions" version="2.0.0" />
+      <dependency id="Microsoft.Extensions.FileProviders.Physical" version="2.0.0" />
+      <dependency id="Microsoft.Extensions.FileSystemGlobbing" version="2.0.0" />
+      <dependency id="Microsoft.Extensions.Primitives" version="2.0.0" />
+      <dependency id="Microsoft.NETCore.Platforms" version="2.0.0" />
       <dependency id="Microsoft.Win32.Primitives" version="4.3.0" />
-      <dependency id="NETStandard.Library" version="1.6.1" />
+      <dependency id="NETStandard.Library" version="2.0.0" />
       <dependency id="Newtonsoft.Json" version="10.0.3" />
       <dependency id="System.AppContext" version="4.3.0" />
       <dependency id="System.Collections" version="4.3.0" />
       <dependency id="System.Collections.Concurrent" version="4.3.0" />
       <dependency id="System.Console" version="4.3.0" />
       <dependency id="System.Diagnostics.Debug" version="4.3.0" />
-      <dependency id="System.Diagnostics.DiagnosticSource" version="4.4.0" />
+      <dependency id="System.Diagnostics.DiagnosticSource" version="4.4.1" />
       <dependency id="System.Diagnostics.Tools" version="4.3.0" />
       <dependency id="System.Diagnostics.Tracing" version="4.3.0" />
       <dependency id="System.Globalization" version="4.3.0" />
@@ -51,7 +51,7 @@
       <dependency id="System.Reflection.Primitives" version="4.3.0" />
       <dependency id="System.Resources.ResourceManager" version="4.3.0" />
       <dependency id="System.Runtime" version="4.3.0" />
-      <dependency id="System.Runtime.CompilerServices.Unsafe" version="4.3.0" />
+      <dependency id="System.Runtime.CompilerServices.Unsafe" version="4.4.0" />
       <dependency id="System.Runtime.Extensions" version="4.3.0" />
       <dependency id="System.Runtime.Handles" version="4.3.0" />
       <dependency id="System.Runtime.InteropServices" version="4.3.0" />
@@ -61,6 +61,7 @@
       <dependency id="System.Security.Cryptography.Encoding" version="4.3.0" />
       <dependency id="System.Security.Cryptography.Primitives" version="4.3.0" />
       <dependency id="System.Security.Cryptography.X509Certificates" version="4.3.0" />
+      <dependency id="System.Security.Cryptography.Xml" version="4.4.0" />
       <dependency id="System.Text.Encoding" version="4.3.0" />
       <dependency id="System.Text.Encoding.Extensions" version="4.3.0" />
       <dependency id="System.Text.RegularExpressions" version="4.3.0" />
@@ -69,7 +70,7 @@
       <dependency id="System.Threading.Timer" version="4.3.0" />
       <dependency id="System.Xml.ReaderWriter" version="4.3.0" />
       <dependency id="System.Xml.XDocument" version="4.3.0" />
-      <dependency id="Gaia.Core.IoC" version="1.17.212.7" />
+      <dependency id="Gaia.Core.IoC" version="1.17.229.1" />
     </dependencies>
   </metadata>
   <files>

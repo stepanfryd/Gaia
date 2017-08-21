@@ -154,7 +154,7 @@ namespace Gaia.Service.Plugins.Scheduler
 		{
 			try
 			{
-				_scheduler = _schedulerFactory.GetScheduler();
+				_scheduler = _schedulerFactory.GetScheduler();		
 				SchedulerName = _scheduler.SchedulerName;
 				Schedulers.Add(_scheduler);
 				_scheduler.Start();

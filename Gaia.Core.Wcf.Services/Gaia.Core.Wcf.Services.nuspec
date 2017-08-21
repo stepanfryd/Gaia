@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Gaia.Core.Wcf.Services</id>
-    <version>1.17.212.7</version>
+    <version>1.17.229.1</version>
     <authors>Cloud17</authors>
     <owners>Cloud17</owners>
     <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
@@ -10,11 +10,12 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <copyright>Copyright (c) Stepan Fryd 2017</copyright>
     <dependencies>
-      <dependency id="Common.Logging" version="3.3.1" />
-      <dependency id="Common.Logging.Core" version="3.3.1" />
-      <dependency id="Gaia.Core.IoC" version="1.17.212.7" />
-      <dependency id="Gaia.Core.Workflows" version="1.17.212.7" />
-      <dependency id="Gaia.Core" version="1.17.212.7" />
+      <dependency id="Common.Logging" version="3.4.1" />
+      <dependency id="Common.Logging.Core" version="3.4.1" />
+      <dependency id="Microsoft.CSharp" version="4.4.0" />
+      <dependency id="Gaia.Core.IoC" version="1.17.229.1" />
+      <dependency id="Gaia.Core.Workflows" version="1.17.229.1" />
+      <dependency id="Gaia.Core" version="1.17.229.1" />
     </dependencies>
   </metadata>
   <files>
