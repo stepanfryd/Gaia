@@ -28,7 +28,8 @@ THE SOFTWARE.
 using System;
 using System.ServiceModel.Activities;
 using System.ServiceModel.Activities.Activation;
-using Microsoft.Practices.Unity;
+using Unity;
+using Unity.Extension;
 
 namespace Gaia.Core.IoC.Unity.Workflow
 {

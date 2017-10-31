@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Gaia.Core.Mail.EmailQueue</id>
-    <version>1.17.229.1</version>
+    <version>1.17.304.1</version>
     <authors>Cloud17</authors>
     <owners>Cloud17</owners>
     <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
@@ -10,14 +10,14 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <copyright>Copyright (c) Stepan Fryd 2017</copyright>
     <dependencies>
-      <dependency id="Gaia.Core.IoC" version="1.17.229.1" />
-      <dependency id="Gaia.Core.Mail" version="1.17.229.1" />
-      <dependency id="Gaia.Core" version="1.17.229.1" />
+      <dependency id="Gaia.Core.IoC" version="1.17.304.1" />
+      <dependency id="Gaia.Core.Mail" version="1.17.304.1" />
+      <dependency id="Gaia.Core" version="1.17.304.1" />
     </dependencies>
   </metadata>
   <files>
     <file src="C:\_WORK\Gaia\Solution Items\NuGet\Template\tools\*" target="tools" />
-    <file src="C:\_WORK\Gaia\Gaia.Core.Mail.EmailQueue\bin\NuGet-Debug\Gaia.Core.Mail.EmailQueue.dll" target="lib\net462\Gaia.Core.Mail.EmailQueue.dll" />
-    <file src="C:\_WORK\Gaia\Gaia.Core.Mail.EmailQueue\bin\NuGet-Debug\Gaia.Core.Mail.EmailQueue.pdb" target="lib\net462\Gaia.Core.Mail.EmailQueue.pdb" />
+    <file src="C:\_WORK\Gaia\Gaia.Core.Mail.EmailQueue\bin\NuGet-Debug\Gaia.Core.Mail.EmailQueue.dll" target="lib\net47\Gaia.Core.Mail.EmailQueue.dll" />
+    <file src="C:\_WORK\Gaia\Gaia.Core.Mail.EmailQueue\bin\NuGet-Debug\Gaia.Core.Mail.EmailQueue.pdb" target="lib\net47\Gaia.Core.Mail.EmailQueue.pdb" />
   </files>
 </package>

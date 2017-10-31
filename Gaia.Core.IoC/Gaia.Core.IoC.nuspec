@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Gaia.Core.IoC</id>
-    <version>1.17.229.1</version>
+    <version>1.17.304.2</version>
     <authors>Cloud17</authors>
     <owners>Cloud17</owners>
     <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
@@ -11,12 +11,12 @@
     <copyright>Copyright (c) Stepan Fryd 2017</copyright>
     <dependencies>
       <dependency id="Cloud17.NParametrizer" version="1.0.8.0" />
-      <dependency id="Gaia.Core" version="1.17.229.1" />
+      <dependency id="Gaia.Core" version="1.17.304.2" />
     </dependencies>
   </metadata>
   <files>
     <file src="C:\_WORK\Gaia\Solution Items\NuGet\Template\tools\*" target="tools" />
-    <file src="C:\_WORK\Gaia\Gaia.Core.IoC\bin\NuGet-Debug\Gaia.Core.IoC.dll" target="lib\net462\Gaia.Core.IoC.dll" />
-    <file src="C:\_WORK\Gaia\Gaia.Core.IoC\bin\NuGet-Debug\Gaia.Core.IoC.pdb" target="lib\net462\Gaia.Core.IoC.pdb" />
+    <file src="C:\_WORK\Gaia\Gaia.Core.IoC\bin\NuGet-Debug\Gaia.Core.IoC.dll" target="lib\net47\Gaia.Core.IoC.dll" />
+    <file src="C:\_WORK\Gaia\Gaia.Core.IoC\bin\NuGet-Debug\Gaia.Core.IoC.pdb" target="lib\net47\Gaia.Core.IoC.pdb" />
   </files>
 </package>

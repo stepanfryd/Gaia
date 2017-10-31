@@ -25,7 +25,7 @@ THE SOFTWARE.
 /*
  Code copy from https://github.com/dimaKudr/Unity.WF
  */
-using Microsoft.Practices.Unity;
+using Unity.Extension;
 
 namespace Gaia.Core.IoC.Unity.Workflow
 {

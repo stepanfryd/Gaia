@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.Practices.Unity;
+using Unity;
 using Microsoft.Practices.Unity.Configuration;
 
 namespace Gaia.Core.IoC.Unity
