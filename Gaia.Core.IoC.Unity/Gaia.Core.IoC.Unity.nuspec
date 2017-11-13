@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Gaia.Core.IoC.Unity</id>
-    <version>1.17.304.1</version>
+    <version>1.17.304.2</version>
     <authors>Cloud17</authors>
     <owners>Cloud17</owners>
     <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
@@ -15,8 +15,8 @@
       <dependency id="Unity.Abstractions" version="2.1.0" />
       <dependency id="Unity.Configuration" version="5.0.2" />
       <dependency id="Unity.Container" version="5.1.1" />
-      <dependency id="Gaia.Core.IoC" version="1.17.304.1" />
-      <dependency id="Gaia.Core.Wcf" version="1.17.304.1" />
+      <dependency id="Gaia.Core.IoC" version="1.17.304.2" />
+      <dependency id="Gaia.Core.Wcf" version="1.17.304.2" />
     </dependencies>
   </metadata>
   <files>
