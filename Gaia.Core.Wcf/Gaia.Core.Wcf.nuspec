@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Gaia.Core.Wcf</id>
-    <version>1.17.304.2</version>
+    <version>1.17.345.1</version>
     <authors>Cloud17</authors>
     <owners>Cloud17</owners>
     <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
@@ -14,8 +14,8 @@
       <dependency id="Common.Logging.Core" version="3.4.1" />
       <dependency id="CommonServiceLocator" version="2.0.1" />
       <dependency id="Microsoft.CSharp" version="4.4.0" />
-      <dependency id="Gaia.Core.IoC" version="1.17.304.2" />
-      <dependency id="Gaia.Core" version="1.17.304.2" />
+      <dependency id="Gaia.Core.IoC" version="1.17.345.1" />
+      <dependency id="Gaia.Core" version="1.17.345.1" />
     </dependencies>
   </metadata>
   <files>

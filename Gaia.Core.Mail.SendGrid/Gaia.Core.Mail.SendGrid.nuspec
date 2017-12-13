@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Gaia.Core.Mail.SendGrid</id>
-    <version>1.17.304.2</version>
+    <version>1.17.345.1</version>
     <authors>Cloud17</authors>
     <owners>Cloud17</owners>
     <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
@@ -15,13 +15,15 @@
       <dependency id="Sendgrid" version="9.9.0" />
       <dependency id="SendGrid.CSharp.HTTP.Client" version="3.3.0" />
       <dependency id="SendGrid.SmtpApi" version="1.3.3" />
+      <dependency id="System.IO" version="4.3.0" />
       <dependency id="System.Net.Http" version="4.3.3" />
-      <dependency id="System.Security.Cryptography.Algorithms" version="4.3.0" />
+      <dependency id="System.Runtime" version="4.3.0" />
+      <dependency id="System.Security.Cryptography.Algorithms" version="4.3.1" />
       <dependency id="System.Security.Cryptography.Encoding" version="4.3.0" />
       <dependency id="System.Security.Cryptography.Primitives" version="4.3.0" />
-      <dependency id="System.Security.Cryptography.X509Certificates" version="4.3.1" />
-      <dependency id="Gaia.Core.Mail" version="1.17.304.2" />
-      <dependency id="Gaia.Core" version="1.17.304.2" />
+      <dependency id="System.Security.Cryptography.X509Certificates" version="4.3.2" />
+      <dependency id="Gaia.Core.Mail" version="1.17.345.1" />
+      <dependency id="Gaia.Core" version="1.17.345.1" />
     </dependencies>
   </metadata>
   <files>

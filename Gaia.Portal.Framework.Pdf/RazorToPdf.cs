@@ -51,7 +51,6 @@ namespace Gaia.Portal.Framework.Pdf
 			{
 				viewName = controllerContext.RouteData.GetRequiredString("action");
 			}
-		
 			var html = RenderView(controllerContext, viewName);
 
 			byte[] output;
@@ -61,6 +60,9 @@ namespace Gaia.Portal.Framework.Pdf
 				var document = new Document(pageSize ?? PageSize.A4, 30, 30, 10, 10);
 				//to create landscape, use PageSize.A4.Rotate() for pageSize
 				var writer = PdfWriter.GetInstance(document, memoryStream);
+
+				configureSettings?.Invoke(writer, document);
+
 				var worker = XMLWorkerHelper.GetInstance();
 				var defaultFontPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Fonts), DEFAULT_FONT_NAME);
 				var fontProvider = new CustomFontFactory(defaultFontPath);
