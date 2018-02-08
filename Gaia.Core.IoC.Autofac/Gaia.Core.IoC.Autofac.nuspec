@@ -61,21 +61,21 @@
       <dependency id="System.Security.Cryptography.Encoding" version="4.3.0" />
       <dependency id="System.Security.Cryptography.Primitives" version="4.3.0" />
       <dependency id="System.Security.Cryptography.X509Certificates" version="4.3.2" />
-      <dependency id="System.Security.Cryptography.Xml" version="4.4.0" />
+      <dependency id="System.Security.Cryptography.Xml" version="4.4.1" />
       <dependency id="System.Text.Encoding" version="4.3.0" />
       <dependency id="System.Text.Encoding.Extensions" version="4.3.0" />
       <dependency id="System.Text.RegularExpressions" version="4.3.0" />
       <dependency id="System.Threading" version="4.3.0" />
       <dependency id="System.Threading.Tasks" version="4.3.0" />
       <dependency id="System.Threading.Timer" version="4.3.0" />
-      <dependency id="System.Xml.ReaderWriter" version="4.3.0" />
+      <dependency id="System.Xml.ReaderWriter" version="4.3.1" />
       <dependency id="System.Xml.XDocument" version="4.3.0" />
       <dependency id="Gaia.Core.IoC" version="1.17.345.1" />
     </dependencies>
   </metadata>
   <files>
-    <file src="C:\_WORK\Gaia\Solution Items\NuGet\Template\tools\*" target="tools" />
-    <file src="C:\_WORK\Gaia\Gaia.Core.IoC.Autofac\bin\NuGet-Debug\Gaia.Core.IoC.Autofac.dll" target="lib\net47\Gaia.Core.IoC.Autofac.dll" />
-    <file src="C:\_WORK\Gaia\Gaia.Core.IoC.Autofac\bin\NuGet-Debug\Gaia.Core.IoC.Autofac.pdb" target="lib\net47\Gaia.Core.IoC.Autofac.pdb" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Solution Items\NuGet\Template\tools\*" target="tools" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Core.IoC.Autofac\bin\NuGet-Debug\Gaia.Core.IoC.Autofac.dll" target="lib\net47\Gaia.Core.IoC.Autofac.dll" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Core.IoC.Autofac\bin\NuGet-Debug\Gaia.Core.IoC.Autofac.pdb" target="lib\net47\Gaia.Core.IoC.Autofac.pdb" />
   </files>
 </package>

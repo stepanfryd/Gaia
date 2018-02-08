@@ -14,7 +14,7 @@
       <dependency id="Cloud17.NParametrizer" version="1.0.8.0" />
       <dependency id="Common.Logging" version="3.4.1" />
       <dependency id="Common.Logging.Core" version="3.4.1" />
-      <dependency id="CommonServiceLocator" version="2.0.1" />
+      <dependency id="CommonServiceLocator" version="2.0.2" />
       <dependency id="Microsoft.AspNet.Mvc" version="5.2.3" />
       <dependency id="Microsoft.AspNet.Razor" version="3.2.3" />
       <dependency id="Microsoft.AspNet.Web.Optimization" version="1.1.3" />
@@ -22,7 +22,7 @@
       <dependency id="Microsoft.AspNet.WebApi.Core" version="5.2.3" />
       <dependency id="Microsoft.AspNet.WebApi.WebHost" version="5.2.3" />
       <dependency id="Microsoft.AspNet.WebPages" version="3.2.3" />
-      <dependency id="Microsoft.CSharp" version="4.4.0" />
+      <dependency id="Microsoft.CSharp" version="4.4.1" />
       <dependency id="Microsoft.Web.Infrastructure" version="1.0.0.0" />
       <dependency id="Newtonsoft.Json" version="10.0.3" />
       <dependency id="WebActivatorEx" version="2.2.0" />
@@ -33,8 +33,8 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="C:\_WORK\Gaia\Solution Items\NuGet\Template\tools\*" target="tools" />
-    <file src="C:\_WORK\Gaia\Gaia.Portal.Framework\bin\NuGet-Debug\Gaia.Portal.Framework.dll" target="lib\net47\Gaia.Portal.Framework.dll" />
-    <file src="C:\_WORK\Gaia\Gaia.Portal.Framework\bin\NuGet-Debug\Gaia.Portal.Framework.pdb" target="lib\net47\Gaia.Portal.Framework.pdb" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Solution Items\NuGet\Template\tools\*" target="tools" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Portal.Framework\bin\NuGet-Debug\Gaia.Portal.Framework.dll" target="lib\net47\Gaia.Portal.Framework.dll" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Portal.Framework\bin\NuGet-Debug\Gaia.Portal.Framework.pdb" target="lib\net47\Gaia.Portal.Framework.pdb" />
   </files>
 </package>

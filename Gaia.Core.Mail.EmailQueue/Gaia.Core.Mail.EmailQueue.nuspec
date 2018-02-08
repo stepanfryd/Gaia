@@ -16,8 +16,8 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="C:\_WORK\Gaia\Solution Items\NuGet\Template\tools\*" target="tools" />
-    <file src="C:\_WORK\Gaia\Gaia.Core.Mail.EmailQueue\bin\NuGet-Debug\Gaia.Core.Mail.EmailQueue.dll" target="lib\net47\Gaia.Core.Mail.EmailQueue.dll" />
-    <file src="C:\_WORK\Gaia\Gaia.Core.Mail.EmailQueue\bin\NuGet-Debug\Gaia.Core.Mail.EmailQueue.pdb" target="lib\net47\Gaia.Core.Mail.EmailQueue.pdb" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Solution Items\NuGet\Template\tools\*" target="tools" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Core.Mail.EmailQueue\bin\NuGet-Debug\Gaia.Core.Mail.EmailQueue.dll" target="lib\net47\Gaia.Core.Mail.EmailQueue.dll" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Core.Mail.EmailQueue\bin\NuGet-Debug\Gaia.Core.Mail.EmailQueue.pdb" target="lib\net47\Gaia.Core.Mail.EmailQueue.pdb" />
   </files>
 </package>

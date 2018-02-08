@@ -12,7 +12,7 @@
     <dependencies>
       <dependency id="Common.Logging" version="3.4.1" />
       <dependency id="Common.Logging.Core" version="3.4.1" />
-      <dependency id="Microsoft.CSharp" version="4.4.0" />
+      <dependency id="Microsoft.CSharp" version="4.4.1" />
       <dependency id="Topshelf" version="4.0.3" />
       <dependency id="Gaia.Core.IoC" version="1.17.345.1" />
       <dependency id="Gaia.Core.Wcf" version="1.17.345.1" />
@@ -20,8 +20,8 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="C:\_WORK\Gaia\Solution Items\NuGet\Template\tools\*" target="tools" />
-    <file src="C:\_WORK\Gaia\Gaia.Core.Services\bin\NuGet-Debug\Gaia.Core.Services.dll" target="lib\net47\Gaia.Core.Services.dll" />
-    <file src="C:\_WORK\Gaia\Gaia.Core.Services\bin\NuGet-Debug\Gaia.Core.Services.pdb" target="lib\net47\Gaia.Core.Services.pdb" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Solution Items\NuGet\Template\tools\*" target="tools" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Core.Services\bin\NuGet-Debug\Gaia.Core.Services.dll" target="lib\net47\Gaia.Core.Services.dll" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Core.Services\bin\NuGet-Debug\Gaia.Core.Services.pdb" target="lib\net47\Gaia.Core.Services.pdb" />
   </files>
 </package>
