@@ -50,7 +50,8 @@ namespace Gaia.Core.IoC.Unity.Workflow
 
 		#region Private and protected
 
-		public override void PostBuildUp(IBuilderContext context) {
+		public override void PostBuildUp(IBuilderContext context, object pre = null)
+		{
 			var derivedFromActivity = typeof(Activity).IsAssignableFrom(context.BuildKey.Type);
 			if (!derivedFromActivity)
 				return;
