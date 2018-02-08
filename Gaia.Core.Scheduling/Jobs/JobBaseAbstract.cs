@@ -23,6 +23,7 @@ THE SOFTWARE.
 
 */
 using System;
+using System.Threading.Tasks;
 using Common.Logging;
 using Newtonsoft.Json;
 using Quartz;
@@ -61,12 +62,12 @@ namespace Gaia.Core.Scheduling.Jobs
 		///             execution.
 		/// </remarks>
 		/// <param name="context">The execution context.</param>
-		public void Execute(IJobExecutionContext context)
+		public async Task Execute(IJobExecutionContext context)
 		{
 			try
 			{
 				Logger.InfoFormat("Executing [{0}]", context.JobDetail.Key);
-				ExecuteJob(context);
+				await ExecuteAsync(context);
 			}
 			catch (Exception e)
 			{
@@ -84,6 +85,7 @@ namespace Gaia.Core.Scheduling.Jobs
 		/// Abstract method executes particular job. Overriden method contains task execution
 		/// </summary>
 		/// <param name="context"></param>
-		protected abstract void ExecuteJob(IJobExecutionContext context);
+		protected abstract Task ExecuteAsync(IJobExecutionContext context);
+
 	}
 }

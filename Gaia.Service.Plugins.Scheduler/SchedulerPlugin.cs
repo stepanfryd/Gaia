@@ -23,13 +23,14 @@ THE SOFTWARE.
 
 */
 
-using System;
 using Common.Logging;
 using Gaia.Core.IoC;
 using Gaia.Core.Services;
 using Gaia.Service.Plugins.Scheduler.IoC;
 using Quartz;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Gaia.Service.Plugins.Scheduler
 {
@@ -39,24 +40,36 @@ namespace Gaia.Service.Plugins.Scheduler
 	[Serializable]
 	public class SchedulerPlugin : IServicePlugin
 	{
+		#region Private members
+
 		private static readonly object SyncRoot = new object();
 		private static IList<IScheduler> _schedulers;
 
+		private readonly ILog _logger;
+		private bool _disposed;
+		private IScheduler _scheduler;
+		private readonly IoCSchedulerFactory _schedulerFactory;
+		private Task _mainPluginTask;
+
+		#endregion Private members
+
 		public static IList<IScheduler> Schedulers {
 			get {
-				if(_schedulers==null) {
-					lock(SyncRoot) {
-						if(_schedulers==null) {
+				if (_schedulers == null)
+				{
+					lock (SyncRoot)
+					{
+						if (_schedulers == null)
+						{
 							_schedulers = new List<IScheduler>();
 						}
 					}
 				}
-				
+
 				return _schedulers;
 			}
 		}
 
-		
 		#region Public properties
 
 		/// <summary>
@@ -69,7 +82,7 @@ namespace Gaia.Service.Plugins.Scheduler
 		/// </summary>
 		public string SchedulerName { get; set; }
 
-		#endregion
+		#endregion Public properties
 
 		#region Interface Implementations
 
@@ -80,9 +93,9 @@ namespace Gaia.Service.Plugins.Scheduler
 		/// </summary>
 		public event EventHandler Initialized;
 
-		#endregion
+		#endregion Events
 
-		#endregion
+		#endregion Interface Implementations
 
 		#region Private and protected
 
@@ -94,16 +107,7 @@ namespace Gaia.Service.Plugins.Scheduler
 			Initialized?.Invoke(this, EventArgs.Empty);
 		}
 
-		#endregion
-
-		#region Private members
-
-		private readonly ILog _logger;
-		private bool _disposed;
-		private IScheduler _scheduler;
-		private readonly IoCSchedulerFactory _schedulerFactory;
-
-		#endregion
+		#endregion Private and protected
 
 		#region Constructor and destructor
 
@@ -125,7 +129,7 @@ namespace Gaia.Service.Plugins.Scheduler
 			Dispose(false);
 		}
 
-		#endregion
+		#endregion Constructor and destructor
 
 		#region Public methods
 
@@ -142,7 +146,7 @@ namespace Gaia.Service.Plugins.Scheduler
 		///   Scheduler plugin has been uninitialized
 		/// </summary>
 		public void Uninitialize()
-		{		
+		{
 			Stop();
 			_logger.Info("Scheduler has been uninitialized");
 		}
@@ -152,18 +156,23 @@ namespace Gaia.Service.Plugins.Scheduler
 		/// </summary>
 		public void Start()
 		{
-			try
+			_mainPluginTask = Task.Run(async () =>
 			{
-				_scheduler = _schedulerFactory.GetScheduler();		
-				SchedulerName = _scheduler.SchedulerName;
-				Schedulers.Add(_scheduler);
-				_scheduler.Start();
-				_logger.Info($"Scheduler [{SchedulerName}] has been succesfully started");
-			}
-			catch (Exception e)
-			{
-				_logger.Error($"Scheduler [{SchedulerName}] start error", e);
-			}
+				try
+				{
+					_scheduler = await _schedulerFactory.GetScheduler();
+					SchedulerName = _scheduler.SchedulerName;
+					Schedulers.Add(_scheduler);
+					await _scheduler.Start();
+					_logger.Info($"Scheduler [{SchedulerName}] has been succesfully started");
+				}
+				catch (Exception e)
+				{
+					_logger.Error($"Scheduler [{SchedulerName}] start error", e);
+				}
+			});
+
+			Task.WaitAll(_mainPluginTask);
 		}
 
 		/// <summary>
@@ -212,7 +221,7 @@ namespace Gaia.Service.Plugins.Scheduler
 		}
 
 		/// <summary>
-		/// Continue with service plugin. Scheduler 
+		/// Continue with service plugin. Scheduler
 		/// </summary>
 		public void Continue()
 		{
@@ -227,14 +236,14 @@ namespace Gaia.Service.Plugins.Scheduler
 				{
 					_logger.Warn($"Scheduler [{SchedulerName}] has not been in stand by mode. Can't start. Service must be stop and start again.");
 				}
-				
 			}
 			catch (Exception e)
 			{
 				_logger.Error($"Scheduler [{SchedulerName}] continue error", e);
 			}
 		}
-		#endregion
+
+		#endregion Public methods
 
 		#region IDisposable Implementation
 
@@ -263,6 +272,6 @@ namespace Gaia.Service.Plugins.Scheduler
 			}
 		}
 
-		#endregion
+		#endregion IDisposable Implementation
 	}
 }

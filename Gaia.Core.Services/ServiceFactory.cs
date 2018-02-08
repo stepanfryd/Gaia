@@ -36,6 +36,9 @@ namespace Gaia.Core.Services
 	/// </summary>
 	public class ServiceFactory
 	{
+
+		private TopshelfExitCode _topshelfExitCode;
+
 		#region Public members
 
 		/// <summary>
@@ -70,7 +73,7 @@ namespace Gaia.Core.Services
 
 		private void RunService(ServiceController<IGaiaService> serviceController)
 		{
-			HostFactory.Run(x =>
+			_topshelfExitCode = HostFactory.Run(x =>
 			{
 				//x.UseLinuxIfAvailable();
 				x.ApplyCommandLine();
@@ -84,9 +87,14 @@ namespace Gaia.Core.Services
 				x.SetDescription(Description);
 				x.SetDisplayName(DisplayName);
 				x.SetServiceName(ServiceName);
-
-				x.Service(s => serviceController);
+				x.Service(
+					s => serviceController,
+					e => {
+						e.AfterStoppingService(() => serviceController.Dispose());
+						});
 			});
+
+			Environment.ExitCode = (int)Convert.ChangeType(_topshelfExitCode, _topshelfExitCode.GetTypeCode());
 		}
 
 		/// <summary>

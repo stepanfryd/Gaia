@@ -26,6 +26,7 @@ using System;
 using System.IO;
 using System.Text;
 using System.Web.Mvc;
+using HtmlAgilityPack;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using iTextSharp.tool.xml;
@@ -53,8 +54,21 @@ namespace Gaia.Portal.Framework.Pdf
 			}
 			var html = RenderView(controllerContext, viewName);
 
+			// fix potentionally mallformed XHTML document
+			var htmlDoc = new HtmlDocument()
+			{
+				OptionCheckSyntax = true,
+				OptionWriteEmptyNodes = true,
+				OptionAutoCloseOnEnd = true,
+				OptionFixNestedTags= true,
+				OptionOutputAsXml = true
+			};
+			htmlDoc.LoadHtml(html);
+
+			var htmlFixed = htmlDoc.DocumentNode.WriteTo();
+
 			byte[] output;
-			using (var capturedActionStream = new MemoryStream(Encoding.UTF8.GetBytes(html)))
+			using (var capturedActionStream = new MemoryStream(Encoding.UTF8.GetBytes(htmlFixed)))
 			{
 				var memoryStream = new MemoryStream();
 				var document = new Document(pageSize ?? PageSize.A4, 30, 30, 10, 10);

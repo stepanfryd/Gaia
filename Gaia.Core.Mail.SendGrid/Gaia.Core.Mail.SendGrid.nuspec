@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Gaia.Core.Mail.SendGrid</id>
-    <version>1.17.345.1</version>
+    <version>1.18.39.3</version>
     <authors>Cloud17</authors>
     <owners>Cloud17</owners>
     <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
@@ -22,13 +22,13 @@
       <dependency id="System.Security.Cryptography.Encoding" version="4.3.0" />
       <dependency id="System.Security.Cryptography.Primitives" version="4.3.0" />
       <dependency id="System.Security.Cryptography.X509Certificates" version="4.3.2" />
-      <dependency id="Gaia.Core.Mail" version="1.17.345.1" />
-      <dependency id="Gaia.Core" version="1.17.345.1" />
+      <dependency id="Gaia.Core.Mail" version="1.18.39.3" />
+      <dependency id="Gaia.Core" version="1.18.39.3" />
     </dependencies>
   </metadata>
   <files>
-    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Solution Items\NuGet\Template\tools\*" target="tools" />
-    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Core.Mail.SendGrid\bin\NuGet-Debug\Gaia.Core.Mail.SendGrid.dll" target="lib\net47\Gaia.Core.Mail.SendGrid.dll" />
-    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Core.Mail.SendGrid\bin\NuGet-Debug\Gaia.Core.Mail.SendGrid.pdb" target="lib\net47\Gaia.Core.Mail.SendGrid.pdb" />
+    <file src="C:\_WORK\Gaia\Solution Items\NuGet\Template\tools\*" target="tools" />
+    <file src="C:\_WORK\Gaia\Gaia.Core.Mail.SendGrid\bin\NuGet-Debug\Gaia.Core.Mail.SendGrid.dll" target="lib\net47\Gaia.Core.Mail.SendGrid.dll" />
+    <file src="C:\_WORK\Gaia\Gaia.Core.Mail.SendGrid\bin\NuGet-Debug\Gaia.Core.Mail.SendGrid.pdb" target="lib\net47\Gaia.Core.Mail.SendGrid.pdb" />
   </files>
 </package>
