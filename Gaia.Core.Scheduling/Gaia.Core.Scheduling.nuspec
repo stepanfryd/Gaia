@@ -12,14 +12,14 @@
     <dependencies>
       <dependency id="Common.Logging" version="3.4.1" />
       <dependency id="Common.Logging.Core" version="3.4.1" />
-      <dependency id="Microsoft.CSharp" version="4.4.0" />
+      <dependency id="Microsoft.CSharp" version="4.4.1" />
       <dependency id="Newtonsoft.Json" version="10.0.3" />
       <dependency id="Quartz" version="2.6.1" />
     </dependencies>
   </metadata>
   <files>
-    <file src="C:\_WORK\Gaia\Solution Items\NuGet\Template\tools\*" target="tools" />
-    <file src="C:\_WORK\Gaia\Gaia.Core.Scheduling\bin\NuGet-Debug\Gaia.Core.Scheduling.dll" target="lib\net47\Gaia.Core.Scheduling.dll" />
-    <file src="C:\_WORK\Gaia\Gaia.Core.Scheduling\bin\NuGet-Debug\Gaia.Core.Scheduling.pdb" target="lib\net47\Gaia.Core.Scheduling.pdb" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Solution Items\NuGet\Template\tools\*" target="tools" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Core.Scheduling\bin\NuGet-Debug\Gaia.Core.Scheduling.dll" target="lib\net47\Gaia.Core.Scheduling.dll" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Core.Scheduling\bin\NuGet-Debug\Gaia.Core.Scheduling.pdb" target="lib\net47\Gaia.Core.Scheduling.pdb" />
   </files>
 </package>

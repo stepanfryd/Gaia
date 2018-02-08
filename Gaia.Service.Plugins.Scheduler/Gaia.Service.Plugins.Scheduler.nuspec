@@ -12,7 +12,7 @@
     <dependencies>
       <dependency id="Common.Logging" version="3.4.1" />
       <dependency id="Common.Logging.Core" version="3.4.1" />
-      <dependency id="Microsoft.CSharp" version="4.4.0" />
+      <dependency id="Microsoft.CSharp" version="4.4.1" />
       <dependency id="Newtonsoft.Json" version="10.0.3" />
       <dependency id="Quartz" version="2.6.1" />
       <dependency id="Gaia.Core.IoC" version="1.17.345.1" />
@@ -20,8 +20,8 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="C:\_WORK\Gaia\Solution Items\NuGet\Template\tools\*" target="tools" />
-    <file src="C:\_WORK\Gaia\Gaia.Service.Plugins.Scheduler\bin\NuGet-Debug\Gaia.Service.Plugins.Scheduler.dll" target="lib\net47\Gaia.Service.Plugins.Scheduler.dll" />
-    <file src="C:\_WORK\Gaia\Gaia.Service.Plugins.Scheduler\bin\NuGet-Debug\Gaia.Service.Plugins.Scheduler.pdb" target="lib\net47\Gaia.Service.Plugins.Scheduler.pdb" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Solution Items\NuGet\Template\tools\*" target="tools" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Service.Plugins.Scheduler\bin\NuGet-Debug\Gaia.Service.Plugins.Scheduler.dll" target="lib\net47\Gaia.Service.Plugins.Scheduler.dll" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Service.Plugins.Scheduler\bin\NuGet-Debug\Gaia.Service.Plugins.Scheduler.pdb" target="lib\net47\Gaia.Service.Plugins.Scheduler.pdb" />
   </files>
 </package>

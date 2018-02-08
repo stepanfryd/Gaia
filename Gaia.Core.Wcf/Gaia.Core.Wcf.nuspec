@@ -12,15 +12,15 @@
     <dependencies>
       <dependency id="Common.Logging" version="3.4.1" />
       <dependency id="Common.Logging.Core" version="3.4.1" />
-      <dependency id="CommonServiceLocator" version="2.0.1" />
-      <dependency id="Microsoft.CSharp" version="4.4.0" />
+      <dependency id="CommonServiceLocator" version="2.0.2" />
+      <dependency id="Microsoft.CSharp" version="4.4.1" />
       <dependency id="Gaia.Core.IoC" version="1.17.345.1" />
       <dependency id="Gaia.Core" version="1.17.345.1" />
     </dependencies>
   </metadata>
   <files>
-    <file src="C:\_WORK\Gaia\Solution Items\NuGet\Template\tools\*" target="tools" />
-    <file src="C:\_WORK\Gaia\Gaia.Core.Wcf\bin\NuGet-Debug\Gaia.Core.Wcf.dll" target="lib\net47\Gaia.Core.Wcf.dll" />
-    <file src="C:\_WORK\Gaia\Gaia.Core.Wcf\bin\NuGet-Debug\Gaia.Core.Wcf.pdb" target="lib\net47\Gaia.Core.Wcf.pdb" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Solution Items\NuGet\Template\tools\*" target="tools" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Core.Wcf\bin\NuGet-Debug\Gaia.Core.Wcf.dll" target="lib\net47\Gaia.Core.Wcf.dll" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Core.Wcf\bin\NuGet-Debug\Gaia.Core.Wcf.pdb" target="lib\net47\Gaia.Core.Wcf.pdb" />
   </files>
 </package>

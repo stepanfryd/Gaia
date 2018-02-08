@@ -12,15 +12,15 @@
     <dependencies>
       <dependency id="Common.Logging" version="3.4.1" />
       <dependency id="Common.Logging.Core" version="3.4.1" />
-      <dependency id="Microsoft.CSharp" version="4.4.0" />
+      <dependency id="Microsoft.CSharp" version="4.4.1" />
       <dependency id="Gaia.Core.IoC" version="1.17.345.1" />
       <dependency id="Gaia.Core.Workflows" version="1.17.345.1" />
       <dependency id="Gaia.Core" version="1.17.345.1" />
     </dependencies>
   </metadata>
   <files>
-    <file src="C:\_WORK\Gaia\Solution Items\NuGet\Template\tools\*" target="tools" />
-    <file src="C:\_WORK\Gaia\Gaia.Core.Wcf.Services\bin\NuGet-Debug\Gaia.Core.Wcf.Services.dll" target="lib\net47\Gaia.Core.Wcf.Services.dll" />
-    <file src="C:\_WORK\Gaia\Gaia.Core.Wcf.Services\bin\NuGet-Debug\Gaia.Core.Wcf.Services.pdb" target="lib\net47\Gaia.Core.Wcf.Services.pdb" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Solution Items\NuGet\Template\tools\*" target="tools" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Core.Wcf.Services\bin\NuGet-Debug\Gaia.Core.Wcf.Services.dll" target="lib\net47\Gaia.Core.Wcf.Services.dll" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Core.Wcf.Services\bin\NuGet-Debug\Gaia.Core.Wcf.Services.pdb" target="lib\net47\Gaia.Core.Wcf.Services.pdb" />
   </files>
 </package>
