@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Gaia.Portal.Framework</id>
-    <version>1.18.39.3</version>
+    <version>1.18.41.1</version>
     <authors>Cloud17</authors>
     <owners>Cloud17</owners>
     <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
@@ -27,14 +27,14 @@
       <dependency id="Newtonsoft.Json" version="10.0.3" />
       <dependency id="WebActivatorEx" version="2.2.0" />
       <dependency id="WebGrease" version="1.6.0" />
-      <dependency id="Gaia.Core.IoC" version="1.18.39.3" />
-      <dependency id="Gaia.Core.Mail" version="1.18.39.3" />
-      <dependency id="Gaia.Core" version="1.18.39.3" />
+      <dependency id="Gaia.Core.IoC" version="1.18.41.1" />
+      <dependency id="Gaia.Core.Mail" version="1.18.41.1" />
+      <dependency id="Gaia.Core" version="1.18.41.1" />
     </dependencies>
   </metadata>
   <files>
-    <file src="C:\_WORK\Gaia\Solution Items\NuGet\Template\tools\*" target="tools" />
-    <file src="C:\_WORK\Gaia\Gaia.Portal.Framework\bin\NuGet-Debug\Gaia.Portal.Framework.dll" target="lib\net47\Gaia.Portal.Framework.dll" />
-    <file src="C:\_WORK\Gaia\Gaia.Portal.Framework\bin\NuGet-Debug\Gaia.Portal.Framework.pdb" target="lib\net47\Gaia.Portal.Framework.pdb" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Solution Items\NuGet\Template\tools\*" target="tools" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Portal.Framework\bin\NuGet-Debug\Gaia.Portal.Framework.dll" target="lib\net47\Gaia.Portal.Framework.dll" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Portal.Framework\bin\NuGet-Debug\Gaia.Portal.Framework.pdb" target="lib\net47\Gaia.Portal.Framework.pdb" />
   </files>
 </package>

@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Gaia.Core.IoC.Autofac</id>
-    <version>1.18.39.3</version>
+    <version>1.18.41.1</version>
     <authors>Cloud17</authors>
     <owners>Cloud17</owners>
     <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
@@ -70,12 +70,12 @@
       <dependency id="System.Threading.Timer" version="4.3.0" />
       <dependency id="System.Xml.ReaderWriter" version="4.3.1" />
       <dependency id="System.Xml.XDocument" version="4.3.0" />
-      <dependency id="Gaia.Core.IoC" version="1.18.39.3" />
+      <dependency id="Gaia.Core.IoC" version="1.18.41.1" />
     </dependencies>
   </metadata>
   <files>
-    <file src="C:\_WORK\Gaia\Solution Items\NuGet\Template\tools\*" target="tools" />
-    <file src="C:\_WORK\Gaia\Gaia.Core.IoC.Autofac\bin\NuGet-Debug\Gaia.Core.IoC.Autofac.dll" target="lib\net47\Gaia.Core.IoC.Autofac.dll" />
-    <file src="C:\_WORK\Gaia\Gaia.Core.IoC.Autofac\bin\NuGet-Debug\Gaia.Core.IoC.Autofac.pdb" target="lib\net47\Gaia.Core.IoC.Autofac.pdb" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Solution Items\NuGet\Template\tools\*" target="tools" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Core.IoC.Autofac\bin\NuGet-Debug\Gaia.Core.IoC.Autofac.dll" target="lib\net47\Gaia.Core.IoC.Autofac.dll" />
+    <file src="D:\_WORK\_CLOUD17\Gaia\Gaia.Core\Gaia.Core.IoC.Autofac\bin\NuGet-Debug\Gaia.Core.IoC.Autofac.pdb" target="lib\net47\Gaia.Core.IoC.Autofac.pdb" />
   </files>
 </package>
