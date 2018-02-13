@@ -91,6 +91,7 @@
     <Compile Include="IoC\IoCSchedulerFactory.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".gitignore" />
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>

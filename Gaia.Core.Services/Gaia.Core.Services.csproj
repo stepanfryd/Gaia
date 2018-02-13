@@ -108,6 +108,7 @@
     <Compile Include="ServiceInfoAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".gitignore" />
     <None Include="app.config" />
     <None Include="Configuration\Schemas\hosts.xsd">
       <SubType>Designer</SubType>

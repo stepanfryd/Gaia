@@ -95,6 +95,7 @@
     <Compile Include="..\Solution Items\Templates\GlobalAssemblyInfo.Core.cs">
       <Link>Properties\GlobalAssemblyInfo.Core.cs</Link>
     </Compile>
+    <Compile Include="Dynamic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Exceptions\NotImplementedPluginInterfaceException.cs" />
     <Compile Include="Exceptions\GaiaBaseException.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="SerializationUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".gitignore" />
     <None Include="app.config" />
     <None Include="packages.config">
       <SubType>Designer</SubType>

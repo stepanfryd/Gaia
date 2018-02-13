@@ -38,9 +38,9 @@ namespace Gaia.Core.Mail.EmailQueue
 			_provider = storageProvider;
 		}
 
-		public async Task SendAsync(MailMessage message, object objectId = null, DateTime? sendTime = null)
+		public void Send(MailMessage message, object objectId = null, DateTime? sendTime = null)
 		{
-			await _provider.SaveMessageAsync(objectId, message, sendTime);
+			_provider.SaveMessage(objectId, message, sendTime);
 		}
 	}
 }

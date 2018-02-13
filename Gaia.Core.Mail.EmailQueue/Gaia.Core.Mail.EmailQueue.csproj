@@ -91,6 +91,9 @@
       <Name>Gaia.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\Solution Items\Targets\Gaia.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
