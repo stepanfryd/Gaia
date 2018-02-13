@@ -25,6 +25,7 @@ THE SOFTWARE.
 
 using System;
 using System.Net.Mail;
+using System.Threading.Tasks;
 using Common.Logging;
 
 namespace Gaia.Core.Mail
@@ -71,9 +72,9 @@ namespace Gaia.Core.Mail
 		/// <param name="message"></param>
 		/// <param name="objectId"></param>
 		/// <param name="sendTime"></param>
-		public void Send(MailMessage message, object objectId = null, DateTime? sendTime = null)
+		public async Task SendAsync(MailMessage message, object objectId = null, DateTime? sendTime = null)
 		{
-			_smtpClient.Send(message);
+			await _smtpClient.SendMailAsync(message);
 			_log.Info($"Message to {message.To} has been sent");
 		}
 

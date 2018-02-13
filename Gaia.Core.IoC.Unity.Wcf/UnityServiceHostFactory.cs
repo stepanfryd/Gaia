@@ -10,6 +10,6 @@ namespace Gaia.Core.IoC.Unity.Wcf
 		{
 		}
 
-		#endregion
+		#endregion Private and protected
 	}
 }

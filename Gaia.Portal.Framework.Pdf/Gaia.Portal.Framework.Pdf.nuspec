@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Gaia.Portal.Framework.Pdf</id>
-    <version>1.18.41.1</version>
+    <version>1.18.43.3</version>
     <authors>Cloud17</authors>
     <owners>Cloud17</owners>
     <projectUrl>https://github.com/stepanfryd/Gaia</projectUrl>
@@ -13,9 +13,9 @@
       <dependency id="HtmlAgilityPack" version="1.6.16" />
       <dependency id="iTextSharp" version="5.5.13" />
       <dependency id="itextsharp.xmlworker" version="5.5.13" />
-      <dependency id="Microsoft.AspNet.Mvc" version="5.2.3" />
-      <dependency id="Microsoft.AspNet.Razor" version="3.2.3" />
-      <dependency id="Microsoft.AspNet.WebPages" version="3.2.3" />
+      <dependency id="Microsoft.AspNet.Mvc" version="5.2.4" />
+      <dependency id="Microsoft.AspNet.Razor" version="3.2.4" />
+      <dependency id="Microsoft.AspNet.WebPages" version="3.2.4" />
       <dependency id="Microsoft.Web.Infrastructure" version="1.0.0.0" />
     </dependencies>
   </metadata>

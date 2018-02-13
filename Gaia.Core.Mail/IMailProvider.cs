@@ -24,6 +24,7 @@ THE SOFTWARE.
 */
 
 using System;
+using System.Threading.Tasks;
 using System.Net.Mail;
 
 namespace Gaia.Core.Mail
@@ -41,7 +42,7 @@ namespace Gaia.Core.Mail
 		/// <param name="message"></param>
 		/// <param name="objectId"></param>
 		/// <param name="sendTime"></param>
-		void Send(MailMessage message, object objectId = null, DateTime? sendTime = null);
+		Task SendAsync(MailMessage message, object objectId = null, DateTime? sendTime = null);
 
 		#endregion
 	}
