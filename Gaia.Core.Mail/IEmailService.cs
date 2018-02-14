@@ -25,6 +25,7 @@ THE SOFTWARE.
 
 using System.Collections.Generic;
 using System.Net.Mail;
+using System.Threading.Tasks;
 
 namespace Gaia.Core.Mail
 {
@@ -49,7 +50,7 @@ namespace Gaia.Core.Mail
 		/// <param name="customHeaders"></param>
 		/// <typeparam name="T"></typeparam>
 		/// <returns></returns>
-		void SendEmail<T>(MailAddress sender, MailAddress[] recipients, string subject, string templatePlain,
+		Task SendEmailAsync<T>(MailAddress sender, MailAddress[] recipients, string subject, string templatePlain,
 			string templateHtml, T model, string templateKey, Attachment[] attachments = null,
 			IDictionary<string, string> customHeaders = null);
 
@@ -64,7 +65,7 @@ namespace Gaia.Core.Mail
 		/// <param name="customHeaders"></param>
 		/// <typeparam name="T"></typeparam>
 		/// <returns></returns>
-		void SendEmail<T>(MailAddress sender, MailAddress[] recipients, string templateKey, T model,
+		Task SendEmailAsync<T>(MailAddress sender, MailAddress[] recipients, string templateKey, T model,
 			Attachment[] attachments = null, IDictionary<string, string> customHeaders = null);
 
 		/// <summary>
@@ -78,7 +79,7 @@ namespace Gaia.Core.Mail
 		/// <param name="customHeaders"></param>
 		/// <typeparam name="T"></typeparam>
 		/// <returns></returns>
-		void SendEmail<T>(string sender, string[] recipients, string templateKey, T model,
+		Task SendEmailAsync<T>(string sender, string[] recipients, string templateKey, T model,
 			Attachment[] attachments = null, IDictionary<string, string> customHeaders = null);
 
 		/// <summary>
@@ -92,7 +93,7 @@ namespace Gaia.Core.Mail
 		/// <param name="customHeaders"></param>
 		/// <typeparam name="T"></typeparam>
 		/// <returns></returns>
-		void SendEmail<T>(string sender, string recipient, string templateKey, T model, Attachment[] attachments = null,
+		Task SendEmailAsync<T>(string sender, string recipient, string templateKey, T model, Attachment[] attachments = null,
 			IDictionary<string, string> customHeaders = null);
 
 		/// <summary>
@@ -109,7 +110,7 @@ namespace Gaia.Core.Mail
 		/// <param name="customHeaders"></param>
 		/// <typeparam name="T"></typeparam>
 		/// <returns></returns>
-		void SendEmail<T>(MailAddress sender, MailAddress recipient, string subject, string templatePlain,
+		Task SendEmailAsync<T>(MailAddress sender, MailAddress recipient, string subject, string templatePlain,
 			string templateHtml, T model, string templateKey, Attachment[] attachments = null,
 			IDictionary<string, string> customHeaders = null);
 
@@ -127,7 +128,7 @@ namespace Gaia.Core.Mail
 		/// <param name="customHeaders"></param>
 		/// <typeparam name="T"></typeparam>
 		/// <returns></returns>
-		void SendEmail<T>(string sender, string recipient, string subject, string templatePlain, string templateHtml,
+		Task SendEmailAsync<T>(string sender, string recipient, string subject, string templatePlain, string templateHtml,
 			T model, string templateKey, Attachment[] attachments = null, IDictionary<string, string> customHeaders = null);
 
 		/// <summary>
@@ -144,9 +145,9 @@ namespace Gaia.Core.Mail
 		/// <param name="customHeaders"></param>
 		/// <typeparam name="T"></typeparam>
 		/// <returns></returns>
-		void SendEmail<T>(string sender, string[] recipients, string subject, string templatePlain, string templateHtml,
+		Task SendEmailAsync<T>(string sender, string[] recipients, string subject, string templatePlain, string templateHtml,
 			T model, string templateKey, Attachment[] attachments = null, IDictionary<string, string> customHeaders = null);
 
-		#endregion
+		#endregion Private and protected
 	}
 }
