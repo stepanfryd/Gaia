@@ -26,10 +26,10 @@ THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Net.Mail;
+using System.Threading.Tasks;
 
 namespace Gaia.Core.Mail.EmailQueue
 {
-
 	public interface IStorageProvider
 	{
 		/// <summary>
@@ -41,11 +41,8 @@ namespace Gaia.Core.Mail.EmailQueue
 		///   Planned time when to send. If plannedTime is null then message is ready to send in the next
 		///   round
 		/// </param>
-		void SaveMessage(object messageId, MailMessage message, DateTime? plannedtime = null);
-
-
+		Task SaveMessageAsync(object messageId, MailMessage message, DateTime? plannedtime = null);
 	}
-
 
 	/// <summary>
 	///   Interface defines mail storage provider
@@ -60,11 +57,12 @@ namespace Gaia.Core.Mail.EmailQueue
 		/// <param name="skip"></param>
 		/// <param name="pageSize"></param>
 		/// <returns></returns>
-		IDictionary<object, Tuple<TMessage, List<TDeliveryInfo>>> GetMessages(DateTime? plannedtime = null);
+		Task<IDictionary<object, Tuple<TMessage, List<TDeliveryInfo>>>> GetMessagesAsync(DateTime? plannedtime = null);
 
-		void UpdateSentRecipients(object messageId, TDeliveryInfo deliveryInfo);
+		Task UpdateSentRecipientsAsync(object messageId, TDeliveryInfo deliveryInfo);
 
-		void FinishMail(object messageId);
-		void UpdateMail(object messageId, object status);
+		Task FinishMailAsync(object messageId);
+
+		Task UpdateMailAsync(object messageId, object status);
 	}
 }

@@ -10,7 +10,7 @@ namespace Gaia.Core.IoC.Autofac
 	public class Container : IContainer
 	{
 		private static string _configSource;
-		private static ConfigSourceType _configSourceType = ConfigSourceType.Json;
+		private static ConfigSourceType _configSourceType = ConfigSourceType.Xml;
 
 		private static readonly Lazy<IAutofacContainer> LazyContainer = new Lazy<IAutofacContainer>(() =>
 		{
@@ -21,23 +21,10 @@ namespace Gaia.Core.IoC.Autofac
 
 			if (!String.IsNullOrEmpty(_configSource))
 			{
-				if (_configSourceType == ConfigSourceType.Json)
-				{
-					config.AddJsonFile(_configSource);
-				} else if(_configSourceType == ConfigSourceType.Xml)
-				{
-					config.AddXmlFile(_configSource);
-				}
+				config.AddXmlFile(_configSource);				
 			} else
 			{
-				if (_configSourceType == ConfigSourceType.Json)
-				{
-					config.AddJsonFile($"autofac.{_configSourceType.ToString().ToLower()}");
-				}
-				else if (_configSourceType == ConfigSourceType.Xml)
-				{
-					config.AddXmlFile($"autofac.{_configSourceType.ToString().ToLower()}");
-				}
+				config.AddXmlFile($"autofac.{_configSourceType.ToString().ToLower()}");				
 			}
 
 			var module = new ConfigurationModule(config.Build());

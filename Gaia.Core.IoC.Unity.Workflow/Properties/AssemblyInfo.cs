@@ -23,24 +23,11 @@ THE SOFTWARE.
 
 */
 
-using System;
-using System.Net.Mail;
-using System.Threading.Tasks;
+using System.Reflection;
+using System.Runtime.InteropServices;
 
-namespace Gaia.Core.Mail.EmailQueue
-{
-	public class EmailQueueProvider : IMailProvider
-	{
-		private readonly IStorageProvider _provider;
+[assembly: AssemblyTitle("Gaia.Core.IoC.Unity.Workflow")]
+[assembly: AssemblyDescription("Gaia IoC Unity Container Support for Workflow Foundation")]
+[assembly: AssemblyProduct("Gaia.Core.IoC.Unity.Workflow")]
 
-		public EmailQueueProvider(IStorageProvider storageProvider)
-		{
-			_provider = storageProvider;
-		}
-
-		public async Task SendAsync(MailMessage message, object objectId = null, DateTime? sendTime = null)
-		{
-			await _provider.SaveMessageAsync(objectId, message, sendTime);
-		}
-	}
-}
+[assembly: Guid("a06a6951-b3aa-4b61-bfc4-b6c7511bc76c")]

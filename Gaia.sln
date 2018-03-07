@@ -22,9 +22,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configuration", "{2DE5E697-F8F8-4034-8958-5645F73774AC}"
 	ProjectSection(SolutionItems) = preProject
 		Solution Items\Configuration\connectionStrings.config = Solution Items\Configuration\connectionStrings.config
-		Solution Items\Configuration\entLib._forEditor.config = Solution Items\Configuration\entLib._forEditor.config
-		Solution Items\Configuration\entLib.exceptionHandling.config = Solution Items\Configuration\entLib.exceptionHandling.config
-		Solution Items\Configuration\entLib.loggingConfiguration.config = Solution Items\Configuration\entLib.loggingConfiguration.config
 		Solution Items\Configuration\quartz.config = Solution Items\Configuration\quartz.config
 		Solution Items\Configuration\quartzJobs.config = Solution Items\Configuration\quartzJobs.config
 		Solution Items\Configuration\unity.config = Solution Items\Configuration\unity.config
@@ -127,6 +124,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gaia.Core.Tests", "Gaia.Core.Tests\Gaia.Core.Tests.csproj", "{C0FCA0DB-E48F-4255-8CE6-425298CEFDA5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gaia.Core.IoC.Autofac", "Gaia.Core.IoC.Autofac\Gaia.Core.IoC.Autofac.csproj", "{005BC034-19A2-44AD-B7B9-1F62AB591920}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gaia.Core.IoC.Unity.Wcf", "Gaia.Core.IoC.Unity.Wcf\Gaia.Core.IoC.Unity.Wcf.csproj", "{0AA9A3D3-40AC-43B8-9932-FC10BFC08176}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gaia.Core.IoC.Unity.Workflow", "Gaia.Core.IoC.Unity.Workflow\Gaia.Core.IoC.Unity.Workflow.csproj", "{A06A6951-B3AA-4B61-BFC4-B6C7511BC76C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -264,6 +265,22 @@ Global
 		{005BC034-19A2-44AD-B7B9-1F62AB591920}.NuGet-Release|Any CPU.Build.0 = NuGet-Release|Any CPU
 		{005BC034-19A2-44AD-B7B9-1F62AB591920}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{005BC034-19A2-44AD-B7B9-1F62AB591920}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AA9A3D3-40AC-43B8-9932-FC10BFC08176}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AA9A3D3-40AC-43B8-9932-FC10BFC08176}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AA9A3D3-40AC-43B8-9932-FC10BFC08176}.NuGet-Debug|Any CPU.ActiveCfg = NuGet-Debug|Any CPU
+		{0AA9A3D3-40AC-43B8-9932-FC10BFC08176}.NuGet-Debug|Any CPU.Build.0 = NuGet-Debug|Any CPU
+		{0AA9A3D3-40AC-43B8-9932-FC10BFC08176}.NuGet-Release|Any CPU.ActiveCfg = NuGet-Release|Any CPU
+		{0AA9A3D3-40AC-43B8-9932-FC10BFC08176}.NuGet-Release|Any CPU.Build.0 = NuGet-Release|Any CPU
+		{0AA9A3D3-40AC-43B8-9932-FC10BFC08176}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AA9A3D3-40AC-43B8-9932-FC10BFC08176}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A06A6951-B3AA-4B61-BFC4-B6C7511BC76C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A06A6951-B3AA-4B61-BFC4-B6C7511BC76C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A06A6951-B3AA-4B61-BFC4-B6C7511BC76C}.NuGet-Debug|Any CPU.ActiveCfg = NuGet-Debug|Any CPU
+		{A06A6951-B3AA-4B61-BFC4-B6C7511BC76C}.NuGet-Debug|Any CPU.Build.0 = NuGet-Debug|Any CPU
+		{A06A6951-B3AA-4B61-BFC4-B6C7511BC76C}.NuGet-Release|Any CPU.ActiveCfg = NuGet-Release|Any CPU
+		{A06A6951-B3AA-4B61-BFC4-B6C7511BC76C}.NuGet-Release|Any CPU.Build.0 = NuGet-Release|Any CPU
+		{A06A6951-B3AA-4B61-BFC4-B6C7511BC76C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A06A6951-B3AA-4B61-BFC4-B6C7511BC76C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -294,6 +311,8 @@ Global
 		{51DA7B52-994C-4F7B-A89C-94F2FC64DE48} = {77DA39B0-F018-4068-BE53-6461957A53DB}
 		{C0FCA0DB-E48F-4255-8CE6-425298CEFDA5} = {4115B21A-DACD-4BC3-981B-3450337D6846}
 		{005BC034-19A2-44AD-B7B9-1F62AB591920} = {77DA39B0-F018-4068-BE53-6461957A53DB}
+		{0AA9A3D3-40AC-43B8-9932-FC10BFC08176} = {77DA39B0-F018-4068-BE53-6461957A53DB}
+		{A06A6951-B3AA-4B61-BFC4-B6C7511BC76C} = {77DA39B0-F018-4068-BE53-6461957A53DB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35

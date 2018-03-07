@@ -23,9 +23,10 @@ THE SOFTWARE.
 
 */
 
-using Gaia.Core.Logging;
+using Common.Logging;
 using System;
 using System.Net.Mail;
+using System.Threading.Tasks;
 
 namespace Gaia.Core.Mail
 {
@@ -45,14 +46,14 @@ namespace Gaia.Core.Mail
 			_smtpClient = new SmtpClient();
 		}
 
-		#endregion
+		#endregion Constructors
 
 		#region Fields and constants
 
 		private readonly ILog _log;
 		private SmtpClient _smtpClient;
 
-		#endregion
+		#endregion Fields and constants
 
 		#region Interface Implementations
 
@@ -71,13 +72,13 @@ namespace Gaia.Core.Mail
 		/// <param name="message"></param>
 		/// <param name="objectId"></param>
 		/// <param name="sendTime"></param>
-		public void Send(MailMessage message, object objectId = null, DateTime? sendTime = null)
+		public async Task SendAsync(MailMessage message, object objectId = null, DateTime? sendTime = null)
 		{
-			_smtpClient.Send(message);
+			await _smtpClient.SendMailAsync(message);
 			_log.Info($"Message to {message.To} has been sent");
 		}
 
-		#endregion
+		#endregion Interface Implementations
 
 		#region Private and protected
 
@@ -105,6 +106,6 @@ namespace Gaia.Core.Mail
 			}
 		}
 
-		#endregion
+		#endregion Private and protected
 	}
 }

@@ -29,6 +29,7 @@ using SendGrid.Helpers.Mail;
 using System;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 // using SendGridWeb = SendGrid.Web;
 
@@ -73,7 +74,7 @@ namespace Gaia.Core.Mail.SendGrid
 		/// </param>
 		/// <param name="sendTime">
 		/// </param>
-		public async void Send(System.Net.Mail.MailMessage message, object objectId = null, DateTime? sendTime = null)
+		public async Task SendAsync(System.Net.Mail.MailMessage message, object objectId = null, DateTime? sendTime = null)
 		{
 			var sendGridMessage = new SendGridMessage
 			{

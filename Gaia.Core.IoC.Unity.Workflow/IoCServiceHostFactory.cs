@@ -25,25 +25,28 @@ THE SOFTWARE.
 /*
  Code copy from https://github.com/dimaKudr/Unity.WF
  */
+
 using System;
 using System.ServiceModel.Activities;
 using System.ServiceModel.Activities.Activation;
 using Unity;
-using Unity.Extension;
 
 namespace Gaia.Core.IoC.Unity.Workflow
 {
-	public abstract class IoCServiceHostFactory : WorkflowServiceHostFactory {
+	public abstract class IoCServiceHostFactory : WorkflowServiceHostFactory
+	{
 		#region Private and protected
 
 		protected abstract void ConfigureContainer(IContainer container);
 
 		protected abstract InjectionTypes ConfigureInjectionType();
 
-		protected virtual void ConfigureServiceHost(WorkflowServiceHost serviceHost) {
+		protected virtual void ConfigureServiceHost(WorkflowServiceHost serviceHost)
+		{
 		}
 
-		protected override WorkflowServiceHost CreateWorkflowServiceHost(WorkflowService service, Uri[] baseAddresses) {
+		protected override WorkflowServiceHost CreateWorkflowServiceHost(WorkflowService service, Uri[] baseAddresses)
+		{
 			var container = IoC.Container.Instance;
 			var unityContainer = (IUnityContainer)container.ContainerInstance;
 
@@ -53,13 +56,15 @@ namespace Gaia.Core.IoC.Unity.Workflow
 
 			var injectionType = ConfigureInjectionType();
 
-			if (injectionType == InjectionTypes.Push) {
+			if (injectionType == InjectionTypes.Push)
+			{
 				unityContainer.AddNewExtension<WorkflowExtension>();
 
 				var rootActivity = host.Activity;
 				unityContainer.BuildUp(rootActivity.GetType(), rootActivity);
 			}
-			else {
+			else
+			{
 				var diExtension = new DependencyInjectionExtension(container);
 				host.WorkflowExtensions.Add(diExtension);
 			}
@@ -68,6 +73,6 @@ namespace Gaia.Core.IoC.Unity.Workflow
 			return host;
 		}
 
-		#endregion
+		#endregion Private and protected
 	}
 }
