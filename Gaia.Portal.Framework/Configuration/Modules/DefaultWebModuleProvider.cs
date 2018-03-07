@@ -28,7 +28,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Optimization;
-using Common.Logging;
+using Gaia.Core.Logging;
 using Gaia.Portal.Framework.Bundling;
 using Newtonsoft.Json;
 
@@ -127,7 +127,7 @@ namespace Gaia.Portal.Framework.Configuration.Modules
 							Modules.Add(webModule);
 						} catch (Exception e)
 						{
-							_log.Error(e);
+							_log.Error(e, "Error during web modules loading");
 							throw new Core.Exceptions.GaiaBaseException("Error during web modules loading", e);
 						}
 					}

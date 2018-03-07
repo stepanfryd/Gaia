@@ -25,8 +25,8 @@ THE SOFTWARE.
 
 using System;
 using System.Collections.Generic;
-using Common.Logging;
 using Gaia.Core.IoC;
+using Gaia.Core.Logging;
 using Gaia.Core.Workflows;
 
 namespace Gaia.Core.Wcf.Services

@@ -25,8 +25,8 @@ THE SOFTWARE.
 
 using System;
 using System.Collections.Generic;
-using Common.Logging;
 using Gaia.Core.Exceptions;
+using Gaia.Core.Logging;
 using Gaia.Core.Services.Configuration;
 
 namespace Gaia.Core.Services
@@ -122,7 +122,7 @@ namespace Gaia.Core.Services
 				else
 				{
 					var ex = new NotImplementedPluginInterfaceException(plugin.PluginTypeName);
-					_log.Error(ex);
+					_log.Error(ex, $"Plugin {plugin.PluginTypeName} is not implemented");
 					throw ex;
 				}
 			}
@@ -151,7 +151,7 @@ namespace Gaia.Core.Services
 					}
 					catch (Exception e)
 					{
-						_log.Error($"Plugin SHUTDOWN error [{plugin.Name}]", e);
+						_log.Error(e, $"Plugin SHUTDOWN error [{plugin.Name}]");
 					}
 				}
 			}
@@ -173,7 +173,7 @@ namespace Gaia.Core.Services
 					}
 					catch (Exception e)
 					{
-						_log.Error($"Plugin START error [{plugin.Name}]", e);
+						_log.Error(e, $"Plugin START error [{plugin.Name}]");
 					}
 				}
 			}
@@ -195,7 +195,7 @@ namespace Gaia.Core.Services
 					}
 					catch (Exception e)
 					{
-						_log.Error($"Plugin STOP error [{plugin.Name}]", e);
+						_log.Error(e, $"Plugin STOP error [{plugin.Name}]");
 					}
 				}
 			}
@@ -217,7 +217,7 @@ namespace Gaia.Core.Services
 					}
 					catch (Exception e)
 					{
-						_log.Error($"Plugin PAUSE error [{plugin.Name}]", e);
+						_log.Error(e, $"Plugin PAUSE error [{plugin.Name}]");
 					}
 				}
 			}
@@ -239,7 +239,7 @@ namespace Gaia.Core.Services
 					}
 					catch (Exception e)
 					{
-						_log.Error($"Plugin CONTINUE error [{plugin.Name}]", e);
+						_log.Error(e, $"Plugin CONTINUE error [{plugin.Name}]");
 					}
 				}
 			}

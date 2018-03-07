@@ -25,8 +25,8 @@ THE SOFTWARE.
 
 using System;
 using System.Activities;
-using Common.Logging;
 using Gaia.Core.IoC;
+using Gaia.Core.Logging;
 
 namespace Gaia.Core.Workflows.Activites
 {

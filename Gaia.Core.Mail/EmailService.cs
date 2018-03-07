@@ -31,7 +31,7 @@ using System.Net.Mail;
 using System.Net.Mime;
 using System.Text;
 using System.Web;
-using Common.Logging;
+using Gaia.Core.Logging;
 using Gaia.Core.Mail.Configuration;
 using HtmlAgilityPack;
 using RazorEngine.Configuration;
@@ -376,7 +376,7 @@ namespace Gaia.Core.Mail
 					}
 					catch (Exception ex)
 					{
-						_log.Error(ex);
+						_log.Error(ex, $"Error embed image {img.Name}");
 					}
 				}
 			}

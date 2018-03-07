@@ -58,12 +58,6 @@
     <ProjectGroup>Core</ProjectGroup>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common.Logging, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Common.Logging.3.4.1\lib\net40\Common.Logging.dll</HintPath>
-    </Reference>
-    <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -103,6 +97,10 @@
     <ProjectReference Include="..\Gaia.Core.Services\Gaia.Core.Services.csproj">
       <Project>{ac5e6f4b-d634-4fd6-b16e-487217b6978f}</Project>
       <Name>Gaia.Core.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gaia.Core\Gaia.Core.csproj">
+      <Project>{8318a17e-7bf1-4d45-a0ce-ee3fd9b83b2d}</Project>
+      <Name>Gaia.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

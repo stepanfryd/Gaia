@@ -25,8 +25,8 @@ THE SOFTWARE.
 
 using System;
 using System.Globalization;
-using Common.Logging;
 using Gaia.Core.IoC;
+using Gaia.Core.Logging;
 using Quartz;
 using Quartz.Spi;
 
@@ -94,7 +94,7 @@ namespace Gaia.Service.Plugins.Scheduler.IoC
 			{
 				var message = string.Format(CultureInfo.InvariantCulture, "There is an issue to create job [{0}]. {1}",
 					jobDetail.JobType.FullName, ex.Message);
-				_log.Error(message, ex);
+				_log.Error(ex, message);
 
 				throw new SchedulerException(message, ex);
 			}

@@ -61,12 +61,6 @@
     <ProjectGroup>Core</ProjectGroup>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common.Logging, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Common.Logging.3.4.1\lib\net40\Common.Logging.dll</HintPath>
-    </Reference>
-    <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
-    </Reference>
     <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.2\lib\net47\CommonServiceLocator.dll</HintPath>
     </Reference>
@@ -110,6 +104,10 @@
     <ProjectReference Include="..\Gaia.Core.IoC\Gaia.Core.IoC.csproj">
       <Project>{52980ebe-aeb1-4b3c-963a-be0da24b25b1}</Project>
       <Name>Gaia.Core.IoC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gaia.Core\Gaia.Core.csproj">
+      <Project>{8318a17e-7bf1-4d45-a0ce-ee3fd9b83b2d}</Project>
+      <Name>Gaia.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

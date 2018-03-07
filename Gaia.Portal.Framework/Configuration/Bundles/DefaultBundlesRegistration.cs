@@ -27,7 +27,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Optimization;
-using Common.Logging;
+using Gaia.Core.Logging;
 using Gaia.Portal.Framework.Configuration.Modules;
 using Newtonsoft.Json;
 
@@ -79,7 +79,7 @@ namespace Gaia.Portal.Framework.Configuration.Bundles
 				RegisterCommonBundles();
 				RegisterModulesBundles();
 			} catch (Exception e)	{
-				_log.Error(e);
+				_log.Error(e, "Bundles registration error");
 				throw new Core.Exceptions.GaiaBaseException("Bundles registration error", e);
 			}
 		}

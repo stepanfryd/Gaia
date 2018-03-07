@@ -23,9 +23,9 @@ THE SOFTWARE.
 
 */
 
+using Gaia.Core.Logging;
 using System;
 using System.Net.Mail;
-using Common.Logging;
 
 namespace Gaia.Core.Mail
 {

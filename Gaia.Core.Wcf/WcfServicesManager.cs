@@ -28,7 +28,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.ServiceModel;
-using Common.Logging;
+using Gaia.Core.Logging;
 using Gaia.Core.Wcf.Configuration;
 
 namespace Gaia.Core.Wcf

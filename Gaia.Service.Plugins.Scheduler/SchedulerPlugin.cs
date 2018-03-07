@@ -23,8 +23,8 @@ THE SOFTWARE.
 
 */
 
-using Common.Logging;
 using Gaia.Core.IoC;
+using Gaia.Core.Logging;
 using Gaia.Core.Services;
 using Gaia.Service.Plugins.Scheduler.IoC;
 using Quartz;
@@ -168,7 +168,7 @@ namespace Gaia.Service.Plugins.Scheduler
 				}
 				catch (Exception e)
 				{
-					_logger.Error($"Scheduler [{SchedulerName}] start error", e);
+					_logger.Error(e, $"Scheduler [{SchedulerName}] start error");
 				}
 			});
 
@@ -190,7 +190,7 @@ namespace Gaia.Service.Plugins.Scheduler
 			}
 			catch (Exception e)
 			{
-				_logger.Error($"Scheduler [{SchedulerName}] pause error", e);
+				_logger.Error(e, $"Scheduler [{SchedulerName}] pause error");
 			}
 		}
 
@@ -216,7 +216,7 @@ namespace Gaia.Service.Plugins.Scheduler
 			}
 			catch (Exception e)
 			{
-				_logger.Error($"Scheduler [{SchedulerName}] stop error", e);
+				_logger.Error(e, $"Scheduler [{SchedulerName}] stop error");
 			}
 		}
 
@@ -239,7 +239,7 @@ namespace Gaia.Service.Plugins.Scheduler
 			}
 			catch (Exception e)
 			{
-				_logger.Error($"Scheduler [{SchedulerName}] continue error", e);
+				_logger.Error(e, $"Scheduler [{SchedulerName}] continue error");
 			}
 		}
 
