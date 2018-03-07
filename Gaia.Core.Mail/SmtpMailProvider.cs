@@ -23,7 +23,7 @@ THE SOFTWARE.
 
 */
 
-using Common.Logging;
+using Gaia.Core.Logging;
 using System;
 using System.Net.Mail;
 using System.Threading.Tasks;

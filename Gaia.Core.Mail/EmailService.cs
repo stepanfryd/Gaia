@@ -23,7 +23,7 @@ THE SOFTWARE.
 
 */
 
-using Common.Logging;
+using Gaia.Core.Logging;
 using Gaia.Core.Mail.Configuration;
 using HtmlAgilityPack;
 using RazorEngine.Configuration;
@@ -375,7 +375,7 @@ namespace Gaia.Core.Mail
 					}
 					catch (Exception ex)
 					{
-						_log.Error(ex);
+						_log.Error(ex, $"Error embending image {img.Name}");
 					}
 				}
 			}
