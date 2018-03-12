@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using Autofac;
-using IAutofacContainer = Autofac.IContainer;
-using Microsoft.Extensions.Configuration;
+﻿using Autofac;
 using Autofac.Configuration;
+using Microsoft.Extensions.Configuration;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using IAutofacContainer = Autofac.IContainer;
 
 namespace Gaia.Core.IoC.Autofac
 {
-	public class Container : IContainer
+	public class Container : IContainer<IAutofacContainer>
 	{
 		private static string _configSource;
 		private static ConfigSourceType _configSourceType = ConfigSourceType.Xml;
@@ -21,10 +22,11 @@ namespace Gaia.Core.IoC.Autofac
 
 			if (!String.IsNullOrEmpty(_configSource))
 			{
-				config.AddXmlFile(_configSource);				
-			} else
+				config.AddXmlFile(_configSource);
+			}
+			else
 			{
-				config.AddXmlFile($"autofac.{_configSourceType.ToString().ToLower()}");				
+				config.AddXmlFile($"autofac.{_configSourceType.ToString().ToLower()}");
 			}
 
 			var module = new ConfigurationModule(config.Build());
@@ -32,7 +34,7 @@ namespace Gaia.Core.IoC.Autofac
 
 			builder.RegisterModule(module);
 
-			return builder.Build();			
+			return builder.Build();
 		});
 
 		public string ConfigSource {
@@ -41,7 +43,6 @@ namespace Gaia.Core.IoC.Autofac
 		}
 
 		public object ContainerInstance => Instance;
-
 		public IAutofacContainer Instance => LazyContainer.Value;
 
 		public ConfigSourceType ConfigSourceType {
@@ -69,34 +70,34 @@ namespace Gaia.Core.IoC.Autofac
 			return IsRegistered(typeof(T), nameToCheck);
 		}
 
-		public object Resolve(Type t, string name)
+		public object Resolve(Type t, string name, IDictionary<string, object> parameters = null)
 		{
-			return Instance.ResolveNamed(name, t);
+			return Instance.ResolveNamed(name, t, GetParameters(parameters));
 		}
 
-		public T Resolve<T>()
+		public T Resolve<T>(IDictionary<string, object> parameters = null)
 		{
-			return Instance.Resolve<T>();
+			return Instance.Resolve<T>(GetParameters(parameters));
 		}
 
-		public T Resolve<T>(string name)
+		public T Resolve<T>(string name, IDictionary<string, object> parameters = null)
 		{
-			return Instance.ResolveNamed<T>(name);
+			return Instance.ResolveNamed<T>(name, GetParameters(parameters));
 		}
 
-		public object Resolve(Type t)
+		public object Resolve(Type t, IDictionary<string, object> parameters = null)
 		{
-			return Instance.Resolve(t);
+			return Instance.Resolve(t, GetParameters(parameters));
 		}
 
-		public IEnumerable<T> ResolveAll<T>()
+		public IEnumerable<T> ResolveAll<T>(IDictionary<string, object> parameters = null)
 		{
-			return Instance.Resolve<IEnumerable<T>>();
+			return Instance.Resolve<IEnumerable<T>>(GetParameters(parameters));
 		}
 
 		#region IDisposable Support
-		private bool disposedValue = false; // To detect redundant calls
 
+		private bool disposedValue = false; // To detect redundant calls
 
 		protected virtual void Dispose(bool disposing)
 		{
@@ -129,7 +130,13 @@ namespace Gaia.Core.IoC.Autofac
 			// GC.SuppressFinalize(this);
 		}
 
+		#endregion IDisposable Support
 
-		#endregion
+		private IEnumerable<NamedParameter> GetParameters(IDictionary<string, object> parameters)
+		{
+			if (parameters == null || parameters.Count == 0) return null;
+
+			return parameters.Select(i => new NamedParameter(i.Key, i.Value));
+		}
 	}
 }

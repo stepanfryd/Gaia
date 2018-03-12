@@ -26,8 +26,8 @@ THE SOFTWARE.
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyVersion("1.18.66.1")]
+[assembly: AssemblyVersion("1.18.71.2")]
 [assembly: AssemblyCompany("Cloud17")]
-[assembly: AssemblyCopyright("Copyright (c) Stepan Fryd 2017")]
+[assembly: AssemblyCopyright("Copyright (c) Stepan Fryd 2018")]
 
 [assembly: ComVisible(false)]

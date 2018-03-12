@@ -63,8 +63,7 @@ namespace Gaia.Portal.Framework.IoC
 				throw new NullReferenceException($"Could not resolve type ${config.WebSettings.MvcDependencyResolver} for Mvc Dependency resolver.");
 			}
 
-			DependencyResolver.SetResolver(
-				(IDependencyResolver) Activator.CreateInstance(mvcResolver, Container.Instance.ContainerInstance));
+			DependencyResolver.SetResolver((IDependencyResolver) Activator.CreateInstance(mvcResolver, Container.Instance.ContainerInstance));
 
 			// TODO: Uncomment if you want to use PerRequestLifetimeManager
 			// Microsoft.Web.Infrastructure.DynamicModuleHelper.DynamicModuleUtility.RegisterModule(typeof(UnityPerRequestHttpModule));
