@@ -168,7 +168,7 @@ namespace Gaia.Service.Plugins.Scheduler
 				}
 				catch (Exception e)
 				{
-					_logger.Error(e, $"Scheduler [{SchedulerName}] start error");
+						_logger.Error(e, $"Scheduler [{SchedulerName}] start error");
 				}
 			});
 
