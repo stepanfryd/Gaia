@@ -58,10 +58,6 @@
     <ProjectGroup>Core</ProjectGroup>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NParametrizer, Version=1.0.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cloud17.NParametrizer.1.0.8.0\lib\net40\NParametrizer.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Activities" />
     <Reference Include="System.configuration" />
@@ -90,13 +86,17 @@
   <ItemGroup>
     <None Include=".gitignore" />
     <None Include="app.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Gaia.Core\Gaia.Core.csproj">
       <Project>{8318a17e-7bf1-4d45-a0ce-ee3fd9b83b2d}</Project>
       <Name>Gaia.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Cloud17.NParametrizer">
+      <Version>1.0.8</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\Solution Items\Targets\Gaia.targets" />
