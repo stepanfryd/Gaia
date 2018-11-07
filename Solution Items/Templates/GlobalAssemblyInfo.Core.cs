@@ -26,7 +26,11 @@ THE SOFTWARE.
 using System.Reflection;
 using System.Runtime.InteropServices;
 
+<<<<<<< HEAD
 [assembly: AssemblyVersion("1.18.86.1")]
+=======
+[assembly: AssemblyVersion("1.18.291.1")]
+>>>>>>> 2d4e98bb97c1120b1e82f55fecdeb1d31218db70
 [assembly: AssemblyCompany("Cloud17")]
 [assembly: AssemblyCopyright("Copyright (c) Stepan Fryd 2018")]
 
