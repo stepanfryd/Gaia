@@ -20,14 +20,13 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+ */
 
-*/
-using iTextSharp.text;
-using iTextSharp.text.pdf;
-
+using iText.Kernel.Font;
+/*
 namespace Gaia.Portal.Framework.Pdf
 {
-	public class CustomFontFactory : FontFactoryImp
+	public class CustomFontFactory
 	{
 		#region Fields and constants
 
@@ -99,14 +98,14 @@ namespace Gaia.Portal.Framework.Pdf
 
 		#region Private and protected
 
-		protected Font GetBaseFont(float size, int style, BaseColor color)
+		protected PdfFont GetBaseFont(float size, int style, BaseColor color)
 		{
-			var baseFont = new Font(DefaultBaseFont, size, style, color);
+			var baseFont = new PdfFont(DefaultBaseFont, size, style, color);
 
 			return baseFont;
 		}
 
-		public override Font GetFont(string fontname, string encoding, bool embedded, float size, int style, BaseColor color,
+		public override iText.Kernel.Font.PdfFont GetFont(string fontname, string encoding, bool embedded, float size, int style, BaseColor color,
 			bool cached)
 		{
 			//eventually replace expected font properties
@@ -124,7 +123,7 @@ namespace Gaia.Portal.Framework.Pdf
 				: embedded;
 
 			//get font
-			Font font = null;
+			PdfFont font = null;
 			if (ReplaceFontWithDefault)
 			{
 				font = GetBaseFont(size, style, color);
@@ -143,3 +142,4 @@ namespace Gaia.Portal.Framework.Pdf
 		#endregion
 	}
 }
+*/

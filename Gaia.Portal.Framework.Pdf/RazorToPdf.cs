@@ -25,12 +25,14 @@ THE SOFTWARE.
 using System;
 using System.IO;
 using System.Text;
-using System.Web.Mvc;
 using HtmlAgilityPack;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
-using iTextSharp.tool.xml;
+using iText.Kernel.Geom;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using Microsoft.AspNetCore.Mvc;
+using Path = System.IO.Path;
 
+/*
 namespace Gaia.Portal.Framework.Pdf
 {
 	public class RazorToPdf
@@ -109,3 +111,4 @@ namespace Gaia.Portal.Framework.Pdf
 		#endregion
 	}
 }
+*/

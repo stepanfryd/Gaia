@@ -22,10 +22,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+/*
 using System;
-using System.Web.Mvc;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
+using iText.Kernel.Geom;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Gaia.Portal.Framework.Pdf
 {
@@ -65,7 +67,7 @@ namespace Gaia.Portal.Framework.Pdf
 
 		#region Private and protected
 
-		public override void ExecuteResult(ControllerContext context)
+		public override void ExecuteResult(ActionContext context)
 		{
 			//IView viewEngineResult;
 			//ViewContext viewContext;
@@ -107,3 +109,4 @@ namespace Gaia.Portal.Framework.Pdf
 		#endregion
 	}
 }
+*/

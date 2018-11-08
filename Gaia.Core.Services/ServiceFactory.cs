@@ -26,7 +26,6 @@ THE SOFTWARE.
 using System;
 using System.Reflection;
 using Gaia.Core.Services.Configuration;
-using Gaia.Core.Wcf.Configuration;
 using Topshelf;
 
 namespace Gaia.Core.Services
@@ -107,8 +106,7 @@ namespace Gaia.Core.Services
 		/// <param name="wcfServicesConfiguration"></param>
 		/// <returns></returns>
 		public static ServiceFactory Create<T>(string serviceName, string displayName,
-			string description = null, PluginConfigurationCollection pluginsConfiguration = null,
-			ServiceHostConfigurationCollection wcfServicesConfiguration = null)
+			string description = null, PluginConfigurationCollection pluginsConfiguration = null)
 		{
 			var serVact = new ServiceFactory
 			{
@@ -119,8 +117,7 @@ namespace Gaia.Core.Services
 			};
 
 
-			var serviceController = new ServiceController<IGaiaService>(
-				serVact.Service, pluginsConfiguration, wcfServicesConfiguration);
+			var serviceController = new ServiceController<IGaiaService>(serVact.Service, pluginsConfiguration);
 
 			serVact.RunService(serviceController);
 			return serVact;
