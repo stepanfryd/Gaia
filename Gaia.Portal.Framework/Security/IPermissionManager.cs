@@ -25,7 +25,6 @@ THE SOFTWARE.
 
 using System.Collections.Generic;
 using System.Security.Principal;
-using Gaia.Portal.Framework.Configuration.Modules;
 
 namespace Gaia.Portal.Framework.Security
 {
@@ -66,18 +65,6 @@ namespace Gaia.Portal.Framework.Security
 		/// <param name="route"></param>
 		/// <returns></returns>
 		bool HasAccess(IPrincipal principal, Route route);
-
-		/// <summary>
-		///   List modules which are accessible to current user
-		/// </summary>
-		/// <returns></returns>
-		IList<IWebModule> GetAccessibleModules();
-
-		/// <summary>
-		///   List modules which are accessible to current user
-		/// </summary>
-		/// <returns></returns>
-		IList<IWebModule> GetAccessibleModules(IPrincipal principal);
 
 		#endregion
 	}

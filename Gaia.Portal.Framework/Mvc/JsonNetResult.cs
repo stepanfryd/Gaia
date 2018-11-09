@@ -24,7 +24,8 @@ THE SOFTWARE.
 */
 using System;
 using System.Text;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace Gaia.Portal.Framework.Mvc
@@ -33,7 +34,6 @@ namespace Gaia.Portal.Framework.Mvc
 	{
 		#region Public members
 
-		public Encoding ContentEncoding { get; set; }
 		public string ContentType { get; set; }
 		public object Data { get; set; }
 
@@ -63,23 +63,14 @@ namespace Gaia.Portal.Framework.Mvc
 
 		#region Private and protected
 
-		public override void ExecuteResult(ControllerContext context)
+		public override void ExecuteResult(ActionContext actionContext)
 		{
-			if (context == null)
-				throw new ArgumentNullException(nameof(context));
-
-			var response = context.HttpContext.Response;
+			if (actionContext == null)
+				throw new ArgumentNullException(nameof(actionContext));
+			
+			var response = actionContext.HttpContext.Response;
 			response.ContentType = !string.IsNullOrEmpty(ContentType) ? ContentType : "application/json";
-
-			if (ContentEncoding != null)
-				response.ContentEncoding = ContentEncoding;
-
-			if (Data == null) return;
-			var writer = new JsonTextWriter(response.Output) {Formatting = Formatting};
-
-			var serializer = JsonSerializer.Create(SerializerSettings);
-			serializer.Serialize(writer, Data);
-			writer.Flush();
+			response.WriteAsync(JsonConvert.SerializeObject(Data)).Wait();
 		}
 
 		#endregion

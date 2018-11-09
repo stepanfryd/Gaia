@@ -25,6 +25,7 @@ THE SOFTWARE.
 using System.IO;
 using System.Reflection;
 using System.Web;
+using Microsoft.AspNetCore.Http;
 using RazorEngine.Configuration;
 using RazorEngine.Templating;
 
@@ -59,11 +60,7 @@ namespace Gaia.Core.Mail.Configuration
 			}
 			else
 			{
-				TemplateFolder = emailsTemplatesFolder.StartsWith("~/")
-					? (HttpContext.Current != null
-						? HttpContext.Current.Server.MapPath(emailsTemplatesFolder)
-						: Path.Combine(Assembly.GetEntryAssembly().Location, emailsTemplatesFolder.TrimStart('~', '/')))
-					: emailsTemplatesFolder;
+				TemplateFolder = emailsTemplatesFolder;
 			}
 
 			if (!Directory.Exists(TemplateFolder))

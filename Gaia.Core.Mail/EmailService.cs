@@ -36,7 +36,6 @@ using System.Net.Mail;
 using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace Gaia.Core.Mail
 {
@@ -365,7 +364,7 @@ namespace Gaia.Core.Mail
 								var imgFullPath = Path.Combine(_emailTemplateConfiguration.TemplateFolder, srcAttr.Value);
 								if (File.Exists(imgFullPath))
 								{
-									var mime = MimeMapping.GetMimeMapping(imgFullPath);
+									var mime = MimeMapping.MimeUtility.GetMimeMapping(imgFullPath);
 									var lr = new LinkedResource(imgFullPath, mime);
 									embeddedImages.Add(lr);
 									img.SetAttributeValue("src", $"cid:{lr.ContentId}");

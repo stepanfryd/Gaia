@@ -22,9 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
 using System;
 using System.IO;
-using System.Web;
 using System.Xml.Serialization;
 
 namespace Gaia.Portal.Framework.Security
@@ -49,9 +49,11 @@ namespace Gaia.Portal.Framework.Security
 		public XmlPermissionsProvider(string filePath)
 		{
 			if (string.IsNullOrEmpty(filePath))
+			{
 				throw new ArgumentNullException(nameof(filePath), "Xml configuration file for permission is not specified");
+			}
 
-			_xmlConfigurationFilePath = filePath.StartsWith("~") ? HttpContext.Current.Server.MapPath(filePath) : filePath;
+			_xmlConfigurationFilePath = filePath;
 
 			if (!File.Exists(_xmlConfigurationFilePath))
 			{

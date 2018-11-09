@@ -23,19 +23,21 @@ THE SOFTWARE.
 
 */
 using System;
-using System.Web.Mvc;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Gaia.Portal.Framework.Mvc.Binders
 {
 	public class GuidModelBinder : IModelBinder
 	{
-		public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+		public Task BindModelAsync(ModelBindingContext bindingContext)
 		{
 			var parameter = bindingContext
 				.ValueProvider
 				.GetValue(bindingContext.ModelName);
 
-			return Guid.Parse(parameter.AttemptedValue);
+			return Task.FromResult(Guid.Parse(parameter.FirstValue));
 		}
 	}
 }

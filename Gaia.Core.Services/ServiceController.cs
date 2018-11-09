@@ -25,8 +25,6 @@ THE SOFTWARE.
 
 using System;
 using Gaia.Core.Services.Configuration;
-using Gaia.Core.Wcf;
-using Gaia.Core.Wcf.Configuration;
 using Topshelf;
 
 namespace Gaia.Core.Services
@@ -41,14 +39,10 @@ namespace Gaia.Core.Services
 		/// </summary>
 		/// <param name="service">Instance of service</param>
 		/// <param name="pluginsConfiguration">Instance of plugin configuration collections</param>
-		/// <param name="wcfServicesConfiguration">WCF services configuration</param>
-		protected ServiceControllerBase(IGaiaService service, PluginConfigurationCollection pluginsConfiguration,
-			ServiceHostConfigurationCollection wcfServicesConfiguration)
+		protected ServiceControllerBase(IGaiaService service, PluginConfigurationCollection pluginsConfiguration)
 		{
 			Service = service;
 			PluginsManager = new PluginsManager(pluginsConfiguration);
-			ServicesManager = new WcfServicesManager(wcfServicesConfiguration);
-
 			service.ServiceController = this;
 		}
 
@@ -62,10 +56,6 @@ namespace Gaia.Core.Services
 		/// </summary>
 		public PluginsManager PluginsManager { get; protected set; }
 
-		/// <summary>
-		///   Instance of WCF service manager
-		/// </summary>
-		public WcfServicesManager ServicesManager { get; protected set; }
 	}
 
 	/// <summary>
@@ -82,10 +72,7 @@ namespace Gaia.Core.Services
 		/// </summary>
 		/// <param name="service">Instance of service</param>
 		/// <param name="pluginsConfiguration">Instance of plugin configuration collections</param>
-		/// <param name="wcfServicesConfiguration">WCF services configuration</param>
-		public ServiceController(T service, PluginConfigurationCollection pluginsConfiguration,
-			ServiceHostConfigurationCollection wcfServicesConfiguration) : base(service, pluginsConfiguration,
-			wcfServicesConfiguration)
+		public ServiceController(T service, PluginConfigurationCollection pluginsConfiguration) : base(service, pluginsConfiguration)
 		{
 		}
 
@@ -113,7 +100,6 @@ namespace Gaia.Core.Services
 		/// <returns></returns>
 		public bool Start(HostControl hostControl)
 		{
-			InitServices();
 			InitPlugins();
 			Service.Start();
 			return true;
@@ -126,7 +112,6 @@ namespace Gaia.Core.Services
 		public bool Stop(HostControl hostControl)
 		{
 			KillPlugins();
-			ShutDownServices();
 			KillDomains();
 			Service.Stop();
 			return true;
@@ -163,21 +148,6 @@ namespace Gaia.Core.Services
 		#endregion
 
 		#region Private methods
-
-		private void InitServices()
-		{
-			ServicesManager?.InitalizeServices();
-		}
-
-		private void ShutDownServices()
-		{
-			if (ServicesManager != null)
-			{
-				ServicesManager.ShutdownServices();
-				ServicesManager.Dispose();
-				GC.SuppressFinalize(ServicesManager);
-			}
-		}
 
 		private void KillDomains()
 		{
@@ -220,7 +190,6 @@ namespace Gaia.Core.Services
 		{
 			if (disposing)
 			{
-				ShutDownServices();
 				KillPlugins();
 				KillDomains();
 			}

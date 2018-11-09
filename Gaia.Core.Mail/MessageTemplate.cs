@@ -22,10 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
 using System;
 using System.IO;
-using System.Reflection;
-using System.Web;
 using Newtonsoft.Json;
 
 namespace Gaia.Core.Mail
@@ -41,20 +40,20 @@ namespace Gaia.Core.Mail
 
 		private string GetTemplate(string path, string templatePropertyName, string templatePathPropertyName)
 		{
-			var physicalPath = path.StartsWith("~/")
-				? (HttpContext.Current != null
-					? HttpContext.Current.Server.MapPath(path)
-					: Path.Combine(Assembly.GetEntryAssembly().Location, path.TrimStart('~', '/')))
-				: path;
+			if (!File.Exists(path))
+			{
+				throw new FileNotFoundException("Template file doesn't exists", path);
+			}
 
-			if (!File.Exists(physicalPath)) throw new FileNotFoundException("Template file doesn't exists", physicalPath);
-
-			var retval = File.ReadAllText(physicalPath);
+			var retval = File.ReadAllText(path);
 
 			if (string.IsNullOrEmpty(retval))
+			{
 				throw new ArgumentNullException("Template is not specified. " +
 				                                $"Please set [{templatePropertyName}] property or [{templatePathPropertyName}] (relative or physical) " +
 				                                "to template file");
+			}
+
 			return retval;
 		}
 
@@ -119,7 +118,7 @@ namespace Gaia.Core.Mail
 
 				return retval;
 			}
-			set { _htmlTemplate = value; }
+			set => _htmlTemplate = value;
 		}
 
 		/// <summary>
@@ -146,7 +145,7 @@ namespace Gaia.Core.Mail
 				return retval;
 			}
 
-			set { _textTemplate = value; }
+			set => _textTemplate = value;
 		}
 
 		#endregion

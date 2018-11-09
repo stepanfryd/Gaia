@@ -23,25 +23,26 @@ THE SOFTWARE.
 
 */
 
+using System;
 using System.IO;
-using System.Web.Http.Description;
-using System.Web.Mvc;
 using System.Xml.Serialization;
-using Antlr.Runtime.Misc;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Gaia.Portal.Framework.Mvc
 {
 	public class XmlActionResult<T> : ActionResult
 	{
-		private XmlSerializerNamespaces _namespaces;
-		private Func<Stream, byte[]> _postProcesFunc;
+		private readonly XmlSerializerNamespaces _namespaces;
+		private readonly Func<Stream, byte[]> _postProcesFunc;
+
 		#region Public members
 
 		/// <summary>
 		///   Gets the object to be serialized to XML.
 		/// </summary>
 		public T ObjectToSerialize { get; }
-		
+
 		#endregion
 
 		#region Constructors
@@ -51,7 +52,8 @@ namespace Gaia.Portal.Framework.Mvc
 		/// </summary>
 		/// <param name="objectToSerialize">The object to serialize to XML.</param>
 		/// <param name="namespaces"></param>
-		public XmlActionResult(T objectToSerialize, Func<Stream, byte[]> postProcesFunc = null, XmlSerializerNamespaces namespaces = null)
+		public XmlActionResult(T objectToSerialize, Func<Stream, byte[]> postProcesFunc = null,
+			XmlSerializerNamespaces namespaces = null)
 		{
 			ObjectToSerialize = objectToSerialize;
 			_namespaces = namespaces;
@@ -66,24 +68,25 @@ namespace Gaia.Portal.Framework.Mvc
 		///   Serialises the object that was passed into the constructor to XML and writes the corresponding XML to the result
 		///   stream.
 		/// </summary>
-		/// <param name="context">The controller context for the current request.</param>
-		public override void ExecuteResult(ControllerContext context)
+		/// <param name="actionContext">The controller context for the current request.</param>
+		public override void ExecuteResult(ActionContext actionContext)
 		{
 			if (ObjectToSerialize != null)
 			{
-				context.HttpContext.Response.Clear();
-				context.HttpContext.Response.ContentType = "text/xml";
+				actionContext.HttpContext.Response.Clear();
+				actionContext.HttpContext.Response.ContentType = "text/xml";
 
-				var xs = new XmlSerializer(typeof (T));
+				var xs = new XmlSerializer(typeof(T));
 				using (var ms = new MemoryStream())
 				{
 					xs.Serialize(ms, ObjectToSerialize, _namespaces);
-					context.HttpContext.Response.BinaryWrite(_postProcesFunc != null ? _postProcesFunc.Invoke(ms) : ms.GetBuffer());
+
+					var buffer = _postProcesFunc != null ? _postProcesFunc.Invoke(ms) : ms.ToArray();
+					actionContext.HttpContext.Response.Body.Write(buffer, 0, buffer.Length);
 					ms.Close();
 				}
 			}
 		}
-
 
 		#endregion
 	}

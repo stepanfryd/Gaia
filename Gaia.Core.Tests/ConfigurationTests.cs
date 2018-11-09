@@ -29,17 +29,16 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using Gaia.Core.Services.Configuration;
-using Gaia.Core.Wcf.Configuration;
-using Gaia.Portal.Framework;
 using Gaia.Portal.Framework.Configuration;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 
 namespace Gaia.Core.Tests
 {
-	[TestFixture]
+	[TestClass]
 	public class ConfigurationTests
 	{
-		[Test]
+		[TestMethod]
 		public void PluginConfigurationSettingsSerializationTest()
 		{
 			var expectedXml =
@@ -98,7 +97,7 @@ namespace Gaia.Core.Tests
 			Assert.AreEqual(expectedCollection[1].PluginTypeName, "Test1.TestPluginType");
 		}
 
-		[Test]
+		[TestMethod]
 		public void PortalConfigSettingsDeserializationTest()
 		{
 			var str =
@@ -118,7 +117,7 @@ namespace Gaia.Core.Tests
 			}
 		}
 
-		[Test]
+		[TestMethod]
 		public void PortalConfigurationSettingsSerializationTest()
 		{
 			var settings = new WebSettings
@@ -145,91 +144,12 @@ namespace Gaia.Core.Tests
 			var str = Encoding.UTF8.GetString(data);
 		}
 
-		[Test]
+		[TestMethod]
 		public void PortalConfiguraitonTest()
 		{
 			var test = new Gaia.Portal.Framework.Configuration.Configuration();
 			
 
-		}
-		[Test]
-		public void ServiceConfigurationSettingsSerializationTest()
-		{
-			var expectedXml =
-				"<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
-				"<serviceHosts xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">" +
-				"<host type=\"Test.TestServiceType\" name=\"Host\" factory=\"Test.TestFactory\" />" +
-				"<host type=\"Test1.TestServiceType\" name=\"Host1\" factory=\"Test1.TestFactory\" />" +
-				"</serviceHosts>";
-
-			var config = new ServiceHostConfigurationCollection
-			{
-				new ServiceHostConfiguration
-				{
-					Name = "Host",
-					FactoryTypeName = "Test.TestFactory",
-					ServiceTypeName = "Test.TestServiceType"
-				},
-				new ServiceHostConfiguration
-				{
-					Name = "Host1",
-					FactoryTypeName = "Test1.TestFactory",
-					ServiceTypeName = "Test1.TestServiceType"
-				}
-			};
-
-
-			string serData;
-			var seri = new XmlSerializer(typeof (ServiceHostConfigurationCollection));
-
-			MemoryStream ms = null;
-			StreamWriter sr = null;
-
-			try
-			{
-				ms = new MemoryStream();
-				sr = new StreamWriter(ms);
-					
-				using (var xmlWriter = XmlWriter.Create(sr, new XmlWriterSettings { Indent = false }))
-				{
-					seri.Serialize(xmlWriter, config);
-				}
-				ms.Seek(0, SeekOrigin.Begin);
-				serData = Encoding.Default.GetString(ms.GetBuffer());
-				sr.Close();	
-				ms.Close();
-			} finally {
-				if(ms!=null) {
-					ms.Dispose();
-				}
-
-				if(sr!=null) {
-					sr.Dispose();
-				}
-			}
-
-			Assert.AreEqual(expectedXml, serData);
-			ServiceHostConfigurationCollection expectedCollection;
-
-			try
-			{
-				ms = new MemoryStream(Encoding.Default.GetBytes(expectedXml));
-				ms.Seek(0, SeekOrigin.Begin);
-				expectedCollection = (ServiceHostConfigurationCollection)seri.Deserialize(ms);
-				ms.Close();
-			} finally {
-				if(ms!=null) {
-					ms.Dispose();
-				}
-			}
-			
-			Assert.IsNotNull(expectedCollection);
-			Assert.AreEqual(expectedCollection[0].Name, "Host");
-			Assert.AreEqual(expectedCollection[0].FactoryTypeName, "Test.TestFactory");
-			Assert.AreEqual(expectedCollection[0].ServiceTypeName, "Test.TestServiceType");
-			Assert.AreEqual(expectedCollection[1].Name, "Host1");
-			Assert.AreEqual(expectedCollection[1].FactoryTypeName, "Test1.TestFactory");
-			Assert.AreEqual(expectedCollection[1].ServiceTypeName, "Test1.TestServiceType");
 		}
 	}
 }

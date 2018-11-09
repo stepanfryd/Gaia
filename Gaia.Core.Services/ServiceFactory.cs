@@ -35,7 +35,6 @@ namespace Gaia.Core.Services
 	/// </summary>
 	public class ServiceFactory
 	{
-
 		private TopshelfExitCode _topshelfExitCode;
 
 		#region Public members
@@ -56,7 +55,7 @@ namespace Gaia.Core.Services
 		public string ServiceName { get; set; }
 
 		/// <summary>
-		/// Service instance
+		///   Service instance
 		/// </summary>
 		public IGaiaService Service { get; private set; }
 
@@ -64,7 +63,9 @@ namespace Gaia.Core.Services
 
 		#region Constructors
 
-		private ServiceFactory() {}
+		private ServiceFactory()
+		{
+		}
 
 		#endregion
 
@@ -88,12 +89,10 @@ namespace Gaia.Core.Services
 				x.SetServiceName(ServiceName);
 				x.Service(
 					s => serviceController,
-					e => {
-						e.AfterStoppingService(() => serviceController.Dispose());
-						});
+					e => { e.AfterStoppingService(() => serviceController.Dispose()); });
 			});
 
-			Environment.ExitCode = (int)Convert.ChangeType(_topshelfExitCode, _topshelfExitCode.GetTypeCode());
+			Environment.ExitCode = (int) Convert.ChangeType(_topshelfExitCode, _topshelfExitCode.GetTypeCode());
 		}
 
 		/// <summary>
@@ -113,7 +112,7 @@ namespace Gaia.Core.Services
 				ServiceName = serviceName,
 				DisplayName = displayName,
 				Description = description,
-				Service = (IGaiaService)Activator.CreateInstance(typeof(T))
+				Service = (IGaiaService) Activator.CreateInstance(typeof(T))
 			};
 
 
@@ -129,8 +128,7 @@ namespace Gaia.Core.Services
 		/// <param name="pluginsConfiguration"></param>
 		/// <param name="wcfServicesConfiguration"></param>
 		/// <returns></returns>
-		public static ServiceFactory Create<T>(PluginConfigurationCollection pluginsConfiguration = null,
-			ServiceHostConfigurationCollection wcfServicesConfiguration = null)
+		public static ServiceFactory Create<T>(PluginConfigurationCollection pluginsConfiguration = null)
 		{
 			var serviceType = typeof(T);
 
@@ -147,7 +145,7 @@ namespace Gaia.Core.Services
 				description = info.Description;
 			}
 
-			return Create<T>(serviceName, displayName, description, pluginsConfiguration, wcfServicesConfiguration);
+			return Create<T>(serviceName, displayName, description, pluginsConfiguration);
 		}
 
 		#endregion

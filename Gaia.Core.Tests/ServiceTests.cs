@@ -25,14 +25,14 @@ THE SOFTWARE.
 
 using Gaia.Core.Services;
 using Gaia.Core.Tests.TestObjects;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Gaia.Core.Tests
 {
-	[TestFixture]
+	[TestClass]
 	public class ServiceTests
 	{
-		[Test]
+		[TestMethod]
 		public void TestServiceRunTest()
 		{
 			var s = ServiceFactory.Create<TestService>();

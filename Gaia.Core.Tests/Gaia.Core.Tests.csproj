@@ -17,6 +17,7 @@
     <ProjectReference Include="..\Gaia.Core.Scheduling\Gaia.Core.Scheduling.csproj" />
     <ProjectReference Include="..\Gaia.Core.Services\Gaia.Core.Services.csproj" />
     <ProjectReference Include="..\Gaia.Core\Gaia.Core.csproj" />
+    <ProjectReference Include="..\Gaia.Portal.Framework\Gaia.Portal.Framework.csproj" />
     <ProjectReference Include="..\Gaia.Service.Plugins.Scheduler\Gaia.Service.Plugins.Scheduler.csproj" />
   </ItemGroup>
 </Project>

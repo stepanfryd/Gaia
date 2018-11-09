@@ -22,11 +22,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
-using System.Net;
-using System.Net.Http;
-using System.Web.Http.Controllers;
-using System.Web.Http.Filters;
+
 using Gaia.Portal.Framework.Validation;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Gaia.Portal.Framework.Mvc.Filters
 {
@@ -35,9 +35,9 @@ namespace Gaia.Portal.Framework.Mvc.Filters
 	/// </summary>
 	public class ValidateModelAttribute : ActionFilterAttribute
 	{
-		public override void OnActionExecuting(HttpActionContext actionContext)
+		public override void OnActionExecuting(ActionExecutingContext actionContext)
 		{
-			var method = actionContext.ActionDescriptor as ReflectedHttpActionDescriptor;
+			var method = actionContext.ActionDescriptor as ControllerActionDescriptor;
 
 			if (method?.MethodInfo != null)
 			{
@@ -47,8 +47,7 @@ namespace Gaia.Portal.Framework.Mvc.Filters
 			// if model is not valid response standard error way
 			if (actionContext.ModelState.IsValid == false)
 			{
-				actionContext.Response = actionContext.Request.CreateErrorResponse(
-					HttpStatusCode.BadRequest, actionContext.ModelState);
+				actionContext.Result = new BadRequestResult();
 			}
 		}
 	}

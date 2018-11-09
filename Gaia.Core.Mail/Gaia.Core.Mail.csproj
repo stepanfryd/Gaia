@@ -12,14 +12,18 @@
     <PackageProjectUrl>https://stepanfryd.github.io/Gaia/</PackageProjectUrl>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Properties\**" />
+    <EmbeddedResource Remove="Properties\**" />
+    <None Remove="Properties\**" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Gaia.Core\Gaia.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.8.9" />
+    <PackageReference Include="MimeMapping" Version="1.0.1.12" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="NParametrizer" Version="2.0.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
+    <PackageReference Include="RazorEngine.Core.NetCore" Version="4.6.0-rc1" />
   </ItemGroup>
 </Project>

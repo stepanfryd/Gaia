@@ -22,8 +22,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
-using System.Web.Mvc;
+
 using Gaia.Portal.Framework.Validation;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Gaia.Portal.Framework.Mvc.Filters
 {
@@ -31,11 +33,11 @@ namespace Gaia.Portal.Framework.Mvc.Filters
 	{
 		public override void OnActionExecuting(ActionExecutingContext filterContext)
 		{
-			var method = filterContext.ActionDescriptor as ReflectedActionDescriptor;
+			var method = filterContext.ActionDescriptor as ControllerActionDescriptor;
 
 			if (method?.MethodInfo != null)
 			{
-				ValidationHelpers.ClearIgnoredProperties(method.MethodInfo, filterContext.Controller.ViewData.ModelState);
+				ValidationHelpers.ClearIgnoredProperties(method.MethodInfo, filterContext.ModelState);
 			}
 
 			base.OnActionExecuting(filterContext);

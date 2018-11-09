@@ -24,10 +24,10 @@ THE SOFTWARE.
 */
 
 using System;
-using System.Web.Mvc;
 using Gaia.Core.IoC;
 using Gaia.Portal.Framework.Configuration;
 using Gaia.Portal.Framework.Security;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Gaia.Portal.Framework.Mvc
 {

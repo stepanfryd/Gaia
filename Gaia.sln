@@ -23,53 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configurat
 		Solution Items\Configuration\unity.config = Solution Items\Configuration\unity.config
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{94CFE497-F49B-4098-8002-3E80779F0C45}"
-	ProjectSection(SolutionItems) = preProject
-		Solution Items\NuGet\BuildNuGets.cmd = Solution Items\NuGet\BuildNuGets.cmd
-		Build\Nugets\nugets.txt = Build\Nugets\nugets.txt
-		Solution Items\NuGet\nuspec.xsd = Solution Items\NuGet\nuspec.xsd
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{8886DA10-0020-4FDC-A693-290A0B062666}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{DF26845F-1F08-4860-B492-9C20C429B339}"
-	ProjectSection(SolutionItems) = preProject
-		Solution Items\Templates\GlobalAssemblyInfo.Core.cs = Solution Items\Templates\GlobalAssemblyInfo.Core.cs
-		Solution Items\Templates\Nuget.nuspec = Solution Items\Templates\Nuget.nuspec
-		Solution Items\Templates\Nuget.tt = Solution Items\Templates\Nuget.tt
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Targets", "Targets", "{A60831E1-A640-4BE2-84FC-CAC422D27D01}"
-	ProjectSection(SolutionItems) = preProject
-		Solution Items\Targets\Gaia.targets = Solution Items\Targets\Gaia.targets
-		Solution Items\Targets\NuGet.targets = Solution Items\Targets\NuGet.targets
-		Solution Items\Targets\TextTransform.targets = Solution Items\Targets\TextTransform.targets
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gaia.Core", "Gaia.Core\Gaia.Core.csproj", "{8318A17E-7BF1-4D45-A0CE-EE3FD9B83B2D}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Template", "Template", "{DB410DE4-7AAB-478A-B347-11786266073C}"
-	ProjectSection(SolutionItems) = preProject
-		Solution Items\NuGet\Template\Template.nuspec = Solution Items\NuGet\Template\Template.nuspec
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{DE63C969-53F8-41A2-B34C-28505F01F7DA}"
-	ProjectSection(SolutionItems) = preProject
-		Solution Items\NuGet\Template\tools\init.ps1 = Solution Items\NuGet\Template\tools\init.ps1
-		Solution Items\NuGet\Template\tools\install.ps1 = Solution Items\NuGet\Template\tools\install.ps1
-		Solution Items\NuGet\Template\tools\uninstall.ps1 = Solution Items\NuGet\Template\tools\uninstall.ps1
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tasks", "Tasks", "{3B7049C4-FD26-41C5-B0AE-C8546025B0BA}"
-	ProjectSection(SolutionItems) = preProject
-		Solution Items\Targets\Tasks\Cloud17.MSBuild.NuGet.dll = Solution Items\Targets\Tasks\Cloud17.MSBuild.NuGet.dll
-		Solution Items\Targets\Tasks\Cloud17.MSBuild.NuGet.pdb = Solution Items\Targets\Tasks\Cloud17.MSBuild.NuGet.pdb
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gaia.Core.IoC", "Gaia.Core.IoC\Gaia.Core.IoC.csproj", "{52980EBE-AEB1-4B3C-963A-BE0DA24B25B1}"
 EndProject
@@ -86,24 +40,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gaia.Core.Mail.SendGrid", "Gaia.Core.Mail.SendGrid\Gaia.Core.Mail.SendGrid.csproj", "{889992D1-CE62-4E54-9371-67657649AAB0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05. Samples", "05. Samples", "{CF894717-3BAC-4D6E-BD25-E7A8855E2DE3}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TextTemplating", "TextTemplating", "{7DE87169-983F-454A-82EC-4100598F988B}"
-	ProjectSection(SolutionItems) = preProject
-		Solution Items\Targets\TextTemplating\Microsoft.TextTemplating.Build.Tasks.dll = Solution Items\Targets\TextTemplating\Microsoft.TextTemplating.Build.Tasks.dll
-		Solution Items\Targets\TextTemplating\Microsoft.TextTemplating.targets = Solution Items\Targets\TextTemplating\Microsoft.TextTemplating.targets
-		Solution Items\Targets\TextTemplating\Microsoft.VisualStudio.TextTemplating.14.0.dll = Solution Items\Targets\TextTemplating\Microsoft.VisualStudio.TextTemplating.14.0.dll
-		Solution Items\Targets\TextTemplating\Microsoft.VisualStudio.TextTemplating.14.0.xml = Solution Items\Targets\TextTemplating\Microsoft.VisualStudio.TextTemplating.14.0.xml
-		Solution Items\Targets\TextTemplating\Microsoft.VisualStudio.TextTemplating.Interfaces.10.0.dll = Solution Items\Targets\TextTemplating\Microsoft.VisualStudio.TextTemplating.Interfaces.10.0.dll
-		Solution Items\Targets\TextTemplating\Microsoft.VisualStudio.TextTemplating.Interfaces.10.0.xml = Solution Items\Targets\TextTemplating\Microsoft.VisualStudio.TextTemplating.Interfaces.10.0.xml
-		Solution Items\Targets\TextTemplating\Microsoft.VisualStudio.TextTemplating.Interfaces.11.0.dll = Solution Items\Targets\TextTemplating\Microsoft.VisualStudio.TextTemplating.Interfaces.11.0.dll
-		Solution Items\Targets\TextTemplating\Microsoft.VisualStudio.TextTemplating.Interfaces.11.0.xml = Solution Items\Targets\TextTemplating\Microsoft.VisualStudio.TextTemplating.Interfaces.11.0.xml
-		Solution Items\Targets\TextTemplating\Microsoft.VisualStudio.TextTemplating.Interfaces.14.0.dll = Solution Items\Targets\TextTemplating\Microsoft.VisualStudio.TextTemplating.Interfaces.14.0.dll
-		Solution Items\Targets\TextTemplating\Microsoft.VisualStudio.TextTemplating.Interfaces.14.0.xml = Solution Items\Targets\TextTemplating\Microsoft.VisualStudio.TextTemplating.Interfaces.14.0.xml
-		Solution Items\Targets\TextTemplating\Microsoft.VisualStudio.TextTemplating.Modeling.14.0.dll = Solution Items\Targets\TextTemplating\Microsoft.VisualStudio.TextTemplating.Modeling.14.0.dll
-		Solution Items\Targets\TextTemplating\Microsoft.VisualStudio.TextTemplating.Sdk.Host.14.0.dll = Solution Items\Targets\TextTemplating\Microsoft.VisualStudio.TextTemplating.Sdk.Host.14.0.dll
-		Solution Items\Targets\TextTemplating\Microsoft.VisualStudio.TextTemplating.VSHost.14.0.dll = Solution Items\Targets\TextTemplating\Microsoft.VisualStudio.TextTemplating.VSHost.14.0.dll
-		Solution Items\Targets\TextTemplating\Microsoft.VisualStudio.TextTemplating.VSHost.14.0.xml = Solution Items\Targets\TextTemplating\Microsoft.VisualStudio.TextTemplating.VSHost.14.0.xml
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gaia.Core.Mail.EmailQueue", "Gaia.Core.Mail.EmailQueue\Gaia.Core.Mail.EmailQueue.csproj", "{112F6856-C285-4D54-A438-2EA47326B9A7}"
 EndProject
@@ -236,20 +172,13 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{AC5E6F4B-D634-4FD6-B16E-487217B6978F} = {37C642A5-183F-4F5B-B065-3467581DB4D1}
 		{2DE5E697-F8F8-4034-8958-5645F73774AC} = {95EEC92A-F6E1-4AC9-9368-7C0C14D65A46}
-		{94CFE497-F49B-4098-8002-3E80779F0C45} = {95EEC92A-F6E1-4AC9-9368-7C0C14D65A46}
-		{DF26845F-1F08-4860-B492-9C20C429B339} = {95EEC92A-F6E1-4AC9-9368-7C0C14D65A46}
-		{A60831E1-A640-4BE2-84FC-CAC422D27D01} = {95EEC92A-F6E1-4AC9-9368-7C0C14D65A46}
 		{8318A17E-7BF1-4D45-A0CE-EE3FD9B83B2D} = {77DA39B0-F018-4068-BE53-6461957A53DB}
-		{DB410DE4-7AAB-478A-B347-11786266073C} = {94CFE497-F49B-4098-8002-3E80779F0C45}
-		{DE63C969-53F8-41A2-B34C-28505F01F7DA} = {DB410DE4-7AAB-478A-B347-11786266073C}
-		{3B7049C4-FD26-41C5-B0AE-C8546025B0BA} = {A60831E1-A640-4BE2-84FC-CAC422D27D01}
 		{52980EBE-AEB1-4B3C-963A-BE0DA24B25B1} = {77DA39B0-F018-4068-BE53-6461957A53DB}
 		{25C70291-E074-4075-99A8-7AF0DF1BF6BC} = {77DA39B0-F018-4068-BE53-6461957A53DB}
 		{37C642A5-183F-4F5B-B065-3467581DB4D1} = {D787A1D9-4250-49C1-9CE2-544BD0BE765E}
 		{3A82E948-43E1-434C-9C6D-BCAA1C83F76F} = {37C642A5-183F-4F5B-B065-3467581DB4D1}
 		{AF928CE3-BBF1-40A7-B97B-41BC225009E7} = {77DA39B0-F018-4068-BE53-6461957A53DB}
 		{889992D1-CE62-4E54-9371-67657649AAB0} = {77DA39B0-F018-4068-BE53-6461957A53DB}
-		{7DE87169-983F-454A-82EC-4100598F988B} = {A60831E1-A640-4BE2-84FC-CAC422D27D01}
 		{112F6856-C285-4D54-A438-2EA47326B9A7} = {77DA39B0-F018-4068-BE53-6461957A53DB}
 		{51DA7B52-994C-4F7B-A89C-94F2FC64DE48} = {77DA39B0-F018-4068-BE53-6461957A53DB}
 		{C0FCA0DB-E48F-4255-8CE6-425298CEFDA5} = {4115B21A-DACD-4BC3-981B-3450337D6846}
@@ -258,9 +187,9 @@ Global
 		{08543236-295A-4D12-8EC3-7A65AAF9BDF5} = {77DA39B0-F018-4068-BE53-6461957A53DB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {C2087D48-181C-4E5E-B152-E613AF345B41}
-		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Logging.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.ExceptionHandling.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.ExceptionHandling.WCF.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.ExceptionHandling.Logging.6.0.1304.0\lib\NET45
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Logging.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.ExceptionHandling.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.ExceptionHandling.WCF.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.ExceptionHandling.Logging.6.0.1304.0\lib\NET45
+		SolutionGuid = {C2087D48-181C-4E5E-B152-E613AF345B41}
 	EndGlobalSection
 	GlobalSection(CodealikeProperties) = postSolution
 		SolutionGuid = 5f7b1ed7-b4d7-4705-95b1-84127f7a8c80

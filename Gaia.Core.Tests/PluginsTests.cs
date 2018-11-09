@@ -25,14 +25,14 @@ THE SOFTWARE.
 
 
 using Gaia.Service.Plugins.Scheduler;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Gaia.Core.Tests
 {
-	[TestFixture]
+	[TestClass]
 	public class PluginsTest
 	{
-		[Test]
+		[TestMethod]
 		public void SchedulerPluginTest()
 		{
 			var sp = new SchedulerPlugin();
@@ -45,7 +45,7 @@ namespace Gaia.Core.Tests
 			sp.Uninitialize();
 		}
 
-		[Test]
+		[TestMethod]
 		public void PluginsManagerTest()
 		{
 			

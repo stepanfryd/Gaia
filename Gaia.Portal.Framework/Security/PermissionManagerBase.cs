@@ -29,7 +29,6 @@ using System.Linq;
 using System.Security.Principal;
 using System.Threading;
 using Gaia.Core.IoC;
-using Gaia.Portal.Framework.Configuration.Modules;
 
 namespace Gaia.Portal.Framework.Security
 {
@@ -45,11 +44,6 @@ namespace Gaia.Portal.Framework.Security
 		#endregion
 
 		#region Public members
-		/// <summary>
-		/// Web moduler provider
-		/// </summary>
-		public IWebModuleProvider ModuleProvider
-			=> new Lazy<IWebModuleProvider>(() => Container.Instance.Resolve<IWebModuleProvider>()).Value;
 
 		#endregion
 
@@ -122,27 +116,6 @@ namespace Gaia.Portal.Framework.Security
 		/// <param name="route"></param>
 		/// <returns></returns>
 		public abstract bool HasAccess(IPrincipal principal, Route route);
-
-		/// <summary>
-		/// Get list of accessible modules
-		/// </summary>
-		/// <returns></returns>
-		public abstract IList<IWebModule> GetAccessibleModules();
-
-		/// <summary>
-		/// Het accessible modules for provided principal
-		/// </summary>
-		/// <param name="principal"></param>
-		/// <returns></returns>
-		public IList<IWebModule> GetAccessibleModules(IPrincipal principal)
-		{
-			var modules = ModuleProvider?.Modules.Where(module => !string.IsNullOrEmpty(module?.AreaName))
-				.Select(
-					m => new { Module = m, rArea = new Dictionary<string, object> {{Constants.RouteValues.Area, m.AreaName}}});
-
-			return modules.Where(t => HasAccess(principal, t.rArea))
-				.Select(t => t.Module).ToList();
-		}
 
 		#endregion
 	}

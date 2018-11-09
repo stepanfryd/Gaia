@@ -22,8 +22,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
 using System;
-using System.Web.Mvc;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Gaia.Portal.Framework.Mvc.Binders
 {
@@ -31,18 +33,21 @@ namespace Gaia.Portal.Framework.Mvc.Binders
 	{
 		#region Interface Implementations
 
-		public object BindModel(ControllerContext controllerContext, ModelBindingContext modelBindingContext)
+		public Task BindModelAsync(ModelBindingContext bindingContext)
 		{
-			var valueProviderResult = modelBindingContext.ValueProvider.GetValue(modelBindingContext.ModelName);
-			if (string.IsNullOrEmpty(valueProviderResult.AttemptedValue)) return default(T);
+			var valueProviderResult = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
+			if (string.IsNullOrEmpty(valueProviderResult.FirstValue))
+			{
+				return Task.FromResult(default(T));
+			}
 
 			try
 			{
-				return (T) Enum.Parse(typeof (T), valueProviderResult.AttemptedValue);
+				return Task.FromResult((T) Enum.Parse(typeof(T), valueProviderResult.FirstValue));
 			}
 			catch
 			{
-				return default(T);
+				return Task.FromResult(default(T));
 			}
 		}
 
@@ -53,18 +58,21 @@ namespace Gaia.Portal.Framework.Mvc.Binders
 	{
 		#region Interface Implementations
 
-		public object BindModel(ControllerContext controllerContext, ModelBindingContext modelBindingContext)
+		public Task BindModelAsync(ModelBindingContext bindingContext)
 		{
-			var valueProviderResult = modelBindingContext.ValueProvider.GetValue(modelBindingContext.ModelName);
-			if (string.IsNullOrEmpty(valueProviderResult?.AttemptedValue)) return null;
+			var valueProviderResult = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
+			if (string.IsNullOrEmpty(valueProviderResult.FirstValue))
+			{
+				return null;
+			}
 
 			try
 			{
-				return (T) Enum.Parse(typeof (T), valueProviderResult.AttemptedValue);
+				return Task.FromResult((T) Enum.Parse(typeof(T), valueProviderResult.FirstValue));
 			}
 			catch
 			{
-				return default(T);
+				return Task.FromResult(default(T));
 			}
 		}
 

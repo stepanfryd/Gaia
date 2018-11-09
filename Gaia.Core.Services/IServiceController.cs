@@ -1,6 +1,4 @@
-﻿using Gaia.Core.Wcf;
-
-namespace Gaia.Core.Services
+﻿namespace Gaia.Core.Services
 {
 	/// <summary>
 	/// Interface describes service controller classes
@@ -16,10 +14,5 @@ namespace Gaia.Core.Services
 		/// Instance of service plugin manager if exists
 		/// </summary>
 		PluginsManager PluginsManager { get; }
-
-		/// <summary>
-		/// Instance of WCF service manager
-		/// </summary>
-		WcfServicesManager ServicesManager { get; }
 	}
 }

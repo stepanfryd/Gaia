@@ -1,13 +1,12 @@
-﻿using System.Runtime.Remoting;
-using Gaia.Core.Tests.TestObjects;
-using NUnit.Framework;
+﻿using Gaia.Core.Tests.TestObjects;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Gaia.Core.Tests
 {
-	[TestFixture]
+	[TestClass]
 	public class DependencyTests : TestBase
 	{
-		[Test]
+		[TestMethod]
 		public void InterfaceResolveTest()
 		{
 			var monitorService = Container.Resolve<ITestInterface>();

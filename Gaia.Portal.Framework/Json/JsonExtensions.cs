@@ -22,29 +22,31 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
-using System.Web.Mvc;
+
+using Microsoft.AspNetCore.Html;
 using Newtonsoft.Json;
 
 namespace Gaia.Portal.Framework.Json
 {
 	/// <summary>
-	/// MVC Json extensions
+	///   MVC Json extensions
 	/// </summary>
 	public static class JsonExtensions
 	{
 		#region Private and protected
+
 		/// <summary>
-		/// Returns object as JSON MvcHtmlString
+		///   Returns object as JSON MvcHtmlString
 		/// </summary>
 		/// <param name="obj"></param>
 		/// <returns></returns>
-		public static MvcHtmlString ToJsonHtmlString(this object obj)
+		public static HtmlString ToJsonHtmlString(this object obj)
 		{
-			return new MvcHtmlString(ToJson(obj));
+			return new HtmlString(ToJson(obj));
 		}
 
 		/// <summary>
-		/// Returns object serialized as simple string
+		///   Returns object serialized as simple string
 		/// </summary>
 		/// <param name="obj"></param>
 		/// <returns></returns>

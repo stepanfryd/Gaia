@@ -24,38 +24,25 @@ THE SOFTWARE.
 */
 
 using System;
-using System.Net;
-using System.Web.Http;
-using System.Web.Mvc;
-using System.Web.Routing;
-using AuthorizeAttribute = System.Web.Mvc.AuthorizeAttribute;
+using Gaia.Core.IoC;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Gaia.Portal.Framework.Security
 {
-	public class GaiaAuthorizeAttribute : AuthorizeAttribute
+	public class GaiaAuthorizeAttribute : AuthorizeAttribute, IAuthorizationFilter
 	{
 		public IPermissionManager PermissionManager
-			=> new Lazy<IPermissionManager>(() => Core.IoC.Container.Instance.Resolve<IPermissionManager>()).Value;
+			=> new Lazy<IPermissionManager>(() => Container.Instance.Resolve<IPermissionManager>()).Value;
 
-		public override void OnAuthorization(AuthorizationContext filterContext)
+		public void OnAuthorization(AuthorizationFilterContext filterContext)
 		{
 			var hasAccess = PermissionManager.HasAccess(filterContext.RouteData.Values);
 			if (!hasAccess)
 			{
-				throw new HttpResponseException(HttpStatusCode.Unauthorized);
-				//filterContext.Result = new RedirectToRouteResult(
-				//	new RouteValueDictionary
-				//	{
-				//		{"Controller", "Home"},
-				//		{"Action", "Error"},
-				//		{"statusCode", 401}
-				//	});
+				filterContext.Result = new UnauthorizedResult();
 			}
-		}
-
-		protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
-		{
-			throw new HttpResponseException(HttpStatusCode.Unauthorized);
 		}
 	}
 }

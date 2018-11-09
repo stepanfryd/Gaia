@@ -25,7 +25,6 @@ THE SOFTWARE.
 
 using System;
 using System.IO;
-using System.Web;
 using System.Xml.Serialization;
 
 namespace Gaia.Core.Mail.Configuration
@@ -71,24 +70,18 @@ namespace Gaia.Core.Mail.Configuration
 		public string CopyLocation { get; set; }
 
 		/// <summary>
-		/// Physical path to copy location
+		///   Physical path to copy location
 		/// </summary>
 		public string CopyLocationPath
 		{
 			get
 			{
-				var path = CopyLocation;
-				if (path.StartsWith("~/") && HttpContext.Current != null)
+				if (!Directory.Exists(CopyLocation))
 				{
-					path = HttpContext.Current.Server.MapPath(path);
+					Directory.CreateDirectory(CopyLocation);
 				}
 
-				if (!Directory.Exists(path))
-				{
-					Directory.CreateDirectory(path);
-				}
-
-				return path;
+				return CopyLocation;
 			}
 		}
 

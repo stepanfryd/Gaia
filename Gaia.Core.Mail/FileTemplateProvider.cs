@@ -25,7 +25,7 @@ THE SOFTWARE.
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using System.Web;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
 namespace Gaia.Core.Mail
@@ -53,18 +53,13 @@ namespace Gaia.Core.Mail
 		/// <param name="templatesConfigurationFile"></param>
 		public FileTemplateProvider(string templatesConfigurationFile)
 		{
-			var physicalPath = templatesConfigurationFile.StartsWith("~/")
-				? (HttpContext.Current != null
-					? HttpContext.Current.Server.MapPath(templatesConfigurationFile)
-					: Path.Combine(Assembly.GetEntryAssembly().Location, templatesConfigurationFile.TrimStart('~', '/')))
-				: templatesConfigurationFile;
-
-			if (!File.Exists(physicalPath))
-				throw new FileNotFoundException("Templates configuration file doesn't exists", physicalPath);
+	
+			if (!File.Exists(templatesConfigurationFile))
+				throw new FileNotFoundException("Templates configuration file doesn't exists", templatesConfigurationFile);
 
 			Templates = new Dictionary<string, IMessageTemplate>();
 			foreach (var pair in JsonConvert.DeserializeObject<Dictionary<string, MessageTemplate>>(
-				File.ReadAllText(physicalPath)))
+				File.ReadAllText(templatesConfigurationFile)))
 			{
 				Templates.Add(pair.Key, pair.Value);
 			}
