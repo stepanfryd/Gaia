@@ -33,6 +33,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Gaia.Core.Mail.Configuration;
 using HtmlAgilityPack;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using MimeMapping;
 using RazorEngine.Configuration;
@@ -47,6 +48,7 @@ namespace Gaia.Core.Mail
 	{
 		#region Fields and constants
 
+		private readonly IConfiguration _configuration;
 		private readonly IEmailSettings _emailSettings;
 		private readonly IEmailTemplateConfiguration _emailTemplateConfiguration;
 		private readonly IRazorEngineService _engineService;
@@ -67,16 +69,20 @@ namespace Gaia.Core.Mail
 		/// <param name="emailTemplateConfiguration"></param>
 		/// <exception cref="ArgumentNullException"></exception>
 		/// <exception cref="EmailSettingsException"></exception>
-		public EmailService(ILogger<EmailService> logger, IMailProvider mailProvider,
+		public EmailService(ILogger<EmailService> logger, IConfiguration configuration, IMailProvider mailProvider,
 			IMessageTemplateProvider templateProvider, IEmailTemplateConfiguration emailTemplateConfiguration)
 		{
 			_logger = logger;
-			_emailSettings = new Settings().EmailSettings;
+			_configuration = configuration;
 
-			if (_emailSettings == null)
+			var section = _configuration.GetSection("gaia:emailSettings");
+			if (section == null)
 			{
 				throw new EmailSettingsException();
 			}
+
+			_emailSettings = new EmailSettings();
+			section.Bind(_emailSettings);
 
 			_mailProvider = mailProvider ?? throw new ArgumentNullException(nameof(mailProvider));
 			_templateProvider = templateProvider;
