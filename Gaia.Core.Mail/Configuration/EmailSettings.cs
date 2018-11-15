@@ -76,7 +76,7 @@ namespace Gaia.Core.Mail.Configuration
 		{
 			get
 			{
-				if (!Directory.Exists(CopyLocation))
+				if (!string.IsNullOrEmpty(CopyLocation) && !Directory.Exists(CopyLocation))
 				{
 					Directory.CreateDirectory(CopyLocation);
 				}

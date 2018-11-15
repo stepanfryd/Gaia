@@ -64,6 +64,7 @@ namespace Gaia.Core.Mail
 		///   Create instance of EmailService with specified providers
 		/// </summary>
 		/// <param name="logger"></param>
+		/// <param name="configuration"></param>
 		/// <param name="mailProvider"></param>
 		/// <param name="templateProvider"></param>
 		/// <param name="emailTemplateConfiguration"></param>
@@ -76,10 +77,10 @@ namespace Gaia.Core.Mail
 			_configuration = configuration;
 
 			var section = _configuration.GetSection("gaia:emailSettings");
-			if (section == null)
-			{
-				throw new EmailSettingsException();
-			}
+			//if (section?.Value == null)
+			//{
+			//	throw new EmailSettingsException();
+			//}
 
 			_emailSettings = new EmailSettings();
 			section.Bind(_emailSettings);
