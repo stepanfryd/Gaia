@@ -23,14 +23,14 @@ THE SOFTWARE.
 
 */
 
-using Gaia.Core.IoC;
-using Gaia.Core.Logging;
-using Gaia.Core.Services;
-using Gaia.Service.Plugins.Scheduler.IoC;
-using Quartz;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Gaia.Core.IoC;
+using Gaia.Core.Services;
+using Gaia.Service.Plugins.Scheduler.IoC;
+using Microsoft.Extensions.Logging;
+using Quartz;
 
 namespace Gaia.Service.Plugins.Scheduler
 {
@@ -45,7 +45,7 @@ namespace Gaia.Service.Plugins.Scheduler
 		private static readonly object SyncRoot = new object();
 		private static IList<IScheduler> _schedulers;
 
-		private readonly ILog _logger;
+		private readonly ILogger _logger;
 		private bool _disposed;
 		private IScheduler _scheduler;
 		private readonly IoCSchedulerFactory _schedulerFactory;
@@ -53,8 +53,10 @@ namespace Gaia.Service.Plugins.Scheduler
 
 		#endregion Private members
 
-		public static IList<IScheduler> Schedulers {
-			get {
+		public static IList<IScheduler> Schedulers
+		{
+			get
+			{
 				if (_schedulers == null)
 				{
 					lock (SyncRoot)
@@ -73,12 +75,12 @@ namespace Gaia.Service.Plugins.Scheduler
 		#region Public properties
 
 		/// <summary>
-		/// Scheduler name
+		///   Scheduler name
 		/// </summary>
 		public string Name { get; set; }
 
 		/// <summary>
-		/// Scheduler registered name
+		///   Scheduler registered name
 		/// </summary>
 		public string SchedulerName { get; set; }
 
@@ -116,7 +118,7 @@ namespace Gaia.Service.Plugins.Scheduler
 		/// </summary>
 		public SchedulerPlugin()
 		{
-			_logger = LogManager.GetLogger(GetType());
+			_logger = new Logger<SchedulerPlugin>(new LoggerFactory());
 			var jobFactory = new IoCJobFactory(Container.Instance);
 			_schedulerFactory = new IoCSchedulerFactory(jobFactory);
 		}
@@ -138,7 +140,7 @@ namespace Gaia.Service.Plugins.Scheduler
 		/// </summary>
 		public void Initialize()
 		{
-			_logger.Info("Scheduler has been initialized");
+			_logger.LogInformation("Scheduler has been initialized");
 			OnInitialized();
 		}
 
@@ -148,11 +150,11 @@ namespace Gaia.Service.Plugins.Scheduler
 		public void Uninitialize()
 		{
 			Stop();
-			_logger.Info("Scheduler has been uninitialized");
+			_logger.LogInformation("Scheduler has been uninitialized");
 		}
 
 		/// <summary>
-		/// Start service plugin
+		///   Start service plugin
 		/// </summary>
 		public void Start()
 		{
@@ -164,11 +166,11 @@ namespace Gaia.Service.Plugins.Scheduler
 					SchedulerName = _scheduler.SchedulerName;
 					Schedulers.Add(_scheduler);
 					await _scheduler.Start();
-					_logger.Info($"Scheduler [{SchedulerName}] has been succesfully started");
+					_logger.LogInformation($"Scheduler [{SchedulerName}] has been succesfully started");
 				}
 				catch (Exception e)
 				{
-						_logger.Error(e, $"Scheduler [{SchedulerName}] start error. {e.Message}");
+					_logger.LogInformation(e, $"Scheduler [{SchedulerName}] start error. {e.Message}");
 				}
 			});
 
@@ -176,7 +178,7 @@ namespace Gaia.Service.Plugins.Scheduler
 		}
 
 		/// <summary>
-		/// Pause service plugin. Scheduler goes to Stand By mode. Continue action executes Start action on scheduler
+		///   Pause service plugin. Scheduler goes to Stand By mode. Continue action executes Start action on scheduler
 		/// </summary>
 		public void Pause()
 		{
@@ -186,16 +188,17 @@ namespace Gaia.Service.Plugins.Scheduler
 				{
 					_scheduler.Standby();
 				}
-				_logger.Info($"Scheduler [{SchedulerName}] has been succesfully paused (stand by mode)");
+
+				_logger.LogInformation($"Scheduler [{SchedulerName}] has been succesfully paused (stand by mode)");
 			}
 			catch (Exception e)
 			{
-				_logger.Error(e, $"Scheduler [{SchedulerName}] pause error");
+				_logger.LogError(e, $"Scheduler [{SchedulerName}] pause error");
 			}
 		}
 
 		/// <summary>
-		/// Stop service plugin
+		///   Stop service plugin
 		/// </summary>
 		public void Stop()
 		{
@@ -212,16 +215,17 @@ namespace Gaia.Service.Plugins.Scheduler
 
 					_scheduler = null;
 				}
-				_logger.Info($"Scheduler [{SchedulerName}] has been succesfully terminated (stop action)");
+
+				_logger.LogInformation($"Scheduler [{SchedulerName}] has been succesfully terminated (stop action)");
 			}
 			catch (Exception e)
 			{
-				_logger.Error(e, $"Scheduler [{SchedulerName}] stop error");
+				_logger.LogError(e, $"Scheduler [{SchedulerName}] stop error");
 			}
 		}
 
 		/// <summary>
-		/// Continue with service plugin. Scheduler
+		///   Continue with service plugin. Scheduler
 		/// </summary>
 		public void Continue()
 		{
@@ -230,16 +234,17 @@ namespace Gaia.Service.Plugins.Scheduler
 				if (_scheduler != null && _scheduler.InStandbyMode)
 				{
 					_scheduler.Start();
-					_logger.Info($"Scheduler [{SchedulerName}] has been started from stand by mode");
+					_logger.LogInformation($"Scheduler [{SchedulerName}] has been started from stand by mode");
 				}
 				else
 				{
-					_logger.Warn($"Scheduler [{SchedulerName}] has not been in stand by mode. Can't start. Service must be stop and start again.");
+					_logger.LogWarning(
+						$"Scheduler [{SchedulerName}] has not been in stand by mode. Can't start. Service must be stop and start again.");
 				}
 			}
 			catch (Exception e)
 			{
-				_logger.Error(e, $"Scheduler [{SchedulerName}] continue error");
+				_logger.LogError(e, $"Scheduler [{SchedulerName}] continue error");
 			}
 		}
 
@@ -268,6 +273,7 @@ namespace Gaia.Service.Plugins.Scheduler
 				{
 					Uninitialize();
 				}
+
 				_disposed = true;
 			}
 		}

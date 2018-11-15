@@ -23,10 +23,10 @@ THE SOFTWARE.
 
 */
 
-using Gaia.Core.Logging;
 using System;
 using System.Net.Mail;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace Gaia.Core.Mail
 {
@@ -35,25 +35,26 @@ namespace Gaia.Core.Mail
 	/// </summary>
 	public class SmtpMailProvider : IMailProvider, IDisposable
 	{
+		#region Fields and constants
+
+		private readonly ILogger _logger;
+		private SmtpClient _smtpClient;
+
+		#endregion Fields and constants
+
 		#region Constructors
 
 		/// <summary>
 		///   Creates default instance of object
 		/// </summary>
-		public SmtpMailProvider()
+		public SmtpMailProvider(ILogger<SmtpMailProvider> logger)
 		{
-			_log = LogManager.GetLogger(GetType());
+			_logger = logger;
 			_smtpClient = new SmtpClient();
 		}
 
 		#endregion Constructors
 
-		#region Fields and constants
-
-		private readonly ILog _log;
-		private SmtpClient _smtpClient;
-
-		#endregion Fields and constants
 
 		#region Interface Implementations
 
@@ -75,7 +76,7 @@ namespace Gaia.Core.Mail
 		public async Task SendAsync(MailMessage message, object objectId = null, DateTime? sendTime = null)
 		{
 			await _smtpClient.SendMailAsync(message);
-			_log.Info($"Message to {message.To} has been sent");
+			_logger.LogInformation($"Message to {message.To} has been sent");
 		}
 
 		#endregion Interface Implementations

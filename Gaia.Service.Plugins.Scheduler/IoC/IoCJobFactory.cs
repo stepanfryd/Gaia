@@ -26,7 +26,7 @@ THE SOFTWARE.
 using System;
 using System.Globalization;
 using Gaia.Core.IoC;
-using Gaia.Core.Logging;
+using Microsoft.Extensions.Logging;
 using Quartz;
 using Quartz.Spi;
 
@@ -46,7 +46,7 @@ namespace Gaia.Service.Plugins.Scheduler.IoC
 		public IoCJobFactory(IContainer container)
 		{
 			_container = container;
-			_log = LogManager.GetLogger(GetType());
+			_logger = new Logger<IoCJobFactory>(new LoggerFactory());
 		}
 
 		#endregion
@@ -55,7 +55,7 @@ namespace Gaia.Service.Plugins.Scheduler.IoC
 
 		private readonly IContainer _container;
 
-		private readonly ILog _log;
+		private readonly ILogger _logger;
 
 		#endregion
 
@@ -94,7 +94,7 @@ namespace Gaia.Service.Plugins.Scheduler.IoC
 			{
 				var message = string.Format(CultureInfo.InvariantCulture, "There is an issue to create job [{0}]. {1}",
 					jobDetail.JobType.FullName, ex.Message);
-				_log.Error(ex, message);
+				_logger.LogError(ex, message);
 
 				throw new SchedulerException(message, ex);
 			}

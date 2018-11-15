@@ -26,8 +26,8 @@ THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using Gaia.Core.Exceptions;
-using Gaia.Core.Logging;
 using Gaia.Core.Services.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace Gaia.Core.Services
 {
@@ -37,17 +37,18 @@ namespace Gaia.Core.Services
 	[Serializable]
 	public class PluginsManager : IDisposable
 	{
-		private ILog _log;
+		private readonly ILogger _logger;
 
 		#region Constructors
 
 		/// <summary>
 		///   Base constructor of plugin manager
 		/// </summary>
+		/// <param name="logger">Instance of logger</param>
 		/// <param name="plugins">Plugins configuration collection</param>
 		public PluginsManager(PluginConfigurationCollection plugins)
 		{
-			_log = LogManager.GetLogger(GetType());
+			_logger = new Logger<PluginsManager>(new LoggerFactory());
 			_pluginsConfiguration = plugins;
 			_plugins = new List<IServicePlugin>();
 		}
@@ -55,8 +56,9 @@ namespace Gaia.Core.Services
 		#endregion
 
 		#region Private and protected
+
 		/// <summary>
-		/// Class destructor
+		///   Class destructor
 		/// </summary>
 		~PluginsManager()
 		{
@@ -108,21 +110,19 @@ namespace Gaia.Core.Services
 
 			foreach (var plugin in _pluginsConfiguration)
 			{
-				if (plugin.PluginType != null && typeof (IServicePlugin).IsAssignableFrom(plugin.PluginType))
+				if (plugin.PluginType != null && typeof(IServicePlugin).IsAssignableFrom(plugin.PluginType))
 				{
-					var plutinInstance = Activator.CreateInstance(plugin.PluginType) as IServicePlugin;
-
-					if (plutinInstance != null)
+					if (Activator.CreateInstance(plugin.PluginType) is IServicePlugin plutinInstance)
 					{
 						plutinInstance.Initialize();
 						_plugins.Add(plutinInstance);
-						_log.Info($"Plugin [{plugin.Name}] has been initialized succesfully.");
+						_logger.LogInformation($"Plugin [{plugin.Name}] has been initialized succesfully.");
 					}
 				}
 				else
 				{
 					var ex = new NotImplementedPluginInterfaceException(plugin.PluginTypeName);
-					_log.Error(ex, $"Plugin {plugin.PluginTypeName} is not implemented");
+					_logger.LogError(ex, $"Plugin {plugin.PluginTypeName} is not implemented");
 					throw ex;
 				}
 			}
@@ -143,22 +143,21 @@ namespace Gaia.Core.Services
 				{
 					try
 					{
-
 						plugin.Uninitialize();
 						plugin.Dispose();
 
-						_log.Info($"Plugin [{plugin.Name}] has been shut down succesfully.");
+						_logger.LogInformation($"Plugin [{plugin.Name}] has been shut down succesfully.");
 					}
 					catch (Exception e)
 					{
-						_log.Error(e, $"Plugin SHUTDOWN error [{plugin.Name}]");
+						_logger.LogError(e, $"Plugin SHUTDOWN error [{plugin.Name}]");
 					}
 				}
 			}
 		}
 
 		/// <summary>
-		/// Start all registered plugins
+		///   Start all registered plugins
 		/// </summary>
 		public void StartPlugins()
 		{
@@ -169,18 +168,18 @@ namespace Gaia.Core.Services
 					try
 					{
 						plugin.Start();
-						_log.Info($"Plugin [{plugin.Name}] has been started succesfully.");
+						_logger.LogInformation($"Plugin [{plugin.Name}] has been started succesfully.");
 					}
 					catch (Exception e)
 					{
-						_log.Error(e, $"Plugin START error [{plugin.Name}]");
+						_logger.LogError(e, $"Plugin START error [{plugin.Name}]");
 					}
 				}
 			}
 		}
 
 		/// <summary>
-		/// Stop all registered plugins
+		///   Stop all registered plugins
 		/// </summary>
 		public void StopPlugins()
 		{
@@ -191,18 +190,18 @@ namespace Gaia.Core.Services
 					try
 					{
 						plugin.Start();
-						_log.Info($"Plugin [{plugin.Name}] has been stopped succesfully.");
+						_logger.LogInformation($"Plugin [{plugin.Name}] has been stopped succesfully.");
 					}
 					catch (Exception e)
 					{
-						_log.Error(e, $"Plugin STOP error [{plugin.Name}]");
+						_logger.LogError(e, $"Plugin STOP error [{plugin.Name}]");
 					}
 				}
 			}
 		}
 
 		/// <summary>
-		/// Pause all registered plugins
+		///   Pause all registered plugins
 		/// </summary>
 		public void PausePlugins()
 		{
@@ -213,18 +212,18 @@ namespace Gaia.Core.Services
 					try
 					{
 						plugin.Pause();
-						_log.Info($"Plugin [{plugin.Name}] has been paused succesfully.");
+						_logger.LogInformation($"Plugin [{plugin.Name}] has been paused succesfully.");
 					}
 					catch (Exception e)
 					{
-						_log.Error(e, $"Plugin PAUSE error [{plugin.Name}]");
+						_logger.LogError(e, $"Plugin PAUSE error [{plugin.Name}]");
 					}
 				}
 			}
 		}
 
 		/// <summary>
-		/// Continue in execution of all registered plugins
+		///   Continue in execution of all registered plugins
 		/// </summary>
 		public void ContinuePlugins()
 		{
@@ -235,11 +234,11 @@ namespace Gaia.Core.Services
 					try
 					{
 						plugin.Start();
-						_log.Info($"Plugin [{plugin.Name}] has been resumed succesfully.");
+						_logger.LogInformation($"Plugin [{plugin.Name}] has been resumed succesfully.");
 					}
 					catch (Exception e)
 					{
-						_log.Error(e, $"Plugin CONTINUE error [{plugin.Name}]");
+						_logger.LogError(e, $"Plugin CONTINUE error [{plugin.Name}]");
 					}
 				}
 			}

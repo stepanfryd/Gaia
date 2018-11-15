@@ -22,10 +22,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 */
+
 using System;
 using System.Threading.Tasks;
-using Gaia.Core.Logging;
-using Newtonsoft.Json;
+using Microsoft.Extensions.Logging;
 using Quartz;
 
 namespace Gaia.Core.Scheduling.Jobs
@@ -36,56 +36,50 @@ namespace Gaia.Core.Scheduling.Jobs
 	public abstract class JobBaseAbstract : IJob
 	{
 		/// <summary>
-		/// Job base class which should be used for all scheduled tasks
+		///   Job base class which should be used for all scheduled tasks
 		/// </summary>
 		protected JobBaseAbstract()
 		{
-			Logger = LogManager.GetLogger(GetType());
+			Logger = new Logger<JobBaseAbstract>(new LoggerFactory());
 		}
 
 		/// <summary>
-		/// Common logger
+		///   Common logger
 		/// </summary>
-		protected ILog Logger { get; }
+		protected ILogger Logger { get; }
 
 
 		/// <summary>
-		/// Called by the <see cref="T:Quartz.IScheduler"/> when a <see cref="T:Quartz.ITrigger"/>
-		///             fires that is associated with the <see cref="T:Quartz.IJob"/>.
+		///   Called by the <see cref="T:Quartz.IScheduler" /> when a <see cref="T:Quartz.ITrigger" />
+		///   fires that is associated with the <see cref="T:Quartz.IJob" />.
 		/// </summary>
 		/// <remarks>
-		/// The implementation may wish to set a  result object on the 
-		///             JobExecutionContext before this method exits.  The result itself
-		///             is meaningless to Quartz, but may be informative to 
-		///             <see cref="T:Quartz.IJobListener"/>s or 
-		///             <see cref="T:Quartz.ITriggerListener"/>s that are watching the job's 
-		///             execution.
+		///   The implementation may wish to set a  result object on the
+		///   JobExecutionContext before this method exits.  The result itself
+		///   is meaningless to Quartz, but may be informative to
+		///   <see cref="T:Quartz.IJobListener" />s or
+		///   <see cref="T:Quartz.ITriggerListener" />s that are watching the job's
+		///   execution.
 		/// </remarks>
 		/// <param name="context">The execution context.</param>
 		public async Task Execute(IJobExecutionContext context)
 		{
 			try
 			{
-				Logger.InfoFormat("Executing [{0}]", context.JobDetail.Key);
+				Logger.LogInformation("Executing [{0}]", context.JobDetail.Key);
 				await ExecuteAsync(context);
 			}
 			catch (Exception e)
 			{
-				Logger.Error(e, $"Error while executing scheduled Job [{context.JobDetail.Key.Name}]");
-
-				// create trigger logger for further logging
-				var triggerLogger = $"{context.Trigger.JobKey}|{context.Trigger.Key}";
-
-				var jobRunLogger = LogManager.GetLogger(triggerLogger);
-				jobRunLogger.Error(e, $"Trigger Data: {JsonConvert.SerializeObject(context.Trigger.JobDataMap)}");
+				Logger.LogError(e,
+					$"Error while executing scheduled Job [{context.JobDetail.Key.Name}], Trigger [{context.Trigger.JobKey}|{context.Trigger.Key}]");
 			}
 		}
 
 		/// <summary>
-		/// Abstract method executes particular job. Overriden method contains task execution
+		///   Abstract method executes particular job. Overriden method contains task execution
 		/// </summary>
 		/// <param name="context"></param>
 		protected abstract Task ExecuteAsync(IJobExecutionContext context);
-
 	}
 }

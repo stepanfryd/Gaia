@@ -23,11 +23,6 @@ THE SOFTWARE.
 
 */
 
-using Gaia.Core.Logging;
-using Gaia.Core.Mail.Configuration;
-using HtmlAgilityPack;
-using RazorEngine.Configuration;
-using RazorEngine.Templating;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -36,6 +31,12 @@ using System.Net.Mail;
 using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
+using Gaia.Core.Mail.Configuration;
+using HtmlAgilityPack;
+using Microsoft.Extensions.Logging;
+using MimeMapping;
+using RazorEngine.Configuration;
+using RazorEngine.Templating;
 
 namespace Gaia.Core.Mail
 {
@@ -49,7 +50,7 @@ namespace Gaia.Core.Mail
 		private readonly IEmailSettings _emailSettings;
 		private readonly IEmailTemplateConfiguration _emailTemplateConfiguration;
 		private readonly IRazorEngineService _engineService;
-		private readonly ILog _log;
+		private readonly ILogger _logger;
 		private readonly IMailProvider _mailProvider;
 		private readonly IMessageTemplateProvider _templateProvider;
 
@@ -60,26 +61,28 @@ namespace Gaia.Core.Mail
 		/// <summary>
 		///   Create instance of EmailService with specified providers
 		/// </summary>
+		/// <param name="logger"></param>
 		/// <param name="mailProvider"></param>
 		/// <param name="templateProvider"></param>
 		/// <param name="emailTemplateConfiguration"></param>
 		/// <exception cref="ArgumentNullException"></exception>
 		/// <exception cref="EmailSettingsException"></exception>
-		public EmailService(IMailProvider mailProvider, IMessageTemplateProvider templateProvider,
-			IEmailTemplateConfiguration emailTemplateConfiguration)
+		public EmailService(ILogger<EmailService> logger, IMailProvider mailProvider,
+			IMessageTemplateProvider templateProvider, IEmailTemplateConfiguration emailTemplateConfiguration)
 		{
-			_log = LogManager.GetLogger(GetType());
-
-			if (mailProvider == null) throw new ArgumentNullException(nameof(mailProvider));
-			if (emailTemplateConfiguration == null) throw new ArgumentNullException(nameof(emailTemplateConfiguration));
+			_logger = logger;
 			_emailSettings = new Settings().EmailSettings;
 
-			if (_emailSettings == null) throw new EmailSettingsException();
+			if (_emailSettings == null)
+			{
+				throw new EmailSettingsException();
+			}
 
-			_mailProvider = mailProvider;
+			_mailProvider = mailProvider ?? throw new ArgumentNullException(nameof(mailProvider));
 			_templateProvider = templateProvider;
-			_emailTemplateConfiguration = emailTemplateConfiguration;
-			_engineService = RazorEngineService.Create((ITemplateServiceConfiguration)_emailTemplateConfiguration);
+			_emailTemplateConfiguration = emailTemplateConfiguration ??
+			                              throw new ArgumentNullException(nameof(emailTemplateConfiguration));
+			_engineService = RazorEngineService.Create((ITemplateServiceConfiguration) _emailTemplateConfiguration);
 		}
 
 		#endregion Constructors
@@ -138,7 +141,7 @@ namespace Gaia.Core.Mail
 		public async Task SendEmailAsync<T>(string sender, string recipient, string templateKey, T model,
 			Attachment[] attachments = null, IDictionary<string, string> customHeaders = null)
 		{
-			await SendEmailAsync(new MailAddress(sender), new[] { new MailAddress(recipient) }, templateKey, model, attachments,
+			await SendEmailAsync(new MailAddress(sender), new[] {new MailAddress(recipient)}, templateKey, model, attachments,
 				customHeaders);
 		}
 
@@ -160,7 +163,7 @@ namespace Gaia.Core.Mail
 			string templateHtml, T model, string templateKey, Attachment[] attachments = null,
 			IDictionary<string, string> customHeaders = null)
 		{
-			await SendEmailAsync(sender, new[] { recipient }, subject, templatePlain, templateHtml, model, templateKey,
+			await SendEmailAsync(sender, new[] {recipient}, subject, templatePlain, templateHtml, model, templateKey,
 				attachments, customHeaders);
 		}
 
@@ -222,14 +225,30 @@ namespace Gaia.Core.Mail
 		/// <param name="customHeaders"></param>
 		/// <typeparam name="T"></typeparam>
 		/// <returns></returns>
-		public async Task SendEmailAsync<T>(MailAddress sender, MailAddress[] recipients, string subject, string templatePlain,
+		public async Task SendEmailAsync<T>(MailAddress sender, MailAddress[] recipients, string subject,
+			string templatePlain,
 			string templateHtml, T model, string templateKey, Attachment[] attachments = null,
 			IDictionary<string, string> customHeaders = null)
 		{
-			if (string.IsNullOrEmpty(sender?.Address)) throw new ArgumentNullException(nameof(sender));
-			if (recipients == null || !recipients.Any()) throw new ArgumentNullException(nameof(recipients));
-			if (string.IsNullOrEmpty(subject)) throw new ArgumentNullException(nameof(subject));
-			if (string.IsNullOrEmpty(templatePlain)) throw new ArgumentNullException(nameof(templatePlain));
+			if (string.IsNullOrEmpty(sender?.Address))
+			{
+				throw new ArgumentNullException(nameof(sender));
+			}
+
+			if (recipients == null || !recipients.Any())
+			{
+				throw new ArgumentNullException(nameof(recipients));
+			}
+
+			if (string.IsNullOrEmpty(subject))
+			{
+				throw new ArgumentNullException(nameof(subject));
+			}
+
+			if (string.IsNullOrEmpty(templatePlain))
+			{
+				throw new ArgumentNullException(nameof(templatePlain));
+			}
 
 			var modelType = typeof(T);
 
@@ -240,8 +259,7 @@ namespace Gaia.Core.Mail
 			var subjectProperty = modelType.GetProperties().SingleOrDefault(p => p.Name.ToLower() == "subject");
 			if (subjectProperty != null && subjectProperty.PropertyType == typeof(string))
 			{
-				var sVal = subjectProperty.GetValue(model) as string;
-				if (sVal != null)
+				if (subjectProperty.GetValue(model) is string sVal)
 				{
 					subject = sVal;
 				}
@@ -271,8 +289,7 @@ namespace Gaia.Core.Mail
 					? _engineService.Run(templateKey + "Html", typeof(T), model)
 					: _engineService.RunCompile(templateHtml, templateKey + "Html", typeof(T), model);
 
-				List<LinkedResource> embeddedImages;
-				templateContentHtml = EmbedImages(templateContentHtml, out embeddedImages);
+				templateContentHtml = EmbedImages(templateContentHtml, out var embeddedImages);
 
 				var htmlView = AlternateView.CreateAlternateViewFromString(templateContentHtml);
 				htmlView.ContentType = new ContentType("text/html")
@@ -284,6 +301,7 @@ namespace Gaia.Core.Mail
 				{
 					htmlView.LinkedResources.Add(lr);
 				}
+
 				message.AlternateViews.Add(htmlView);
 			}
 
@@ -308,8 +326,8 @@ namespace Gaia.Core.Mail
 			}
 
 			if (_emailSettings.SaveCopy
-					&& !string.IsNullOrEmpty(_emailSettings.CopyLocation)
-					&& Directory.Exists(_emailSettings.CopyLocation))
+			    && !string.IsNullOrEmpty(_emailSettings.CopyLocation)
+			    && Directory.Exists(_emailSettings.CopyLocation))
 			{
 				var client = new SmtpClient
 				{
@@ -355,7 +373,7 @@ namespace Gaia.Core.Mail
 									new MemoryStream(
 										Convert.FromBase64String(p1[1])),
 									p1[0].Split(';')[0].Split(':')[1]
-									);
+								);
 								embeddedImages.Add(lr);
 								img.SetAttributeValue("src", $"cid:{lr.ContentId}");
 							}
@@ -364,7 +382,7 @@ namespace Gaia.Core.Mail
 								var imgFullPath = Path.Combine(_emailTemplateConfiguration.TemplateFolder, srcAttr.Value);
 								if (File.Exists(imgFullPath))
 								{
-									var mime = MimeMapping.MimeUtility.GetMimeMapping(imgFullPath);
+									var mime = MimeUtility.GetMimeMapping(imgFullPath);
 									var lr = new LinkedResource(imgFullPath, mime);
 									embeddedImages.Add(lr);
 									img.SetAttributeValue("src", $"cid:{lr.ContentId}");
@@ -374,7 +392,7 @@ namespace Gaia.Core.Mail
 					}
 					catch (Exception ex)
 					{
-						_log.Error(ex, $"Error embending image {img.Name}");
+						_logger.LogError(ex, $"Error embending image {img.Name}");
 					}
 				}
 			}
