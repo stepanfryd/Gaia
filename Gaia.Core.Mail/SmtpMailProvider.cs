@@ -24,8 +24,10 @@ THE SOFTWARE.
 */
 
 using System;
+using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
+using Gaia.Core.Mail.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace Gaia.Core.Mail
@@ -35,26 +37,40 @@ namespace Gaia.Core.Mail
 	/// </summary>
 	public class SmtpMailProvider : IMailProvider, IDisposable
 	{
+		#region Constructors
+
+		/// <summary>
+		///   Creates default instance of object
+		/// </summary>
+		public SmtpMailProvider(ILogger<SmtpMailProvider> logger, ISmtpClientSettings smtpClientSettings = null)
+		{
+			_logger = logger;
+			_smtpClient = new SmtpClient();
+
+			if (smtpClientSettings != null)
+			{
+				_smtpClient.Host = smtpClientSettings.Host;
+				_smtpClient.Port = smtpClientSettings.Port;
+				_smtpClient.EnableSsl = smtpClientSettings.EnableSsl;
+				if (smtpClientSettings.Credentials != null
+				    && !string.IsNullOrEmpty(smtpClientSettings.Credentials.UserName)
+				    && !string.IsNullOrEmpty(smtpClientSettings.Credentials.Password)
+				)
+				{
+					_smtpClient.Credentials = new NetworkCredential(smtpClientSettings.Credentials.UserName,
+						smtpClientSettings.Credentials.Password);
+				}
+			}
+		}
+
+		#endregion Constructors
+
 		#region Fields and constants
 
 		private readonly ILogger _logger;
 		private SmtpClient _smtpClient;
 
 		#endregion Fields and constants
-
-		#region Constructors
-
-		/// <summary>
-		///   Creates default instance of object
-		/// </summary>
-		public SmtpMailProvider(ILogger<SmtpMailProvider> logger)
-		{
-			_logger = logger;
-			_smtpClient = new SmtpClient();
-		}
-
-		#endregion Constructors
-
 
 		#region Interface Implementations
 
