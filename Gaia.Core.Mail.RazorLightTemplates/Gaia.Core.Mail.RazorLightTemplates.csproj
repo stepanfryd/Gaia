@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<AssemblyVersion>2.0.0.0</AssemblyVersion>
+		<FileVersion>2.0.0.0</FileVersion>
+		<Version>2.0.0</Version>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Authors>Stepan Fryd</Authors>
+		<Company>Cloud17</Company>
+		<PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+		<Copyright>Copyright (c) Stepan Fryd 2018</Copyright>
+		<RepositoryUrl>https://github.com/stepanfryd/Gaia</RepositoryUrl>
+		<RepositoryType>GIT</RepositoryType>
+		<PackageProjectUrl>https://stepanfryd.github.io/Gaia/</PackageProjectUrl>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="RazorLight" Version="2.0.0-beta1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Gaia.Core.Mail\Gaia.Core.Mail.csproj" />
+	</ItemGroup>
+
+</Project>
