@@ -10,15 +10,7 @@
     <PackageReference Include="MSTest.TestFramework" Version="1.3.2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Gaia.Core.IoC.Unity\Gaia.Core.IoC.Unity.csproj" />
     <ProjectReference Include="..\Gaia.Core.IoC\Gaia.Core.IoC.csproj" />
-    <ProjectReference Include="..\Gaia.Core.Mail.EmailQueue\Gaia.Core.Mail.EmailQueue.csproj" />
-    <ProjectReference Include="..\Gaia.Core.Mail.SendGrid\Gaia.Core.Mail.SendGrid.csproj" />
-    <ProjectReference Include="..\Gaia.Core.Mail\Gaia.Core.Mail.csproj" />
-    <ProjectReference Include="..\Gaia.Core.Scheduling\Gaia.Core.Scheduling.csproj" />
-    <ProjectReference Include="..\Gaia.Core.Services\Gaia.Core.Services.csproj" />
     <ProjectReference Include="..\Gaia.Core\Gaia.Core.csproj" />
-    <ProjectReference Include="..\Gaia.Portal.Framework\Gaia.Portal.Framework.csproj" />
-    <ProjectReference Include="..\Gaia.Service.Plugins.Scheduler\Gaia.Service.Plugins.Scheduler.csproj" />
   </ItemGroup>
 </Project>

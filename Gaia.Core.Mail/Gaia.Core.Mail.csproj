@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<AssemblyVersion>2.0.0.2</AssemblyVersion>
-		<FileVersion>2.0.0.2</FileVersion>
-		<Version>2.0.2</Version>
+		<AssemblyVersion>2.0.0.3</AssemblyVersion>
+		<FileVersion>2.0.0.3</FileVersion>
+		<Version>2.0.3</Version>
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<Authors>Stepan Fryd</Authors>
@@ -12,6 +12,7 @@
 		<RepositoryUrl>https://github.com/stepanfryd/Gaia</RepositoryUrl>
 		<RepositoryType>GIT</RepositoryType>
 		<PackageProjectUrl>https://stepanfryd.github.io/Gaia/</PackageProjectUrl>
+		<PackageReleaseNotes>Removet dependency to RazorEngine, introduced IMessageProvider</PackageReleaseNotes>
 	</PropertyGroup>
 	<ItemGroup>
 		<Compile Remove="Properties\**" />
