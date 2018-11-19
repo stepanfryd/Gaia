@@ -1,0 +1,40 @@
+﻿@{
+		Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width"/>
+	<meta charset="utf-8">
+		<title>@ViewBag.Subject</title>
+	<style>
+		html, body {
+			font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+		}
+		table {
+			border-collapse: collapse;
+			border-spacing: 0;
+		}
+
+		table tbody tr td, table thead tr th {
+			border-bottom: solid 1px gray;
+			padding: 5px;
+		}
+
+		table tbody tr:hover {
+			background-color: aliceblue;
+		}
+
+		table thead tr th {
+			font-weight: bold;
+		}
+
+		table thead tr {
+			background-color: silver
+		}
+	</style>
+</head>
+<body>
+		@RenderBody()
+</body>
+</html>

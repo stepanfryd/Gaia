@@ -74,7 +74,6 @@ namespace Gaia.Core.Tests
 						seri.Serialize(xmlWriter, config);
 						ms.Seek(0, SeekOrigin.Begin);
 						serData = Encoding.Default.GetString(ms.GetBuffer());
-						sr.Close();
 					}
 				}
 				ms.Close();
