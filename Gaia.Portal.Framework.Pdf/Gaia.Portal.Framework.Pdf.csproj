@@ -12,7 +12,7 @@
 		<PackageProjectUrl>https://stepanfryd.github.io/Gaia/</PackageProjectUrl>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="HtmlAgilityPack" Version="1.8.9" />
+		<PackageReference Include="HtmlAgilityPack" Version="1.8.10" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.3" />
 		<PackageReference Include="itext7" Version="7.1.4" />
 	</ItemGroup>

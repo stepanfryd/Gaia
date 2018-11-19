@@ -29,15 +29,13 @@ using System.IO;
 using System.Linq;
 using System.Net.Mail;
 using System.Net.Mime;
-using System.Text;
 using System.Threading.Tasks;
 using Gaia.Core.Mail.Configuration;
 using HtmlAgilityPack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using MimeMapping;
-using RazorEngine.Configuration;
-using RazorEngine.Templating;
+using Encoding = System.Text.Encoding;
 
 namespace Gaia.Core.Mail
 {
@@ -51,10 +49,10 @@ namespace Gaia.Core.Mail
 		private readonly IConfiguration _configuration;
 		private readonly IEmailSettings _emailSettings;
 		private readonly IEmailTemplateConfiguration _emailTemplateConfiguration;
-		private readonly IRazorEngineService _engineService;
 		private readonly ILogger _logger;
 		private readonly IMailProvider _mailProvider;
 		private readonly IMessageTemplateProvider _templateProvider;
+		private readonly IMessageProvider _messageProvider;
 
 		#endregion Fields and constants
 
@@ -71,7 +69,7 @@ namespace Gaia.Core.Mail
 		/// <exception cref="ArgumentNullException"></exception>
 		/// <exception cref="EmailSettingsException"></exception>
 		public EmailService(ILogger<EmailService> logger, IConfiguration configuration, IMailProvider mailProvider,
-			IMessageTemplateProvider templateProvider, IEmailTemplateConfiguration emailTemplateConfiguration)
+			IMessageTemplateProvider templateProvider, IEmailTemplateConfiguration emailTemplateConfiguration, IMessageProvider messageProvider)
 		{
 			_logger = logger;
 			_configuration = configuration;
@@ -86,10 +84,9 @@ namespace Gaia.Core.Mail
 			section.Bind(_emailSettings);
 
 			_mailProvider = mailProvider ?? throw new ArgumentNullException(nameof(mailProvider));
-			_templateProvider = templateProvider;
-			_emailTemplateConfiguration = emailTemplateConfiguration ??
-			                              throw new ArgumentNullException(nameof(emailTemplateConfiguration));
-			_engineService = RazorEngineService.Create((ITemplateServiceConfiguration) _emailTemplateConfiguration);
+			_templateProvider =  templateProvider ?? throw new ArgumentNullException(nameof(templateProvider));
+			_emailTemplateConfiguration = emailTemplateConfiguration ?? throw new ArgumentNullException(nameof(emailTemplateConfiguration));
+			_messageProvider = messageProvider ?? throw new ArgumentNullException(nameof(messageProvider));
 		}
 
 		#endregion Constructors
@@ -259,10 +256,8 @@ namespace Gaia.Core.Mail
 
 			var modelType = typeof(T);
 
-			var templateContentPlain = _engineService.IsTemplateCached(templateKey + "Plain", typeof(T))
-				? _engineService.Run(templateKey + "Plain", typeof(T), model)
-				: _engineService.RunCompile(templatePlain, templateKey + "Plain", typeof(T), model);
-
+			var templateContentPlain = await _messageProvider.GetCompiledMessageAsync(templateKey + "Plain", templatePlain, model);
+			
 			var subjectProperty = modelType.GetProperties().SingleOrDefault(p => p.Name.ToLower() == "subject");
 			if (subjectProperty != null && subjectProperty.PropertyType == typeof(string))
 			{
@@ -292,10 +287,8 @@ namespace Gaia.Core.Mail
 
 			if (!string.IsNullOrEmpty(templateHtml))
 			{
-				var templateContentHtml = _engineService.IsTemplateCached(templateKey + "Html", typeof(T))
-					? _engineService.Run(templateKey + "Html", typeof(T), model)
-					: _engineService.RunCompile(templateHtml, templateKey + "Html", typeof(T), model);
 
+				var templateContentHtml = await _messageProvider.GetCompiledMessageAsync(templateKey + "Html", templateHtml, model);
 				templateContentHtml = EmbedImages(templateContentHtml, out var embeddedImages);
 
 				var htmlView = AlternateView.CreateAlternateViewFromString(templateContentHtml);

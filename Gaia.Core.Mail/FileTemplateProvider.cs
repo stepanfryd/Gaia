@@ -24,8 +24,6 @@ THE SOFTWARE.
 */
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
-using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
 namespace Gaia.Core.Mail

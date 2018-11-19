@@ -24,17 +24,13 @@ THE SOFTWARE.
 */
 using System.IO;
 using System.Reflection;
-using System.Web;
-using Microsoft.AspNetCore.Http;
-using RazorEngine.Configuration;
-using RazorEngine.Templating;
 
 namespace Gaia.Core.Mail.Configuration
 {
 	/// <summary>
 	/// 
 	/// </summary>
-	public class EmailTemplateConfiguration : TemplateServiceConfiguration, IEmailTemplateConfiguration
+	public class EmailTemplateConfiguration : IEmailTemplateConfiguration
 	{
 		#region Public members
 
@@ -65,15 +61,6 @@ namespace Gaia.Core.Mail.Configuration
 
 			if (!Directory.Exists(TemplateFolder))
 				throw new DirectoryNotFoundException($"Template directory {TemplateFolder} doesn't exists.");
-
-			TemplateManager = new DelegateTemplateManager(name =>
-			{
-				var templatePath = Path.Combine(TemplateFolder, name);
-				using (var reader = new StreamReader(templatePath))
-				{
-					return reader.ReadToEnd();
-				}
-			});
 		}
 
 		#endregion
