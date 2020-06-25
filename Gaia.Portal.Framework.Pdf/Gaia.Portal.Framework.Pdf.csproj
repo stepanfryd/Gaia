@@ -10,7 +10,16 @@
 		<RepositoryUrl>https://github.com/stepanfryd/Gaia</RepositoryUrl>
 		<RepositoryType>GIT</RepositoryType>
 		<PackageProjectUrl>https://stepanfryd.github.io/Gaia/</PackageProjectUrl>
-	</PropertyGroup>
+	
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="HtmlAgilityPack" Version="1.8.10" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.3" />
