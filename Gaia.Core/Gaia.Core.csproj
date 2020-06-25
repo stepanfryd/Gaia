@@ -10,7 +10,15 @@
     <RepositoryUrl>https://github.com/stepanfryd/Gaia</RepositoryUrl>
     <RepositoryType>GIT</RepositoryType>
     <PackageProjectUrl>https://stepanfryd.github.io/Gaia/</PackageProjectUrl>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>TRACE;LIBLOG_PUBLIC</DefineConstants>
   </PropertyGroup>
